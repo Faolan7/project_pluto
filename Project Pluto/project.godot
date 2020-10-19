@@ -16,7 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Project Pluto"
+run/main_scene="res://Room.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=480
+window/size/height=320
 
 [rendering]
 

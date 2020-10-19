@@ -2,12 +2,12 @@
 
 [ext_resource path="res://PrototypeTextures/ClipartKey_2688753.png" type="Texture" id=1]
 
-[node name="Door" type="RigidBody2D"]
-position = Vector2( 471.131, 84.7606 )
+[node name="Door" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -1.97852, -3.71924 )
-scale = Vector2( 0.0472964, 0.049122 )
+scale = Vector2( 0.0356238, 0.0356239 )
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
