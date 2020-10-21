@@ -15,19 +15,49 @@ _global_script_classes=[ {
 "path": "res://Scripts/State.gd"
 }, {
 "base": "Node",
-"class": "State_Machine",
+"class": "StateMachine",
 "language": "GDScript",
-"path": "res://Scripts/State_Machine.gd"
+"path": "res://Scripts/StateMachine.gd"
 } ]
 _global_script_class_icons={
 "State": "",
-"State_Machine": ""
+"StateMachine": ""
 }
 
 [application]
 
 config/name="Project Pluto"
-config/icon="res://Sprites/icon.png"
+config/icon="res://icon.png"
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
+
+[layer_names]
+
+2d_render/layer_1="world"
+2d_physics/layer_1="world"
+2d_render/layer_2="hitbox"
+2d_physics/layer_2="hitbox"
 
 [rendering]
 

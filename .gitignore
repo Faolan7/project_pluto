@@ -1,5 +1,6 @@
 # Godot Project files
 Project Pluto/.import/
+*.import
 
 # OS X files
 .DS_Store
