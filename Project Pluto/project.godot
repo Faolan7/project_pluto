@@ -8,15 +8,26 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://Scripts/State.gd"
+}, {
+"base": "Node",
+"class": "State_Machine",
+"language": "GDScript",
+"path": "res://Scripts/State_Machine.gd"
+} ]
 _global_script_class_icons={
-
+"State": "",
+"State_Machine": ""
 }
 
 [application]
 
 config/name="Project Pluto"
-config/icon="res://icon.png"
+config/icon="res://Sprites/icon.png"
 
 [rendering]
 
