@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var doorsprite = preload("res://Door.tscn")
+onready var doorsprite = preload("res://Scenes/Door.tscn")
 onready var door_coordinates = [
 	Vector2(140, 160),
 	Vector2(340, 160),

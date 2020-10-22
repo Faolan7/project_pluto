@@ -27,6 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Project Pluto"
+run/main_scene="res://Scenes/Room.tscn"
 config/icon="res://icon.png"
 
 [importer_defaults]
