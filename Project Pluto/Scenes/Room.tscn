@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/InstancingDoor.gd" type="Script" id=1]
+
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+[node name="Room" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Area2D4" type="Area2D" parent="."]
+position = Vector2( 140, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
+shape = SubResource( 1 )
