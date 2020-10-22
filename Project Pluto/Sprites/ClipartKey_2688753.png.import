@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ClipartKey_2688753.png-102dd17f5d15f8690fb40b5fddfeb1b3.stex"
+path="res://.import/ClipartKey_2688753.png-fa83f4e4f54887d184faca51d205e07e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PrototypeTextures/ClipartKey_2688753.png"
-dest_files=[ "res://.import/ClipartKey_2688753.png-102dd17f5d15f8690fb40b5fddfeb1b3.stex" ]
+source_file="res://Sprites/ClipartKey_2688753.png"
+dest_files=[ "res://.import/ClipartKey_2688753.png-fa83f4e4f54887d184faca51d205e07e.stex" ]
 
 [params]
 
