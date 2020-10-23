@@ -1,6 +1,8 @@
 # Godot Project files
 Project Pluto/.import/
 *.import
+Project Pluto/Scenes/Test*.tscn
+
 
 # OS X files
 .DS_Store

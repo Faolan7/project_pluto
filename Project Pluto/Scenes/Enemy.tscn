@@ -1,10 +1,17 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 18, 9 )
 
 [node name="Enemy" type="KinematicBody2D"]
 collision_layer = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Sprite" type="ColorRect" parent="."]
 margin_left = -20.0
@@ -15,6 +22,13 @@ color = Color( 1, 0.784314, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HealthBar" parent="." instance=ExtResource( 2 )]
+visible = false
+margin_left = -20.0
+margin_top = -30.0
+margin_right = 20.0
+margin_bottom = -25.0
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 10 )
