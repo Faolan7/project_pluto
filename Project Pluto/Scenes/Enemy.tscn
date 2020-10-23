@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 18, 9 )
+
+[node name="Enemy" type="KinematicBody2D"]
+collision_layer = 0
+
+[node name="Sprite" type="ColorRect" parent="."]
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+color = Color( 1, 0.784314, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WorldCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 10 )
+shape = SubResource( 1 )
