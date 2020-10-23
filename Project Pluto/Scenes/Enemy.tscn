@@ -1,45 +1,43 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Hitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sprites/dummy_enemy.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 18, 9 )
+extents = Vector2( 12, 4 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 20, 20 )
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 8.0641
+height = 9.23656
 
 [node name="Enemy" type="KinematicBody2D"]
+position = Vector2( 8, 8 )
 collision_layer = 0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="ColorRect" parent="."]
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
-color = Color( 1, 0.784314, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+offset = Vector2( -8, -8 )
 
 [node name="HealthBar" parent="." instance=ExtResource( 2 )]
 visible = false
 margin_left = -20.0
 margin_top = -30.0
-margin_right = 20.0
+margin_right = 4.0
 margin_bottom = -25.0
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 10 )
+position = Vector2( -8, 0 )
 shape = SubResource( 1 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -8, -8 )
 shape = SubResource( 2 )
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hit"]
