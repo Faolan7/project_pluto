@@ -13,8 +13,9 @@ func _ready() -> void:
 func set_health(value: int) -> void:
 	health = value
 	
-	if health == 0:
+	if health <= 0: # Checking if dead
 		queue_free()
+		return
 		
 	if health_bar != null: # Export sets value before children are created
 		health_bar.update_bar(health)

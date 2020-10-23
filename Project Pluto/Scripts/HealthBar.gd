@@ -13,4 +13,4 @@ func update_bar(value: int) -> void:
 		visible = false
 	else:
 		visible = true
-		cur_health_bar.margin_right = value as float / max_health * MAX_BAR_LEN
+		cur_health_bar.margin_right = value * MAX_BAR_LEN / max_health
