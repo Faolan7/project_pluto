@@ -30,10 +30,3 @@ script = ExtResource( 3 )
 
 [node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource( 2 )
-
-[node name="WorldInteraction" type="Area2D" parent="."]
-
-[node name="WorldCollision2" type="CollisionShape2D" parent="WorldInteraction"]
-position = Vector2( 0, 8 )
-rotation = 1.5708
-shape = SubResource( 1 )

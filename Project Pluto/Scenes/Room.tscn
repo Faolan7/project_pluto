@@ -26,3 +26,4 @@ position = Vector2( 936, 280 )
 
 [node name="Player" parent="Door" instance=ExtResource( 3 )]
 position = Vector2( -432, -16 )
+[connection signal="body_entered" from="Door" to="Door" method="_on_Door_body_entered"]
