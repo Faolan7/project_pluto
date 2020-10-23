@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-export var health: int setget set_health
+export(int) var health: int setget set_health
 
 onready var health_bar: HealthBar = $HealthBar as HealthBar
 
