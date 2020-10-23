@@ -13,5 +13,12 @@ func _ready() -> void:
 func set_health(value: int) -> void:
 	health = value
 	
+	if health == 0:
+		queue_free()
+		
 	if health_bar != null: # Export sets value before children are created
 		health_bar.update_bar(health)
+
+
+func _on_hit(_area: Area2D):
+	set_health(health - 1)
