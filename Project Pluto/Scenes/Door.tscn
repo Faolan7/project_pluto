@@ -3,8 +3,6 @@
 [ext_resource path="res://Sprites/ClipartKey_2688753.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/ExitGame.gd" type="Script" id=2]
 
-
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 13.7835
 height = 59.5294
