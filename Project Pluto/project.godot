@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://Scripts/StateMachine.gd"
+}, {
+"base": "Sprite",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://Scripts/Weapon.gd"
 } ]
 _global_script_class_icons={
 "HealthBar": "",
 "Hitbox": "",
 "State": "",
-"StateMachine": ""
+"StateMachine": "",
+"Weapon": ""
 }
 
 [application]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Weapon.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/sword.png" type="Texture" id=2]
@@ -8,7 +8,36 @@
 radius = 3.0
 height = 8.0
 
+[sub_resource type="Animation" id=2]
+resource_name = "stab"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
 [node name="Weapon" type="Sprite"]
+visible = false
 position = Vector2( 0, -6 )
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
@@ -19,3 +48,7 @@ damage = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0, -2 )
 shape = SubResource( 1 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/stab = SubResource( 2 )

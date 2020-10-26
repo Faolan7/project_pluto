@@ -3,9 +3,9 @@ extends State
 
 var move_dir: Vector2 = Vector2.ZERO
 
-onready var player: KinematicBody2D = get_node("../..") as KinematicBody2D
+export(int) var MOVE_SPEED: int
 
 
 func _physics_process(_delta: float) -> void:
 	# warning-ignore:return_value_discarded
-	player.move_and_slide(move_dir * 100)
+	actor.move_and_slide(move_dir * MOVE_SPEED)
