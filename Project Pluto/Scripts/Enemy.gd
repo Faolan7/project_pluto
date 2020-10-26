@@ -21,5 +21,5 @@ func set_health(value: int) -> void:
 		health_bar.update_bar(health)
 
 
-func _on_hit(_area: Area2D):
-	set_health(health - 1)
+func _on_hit(damage: int):
+	set_health(health - damage)

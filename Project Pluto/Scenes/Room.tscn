@@ -6,7 +6,7 @@
 [ext_resource path="res://Sprites/dungeon_wall.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/EnemyTracker.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/RoomCleared.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/RoomCleared.gd" type="Script" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -77,5 +77,5 @@ position = Vector2( 128, 144 )
 
 [node name="Enemy" parent="EnemyTracker" instance=ExtResource( 5 )]
 position = Vector2( 136, 96 )
-health = 1
+health = 3
 [connection signal="roomcleared" from="EnemyTracker" to="." method="_on_roomcleared"]

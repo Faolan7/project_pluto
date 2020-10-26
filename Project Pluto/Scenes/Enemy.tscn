@@ -2,11 +2,12 @@
 
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Hitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/dummy_enemy.png" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12, 4 )
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 4.71482
+height = 4.56489
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 8.0641
@@ -33,11 +34,14 @@ margin_bottom = -25.0
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
 position = Vector2( -8, 0 )
-shape = SubResource( 1 )
+rotation = 1.5708
+shape = SubResource( 3 )
 
-[node name="Hitbox" parent="." instance=ExtResource( 3 )]
+[node name="HurtBox" parent="." instance=ExtResource( 3 )]
+collision_layer = 2
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2( -8, -8 )
 shape = SubResource( 2 )
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hit"]
+[connection signal="damaged" from="HurtBox" to="." method="_on_hit"]
