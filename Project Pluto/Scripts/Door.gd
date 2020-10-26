@@ -10,6 +10,7 @@ onready var sprite = $Sprite
 func _ready() -> void:
 	set_open(is_open)
 
+
 func set_open(value: bool) -> void:
 	is_open = value
 	

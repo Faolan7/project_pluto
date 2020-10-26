@@ -1,7 +1,7 @@
 extends Node2D
 
 
-signal roomcleared
+signal room_cleared
 
 
 func _ready():
@@ -12,4 +12,4 @@ func _ready():
 func on_death() -> void:
 	var numOfChildren = get_child_count()	
 	if numOfChildren == 0:
-		emit_signal("roomcleared")
+		emit_signal("room_cleared")

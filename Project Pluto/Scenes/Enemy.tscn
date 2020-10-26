@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/dummy_enemy.png" type="Texture" id=4]
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 4.71482
 height = 4.56489
 
@@ -17,9 +17,6 @@ height = 9.23656
 position = Vector2( 8, 8 )
 collision_layer = 0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 4 )
@@ -28,14 +25,14 @@ offset = Vector2( -8, -8 )
 [node name="HealthBar" parent="." instance=ExtResource( 2 )]
 visible = false
 margin_left = -20.0
-margin_top = -30.0
+margin_top = -24.0
 margin_right = 4.0
-margin_bottom = -25.0
+margin_bottom = -22.0
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
 position = Vector2( -8, 0 )
 rotation = 1.5708
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="HurtBox" parent="." instance=ExtResource( 3 )]
 collision_layer = 2

@@ -11,8 +11,8 @@ func _ready() -> void:
 
 func _unhandled_input(_event: InputEvent) -> void:
 	var input_vector: Vector2 = Vector2(
-		Input.get_action_strength('ui_right') - Input.get_action_strength('ui_left'),
-		Input.get_action_strength('ui_down') - Input.get_action_strength('ui_up')
+		Input.get_action_strength('move_right') - Input.get_action_strength('move_left'),
+		Input.get_action_strength('move_down') - Input.get_action_strength('move_up')
 	)
 	move_state.move_dir = input_vector.normalized()
 	
