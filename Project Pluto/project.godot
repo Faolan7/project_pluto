@@ -12,27 +12,27 @@ _global_script_classes=[ {
 "base": "ColorRect",
 "class": "HealthBar",
 "language": "GDScript",
-"path": "res://Scripts/HealthBar.gd"
+"path": "res://Scripts/Enemy/HealthBar.gd"
 }, {
 "base": "Area2D",
 "class": "Hitbox",
 "language": "GDScript",
-"path": "res://Scripts/Hitbox.gd"
+"path": "res://Scripts/Weapon/Hitbox.gd"
 }, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
-"path": "res://Scripts/State.gd"
+"path": "res://Scripts/State/BaseState.gd"
 }, {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://Scripts/StateMachine.gd"
+"path": "res://Scripts/State/StateMachine.gd"
 }, {
 "base": "Sprite",
 "class": "Weapon",
 "language": "GDScript",
-"path": "res://Scripts/Weapon.gd"
+"path": "res://Scripts/Weapon/Weapon.gd"
 } ]
 _global_script_class_icons={
 "HealthBar": "",
@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Project Pluto"
-run/main_scene="res://Scenes/Room.tscn"
+run/main_scene="res://Scenes/Dungeon/Room.tscn"
 config/icon="res://icon.png"
 
 [display]

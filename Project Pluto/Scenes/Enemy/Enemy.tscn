@@ -1,9 +1,14 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Hurtbox.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Sprites/dummy_enemy.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Enemy/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Enemy/HealthBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Weapon/Hurtbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sprites/Enemy/dummy_enemy.png" type="Texture" id=4]
+
+
+
+
+
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.71482
