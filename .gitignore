@@ -3,6 +3,7 @@ Project Pluto/.import/
 *.import
 Project Pluto/Scenes/Test*.tscn
 Project Pluto/Scripts/Test*.gd
+Project Pluto/Exports/
 
 
 # OS X files
