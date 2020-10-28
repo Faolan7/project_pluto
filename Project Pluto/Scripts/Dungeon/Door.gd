@@ -1,7 +1,11 @@
+class_name Door
 extends StaticBody2D
 
 
-export(bool) var is_open: bool = false setget set_open
+signal entered
+
+
+export(bool) var is_open: bool = true setget set_open
 
 onready var collision_box = $WorldCollision
 onready var sprite = $Sprite
@@ -20,4 +24,4 @@ func set_open(value: bool) -> void:
 
 
 func _on_door_entered(_body: PhysicsBody2D) -> void:
-	get_tree().quit()
+	emit_signal('entered')
