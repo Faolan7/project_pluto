@@ -19,8 +19,8 @@ func set_open(value: bool) -> void:
 	is_open = value
 	
 	if collision_box != null: # Export sets value before children are created
-		collision_box.disabled = value
-		sprite.visible = not value
+		collision_box.set_deferred('disabled', is_open)
+		sprite.visible = not is_open
 
 
 func _on_door_entered(_body: PhysicsBody2D) -> void:
