@@ -24,10 +24,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Weapon/Hitbox.gd"
 }, {
-"base": "TileMap",
+"base": "Node2D",
 "class": "Room",
 "language": "GDScript",
 "path": "res://Scripts/Dungeon/Room.gd"
+}, {
+"base": "TileMap",
+"class": "RoomLayout",
+"language": "GDScript",
+"path": "res://Scripts/Dungeon/RoomLayout.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -49,6 +54,7 @@ _global_script_class_icons={
 "HealthBar": "",
 "Hitbox": "",
 "Room": "",
+"RoomLayout": "",
 "State": "",
 "StateMachine": "",
 "Weapon": ""

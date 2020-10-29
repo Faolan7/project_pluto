@@ -20,9 +20,9 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="ExitArea" type="Area2D" parent="."]
+position = Vector2( 0, -4 )
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
-position = Vector2( 0, -4 )
 shape = SubResource( 2 )
 [connection signal="body_entered" from="ExitArea" to="." method="_on_door_entered"]
