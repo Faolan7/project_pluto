@@ -2,13 +2,16 @@ extends Node
 
 var npc: String setget set_npc, get_npc
 var quest_name: String setget set_quest_name, get_quest_name
-var conditions: Condition
-var reward: Reward
+onready var condition = $Conditions
+onready var reward: Reward = $Reward
 
 
-
-func _init(npc: String, quest_name: String, enemyID: int, numOfEnemy: int):
-	pass
+#similar to constructor. please dont use the holy flamer matt
+func setQuest(passed_npc: String, passed_quest_name: String, enemyID: int, numOfEnemy: int) -> void:
+	set_npc(passed_npc)
+	set_quest_name(passed_quest_name)
+	set_conditions(enemyID, numOfEnemy)
+	#set_reward()
 
 func set_npc(name: String) -> void:
 	npc = name
@@ -23,7 +26,7 @@ func get_quest_name() -> String:
 	return quest_name
 
 func set_conditions(enemyID: int, numOfEnemy: int) -> void:
-	conditions = Condition.init(enemyID, numOfEnemy)
+	condition.createConditions(enemyID,numOfEnemy)
 
-func set_reward() -> void:
-	reward = Reward.init()
+#func set_reward() -> void:
+#	reward = Reward.init()
