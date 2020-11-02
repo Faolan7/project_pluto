@@ -8,19 +8,31 @@ const MAX_NUMBER_OF_QUESTS: int = 5
 var current_number_of_quests: int = 0
 #	assume that view is set up and functional
 
+onready var quest_resource = preload("res://Scenes/Quest/Quest.tscn")
+
+signal journal_is_full
+
+
 #	Creation of The Journal Singleton that will be instantiated within the Player Scene as part of the player
 #		We would initialize the value of current quests to 0
 
 #	Add a Quest function
-func AddQuest():
-	
-	var new_quest_node = 
-	
-	
-	
-	pass
+func add_quest(passed_npc: String, passed_quest_name: String, enemy_ID: int, num_of_enemies: int) -> void:
 #		We would first check to see if the player has a full quest log
 # 		if yes:	We would emit a signal that says that the log is full
+		if(current_number_of_quests == MAX_NUMBER_OF_QUESTS):
+			emit_signal("journal_is_full")
+		else:
+			var quest_scene = quest_resource.instance()
+			add_child(quest_scene)
+			
+			quest_scene.connect("quest_completed",self,"remove_quest", [quest_scene])#connect: signal as String, what is recieving the signal, name of the function as a string
+			
+			quest_scene.setQuest(passed_npc, passed_quest_name, enemy_ID, num_of_enemies)
+			current_number_of_quests+=1
+			
+			
+			#we need something to set up the reward system
 
 #		Create a Quest Node
 #			It would contain the following parameters:
@@ -38,25 +50,24 @@ func AddQuest():
 #					4. Permanant Stat Upgrade
 #					5. Weapon Upgrade
 #					6. Temporary Trinkets (maybe for the room based quests???)
-#
-#
 
 
 #	Remove a Quest Function
+func remove_quest(quest: Node) -> void:	
+	current_number_of_quests-=1
+	quest.reward.quest_completed()
+
+
+
+
+
+
 #		This function would only be called if there was a signal emitted that said "Hey, this quest was completed"
 #		Give the player the reward
 #		Free up queue using the specific quest node
 #		Decrement the total quests
-#		update the view
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
+#		imaginary update signal emission here
 
+func check_for_enemy_in_journal(enemy_ID) -> void:
+	for i in get_children():
+		i.condition.add_to_the_body_count(enemy_ID)

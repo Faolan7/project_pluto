@@ -1,28 +1,24 @@
 class_name Condition
 extends Node
 
-onready var ENEMY: int
-onready var NumberOf: int
-onready var ActuallyDead: int
+onready var ENEMY_ID: int
+onready var number_to_kill: int
+onready var number_killed: int
 
-#signal conditions_met
-
-#working as intended
-func createConditions(enemyID: int, numberOfBeDead: int) -> void:
-	ENEMY = enemyID # for quick look up to be sure this is the correct enemy
-	NumberOf = numberOfBeDead
-	
-	print(ENEMY)
-	print(NumberOf)
+signal conditions_met
 
 
-#Working, just need to figure out how to attach signal
-func checkForCompletion():
-	return NumberOf == ActuallyDead
-		#emit_signal("conditions_met")
+func create_conditions(enemy_ID: int, number_of_enemies: int) -> void:
+	ENEMY_ID = enemy_ID
+	number_to_kill = number_of_enemies
 
-#This could increment only if the enemy ID was the same.
-#Working as intended
-func addToTheBodyCount(enemyID: int) -> void:
-	if(enemyID == ENEMY):
-		ActuallyDead = ActuallyDead + 1
+
+func check_for_completion() -> void:
+	if number_to_kill == number_killed:
+		emit_signal("conditions_met")
+
+
+func add_to_the_body_count(enemy_ID: int) -> void:
+	if(enemy_ID == ENEMY_ID):
+		number_killed += 1
+		check_for_completion()
