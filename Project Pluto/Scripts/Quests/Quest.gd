@@ -6,15 +6,15 @@ onready var condition = $Condition
 onready var reward = $Reward
 
 
-signal quest_completed
+signal quest_completed(xp, gold, items)
 
 #similar to constructor. please dont use the holy flamer matt
-func set_quest(passed_npc: String, passed_quest_name: String, enemyID: int, numOfEnemy: int) -> void:
+func set_quest(passed_npc: String, passed_quest_name: String, enemyID: int, numOfEnemy: int, rewards: Array) -> void:
 	
 	set_npc(passed_npc)
 	set_quest_name(passed_quest_name)
 	set_conditions(enemyID, numOfEnemy)
-	#set_reward()
+	set_reward(rewards)
 func set_npc(name: String) -> void:
 	npc = name
 
@@ -32,8 +32,8 @@ func set_conditions(enemyID: int, numOfEnemy: int) -> void:
 
 
 
-#func set_reward() -> void:
-#	reward = Reward.init()
+func set_reward(passed_rewards: Array) -> void:
+	reward.create_reward(passed_rewards[0], passed_rewards[1], passed_rewards[2])
 
 
 

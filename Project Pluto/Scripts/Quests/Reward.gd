@@ -4,10 +4,7 @@ extends Node
 var xp: int setget set_xp, get_xp
 var gold: int setget set_gold, get_gold
 var items: Array = [
-	
 ]
-
-#signal give_reward(xp, gold, items)
 
 
 func create_reward(passed_xp: int, passed_gold: int, passed_items: Array) -> void:
@@ -17,26 +14,25 @@ func create_reward(passed_xp: int, passed_gold: int, passed_items: Array) -> voi
 
 
 func set_xp(passed_xp: int) -> void:
-	self.xp = passed_xp
+	xp = passed_xp
 
 func get_xp() -> int:
-	return self.xp
+	return xp
 
 
 func set_gold(passed_gold: int) -> void:
-	self.gold = passed_gold
+	gold = passed_gold
 
 func get_gold() -> int:
-	return self.gold
+	return gold
 
 
 func set_items(passed_items: Array) -> void:
-	self.items = items
+	items = passed_items
 
 func get_items() -> Array:
-	return self.items
-
+	return items
 
 func quest_completed() -> void:
-#	emit_signal("give_reward", get_xp(), get_gold(), get_items())
-	get_tree().quit()
+	print("I would quit but the code below me is commented out")
+#	get_tree().quit()
