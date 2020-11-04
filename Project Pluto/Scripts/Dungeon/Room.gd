@@ -24,7 +24,7 @@ func enter(enter_dir: Vector2) -> void:
 
 func add_connection(other: Room, side: Vector2) -> void:
 	connections[side] = other
-	other.connections[side * -1] = other
+	other.connections[side * -1] = self
 
 
 func set_active(value: bool) -> void:

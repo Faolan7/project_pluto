@@ -7,7 +7,7 @@
 extents = Vector2( 16, 8 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 16, 4 )
+extents = Vector2( 16, 1 )
 
 [node name="Door" type="StaticBody2D"]
 collision_mask = 0
@@ -20,7 +20,7 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="ExitArea" type="Area2D" parent="."]
-position = Vector2( 0, -4 )
+position = Vector2( 0, -16 )
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]

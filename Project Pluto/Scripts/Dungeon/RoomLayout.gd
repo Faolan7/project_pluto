@@ -12,10 +12,10 @@ onready var WALL_ID: int = tile_set.find_tile_by_name('wall')
 onready var camera: Camera2D = $Camera2D as Camera2D
 onready var enemy_tracker: Node2D = $EnemyTracker as Node2D
 onready var doors: Dictionary = {
-	Vector2.UP: $Doors/NorthDoor,
-	Vector2.DOWN: $Doors/SouthDoor,
-	Vector2.LEFT: $Doors/WestDoor,
-	Vector2.RIGHT: $Doors/EastDoor,
+	Vector2.UP: $Doors/NorthDoor as Door,
+	Vector2.DOWN: $Doors/SouthDoor as Door,
+	Vector2.LEFT: $Doors/WestDoor as Door,
+	Vector2.RIGHT: $Doors/EastDoor as Door,
 }
 
 
@@ -27,7 +27,10 @@ func enter(enter_dir: Vector2) -> void:
 func set_active(value: bool) -> void:
 	active = value
 	
-	camera.current = value
+	camera.current = active
+	for door in doors.values():
+		door.active = active
+		
 	if enemy_tracker.get_child_count() > 0:
 		set_doors_open(false)
 

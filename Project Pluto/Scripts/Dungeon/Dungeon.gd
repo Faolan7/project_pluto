@@ -15,9 +15,14 @@ func _ready():
 
 
 func _on_room_exited(exit_dir: Vector2) -> void:
-	var old_room = current_room
+	# Switching rooms
+	var old_room: Room = current_room
 	current_room = current_room.connections[exit_dir] as Room
 	
+	# Moving the player into the room
+	$Player.position += 32 * exit_dir
+	
+	# Unloading far away rooms
 	for connection in old_room.connections.values():
 		if connection != null and connection != current_room:
 			connection.is_loaded = false
