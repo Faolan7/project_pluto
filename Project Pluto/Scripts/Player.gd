@@ -4,7 +4,11 @@ extends KinematicBody2D
 onready var state_machine: Node = $StateMachine
 onready var move_state: Node = $StateMachine/Move
 onready var attack_state: Node = $StateMachine/Attack
-
+# Need a variable that attaches the Quest Journal to the player
+# This would need to be kept track of basically 24/7 as wherever the player
+# Goes, this object will have to go. If we had a manager that oversaw
+# All of the important data that we want kept to be at the ready for any purpose
+# this would allow our journal to not be erased a lot.
 
 func _ready() -> void:
 	attack_state.weapon = $Weapons/Weapon as Weapon

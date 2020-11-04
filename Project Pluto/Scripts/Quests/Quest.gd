@@ -3,12 +3,13 @@ extends Node
 var npc: String setget set_npc, get_npc
 var quest_name: String setget set_quest_name, get_quest_name
 onready var condition = $Condition
-onready var reward: Reward = $Reward
+onready var reward = $Reward
+
 
 signal quest_completed
 
 #similar to constructor. please dont use the holy flamer matt
-func setQuest(passed_npc: String, passed_quest_name: String, enemyID: int, numOfEnemy: int) -> void:
+func set_quest(passed_npc: String, passed_quest_name: String, enemyID: int, numOfEnemy: int) -> void:
 	
 	set_npc(passed_npc)
 	set_quest_name(passed_quest_name)
