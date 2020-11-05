@@ -60,6 +60,10 @@ config/name="Project Pluto"
 run/main_scene="res://Scenes/Dungeon/Room.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+QuestJournal="*res://Scenes/Quest/Quest_Journal.tscn"
+
 [display]
 
 window/size/width=480
@@ -119,6 +123,11 @@ move_down={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
+interact={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -126,6 +135,8 @@ move_down={
 2d_physics/layer_1="world"
 2d_render/layer_2="hitbox"
 2d_physics/layer_2="hitbox"
+2d_render/layer_3="interaction"
+2d_physics/layer_3="interaction"
 
 [rendering]
 

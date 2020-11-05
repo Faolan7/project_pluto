@@ -13,12 +13,12 @@ func create_conditions(enemy_ID: int, number_of_enemies: int) -> void:
 	number_to_kill = number_of_enemies
 
 
-func check_for_completion() -> void:
-	if number_to_kill == number_killed:
-		emit_signal("conditions_met")
-
-
 func add_to_the_body_count(enemy_ID: int) -> void:
 	if(enemy_ID == ENEMY_ID):
 		number_killed += 1
 		check_for_completion()
+
+
+func check_for_completion() -> void:
+	if number_to_kill == number_killed:
+		emit_signal("conditions_met")

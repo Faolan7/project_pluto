@@ -1,7 +1,7 @@
 extends Node
 
-var npc: String setget set_npc, get_npc
-var quest_name: String setget set_quest_name, get_quest_name
+var npc: String
+var quest_name: String
 onready var condition = $Condition
 onready var reward = $Reward
 
@@ -11,32 +11,10 @@ signal quest_completed(xp, gold, items)
 #similar to constructor. please dont use the holy flamer matt
 func set_quest(passed_npc: String, passed_quest_name: String, enemyID: int, numOfEnemy: int, rewards: Array) -> void:
 	
-	set_npc(passed_npc)
-	set_quest_name(passed_quest_name)
-	set_conditions(enemyID, numOfEnemy)
-	set_reward(rewards)
-func set_npc(name: String) -> void:
-	npc = name
-
-func get_npc() -> String:
-	return npc
-
-func set_quest_name(name: String) -> void:
-	quest_name = name
-
-func get_quest_name() -> String:
-	return quest_name
-
-func set_conditions(enemyID: int, numOfEnemy: int) -> void:
+	npc = passed_npc
+	quest_name = passed_quest_name
 	condition.create_conditions(enemyID, numOfEnemy)
-
-
-
-func set_reward(passed_rewards: Array) -> void:
-	reward.create_reward(passed_rewards[0], passed_rewards[1], passed_rewards[2])
-
-
-
+	reward.create_reward(rewards[0], rewards[1], rewards[2])
 
 func _on_Condition_conditions_met():
 	emit_signal("quest_completed")
