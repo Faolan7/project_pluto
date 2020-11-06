@@ -43,7 +43,10 @@ func remove_door(side: Vector2) -> void:
 	var door: Door = doors[side] as Door
 	var offset: Vector2 = Vector2(1, 1)
 	
+	# Hiding door
 	door.visible = false
+	
+	# Replacing floor tiles with wall tiles
 	set_cellv(world_to_map(door.position + offset), WALL_ID)
 	set_cellv(world_to_map(door.position - offset), WALL_ID)
 
