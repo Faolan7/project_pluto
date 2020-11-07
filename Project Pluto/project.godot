@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
-"class": "Condition",
+"base": "KinematicBody2D",
+"class": "Enemy",
 "language": "GDScript",
-"path": "res://Scripts/Quests/Conditions.gd"
+"path": "res://Scripts/Enemy/Enemy.gd"
 }, {
 "base": "ColorRect",
 "class": "HealthBar",
@@ -25,9 +25,19 @@ _global_script_classes=[ {
 "path": "res://Scripts/Weapon/Hitbox.gd"
 }, {
 "base": "Node",
+"class": "KillTask",
+"language": "GDScript",
+"path": "res://Scripts/Quest/KillTask.gd"
+}, {
+"base": "Node",
+"class": "Quest",
+"language": "GDScript",
+"path": "res://Scripts/Quest/Quest.gd"
+}, {
+"base": "Node",
 "class": "Reward",
 "language": "GDScript",
-"path": "res://Scripts/Quests/Reward.gd"
+"path": "res://Scripts/Quest/Reward.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -45,9 +55,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/Weapon/Weapon.gd"
 } ]
 _global_script_class_icons={
-"Condition": "",
+"Enemy": "",
 "HealthBar": "",
 "Hitbox": "",
+"KillTask": "",
+"Quest": "",
 "Reward": "",
 "State": "",
 "StateMachine": "",
@@ -62,7 +74,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-QuestJournal="*res://Scenes/Quest/Quest_Journal.tscn"
+QuestJournal="*res://Scenes/Quest/QuestJournal.tscn"
 
 [display]
 

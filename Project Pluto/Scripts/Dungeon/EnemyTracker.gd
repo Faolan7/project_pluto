@@ -10,6 +10,8 @@ func _ready():
 
 
 func on_death() -> void:
+	QuestJournal.check_for_enemy_in_journal(1)
+	
 	var numOfChildren = get_child_count()	
 	if numOfChildren == 0:
 		emit_signal("room_cleared")
