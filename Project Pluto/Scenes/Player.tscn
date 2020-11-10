@@ -7,10 +7,6 @@
 [ext_resource path="res://Scenes/Weapon/Weapon.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/State/Attack.gd" type="Script" id=6]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 5.56895
-height = 3.93819
-
 [sub_resource type="Animation" id=2]
 resource_name = "idle_down"
 length = 0.1
@@ -210,25 +206,13 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=23]
 
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.56895
+height = 3.93819
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 0
 script = ExtResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 4 )
-hframes = 60
-frame = 18
-
-[node name="WorldCollision" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 8 )
-rotation = 1.5708
-shape = SubResource( 1 )
-
-[node name="Weapons" type="Node2D" parent="."]
-
-[node name="Weapon" parent="Weapons" instance=ExtResource( 5 )]
-position = Vector2( 11, 4 )
-rotation = 1.5708
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -254,7 +238,25 @@ anims/run_up = SubResource( 9 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 22 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 23 )
-parameters/Idle/blend_position = Vector2( 0, 0 )
-parameters/Run/blend_position = Vector2( 0, 0 )
+parameters/Idle/blend_position = Vector2( 1, 0 )
+parameters/Run/blend_position = Vector2( 1, 0 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+hframes = 60
+frame = 13
+
+[node name="FacingPivot" type="Node2D" parent="Sprite"]
+position = Vector2( 0, 3.5 )
+
+[node name="Weapons" type="Node2D" parent="Sprite/FacingPivot"]
+
+[node name="Weapon" parent="Sprite/FacingPivot/Weapons" instance=ExtResource( 5 )]
+position = Vector2( 12, 0 )
+rotation = 1.5708
+
+[node name="WorldCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 8 )
+rotation = 1.5708
+shape = SubResource( 1 )
