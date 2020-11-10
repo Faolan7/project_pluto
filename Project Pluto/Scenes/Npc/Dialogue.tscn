@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Npc/Dialogue.gd" type="Script" id=1]
+
+[node name="DialogueBox" type="PanelContainer"]
+margin_top = 268.528
+margin_right = 480.0
+margin_bottom = 319.528
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 473.0
+margin_bottom = 44.0
+size_flags_vertical = 1
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "This is text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
