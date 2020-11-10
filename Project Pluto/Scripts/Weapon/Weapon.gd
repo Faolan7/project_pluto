@@ -6,6 +6,9 @@ signal attack_finished
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
 
+#Need some kind of stat that determines range
+#Need some kind of stat that determines damage (Damage variance based or otherwise)
+
 
 func use() -> void:
 	animation_player.play('stab')
