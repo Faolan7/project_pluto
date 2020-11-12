@@ -1,27 +1,47 @@
 extends State
 
+
 export(NodePath) var INTERACTION_AREA: NodePath # Path to the actor node
 
 var interaction_area: Area2D
 
+
 func _ready():
 	interaction_area = get_node(INTERACTION_AREA) as Area2D
-	
+
+
 func activate():
 	.activate()
-		
-	var bodies = interaction_area.get_overlapping_bodies()
+	is_completed = false
 	
-	if bodies.size() == 0:
-		return
+	var closest_object: CollisionObject2D = get_closest_object()
+	
+	if closest_object == null:
+		is_completed = true
+	else:
+		closest_object.interact()
+		# warning-ignore:return_value_discarded
+		closest_object.connect('interaction_finished', self, '_on_interaction_finished',
+			[], CONNECT_ONESHOT)
+
+
+func get_closest_object() -> CollisionObject2D:
+	var objects: Array = interaction_area.get_overlapping_areas()
+	
+	if objects.size() == 0:
+		return null
 	
 	var shortest_distance: float = INF
-	var closest_body: PhysicsBody2D
+	var closest_object: CollisionObject2D
 	
-	for body in bodies:
-		var current_distance: float = actor.position.distance_squared_to(body.position)
+	for object in objects:
+		var current_distance: float = actor.position.distance_squared_to(object.position)
 		if current_distance < shortest_distance:
-			closest_body = body
+			closest_object = object
 			shortest_distance = current_distance
-	
-	closest_body.interact()
+			
+	return closest_object
+
+
+func _on_interaction_finished():
+	is_completed = true

@@ -19,7 +19,6 @@ margin_right = 473.0
 margin_bottom = 44.0
 size_flags_vertical = 1
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "This is text"
 __meta__ = {
 "_edit_use_anchors_": false
 }

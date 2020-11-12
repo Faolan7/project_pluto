@@ -2,6 +2,7 @@ class_name StateMachine
 extends Node
 
 
+var can_change_state: bool setget ,_get_can_change_state
 var current_state: State
 
 export(NodePath) var ACTOR_NODE: NodePath # Path to the actor node
@@ -23,3 +24,7 @@ func change_state(new_state: State):
 		
 	current_state = new_state
 	current_state.activate()
+
+
+func _get_can_change_state() -> bool:
+	return current_state.is_completed if current_state != null else true
