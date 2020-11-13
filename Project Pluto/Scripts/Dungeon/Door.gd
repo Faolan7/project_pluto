@@ -3,8 +3,8 @@ extends StaticBody2D
 
 export(bool) var is_open: bool = false setget set_open
 
-onready var collision_box = $WorldCollision
-onready var sprite = $Sprite
+onready var collision_box: CollisionShape2D = $WorldCollision as CollisionShape2D
+onready var sprite: Sprite = $Sprite as Sprite
 
 
 func _ready() -> void:

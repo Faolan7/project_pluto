@@ -1,10 +1,10 @@
 extends KinematicBody2D
 
 
-onready var state_machine: Node = $StateMachine
-onready var move_state: Node = $StateMachine/Move
-onready var attack_state: Node = $StateMachine/Attack
-onready var interact_state: Node = $StateMachine/Interact
+onready var state_machine: StateMachine = $StateMachine as StateMachine
+onready var move_state: State = $StateMachine/Move as State
+onready var attack_state: State = $StateMachine/Attack as State
+onready var interact_state: State = $StateMachine/Interact as State
 
 
 func _ready() -> void:
