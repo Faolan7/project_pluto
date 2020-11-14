@@ -37,7 +37,6 @@ tracks/1/keys = {
 }
 
 [node name="Weapon" type="Sprite"]
-visible = false
 position = Vector2( 0, -6 )
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
@@ -52,3 +51,4 @@ disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/stab = SubResource( 2 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

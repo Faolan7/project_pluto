@@ -8,7 +8,7 @@ signal room_exited(exit_dir)
 var active: bool setget set_active, get_active
 var is_loaded: bool setget set_loaded
 
-var layout: RoomLayout
+var layout
 var connections: Dictionary = {
 	Vector2.UP: null,
 	Vector2.DOWN: null,

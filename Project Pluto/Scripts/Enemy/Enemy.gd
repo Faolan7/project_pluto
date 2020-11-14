@@ -1,3 +1,4 @@
+class_name Enemy
 extends KinematicBody2D
 
 
@@ -21,5 +22,5 @@ func set_health(value: int) -> void:
 		health_bar.update_bar(health)
 
 
-func _on_hit(damage: int):
+func _on_hit(damage: int) -> void:
 	set_health(health - damage)

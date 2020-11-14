@@ -5,6 +5,8 @@ Project Pluto/Scenes/Test*.tscn
 Project Pluto/Scripts/Test*.gd
 Project Pluto/Exports/
 
+# Class files
+*.pdf
 
 # OS X files
 .DS_Store
