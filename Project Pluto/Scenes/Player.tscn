@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/State/Move.gd" type="Script" id=2]
@@ -6,6 +6,14 @@
 [ext_resource path="res://Sprites/Player.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Weapon/Weapon.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/State/Attack.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/State/Interact.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=24]
+extents = Vector2( 12, 20 )
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 6.0
+height = 4.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle_down"
@@ -206,15 +214,6 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=23]
 
-[ext_resource path="res://Scripts/State/Interact.gd" type="Script" id=7]
-
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 5.56895
-height = 3.93819
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 11.0
-
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 0
 script = ExtResource( 1 )
@@ -223,17 +222,28 @@ script = ExtResource( 1 )
 texture = ExtResource( 4 )
 hframes = 60
 
+[node name="FacingPivot" type="Node2D" parent="Sprite"]
+position = Vector2( 0, 3.5 )
+
+[node name="Weapons" type="Node2D" parent="Sprite/FacingPivot"]
+
+[node name="Weapon" parent="Sprite/FacingPivot/Weapons" instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 12, 0 )
+rotation = 1.5708
+
+[node name="InteractionArea" type="Area2D" parent="Sprite/FacingPivot"]
+position = Vector2( 12, 0 )
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/FacingPivot/InteractionArea"]
+shape = SubResource( 24 )
+
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 8 )
 rotation = 1.5708
 shape = SubResource( 1 )
-
-[node name="Weapons" type="Node2D" parent="."]
-
-[node name="Weapon" parent="Weapons" instance=ExtResource( 5 )]
-visible = false
-position = Vector2( 11, 4 )
-rotation = 1.5708
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -245,6 +255,10 @@ MOVE_SPEED = 100
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource( 6 )
+
+[node name="Interact" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+INTERACTION_AREA = NodePath("../../Sprite/FacingPivot/InteractionArea")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle_down = SubResource( 2 )
@@ -262,34 +276,3 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 23 )
 parameters/Idle/blend_position = Vector2( 1, 0 )
 parameters/Run/blend_position = Vector2( 1, 0 )
-
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 4 )
-hframes = 60
-frame = 13
-
-[node name="FacingPivot" type="Node2D" parent="Sprite"]
-position = Vector2( 0, 3.5 )
-
-[node name="Weapons" type="Node2D" parent="Sprite/FacingPivot"]
-
-[node name="Weapon" parent="Sprite/FacingPivot/Weapons" instance=ExtResource( 5 )]
-position = Vector2( 12, 0 )
-rotation = 1.5708
-
-[node name="WorldCollision" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 8 )
-rotation = 1.5708
-shape = SubResource( 1 )
-
-[node name="Interact" type="Node" parent="StateMachine"]
-script = ExtResource( 7 )
-INTERACTION_AREA = NodePath("../../InteractionArea")
-
-[node name="InteractionArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-position = Vector2( 13, 2 )
-shape = SubResource( 2 )
