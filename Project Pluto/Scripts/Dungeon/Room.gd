@@ -3,10 +3,10 @@ extends Node2D
 
 
 signal room_exited(exit_dir)
+signal loaded()
 
-
-var active: bool setget set_active, get_active
 var is_loaded: bool setget set_loaded
+var cleared: bool
 
 var layout
 var connections: Dictionary = {
@@ -20,15 +20,12 @@ export(Resource) var LAYOUT_SCENE: Resource
 
 
 func enter(enter_dir: Vector2) -> void:
-	layout.enter(enter_dir)
+	layout.enter(enter_dir, cleared)
 
 func add_connection(other: Room, side: Vector2) -> void:
 	connections[side] = other
 	other.connections[side * -1] = self
 
-
-func set_active(value: bool) -> void:
-	layout.active = value
 
 func set_loaded(value: bool) -> void:
 	is_loaded = value
@@ -40,18 +37,16 @@ func set_loaded(value: bool) -> void:
 		add_child(layout)
 		# warning-ignore:return_value_discarded
 		layout.connect('room_exited', self, '_on_room_exited')
+		layout.enemy_tracker.connect('room_cleared', self, '_on_room_cleared')
 		
 		for dir in connections.keys():
 			if connections[dir] == null:
 				layout.remove_door(dir)
-
-
-func get_active() -> bool:
-	return layout.active
+		emit_signal('loaded')
+func _on_room_cleared() -> void:
+	cleared = true
 
 
 func _on_room_exited(exit_dir: Vector2) -> void:
-	set_active(false)
-	connections[exit_dir].enter(exit_dir * -1)
-	
+	print("no mathew, i do it this way, room")	
 	emit_signal('room_exited', exit_dir)

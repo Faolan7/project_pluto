@@ -5,8 +5,6 @@ extends TileMap
 signal room_exited(exit_dir)
 
 
-var active: bool = false setget set_active
-
 onready var WALL_ID: int = tile_set.find_tile_by_name('wall')
 
 onready var camera: Camera2D = $Camera2D as Camera2D
@@ -19,21 +17,18 @@ onready var doors: Dictionary = {
 }
 
 
-func enter(enter_dir: Vector2) -> void:
-	set_active(true)
-	doors[enter_dir].is_open = true
-
-
-func set_active(value: bool) -> void:
-	active = value
-	
-	camera.current = active
-	for door in doors.values():
-		door.active = active
-		
+func enter(enter_dir: Vector2, cleared: bool) -> void:
+	print(enter_dir)
+	if cleared:
+		for child in enemy_tracker.get_children():
+			enemy_tracker.remove_child(child)	
+	camera.current = true
 	if enemy_tracker.get_child_count() > 0:
 		set_doors_open(false)
+	doors[enter_dir].is_open = true
 
+func spawnEnemies() -> void:
+	pass
 
 func set_doors_open(value: bool) -> void:
 	for door in doors.values():
@@ -52,6 +47,8 @@ func remove_door(side: Vector2) -> void:
 
 
 func _on_door_entered(side: Vector2) -> void:
+	print("no mathew, i do it this way , layout")
+	camera.current = false
 	emit_signal('room_exited', side)
 
 func _on_room_cleared() -> void:
