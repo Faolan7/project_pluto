@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Enemy/HealthBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Weapon/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/Enemy/dummy_enemy.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Weapon/Weapon.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.71482
@@ -38,4 +39,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource( 2 )
+
+[node name="Weapon" parent="." instance=ExtResource( 5 )]
+visible = false
 [connection signal="damaged" from="HurtBox" to="." method="_on_hit"]
