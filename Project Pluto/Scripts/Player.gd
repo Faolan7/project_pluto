@@ -12,6 +12,7 @@ onready var move_state: State = $StateMachine/Move as State
 onready var attack_state: State = $StateMachine/Attack as State
 onready var interact_state: State = $StateMachine/Interact as State
 
+onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 
 func _ready() -> void:
 	animation_tree.active = true
@@ -50,3 +51,20 @@ func set_face_dir(value: Vector2):
 		
 		facing_pivot.rotation = face_dir.angle()
 		facing_pivot.show_behind_parent = face_dir == Vector2.UP
+
+# Player interacts with the weapon (Assuming we only have one weapon) -> PROOF OF CONCEPT
+func add_weapon(passed_weapon: Weapon) -> void:
+	passed_weapon.visible = false
+	weapon_slots.add_child(passed_weapon)
+
+
+# Player interacting with a weapon on the ground (Assuming we have weapon inventory set up) -> more generic
+# 	Check to see if we have a "full inventory"
+# 	if we have a full inventory:
+#		"Pop" a weapon off the stack
+#		Drop weapon on the ground as a "DroppedItem"
+#	Get a pointer that points to the "Weapons" Node
+#	Recieve a signal from "DroppedItem" that would send the "Weapon" child to this script
+#	Add the recieved "Weapon" as a child of the "Weapons" Node
+#	Emit signal back to the "DroppedItem" that would delete the "DroppedItem" from the scene
+#	Insert Interaction shinanigans here because I don't understand how it fully works.

@@ -14,4 +14,3 @@ light_mask = 4
 shape = SubResource( 1 )
 
 [node name="Weapon" parent="." instance=ExtResource( 2 )]
-visible = true

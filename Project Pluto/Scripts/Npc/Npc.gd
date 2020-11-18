@@ -10,7 +10,7 @@ func _ready():
 	quest = QuestJournal.register_quest(1, 1, [0, 0, []])
 
 
-func _on_interaction() -> void:
+func _on_interaction(player: Player) -> void:
 	if quest.state == quest.QuestState.UNSTARTED:
 		quest.state = quest.QuestState.STARTED
 		UI.create_dialogue(self, '_on_dialogue_closed',

@@ -23,7 +23,7 @@ func activate() -> void:
 		closest_object.connect('interaction_finished', self, '_on_interaction_finished',
 			[], CONNECT_ONESHOT)
 			
-		closest_object.interact()
+		closest_object.interact(actor)
 
 
 func get_closest_object() -> CollisionObject2D:
