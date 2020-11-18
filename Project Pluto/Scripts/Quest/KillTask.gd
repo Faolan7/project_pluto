@@ -1,14 +1,10 @@
 class_name KillTask
-extends Node
-
-signal completed
+extends Task
 
 
 var ENEMY_ID: int
 var NUM_TO_KILL: int
 var num_killed: int = 0
-
-var is_complete: bool setget, get_complete
 
 
 func init(enemy_id: int, quantity: int) -> void:

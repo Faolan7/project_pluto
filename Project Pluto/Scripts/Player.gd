@@ -24,14 +24,17 @@ func _unhandled_input(_event: InputEvent) -> void:
 		Input.get_action_strength('move_down') - Input.get_action_strength('move_up')
 	)
 	move_state.move_dir = input_vector.normalized()
-	set_face_dir(input_vector)
 	
 	# Updating state
 	if state_machine.can_change_state:
+		set_face_dir(input_vector)
+		
 		if Input.is_action_just_pressed('attack'):
+			animation_state.travel('Idle')
 			state_machine.change_state(attack_state)
 			
 		elif Input.is_action_just_pressed('interact'):
+			animation_state.travel('Idle')
 			state_machine.change_state(interact_state)
 			
 		elif input_vector != Vector2.ZERO: # Checking if move button is pushed
@@ -45,6 +48,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 func set_face_dir(value: Vector2):
 	if abs(face_dir.angle_to(value)) > PI / 3:
 		face_dir = value.snapped(Vector2(1, 1))
+		print(face_dir)
 		
 		set_blend_position(face_dir)
 		facing_pivot.rotation = face_dir.angle()

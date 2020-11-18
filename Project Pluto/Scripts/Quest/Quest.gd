@@ -4,40 +4,42 @@ extends Node
 
 enum QuestState {UNSTARTED, STARTED, COMPLETED, TURNED_IN}
 
-var KILL_TASK: Resource = load('res://Scenes/Quest/KillTask.tscn')
-var REWARD: Resource = load('res://Scripts/Quest/Reward.gd')
+var KILL_TASK: Resource = load('res://Scripts/Quest/KillTask.gd')
+
 
 var state: int = QuestState.UNSTARTED
-var tasks: Array setget ,get_tasks
-var rewards: Array = []
-
-onready var TASK_NODE: Node = $Tasks
+var tasks: Array = []
 
 
-func init(enemyID: int, numOfEnemy: int, reward_data: Array) -> void:
-	add_task(enemyID, numOfEnemy)
+func init(task_data: Array) -> void:
+	for task in task_data:
+		add_task(task)
+
+func add_task(task_data: Dictionary) -> void:
+	var task: Task = init_task(task_data)
 	
-	var reward: Reward = REWARD.new() as Reward
-	reward.init(reward_data[0], reward_data[1], reward_data[2])
-	rewards.append(reward)
-
-func add_task(enemy_id: int, quantity: int) -> void:
-	var task: KillTask = KILL_TASK.instance() as KillTask
-	TASK_NODE.add_child(task)
-	
-	task.init(enemy_id, quantity)
+	tasks.append(task)
 	# warning-ignore:return_value_discarded
 	task.connect('completed', self, '_on_task_completed')
 
-func get_tasks() -> Array:
-	return TASK_NODE.get_children()
+func init_task(task_data: Dictionary) -> Task:
+	var task: Task
+	
+	match task_data['type']:
+		'kill':
+			task = KILL_TASK.new()
+			task.init(task_data['enemy'], task_data['quantity'])
+		_: # Quit if unknown task
+			return null
+			
+	return task
 
 
 func _on_task_completed() -> void:
 	var is_completed: bool = true
 	
 	# Checking if all tasks are completed
-	for task in get_tasks():
+	for task in tasks:
 		if not task.is_complete:
 			is_completed = false
 			break

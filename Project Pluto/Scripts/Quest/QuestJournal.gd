@@ -1,19 +1,21 @@
 extends Node
 
 
-const QUEST_SCENE = preload('res://Scenes/Quest/Quest.tscn')
+var QUEST_SCENE = load('res://Scripts/Quest/Quest.gd')
+
+var quests: Dictionary = {}
 
 
-func register_quest(enemyID: int, numOfEnemy: int, reward_data: Array) -> Quest:
-	var quest: Quest = QUEST_SCENE.instance() as Quest
-	add_child(quest)
-	
-	quest.init(enemyID, numOfEnemy, reward_data)
-	
-	return quest
-
+func register_quest(quest_name: String, tasks: Array) -> Quest:
+	if not quest_name in quests:
+		var quest: Quest = QUEST_SCENE.new() as Quest
+		quests[quest_name] = quest
+		
+		quest.init(tasks)
+		
+	return quests[quest_name]
 
 func add_kill(enemyID) -> void:
-	for quest in get_children():
+	for quest in quests.values():
 		if quest.state == quest.QuestState.STARTED:
 			quest.tasks[0].add_kill(enemyID)

@@ -39,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Npc/InteractBox.gd"
 }, {
-"base": "Node",
+"base": "Task",
 "class": "KillTask",
 "language": "GDScript",
 "path": "res://Scripts/Quest/KillTask.gd"
@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/State/StateMachine.gd"
 }, {
+"base": "Node",
+"class": "Task",
+"language": "GDScript",
+"path": "res://Scripts/Quest/Tasks/BaseTask.gd"
+}, {
 "base": "Sprite",
 "class": "Weapon",
 "language": "GDScript",
@@ -99,6 +104,7 @@ _global_script_class_icons={
 "RoomLayout": "",
 "State": "",
 "StateMachine": "",
+"Task": "",
 "Weapon": ""
 }
 
@@ -110,7 +116,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-QuestJournal="*res://Scenes/Quest/QuestJournal.tscn"
+QuestJournal="*res://Scripts/Quest/QuestJournal.gd"
 UI="*res://Scripts/UI.gd"
 
 [display]

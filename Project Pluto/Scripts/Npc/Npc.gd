@@ -7,7 +7,11 @@ onready var interact_box: InteractBox = $InteractBox as InteractBox
 
 
 func _ready():
-	quest = QuestJournal.register_quest(1, 1, [0, 0, []])
+	quest = QuestJournal.register_quest('Tutorial Quest', [{
+		'type': 'kill',
+		'enemy': 1,
+		'quantity': 1
+	}])
 
 
 func _on_interaction() -> void:
@@ -23,7 +27,7 @@ func _on_interaction() -> void:
 			
 	else:
 		UI.create_dialogue(self, '_on_dialogue_closed',
-			"You just gotta go over there, dummy!")
+			"You just gotta go into that other room, dummy!")
 
 func _on_dialogue_closed() -> void:
 	interact_box.finish_interaction()
