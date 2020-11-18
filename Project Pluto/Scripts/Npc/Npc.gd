@@ -14,7 +14,7 @@ func _ready():
 	}])
 
 
-func _on_interaction() -> void:
+func _on_interaction(player: Player) -> void:
 	if quest.state == quest.QuestState.UNSTARTED:
 		quest.state = quest.QuestState.STARTED
 		UI.create_dialogue(self, '_on_dialogue_closed',
