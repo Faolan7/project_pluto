@@ -35,18 +35,21 @@ func _unhandled_input(_event: InputEvent) -> void:
 			state_machine.change_state(interact_state)
 			
 		elif input_vector != Vector2.ZERO: # Checking if move button is pushed
+			animation_state.travel('Run')
 			state_machine.change_state(move_state)
 			
 		else:
-			animation_state.travel("Idle")
+			animation_state.travel('Idle')
 
 
 func set_face_dir(value: Vector2):
 	if abs(face_dir.angle_to(value)) > PI / 3:
 		face_dir = value.snapped(Vector2(1, 1))
 		
-		animation_tree.set("parameters/Idle/blend_position", face_dir)
-		animation_tree.set("parameters/Run/blend_position", face_dir)
-		
+		set_blend_position(face_dir)
 		facing_pivot.rotation = face_dir.angle()
 		facing_pivot.show_behind_parent = face_dir == Vector2.UP
+
+func set_blend_position(value: Vector2):
+	animation_tree.set('parameters/Idle/blend_position', value)
+	animation_tree.set('parameters/Run/blend_position', value)

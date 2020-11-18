@@ -8,7 +8,7 @@ signal loaded()
 var is_loaded: bool setget set_loaded
 var cleared: bool
 
-var layout
+var layout: RoomLayout
 var connections: Dictionary = {
 	Vector2.UP: null,
 	Vector2.DOWN: null,
@@ -35,18 +35,23 @@ func set_loaded(value: bool) -> void:
 	else:
 		layout = LAYOUT_SCENE.instance() as RoomLayout
 		add_child(layout)
+		
 		# warning-ignore:return_value_discarded
 		layout.connect('room_exited', self, '_on_room_exited')
+		# warning-ignore:return_value_discarded
 		layout.enemy_tracker.connect('room_cleared', self, '_on_room_cleared')
 		
 		for dir in connections.keys():
 			if connections[dir] == null:
 				layout.remove_door(dir)
 		emit_signal('loaded')
+
+func get_enter_position(enter_dir: Vector2) -> Vector2:
+	return position + layout.doors[enter_dir].position
+
+
 func _on_room_cleared() -> void:
 	cleared = true
 
-
 func _on_room_exited(exit_dir: Vector2) -> void:
-	print("no mathew, i do it this way, room")	
 	emit_signal('room_exited', exit_dir)

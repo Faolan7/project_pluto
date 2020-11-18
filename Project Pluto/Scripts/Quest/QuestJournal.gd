@@ -15,4 +15,5 @@ func register_quest(enemyID: int, numOfEnemy: int, reward_data: Array) -> Quest:
 
 func add_kill(enemyID) -> void:
 	for quest in get_children():
-		quest.tasks[0].add_kill(enemyID)
+		if quest.state == quest.QuestState.STARTED:
+			quest.tasks[0].add_kill(enemyID)

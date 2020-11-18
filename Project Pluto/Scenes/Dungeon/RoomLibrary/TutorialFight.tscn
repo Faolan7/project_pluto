@@ -78,11 +78,11 @@ rotation = -1.5708
 [node name="EnemyTracker" parent="." instance=ExtResource( 6 )]
 
 [node name="Enemy" parent="EnemyTracker" instance=ExtResource( 5 )]
-position = Vector2( 165.05, 93.2342 )
+position = Vector2( 176, 96 )
 health = 3
 
 [node name="Enemy2" parent="EnemyTracker" instance=ExtResource( 5 )]
-position = Vector2( 76.8552, 93.2342 )
+position = Vector2( 80, 96 )
 health = 3
 [connection signal="entered" from="Doors/NorthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, -1 ) ]]
 [connection signal="entered" from="Doors/SouthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, 1 ) ]]

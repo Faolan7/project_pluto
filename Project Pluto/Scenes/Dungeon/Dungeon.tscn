@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Dungeon/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/_DummyFight.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/TutorialQuest.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Dungeon/Dungeon.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/TutorialFight.tscn" type="PackedScene" id=5]
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource( 4 )
@@ -11,10 +12,11 @@ script = ExtResource( 4 )
 [node name="Rooms" type="Node2D" parent="."]
 
 [node name="Room" parent="Rooms" instance=ExtResource( 1 )]
+LAYOUT_SCENE = ExtResource( 3 )
 
 [node name="Room2" parent="Rooms" instance=ExtResource( 1 )]
-position = Vector2( 0, 192 )
-LAYOUT_SCENE = ExtResource( 3 )
+position = Vector2( 0, -192 )
+LAYOUT_SCENE = ExtResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 128, 144 )

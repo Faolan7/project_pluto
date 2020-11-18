@@ -6,12 +6,11 @@ onready var player: Player = $Player as Player
 
 
 func _ready():
-	var other_room: Room = $Rooms/Room2 as Room
+	get_parent().call_deferred('move_child', self, 0)
 	
-	current_room.add_connection(other_room, Vector2.DOWN)
+	current_room.add_connection($Rooms/Room2, Vector2.UP)
 	
 	current_room.is_loaded = true
-	current_room.enter(Vector2.DOWN)
 
 
 func _on_room_exited(exit_dir: Vector2) -> void:
@@ -19,13 +18,15 @@ func _on_room_exited(exit_dir: Vector2) -> void:
 	var old_room: Room = current_room
 	current_room = current_room.connections[exit_dir] as Room
 	
-	# Unloading far away rooms
+	# Unloading old room
 	old_room.set_deferred('is_loaded', false)
-	current_room.connect('loaded', self, 'on_room_loaded', [exit_dir*-1, current_room])
+	
+	# Loading new room
+	# warning-ignore:return_value_discarded
+	current_room.connect('loaded', self, '_on_room_loaded',
+		[exit_dir * -1, current_room], CONNECT_ONESHOT)
 	current_room.set_deferred('is_loaded', true)
 
-
-func on_room_loaded(enter_dir: Vector2, room: Room)->void:
-	room.disconnect('ready', self, 'on_room_loaded')
+func _on_room_loaded(enter_dir: Vector2, room: Room)->void:
 	room.enter(enter_dir)
-	player.position = current_room.position + current_room.layout.doors[enter_dir].position
+	player.position = current_room.get_enter_position(enter_dir)
