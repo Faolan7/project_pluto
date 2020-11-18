@@ -42,6 +42,13 @@ func _unhandled_input(_event: InputEvent) -> void:
 			animation_state.travel("Idle")
 
 
+func add_weapon(weapon: Weapon) -> void:
+	weapon.visible = false
+	
+	weapon.get_parent().remove_child(weapon)
+	weapon_slots.add_child(weapon)
+
+
 func set_face_dir(value: Vector2):
 	if abs(face_dir.angle_to(value)) > PI / 3:
 		face_dir = value.snapped(Vector2(1, 1))
@@ -51,20 +58,3 @@ func set_face_dir(value: Vector2):
 		
 		facing_pivot.rotation = face_dir.angle()
 		facing_pivot.show_behind_parent = face_dir == Vector2.UP
-
-# Player interacts with the weapon (Assuming we only have one weapon) -> PROOF OF CONCEPT
-func add_weapon(passed_weapon: Weapon) -> void:
-	passed_weapon.visible = false
-	weapon_slots.add_child(passed_weapon)
-
-
-# Player interacting with a weapon on the ground (Assuming we have weapon inventory set up) -> more generic
-# 	Check to see if we have a "full inventory"
-# 	if we have a full inventory:
-#		"Pop" a weapon off the stack
-#		Drop weapon on the ground as a "DroppedItem"
-#	Get a pointer that points to the "Weapons" Node
-#	Recieve a signal from "DroppedItem" that would send the "Weapon" child to this script
-#	Add the recieved "Weapon" as a child of the "Weapons" Node
-#	Emit signal back to the "DroppedItem" that would delete the "DroppedItem" from the scene
-#	Insert Interaction shinanigans here because I don't understand how it fully works.

@@ -4,29 +4,28 @@ extends KinematicBody2D
 
 export(int) var health: int setget set_health
 
+const DROPPED_WEAPON: Resource = preload('res://Scenes/DroppedWeapon.tscn')
+
 onready var health_bar: HealthBar = $HealthBar as HealthBar
-onready var DROPPED_ITEM: Resource = load("res://Scenes/DroppedItem.tscn")
 onready var weapon: Weapon = $Weapon
+
 
 func _ready() -> void:
 	health_bar.max_health = health
+
+
+func drop_weapon() -> void:
+	var dropped_weapon = DROPPED_WEAPON.instance()
+	
+	dropped_weapon.init(position, weapon)
+	get_parent().get_parent().call_deferred('add_child', dropped_weapon)
 
 
 func set_health(value: int) -> void:
 	health = value
 	
 	if health <= 0: # Checking if dead
-		#instance dropped_item
-		var dropped_weapon = DROPPED_ITEM.instance()
-		
-		#ole switcharoo
-		remove_child(weapon)
-		dropped_weapon.init(weapon, position)
-		
-		#add the dropped item as a child of the Dungeon
-		get_parent().get_parent().call_deferred("add_child", dropped_weapon)
-		
-		#remove the dead body
+		drop_weapon()
 		queue_free()
 		return
 		

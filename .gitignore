@@ -1,8 +1,7 @@
 # Godot Project files
 Project Pluto/.import/
 *.import
-Project Pluto/Scenes/Test*.tscn
-Project Pluto/Scripts/Test*.gd
+*test*
 Project Pluto/Exports/
 
 # Class files
