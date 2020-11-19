@@ -4,12 +4,21 @@ extends Node2D
 signal room_cleared
 
 
-func _ready():
+func _ready() -> void:
 	for child in get_children():
-		child.connect("tree_exited", self, "on_death")	#tree_exited is equivalent to dead
+		child.connect('died', self, '_on_death')
 
 
-func on_death() -> void:
-	var numOfChildren = get_child_count()	
-	if numOfChildren == 0:
+func _on_death() -> void:
+	QuestJournal.add_kill(1)
+	
+	var is_cleared: bool = true
+	
+	# Checking if all enemies are killed
+	for enemy in get_children():
+		if not enemy.is_dead:
+			is_cleared = false
+			break
+			
+	if is_cleared:
 		emit_signal("room_cleared")
