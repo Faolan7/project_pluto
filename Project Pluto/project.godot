@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "InteractBox",
 "class": "DroppedWeapon",
 "language": "GDScript",
-"path": "res://Scripts/DroppedWeapon.gd"
+"path": "res://Scripts/Weapon/DroppedWeapon.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Enemy",

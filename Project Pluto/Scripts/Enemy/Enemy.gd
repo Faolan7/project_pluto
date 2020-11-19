@@ -12,7 +12,7 @@ export(int) var health: int setget set_health
 const DROPPED_WEAPON: Resource = preload('res://Scenes/DroppedWeapon.tscn')
 
 onready var health_bar: HealthBar = $HealthBar as HealthBar
-onready var weapon: Weapon = $Weapon
+onready var weapon: Weapon = $Weapon as Weapon
 
 
 func _ready() -> void:

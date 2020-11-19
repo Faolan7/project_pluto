@@ -6,7 +6,7 @@ signal room_cleared
 
 func _ready() -> void:
 	for child in get_children():
-		child.connect('died', self, '_on_death') #tree_exited is equivalent to dead
+		child.connect('died', self, '_on_death')
 
 
 func _on_death() -> void:

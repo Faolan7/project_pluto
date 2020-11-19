@@ -5,6 +5,7 @@ extends Node2D
 signal room_exited(exit_dir)
 signal loaded()
 
+
 var is_loaded: bool setget set_loaded
 var cleared: bool
 
