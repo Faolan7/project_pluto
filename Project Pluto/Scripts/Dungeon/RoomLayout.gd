@@ -8,7 +8,7 @@ signal room_exited(exit_dir)
 onready var WALL_ID: int = tile_set.find_tile_by_name('wall')
 
 onready var camera: Camera2D = $Camera2D as Camera2D
-onready var enemy_tracker: Node2D = $EnemyTracker as Node2D
+onready var entities: Node2D = $Entities as Node2D
 onready var doors: Dictionary = {
 	Vector2.UP: $Doors/NorthDoor as Door,
 	Vector2.DOWN: $Doors/SouthDoor as Door,
@@ -17,22 +17,24 @@ onready var doors: Dictionary = {
 }
 
 
-func enter(enter_dir: Vector2, cleared: bool) -> void:
-	if cleared:
-		# Removing enemies
-		for child in enemy_tracker.get_children():
-			enemy_tracker.remove_child(child)
-			
-	camera.current = true
+func enter(enter_dir: Vector2, player: Player, cleared: bool) -> void:
+	# Closing doors
+	set_doors_open(false)
+	if enter_dir != Vector2.ZERO:
+		doors[enter_dir].is_open = true
 	
-	# Closing/opening doors
-	if enemy_tracker.get_child_count() > 0:
-		set_doors_open(false)
-	doors[enter_dir].is_open = true
-
-func set_doors_open(value: bool) -> void:
-	for door in doors.values():
-		door.is_open = value
+	# Adding player
+	player.get_parent().remove_child(player)
+	entities.add_child(player)
+	player.position = get_enter_position(enter_dir)
+	
+	# Checking room state
+	if cleared:
+		entities.remove_enemies()
+	elif not entities.has_enemies():
+		entities.emit_signal('room_cleared')
+		
+	camera.current = true
 
 func remove_door(side: Vector2) -> void:
 	var door: Door = doors[side] as Door
@@ -44,6 +46,17 @@ func remove_door(side: Vector2) -> void:
 	# Replacing floor tiles with wall tiles
 	set_cellv(world_to_map(door.position + offset), WALL_ID)
 	set_cellv(world_to_map(door.position - offset), WALL_ID)
+
+
+func set_doors_open(value: bool) -> void:
+	for door in doors.values():
+		door.is_open = value
+
+func get_enter_position(enter_dir: Vector2) -> Vector2:
+	if enter_dir == Vector2.ZERO:
+		return Vector2(128, 96) # Center of room
+	else:
+		return doors[enter_dir].position
 
 
 func _on_door_entered(side: Vector2) -> void:

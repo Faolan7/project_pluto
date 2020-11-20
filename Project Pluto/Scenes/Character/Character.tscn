@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/State/Attack.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Character/Character.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/State/Move.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/State/StateMachine.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Interface/ResourceBar.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Weapon/Hurtbox.tscn" type="PackedScene" id=6]
+
+[node name="Character" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="Bars" type="Node2D" parent="Sprite"]
+visible = false
+
+[node name="HealthBar" type="TextureProgress" parent="Sprite/Bars"]
+margin_right = 40.0
+margin_bottom = 40.0
+max_value = 3.0
+step = 0.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaminaBar" type="TextureProgress" parent="Sprite/Bars"]
+margin_right = 40.0
+margin_bottom = 40.0
+max_value = 10.0
+step = 0.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaminaRegen" type="Timer" parent="Sprite/Bars/StaminaBar"]
+wait_time = 0.2
+autostart = true
+
+[node name="FacingPivot" type="Node2D" parent="Sprite"]
+
+[node name="HurtBox" parent="." instance=ExtResource( 6 )]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 4 )
+ACTOR_NODE = NodePath("..")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource( 3 )
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource( 1 )
+[connection signal="timeout" from="Sprite/Bars/StaminaBar/StaminaRegen" to="." method="_on_stamina_regen"]
+[connection signal="damaged" from="HurtBox" to="." method="_on_damaged"]
