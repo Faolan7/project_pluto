@@ -5,6 +5,7 @@ extends KinematicBody2D
 signal died
 
 
+
 var is_dead setget, get_is_dead
 
 export(int) var health: int setget set_health
@@ -14,10 +15,19 @@ const DROPPED_WEAPON: Resource = preload('res://Scenes/DroppedWeapon.tscn')
 onready var health_bar: HealthBar = $HealthBar as HealthBar
 onready var weapon: Weapon = $Weapon as Weapon
 
+onready var state_machine: StateMachine = $StateMachine as StateMachine
+onready var move_state: State = $StateMachine/MoveState as State
+
+var target: KinematicBody2D
+
 
 func _ready() -> void:
 	health_bar.max_health = health
+	state_machine.change_state(move_state)
 
+func _physics_process(_delta):
+	if target != null:
+		move_state.move_dir = target.position - position
 
 func drop_weapon() -> void:
 	var dropped_weapon = DROPPED_WEAPON.instance()
@@ -45,3 +55,12 @@ func get_is_dead() -> bool:
 
 func _on_hit(damage: int) -> void:
 	set_health(health - damage)
+
+
+func _on_target_detected(body):
+	target = body
+
+
+func _on_target_lost(body):
+	target = null
+	move_state.move_dir = Vector2.ZERO

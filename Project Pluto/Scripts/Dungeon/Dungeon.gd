@@ -2,8 +2,8 @@ extends Node2D
 
 
 onready var current_room: Room = $Rooms/Room as Room
-onready var player: Player = $Player as Player
-
+onready var player
+const PLAYER_SCENE = preload('res://Scenes/Player.tscn')
 
 func _ready():
 	get_parent().call_deferred('move_child', self, 0)
@@ -11,8 +11,10 @@ func _ready():
 	current_room.add_connection($Rooms/Room2, Vector2.UP)
 	
 	current_room.is_loaded = true
-
-
+	player = PLAYER_SCENE.instance()
+	current_room.add_child(player)
+	player.position = Vector2(128, 96)
+	
 func _on_room_exited(exit_dir: Vector2) -> void:
 	# Switching rooms
 	var old_room: Room = current_room
@@ -28,5 +30,4 @@ func _on_room_exited(exit_dir: Vector2) -> void:
 	current_room.set_deferred('is_loaded', true)
 
 func _on_room_loaded(enter_dir: Vector2, room: Room)->void:
-	room.enter(enter_dir)
-	player.position = current_room.get_enter_position(enter_dir)
+	room.enter(enter_dir, player)

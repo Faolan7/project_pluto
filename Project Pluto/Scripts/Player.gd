@@ -26,7 +26,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 		Input.get_action_strength('move_right') - Input.get_action_strength('move_left'),
 		Input.get_action_strength('move_down') - Input.get_action_strength('move_up')
 	)
-	move_state.move_dir = input_vector.normalized()
+	move_state.move_dir = input_vector
 	
 	# Updating state
 	if state_machine.can_change_state:

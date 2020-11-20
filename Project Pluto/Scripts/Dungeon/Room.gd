@@ -20,8 +20,12 @@ var connections: Dictionary = {
 export(Resource) var LAYOUT_SCENE: Resource
 
 
-func enter(enter_dir: Vector2) -> void:
+func enter(enter_dir: Vector2, player: Player) -> void:
 	layout.enter(enter_dir, cleared)
+	player.get_parent().remove_child(player)
+	add_child(player)
+	player.position = get_enter_position(enter_dir)
+
 
 func add_connection(other: Room, side: Vector2) -> void:
 	connections[side] = other
@@ -48,7 +52,7 @@ func set_loaded(value: bool) -> void:
 		emit_signal('loaded')
 
 func get_enter_position(enter_dir: Vector2) -> Vector2:
-	return position + layout.doors[enter_dir].position
+	return layout.doors[enter_dir].position
 
 
 func _on_room_cleared() -> void:
