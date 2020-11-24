@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Enemy/HealthBar.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Weapon/Weapon.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/State/StateMachine.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/State/Move.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/State/Attack.gd" type="Script" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.71482
@@ -55,6 +56,9 @@ ACTOR_NODE = NodePath("..")
 script = ExtResource( 7 )
 MOVE_SPEED = 50
 
+[node name="AttackState" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 8
@@ -62,5 +66,7 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource( 3 )
 [connection signal="damaged" from="HurtBox" to="." method="_on_hit"]
+[connection signal="attack_finished" from="Weapon" to="." method="_on_attack_finished"]
+[connection signal="attack_range_entered" from="Weapon" to="." method="_on_attack_range_entered"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_target_detected"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_target_lost"]
