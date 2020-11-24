@@ -5,7 +5,7 @@
 [ext_resource path="res://Scripts/Dungeon/RoomLayout.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/Dungeon/wall.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Enemy/Enemy.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Dungeon/EnemyTracker.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Dungeon/EntityTracker.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -75,13 +75,13 @@ rotation = 1.5708
 position = Vector2( 24, 96 )
 rotation = -1.5708
 
-[node name="EnemyTracker" parent="." instance=ExtResource( 6 )]
+[node name="Entities" parent="." instance=ExtResource( 6 )]
 
-[node name="Enemy" parent="EnemyTracker" instance=ExtResource( 5 )]
+[node name="Enemy" parent="Entities" instance=ExtResource( 5 )]
 position = Vector2( 128, 64 )
 health = 3
 [connection signal="entered" from="Doors/NorthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, -1 ) ]]
 [connection signal="entered" from="Doors/SouthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, 1 ) ]]
 [connection signal="entered" from="Doors/EastDoor" to="." method="_on_door_entered" binds= [ Vector2( 1, 0 ) ]]
 [connection signal="entered" from="Doors/WestDoor" to="." method="_on_door_entered" binds= [ Vector2( -1, 0 ) ]]
-[connection signal="room_cleared" from="EnemyTracker" to="." method="_on_room_cleared"]
+[connection signal="room_cleared" from="Entities" to="." method="_on_room_cleared"]

@@ -17,10 +17,9 @@ radius = 8.0641
 height = 9.23656
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 70.7071
+radius = 64.0
 
 [node name="Enemy" type="KinematicBody2D"]
-collision_layer = 0
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

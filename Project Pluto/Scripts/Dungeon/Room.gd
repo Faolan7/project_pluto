@@ -21,10 +21,7 @@ export(Resource) var LAYOUT_SCENE: Resource
 
 
 func enter(enter_dir: Vector2, player: Player) -> void:
-	layout.enter(enter_dir, cleared)
-	player.get_parent().remove_child(player)
-	add_child(player)
-	player.position = get_enter_position(enter_dir)
+	layout.enter(enter_dir, player, cleared)
 
 
 func add_connection(other: Room, side: Vector2) -> void:
@@ -44,15 +41,13 @@ func set_loaded(value: bool) -> void:
 		# warning-ignore:return_value_discarded
 		layout.connect('room_exited', self, '_on_room_exited')
 		# warning-ignore:return_value_discarded
-		layout.enemy_tracker.connect('room_cleared', self, '_on_room_cleared')
+		layout.entities.connect('room_cleared', self, '_on_room_cleared')
 		
 		for dir in connections.keys():
 			if connections[dir] == null:
 				layout.remove_door(dir)
+				
 		emit_signal('loaded')
-
-func get_enter_position(enter_dir: Vector2) -> Vector2:
-	return layout.doors[enter_dir].position
 
 
 func _on_room_cleared() -> void:
