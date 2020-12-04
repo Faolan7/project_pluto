@@ -3,14 +3,15 @@ extends Node2D
 
 const PLAYER_SCENE = preload('res://Scenes/Player.tscn')
 
+var player: Player
+
 onready var current_room: Room = $Rooms/Room as Room
-onready var player
 
 
 func _ready():
 	get_parent().call_deferred('move_child', self, 0)
 	
-	player = PLAYER_SCENE.instance()
+	player = PLAYER_SCENE.instance() as Player
 	add_child(player) # Makes player always have a parent
 	
 	current_room.add_connection($Rooms/Room2, Vector2.UP) # Temporary

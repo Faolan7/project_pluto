@@ -8,8 +8,11 @@
 radius = 3.0
 height = 8.0
 
-[sub_resource type="Animation" id=2]
-resource_name = "stab"
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 3.0
+height = 6.0
+
+[sub_resource type="Animation" id=3]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
@@ -36,10 +39,6 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 3.0
-height = 8.0
-
 [node name="Weapon" type="Sprite"]
 position = Vector2( 0, -6 )
 texture = ExtResource( 2 )
@@ -53,12 +52,13 @@ position = Vector2( 0, -2 )
 shape = SubResource( 1 )
 disabled = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/stab = SubResource( 2 )
-
 [node name="AttackRange" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
-shape = SubResource( 3 )
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
+position = Vector2( 0, -2 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/stab = SubResource( 3 )
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

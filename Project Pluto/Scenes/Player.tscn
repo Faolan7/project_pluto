@@ -8,6 +8,7 @@
 [ext_resource path="res://Scripts/State/Attack.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/State/Interact.gd" type="Script" id=7]
 
+
 [sub_resource type="RectangleShape2D" id=1]
 
 [sub_resource type="CapsuleShape2D" id=2]

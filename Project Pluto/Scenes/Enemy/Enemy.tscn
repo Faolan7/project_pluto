@@ -9,6 +9,7 @@
 [ext_resource path="res://Scripts/State/Move.gd" type="Script" id=7]
 [ext_resource path="res://Scripts/State/Attack.gd" type="Script" id=8]
 
+
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.71482
 height = 4.56489

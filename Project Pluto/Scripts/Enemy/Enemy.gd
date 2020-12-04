@@ -54,6 +54,15 @@ func get_is_dead() -> bool:
 	return health <= 0
 
 
+func _on_attack_range_entered():
+	state_machine.change_state(attack_state)
+
+func _on_attack_finished():
+	if weapon.has_targets_in_range():
+		_on_attack_range_entered()
+	else:
+		state_machine.change_state(move_state)
+
 func _on_hit(damage: int) -> void:
 	set_health(health - damage)
 
@@ -63,14 +72,3 @@ func _on_target_detected(body):
 func _on_target_lost(_body):
 	target = null
 	move_state.move_dir = Vector2.ZERO
-
-
-func _on_attack_range_entered():
-	state_machine.change_state(attack_state)
-
-
-func _on_attack_finished():
-	if weapon.has_targets_in_range():
-		_on_attack_range_entered()
-	else:
-		state_machine.change_state(move_state)
