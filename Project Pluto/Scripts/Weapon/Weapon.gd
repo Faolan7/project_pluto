@@ -17,8 +17,8 @@ func use() -> void:
 	animation_player.play('stab')
 
 func has_targets_in_range() -> bool:
-	for body in attack_range.get_overlapping_bodies():
-		if body != get_wielder():
+	for area in attack_range.get_overlapping_areas():
+		if area.get_parent() != get_wielder():
 			return true
 	return false
 
@@ -33,5 +33,6 @@ func get_wielder() -> Node2D:
 func _on_animation_finished(_anim_name: String) -> void:
 	emit_signal('attack_finished')
 
-func _on_attack_range_entered(_body: PhysicsBody2D) -> void:
-	emit_signal('attack_range_entered')
+func _on_attack_range_entered(area: Area2D) -> void:
+	if area.get_parent() != get_wielder():
+		emit_signal('attack_range_entered')

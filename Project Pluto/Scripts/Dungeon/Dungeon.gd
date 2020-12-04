@@ -1,7 +1,7 @@
 extends Node2D
 
 
-const PLAYER_SCENE = preload('res://Scenes/Player.tscn')
+const PLAYER_SCENE = preload('res://Scenes/Character/Player.tscn')
 
 var player: Player
 

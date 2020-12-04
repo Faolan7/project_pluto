@@ -9,10 +9,15 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Scripts/Character/Character.gd"
+}, {
 "base": "PanelContainer",
 "class": "DialogueBox",
 "language": "GDScript",
-"path": "res://Scripts/Npc/Dialogue.gd"
+"path": "res://Scripts/Interface/Dialogue.gd"
 }, {
 "base": "StaticBody2D",
 "class": "Door",
@@ -24,15 +29,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Weapon/DroppedWeapon.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Character",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://Scripts/Enemy/Enemy.gd"
+"path": "res://Scripts/Character/Enemy.gd"
 }, {
 "base": "ColorRect",
 "class": "HealthBar",
 "language": "GDScript",
-"path": "res://Scripts/Enemy/HealthBar.gd"
+"path": "res://Scripts/Character/HealthBar.gd"
 }, {
 "base": "Area2D",
 "class": "Hitbox",
@@ -42,17 +47,17 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "InteractBox",
 "language": "GDScript",
-"path": "res://Scripts/Npc/InteractBox.gd"
+"path": "res://Scripts/Interface/InteractBox.gd"
 }, {
 "base": "Task",
 "class": "KillTask",
 "language": "GDScript",
 "path": "res://Scripts/Quest/KillTask.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Character",
 "class": "Player",
 "language": "GDScript",
-"path": "res://Scripts/Player.gd"
+"path": "res://Scripts/Character/Player.gd"
 }, {
 "base": "Node",
 "class": "Quest",
@@ -95,6 +100,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Weapon/Weapon.gd"
 } ]
 _global_script_class_icons={
+"Character": "",
 "DialogueBox": "",
 "Door": "",
 "DroppedWeapon": "",
@@ -123,7 +129,7 @@ config/icon="res://icon.png"
 [autoload]
 
 QuestJournal="*res://Scripts/Quest/QuestJournal.gd"
-UI="*res://Scripts/UI.gd"
+UI="*res://Scripts/Interface/UI.gd"
 
 [display]
 

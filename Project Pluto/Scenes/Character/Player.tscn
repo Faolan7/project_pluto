@@ -1,19 +1,23 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
-[ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/State/Move.gd" type="Script" id=2]
-[ext_resource path="res://Scripts/State/StateMachine.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/State/Attack.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Character/Player.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/State/Move.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/Player.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Weapon/Weapon.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scripts/State/Attack.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/State/Interact.gd" type="Script" id=7]
-
+[ext_resource path="res://Scripts/State/Interact.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/State/StateMachine.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Weapon/Hurtbox.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 6.0
 height = 4.0
+
+[sub_resource type="CapsuleShape2D" id=25]
+radius = 6.0
+height = 8.0
 
 [sub_resource type="Animation" id=3]
 length = 0.1
@@ -208,11 +212,12 @@ start_node = "Idle"
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 8
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 4 )
 hframes = 60
+frame = 18
 
 [node name="FacingPivot" type="Node2D" parent="Sprite"]
 position = Vector2( 0, 3.5 )
@@ -238,19 +243,25 @@ position = Vector2( 0, 8 )
 rotation = 1.5708
 shape = SubResource( 2 )
 
+[node name="HurtBox" parent="." instance=ExtResource( 8 )]
+position = Vector2( 0, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource( 25 )
+
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource( 7 )
 ACTOR_NODE = NodePath("..")
 
 [node name="Move" type="Node" parent="StateMachine"]
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 MOVE_SPEED = 100
 
 [node name="Attack" type="Node" parent="StateMachine"]
-script = ExtResource( 6 )
+script = ExtResource( 1 )
 
 [node name="Interact" type="Node" parent="StateMachine"]
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 INTERACTION_AREA = NodePath("../../Sprite/FacingPivot/InteractionArea")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -21,3 +21,4 @@ func init(drop_pos: Vector2, drop_weapon: Weapon) -> void:
 	add_child(weapon)
 	
 	weapon.visible = true
+	weapon.set_wielder(null)

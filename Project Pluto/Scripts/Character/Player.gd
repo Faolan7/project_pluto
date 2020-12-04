@@ -1,16 +1,10 @@
 class_name Player
-extends KinematicBody2D
+extends Character
 
-
-var face_dir: Vector2 = Vector2.RIGHT setget set_face_dir
 
 onready var animation_tree: AnimationTree = $AnimationTree as AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
-onready var facing_pivot: Node2D = $Sprite/FacingPivot as Node2D
 
-onready var state_machine: StateMachine = $StateMachine as StateMachine
-onready var move_state: State = $StateMachine/Move as State
-onready var attack_state: State = $StateMachine/Attack as State
 onready var interact_state: State = $StateMachine/Interact as State
 
 onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
@@ -55,14 +49,10 @@ func add_weapon(weapon: Weapon) -> void:
 	weapon_slots.add_child(weapon)
 
 
-func set_face_dir(value: Vector2):
-	if abs(face_dir.angle_to(value)) > PI / 3:
-		face_dir = value.snapped(Vector2(1, 1))
-		
-		set_blend_position(face_dir)
-		facing_pivot.rotation = face_dir.angle()
-		facing_pivot.show_behind_parent = face_dir == Vector2.UP
+func set_face_dir(value: Vector2) -> void:
+	.set_face_dir(value)
+	set_blend_position(face_dir)
 
-func set_blend_position(value: Vector2):
+func set_blend_position(value: Vector2) -> void:
 	animation_tree.set('parameters/Idle/blend_position', value)
 	animation_tree.set('parameters/Run/blend_position', value)
