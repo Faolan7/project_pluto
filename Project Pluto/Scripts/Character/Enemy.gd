@@ -53,10 +53,11 @@ func get_is_dead() -> bool:
 
 
 func _on_attack_range_entered() -> void:
-	state_machine.change_state(attack_state)
+	if stamina > weapon.attack_cost:
+		state_machine.change_state(attack_state)
 
 func _on_attack_finished() -> void:
-	if weapon.has_targets_in_range():
+	if weapon.has_targets_in_range() and stamina > weapon.attack_cost:
 		_on_attack_range_entered()
 	else:
 		state_machine.change_state(move_state)

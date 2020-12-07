@@ -7,6 +7,7 @@ signal attack_range_entered
 
 
 var wielder: Node2D setget set_wielder, get_wielder
+export(int) var attack_cost
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
 onready var hitbox: Hitbox = $Hitbox as Hitbox
