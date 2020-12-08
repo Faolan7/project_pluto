@@ -6,6 +6,7 @@ onready var animation_tree: AnimationTree = $AnimationTree as AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
 
 onready var interact_state: State = $StateMachine/Interact as State
+onready var dodge_state: State = $StateMachine/Dodge as State
 
 onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 
@@ -21,6 +22,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 		Input.get_action_strength('move_down') - Input.get_action_strength('move_up')
 	)
 	move_state.move_dir = input_vector
+	dodge_state.dodge_dir = move_state.move_dir
 	
 	# Updating state
 	if state_machine.can_change_state:
@@ -33,6 +35,10 @@ func _unhandled_input(_event: InputEvent) -> void:
 		elif Input.is_action_just_pressed('interact'):
 			animation_state.travel('Idle')
 			state_machine.change_state(interact_state)
+			
+		elif Input.is_action_just_pressed('dodge'):
+			animation_state.travel('Dodge')
+			state_machine.change_state(dodge_state)
 			
 		elif input_vector != Vector2.ZERO: # Checking if move button is pushed
 			animation_state.travel('Run')
