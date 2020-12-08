@@ -42,7 +42,7 @@ tracks/1/keys = {
 [node name="Weapon" type="Sprite"]
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
-attack_cost = 30
+attack_cost = 3.0
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
 damage = 1
