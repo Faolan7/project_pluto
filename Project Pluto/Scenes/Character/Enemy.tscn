@@ -27,40 +27,40 @@ health = 3
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 6 )
 
-[node name="Weapon" parent="Sprite/FacingPivot" index="0" instance=ExtResource( 4 )]
-visible = false
-position = Vector2( 12, 0 )
-rotation = 1.5708
-
-[node name="HealthBar" parent="Sprite" index="1" instance=ExtResource( 7 )]
+[node name="HealthBar" parent="Sprite" index="0" instance=ExtResource( 7 )]
 visible = false
 margin_left = -12.0
 margin_top = -15.0
 margin_right = 12.0
 margin_bottom = -13.0
 
-[node name="StateMachine" parent="." index="1"]
-ACTOR_NODE = NodePath("..")
+[node name="Weapon" parent="Sprite/FacingPivot" index="0" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 12, 0 )
+rotation = 1.5708
 
-[node name="Move" parent="StateMachine" index="0"]
-MOVE_SPEED = 50
-
-[node name="WorldCollision" type="CollisionShape2D" parent="." index="3"]
+[node name="WorldCollision" type="CollisionShape2D" parent="." index="1"]
 position = Vector2( 0, 8 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
-[node name="HurtBox" parent="." index="4" instance=ExtResource( 8 )]
+[node name="HurtBox" parent="." index="2" instance=ExtResource( 8 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
 
-[node name="DetectionArea" type="Area2D" parent="." index="5"]
+[node name="DetectionArea" type="Area2D" parent="." index="3"]
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" index="0"]
 shape = SubResource( 3 )
+
+[node name="StateMachine" parent="." index="4"]
+ACTOR_NODE = NodePath("..")
+
+[node name="Move" parent="StateMachine" index="0"]
+MOVE_SPEED = 50
 [connection signal="attack_finished" from="Sprite/FacingPivot/Weapon" to="." method="_on_attack_finished"]
 [connection signal="attack_range_entered" from="Sprite/FacingPivot/Weapon" to="." method="_on_attack_range_entered"]
 [connection signal="damaged" from="HurtBox" to="." method="_on_hit"]
