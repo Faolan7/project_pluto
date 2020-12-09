@@ -27,19 +27,19 @@ func _unhandled_input(_event: InputEvent) -> void:
 		set_face_dir(input_vector)
 		
 		if Input.is_action_just_pressed('attack'):
-			animation_state.travel('Idle')
+			animation_state.travel('idle')
 			state_machine.change_state(attack_state)
 			
 		elif Input.is_action_just_pressed('interact'):
-			animation_state.travel('Idle')
+			animation_state.travel('idle')
 			state_machine.change_state(interact_state)
 			
 		elif input_vector != Vector2.ZERO: # Checking if move button is pushed
-			animation_state.travel('Run')
+			animation_state.travel('move')
 			state_machine.change_state(move_state)
 			
 		else:
-			animation_state.travel('Idle')
+			animation_state.travel('idle')
 
 
 func add_weapon(weapon: Weapon) -> void:
@@ -54,5 +54,15 @@ func set_face_dir(value: Vector2) -> void:
 	set_blend_position(face_dir)
 
 func set_blend_position(value: Vector2) -> void:
-	animation_tree.set('parameters/Idle/blend_position', value)
-	animation_tree.set('parameters/Run/blend_position', value)
+	animation_tree.set('parameters/idle/blend_position', value)
+	animation_tree.set('parameters/move/blend_position', value)
+
+
+func _on_state_completed() -> void:
+	state_machine.change_state(move_state)
+	
+	set_face_dir(move_state.move_dir)
+	if move_state.move_dir == Vector2.ZERO:
+		animation_state.travel('idle')
+	else:
+		animation_state.travel('move')

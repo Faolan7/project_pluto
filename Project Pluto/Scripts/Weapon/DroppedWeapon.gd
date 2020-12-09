@@ -5,14 +5,6 @@ extends InteractBox
 var weapon: Weapon
 
 
-func interact(player: Player):
-	.interact(player)
-	
-	player.add_weapon(weapon)
-	
-	finish_interaction()
-	queue_free()
-
 func init(drop_pos: Vector2, drop_weapon: Weapon) -> void:
 	position = drop_pos
 	weapon = drop_weapon
@@ -22,3 +14,11 @@ func init(drop_pos: Vector2, drop_weapon: Weapon) -> void:
 	
 	weapon.visible = true
 	weapon.set_wielder(null)
+
+func interact(player: Player):
+	.interact(player)
+	
+	player.add_weapon(weapon)
+	
+	finish_interaction()
+	queue_free()
