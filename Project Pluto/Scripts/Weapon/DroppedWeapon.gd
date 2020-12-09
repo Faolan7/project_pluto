@@ -13,6 +13,8 @@ func init(drop_pos: Vector2, drop_weapon: Weapon) -> void:
 	add_child(weapon)
 	
 	weapon.visible = true
+	weapon.position = Vector2.ZERO
+	weapon.rotation = 0
 	weapon.set_wielder(null)
 
 func interact(player: Player):

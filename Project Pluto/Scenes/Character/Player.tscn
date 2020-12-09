@@ -9,11 +9,11 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 
-[sub_resource type="CapsuleShape2D" id=26]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 6.0
 height = 8.0
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=3]
 radius = 6.0
 height = 4.0
 
@@ -260,12 +260,12 @@ position = Vector2( 4, 0 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
-shape = SubResource( 26 )
+shape = SubResource( 2 )
 
 [node name="WorldCollision" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0, 8 )
 rotation = 1.5708
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Move" parent="StateMachine" index="0"]
 MOVE_SPEED = 100
@@ -290,3 +290,5 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 25 )
 parameters/idle/blend_position = Vector2( 1, 0 )
 parameters/move/blend_position = Vector2( 1, 0 )
+[connection signal="completed" from="StateMachine/Attack" to="." method="_on_state_completed"]
+[connection signal="completed" from="StateMachine/Interact" to="." method="_on_state_completed"]

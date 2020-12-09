@@ -18,15 +18,13 @@ export(float) var stamina_regen_rate: float = 1 # In stamina/second
 
 
 func set_face_dir(value: Vector2) -> void:
-	var max_comp: float = abs(value.x) if abs(value.x) > abs(value.y) else abs(value.y)
-	
-	if max_comp != 0 and abs(face_dir.angle_to(value)) > PI / 3:
-		var x_comp: float = value.x / max_comp
-		var y_comp: float = value.y / max_comp
-		
-		face_dir = Vector2(
-			0.0 if abs(x_comp) < 1 else x_comp,
-			0.0 if abs(y_comp) < 1 else y_comp)
+	if abs(face_dir.angle_to(value)) > PI / 3:
+		if abs(value.x) > abs(value.y):
+			face_dir.x = value.x / abs(value.x)
+			face_dir.y = 0
+		else:
+			face_dir.x = 0
+			face_dir.y = value.y / abs(value.y)
 			
 		facing_pivot.rotation = face_dir.angle()
 		facing_pivot.show_behind_parent = face_dir == Vector2.UP

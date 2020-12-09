@@ -69,7 +69,7 @@ shape = SubResource( 3 )
 
 [node name="Move" parent="StateMachine" index="0"]
 MOVE_SPEED = 30
-[connection signal="attack_finished" from="Sprite/FacingPivot/Weapon" to="." method="_on_attack_finished"]
 [connection signal="attack_range_entered" from="Sprite/FacingPivot/Weapon" to="." method="_on_attack_range_entered"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_target_detected"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_target_lost"]
+[connection signal="completed" from="StateMachine/Attack" to="." method="_on_attack_completed"]
