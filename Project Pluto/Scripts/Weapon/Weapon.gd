@@ -17,6 +17,7 @@ export(float) var attack_cost: float
 
 func use() -> void:
 	animation_player.play('stab')
+	
 
 func has_targets_in_range() -> bool:
 	for area in attack_range.get_overlapping_areas():

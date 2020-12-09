@@ -12,7 +12,7 @@ onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 
 func _ready() -> void:
 	animation_tree.active = true
-	
+	special_state = $StateMachine/SpecialAttack as State
 	attack_state.weapon = $Sprite/FacingPivot/Weapons/Weapon as Weapon
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -29,7 +29,12 @@ func _unhandled_input(_event: InputEvent) -> void:
 		if Input.is_action_just_pressed('attack'):
 			animation_state.travel('idle')
 			state_machine.change_state(attack_state)
-			
+		
+		elif Input.is_action_just_pressed('special'):
+			print('Q pressed!')
+			animation_state.travel('idle')
+			state_machine.change_state(special_state)			
+		
 		elif Input.is_action_just_pressed('interact'):
 			animation_state.travel('idle')
 			state_machine.change_state(interact_state)

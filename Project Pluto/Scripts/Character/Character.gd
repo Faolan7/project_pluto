@@ -10,6 +10,7 @@ onready var state_machine: StateMachine = $StateMachine as StateMachine
 onready var move_state: State = $StateMachine/Move as State
 onready var attack_state: State = $StateMachine/Attack as State
 onready var facing_pivot: Node2D = $Sprite/FacingPivot as Node2D
+onready var special_state: State
 
 onready var health_bar: ResourceBar = $Sprite/Bars/HealthBar as ResourceBar
 onready var stamina_bar: ResourceBar = $Sprite/Bars/StaminaBar as ResourceBar
