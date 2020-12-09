@@ -37,15 +37,18 @@ func set_health(value: float) -> void:
 	
 	if health_bar != null:
 		if get_is_dead():
-			drop_weapon()
 			emit_signal('died')
-	
-			queue_free()
+			on_death()
 			return
 
 func get_is_dead() -> bool:
 	return get_health() <= 0
 
+
+func on_death():
+	weapon.animation_player.stop(true)
+	drop_weapon()
+	queue_free()
 
 func _on_attack_completed() -> void:
 	if weapon.has_targets_in_range() and get_stamina() > weapon.attack_cost:
