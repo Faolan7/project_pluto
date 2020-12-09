@@ -79,7 +79,6 @@ rotation = -1.5708
 
 [node name="Enemy" parent="Entities" instance=ExtResource( 5 )]
 position = Vector2( 128, 64 )
-health = 3
 [connection signal="entered" from="Doors/NorthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, -1 ) ]]
 [connection signal="entered" from="Doors/SouthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, 1 ) ]]
 [connection signal="entered" from="Doors/EastDoor" to="." method="_on_door_entered" binds= [ Vector2( 1, 0 ) ]]
