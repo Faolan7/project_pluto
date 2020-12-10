@@ -3,6 +3,9 @@ extends Character
 
 
 onready var animation_tree: AnimationTree = $AnimationTree as AnimationTree
+
+#testing variable, could be deleted later
+onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
 onready var animation_state = animation_tree.get("parameters/playback")
 
 onready var interact_state: State = $StateMachine/Interact as State
@@ -33,7 +36,8 @@ func _unhandled_input(_event: InputEvent) -> void:
 		elif Input.is_action_just_pressed('special'):
 			print('Q pressed!')
 			animation_state.travel('idle')
-			state_machine.change_state(special_state)			
+			#state_machine.change_state(special_state)
+			animation_player.play("Spin")
 		
 		elif Input.is_action_just_pressed('interact'):
 			animation_state.travel('idle')
