@@ -7,7 +7,6 @@
 [ext_resource path="res://Scenes/Weapon/Weapon.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/State/Interact.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/State/SpecialAttack.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/SpinAttack.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -18,6 +17,35 @@ height = 8.0
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 6.0
 height = 4.0
+
+[sub_resource type="Animation" id=26]
+resource_name = "Spin"
+length = 0.22
+step = 0.06
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 92, 93, 94, 95 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "idle_down"
@@ -216,8 +244,8 @@ stamina_regen_rate = 2.0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 4 )
-hframes = 102
-frame = 12
+hframes = 97
+frame = 92
 
 [node name="Bars" parent="Sprite" index="0"]
 visible = true
@@ -252,10 +280,6 @@ visible = false
 position = Vector2( 12, 0 )
 rotation = 1.5708
 
-[node name="SpinAttack" parent="Sprite/FacingPivot/Weapons/Weapon" index="3" instance=ExtResource( 8 )]
-position = Vector2( 4.33922e-05, 12 )
-rotation = -1.5708
-
 [node name="InteractionArea" type="Area2D" parent="Sprite/FacingPivot" index="1"]
 position = Vector2( 12, 0 )
 collision_layer = 0
@@ -284,6 +308,7 @@ INTERACTION_AREA = NodePath("../../Sprite/FacingPivot/InteractionArea")
 script = ExtResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+anims/Spin = SubResource( 26 )
 anims/idle_down = SubResource( 4 )
 anims/idle_left = SubResource( 5 )
 anims/idle_right = SubResource( 6 )
