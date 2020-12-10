@@ -49,8 +49,6 @@ tint_progress = Color( 0, 1, 1, 1 )
 
 [node name="Weapon" parent="Sprite/FacingPivot" index="0" instance=ExtResource( 4 )]
 visible = false
-position = Vector2( 12, 0 )
-rotation = 1.5708
 
 [node name="WorldCollision" type="CollisionShape2D" parent="." index="1"]
 position = Vector2( 0, 8 )

@@ -40,6 +40,8 @@ tracks/1/keys = {
 }
 
 [node name="Weapon" type="Sprite"]
+position = Vector2( 12, 0 )
+rotation = 1.5708
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
 attack_cost = 3.0

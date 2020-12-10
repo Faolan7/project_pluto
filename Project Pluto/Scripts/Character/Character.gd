@@ -1,6 +1,7 @@
 class_name Character
 extends KinematicBody2D
 
+
 const DROPPED_WEAPON: Resource = preload('res://Scenes/DroppedWeapon.tscn')
 
 var face_dir: Vector2 = Vector2.RIGHT setget set_face_dir
@@ -21,10 +22,10 @@ export(float) var stamina_regen_rate: float = 1 # In stamina/second
 func drop_weapon(weapon: Weapon) -> void:
 	var dropped_weapon = DROPPED_WEAPON.instance()
 	
-	dropped_weapon.init(position, weapon)
+	dropped_weapon.init(position - Vector2(0, 1), weapon)
 	get_parent().call_deferred('add_child', dropped_weapon)
-	
-	
+
+
 func set_face_dir(value: Vector2) -> void:
 	if abs(face_dir.angle_to(value)) > PI / 3:
 		if abs(value.x) > abs(value.y):
@@ -50,7 +51,7 @@ func get_stamina() -> float:
 	return stamina_bar.value
 
 
-func _on_damaged(damage) -> void:
+func _on_damaged(damage: float) -> void:
 	set_health(get_health() - damage)
 
 func _on_stamina_regen() -> void:

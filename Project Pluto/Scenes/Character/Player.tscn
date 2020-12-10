@@ -211,11 +211,11 @@ start_node = "idle"
 collision_layer = 9
 script = ExtResource( 2 )
 stamina_regen_rate = 2.0
+max_weapon_count = 2
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 4 )
 hframes = 60
-frame = 18
 
 [node name="Bars" parent="Sprite" index="0"]
 visible = true
@@ -247,8 +247,6 @@ position = Vector2( 0, 3.5 )
 
 [node name="Weapon" parent="Sprite/FacingPivot/Weapons" index="0" instance=ExtResource( 5 )]
 visible = false
-position = Vector2( 12, 0 )
-rotation = 1.5708
 
 [node name="InteractionArea" type="Area2D" parent="Sprite/FacingPivot" index="1"]
 position = Vector2( 12, 0 )
