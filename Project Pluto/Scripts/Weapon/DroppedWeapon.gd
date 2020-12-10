@@ -4,6 +4,12 @@ extends InteractBox
 
 var weapon: Weapon
 
+export(NodePath) var INITIAL_WEAPON_NODE: NodePath
+
+
+func _ready() -> void:
+	if weapon == null:
+		weapon = get_node(INITIAL_WEAPON_NODE)
 
 func init(drop_pos: Vector2, drop_weapon: Weapon) -> void:
 	position = drop_pos
@@ -17,7 +23,7 @@ func init(drop_pos: Vector2, drop_weapon: Weapon) -> void:
 	weapon.rotation = 0
 	weapon.set_wielder(null)
 
-func interact(player: Player):
+func interact(player):
 	.interact(player)
 	
 	player.add_weapon(weapon)

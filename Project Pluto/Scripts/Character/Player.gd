@@ -9,6 +9,7 @@ onready var interact_state: State = $StateMachine/Interact as State
 
 onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 
+var max_weapons: int = 2
 
 func _ready() -> void:
 	animation_tree.active = true
@@ -43,11 +44,14 @@ func _unhandled_input(_event: InputEvent) -> void:
 
 
 func add_weapon(weapon: Weapon) -> void:
+	if weapon_slots.get_child_count() == max_weapons:
+		drop_weapon(attack_state.weapon)
 	weapon.visible = false
 	
 	weapon.get_parent().remove_child(weapon)
 	weapon_slots.add_child(weapon)
-
+	
+	attack_state.weapon = weapon
 
 func set_face_dir(value: Vector2) -> void:
 	.set_face_dir(value)

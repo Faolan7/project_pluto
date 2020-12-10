@@ -5,8 +5,6 @@ extends Character
 signal died
 
 
-const DROPPED_WEAPON: Resource = preload('res://Scenes/DroppedWeapon.tscn')
-
 var is_dead setget, get_is_dead
 var target: KinematicBody2D
 
@@ -25,13 +23,6 @@ func _physics_process(_delta) -> void:
 		set_face_dir(to_target)
 
 
-func drop_weapon() -> void:
-	var dropped_weapon = DROPPED_WEAPON.instance()
-	
-	dropped_weapon.init(position, weapon)
-	get_parent().call_deferred('add_child', dropped_weapon)
-
-
 func set_health(value: float) -> void:
 	.set_health(value)
 	
@@ -47,7 +38,7 @@ func get_is_dead() -> bool:
 
 func on_death():
 	weapon.animation_player.stop(true)
-	drop_weapon()
+	drop_weapon(weapon)
 	queue_free()
 
 func _on_attack_completed() -> void:
