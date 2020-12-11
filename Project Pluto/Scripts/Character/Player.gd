@@ -10,7 +10,6 @@ onready var dodge_state: State = $StateMachine/Dodge as State
 
 onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 
-
 func _ready() -> void:
 	animation_tree.active = true
 	
@@ -22,7 +21,6 @@ func _unhandled_input(_event: InputEvent) -> void:
 		Input.get_action_strength('move_down') - Input.get_action_strength('move_up')
 	)
 	move_state.move_dir = input_vector
-	dodge_state.dodge_dir = move_state.move_dir
 	
 	# Updating state
 	if state_machine.can_change_state:
@@ -58,7 +56,9 @@ func add_weapon(weapon: Weapon) -> void:
 func set_face_dir(value: Vector2) -> void:
 	.set_face_dir(value)
 	set_blend_position(face_dir)
+	dodge_state.dodge_dir = face_dir
 
 func set_blend_position(value: Vector2) -> void:
 	animation_tree.set('parameters/Idle/blend_position', value)
 	animation_tree.set('parameters/Run/blend_position', value)
+	animation_tree.set('parameters/Dodge/blend_position', value)
