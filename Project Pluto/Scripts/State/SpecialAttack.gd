@@ -3,12 +3,11 @@ extends State
 
 var weapon: Weapon setget _set_weapon
 var special_attack_cost: float = 0.0
-#onready var ap: AnimationPlayer = get_parent().get_parent().get_child(4) as AnimationPlayer 
 
 
 func activate() -> void:
 	.activate()
-	special_attack_cost = 0.5
+	special_attack_cost = 5.0
 	if actor.stamina < special_attack_cost:
 		set_completed(true)
 	else:
@@ -17,9 +16,8 @@ func activate() -> void:
 
 
 func useSpecial() -> void:
-	print('Special Attack!!!')
+	actor.playAnimation('Spin')
 	set_completed(true)
-	#ap.play('Spin')
 
 
 func _set_weapon(value: Weapon) -> void:

@@ -34,10 +34,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 			state_machine.change_state(attack_state)
 		
 		elif Input.is_action_just_pressed('special'):
-			print('Q pressed!')
-			animation_state.travel('idle')
 			state_machine.change_state(special_state)
-			animation_player.play("Spin")
 		
 		elif Input.is_action_just_pressed('interact'):
 			animation_state.travel('idle')
@@ -67,3 +64,5 @@ func set_blend_position(value: Vector2) -> void:
 	animation_tree.set('parameters/move/blend_position', value)
 
 
+func playAnimation(animation: String) -> void:
+	animation_state.travel(animation)

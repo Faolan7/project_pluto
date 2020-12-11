@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Scenes/Character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Character/Player.gd" type="Script" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://Scenes/Weapon/Weapon.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/State/Interact.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/State/SpecialAttack.gd" type="Script" id=7]
+
+[sub_resource type="CircleShape2D" id=27]
+radius = 28.5496
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -35,27 +38,16 @@ tracks/0/keys = {
 "values": [ 0, 93, 94, 95, 96, 93 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:visible")
+tracks/1/path = NodePath("Sprite/FacingPivot/Area2D/SpinCollision:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
+"times": PoolRealArray( 0, 0.04, 0.08, 0.12, 0.16, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [  ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"values": [  ]
+"values": [ false, false, false, false, false, true ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -182,6 +174,9 @@ tracks/0/keys = {
 "values": [ 6, 7, 8, 9, 10, 11 ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "Spin"
+
 [sub_resource type="AnimationNodeAnimation" id=13]
 animation = "idle_down"
 
@@ -230,13 +225,20 @@ blend_point_3/pos = Vector2( -1, 0 )
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
 [sub_resource type="AnimationNodeStateMachine" id=25]
+states/Spin/node = SubResource( 29 )
+states/Spin/position = Vector2( 561, 171 )
 states/idle/node = SubResource( 17 )
 states/idle/position = Vector2( 561, 62 )
 states/move/node = SubResource( 22 )
 states/move/position = Vector2( 780, 62 )
-transitions = [ "idle", "move", SubResource( 23 ), "move", "idle", SubResource( 24 ) ]
+transitions = [ "idle", "move", SubResource( 23 ), "move", "idle", SubResource( 24 ), "idle", "Spin", SubResource( 30 ), "Spin", "idle", SubResource( 31 ) ]
 start_node = "idle"
+graph_offset = Vector2( 0, -10.5476 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=26]
 
@@ -248,7 +250,7 @@ stamina_regen_rate = 2.0
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 4 )
 hframes = 98
-frame = 94
+frame = 93
 
 [node name="Bars" parent="Sprite" index="0"]
 visible = true
@@ -276,14 +278,21 @@ tint_progress = Color( 0, 1, 1, 1 )
 [node name="FacingPivot" parent="Sprite" index="1"]
 position = Vector2( 0, 3.5 )
 
-[node name="Weapons" type="Node2D" parent="Sprite/FacingPivot" index="0"]
+[node name="Area2D" type="Area2D" parent="Sprite/FacingPivot" index="0"]
+position = Vector2( 0, -3.5 )
+
+[node name="SpinCollision" type="CollisionShape2D" parent="Sprite/FacingPivot/Area2D" index="0"]
+shape = SubResource( 27 )
+disabled = true
+
+[node name="Weapons" type="Node2D" parent="Sprite/FacingPivot" index="1"]
 
 [node name="Weapon" parent="Sprite/FacingPivot/Weapons" index="0" instance=ExtResource( 5 )]
 visible = false
 position = Vector2( 12, 0 )
 rotation = 1.5708
 
-[node name="InteractionArea" type="Area2D" parent="Sprite/FacingPivot" index="1"]
+[node name="InteractionArea" type="Area2D" parent="Sprite/FacingPivot" index="2"]
 position = Vector2( 12, 0 )
 collision_layer = 0
 collision_mask = 4
@@ -309,6 +318,8 @@ INTERACTION_AREA = NodePath("../../Sprite/FacingPivot/InteractionArea")
 
 [node name="SpecialAttack" type="Node" parent="StateMachine" index="3"]
 script = ExtResource( 7 )
+
+[node name="SpecialHitBox" type="Node" parent="StateMachine/SpecialAttack" index="0"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
 anims/Spin = SubResource( 4 )
