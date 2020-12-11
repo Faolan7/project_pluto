@@ -34,6 +34,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 			state_machine.change_state(attack_state)
 		
 		elif Input.is_action_just_pressed('special'):
+			#animation_player.connect('animation_finished', special_state, '_on_special_completed')
 			state_machine.change_state(special_state)
 		
 		elif Input.is_action_just_pressed('interact'):
@@ -54,6 +55,9 @@ func add_weapon(weapon: Weapon) -> void:
 	weapon.get_parent().remove_child(weapon)
 	weapon_slots.add_child(weapon)
 
+func playAnimation(animation: String) -> void:
+	animation_state.travel(animation)
+
 
 func set_face_dir(value: Vector2) -> void:
 	.set_face_dir(value)
@@ -64,5 +68,11 @@ func set_blend_position(value: Vector2) -> void:
 	animation_tree.set('parameters/move/blend_position', value)
 
 
-func playAnimation(animation: String) -> void:
-	animation_state.travel(animation)
+func _on_state_completed() -> void:
+	state_machine.change_state(move_state)
+	
+	set_face_dir(move_state.move_dir)
+	if move_state.move_dir == Vector2.ZERO:
+		animation_state.travel('idle')
+	else:
+		animation_state.travel('move')

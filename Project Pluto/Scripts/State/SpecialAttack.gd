@@ -17,7 +17,6 @@ func activate() -> void:
 
 func useSpecial() -> void:
 	actor.playAnimation('Spin')
-	set_completed(true)
 
 
 func _set_weapon(value: Weapon) -> void:
@@ -30,11 +29,6 @@ func _set_weapon(value: Weapon) -> void:
 	weapon.connect('attack_finished', self, '_on_attack_completed')
 
 
-func _on_attack_completed() -> void:
+func _on_special_completed(_anim: String) -> void:
+	print('isdone?')
 	set_completed(true)
-
-
-func _on_animation_finished(_anim_name: String) -> void:
-	emit_signal('attack_finished')
-
-
