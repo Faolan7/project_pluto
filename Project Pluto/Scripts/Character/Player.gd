@@ -5,6 +5,9 @@ extends Character
 onready var animation_tree: AnimationTree = $AnimationTree as AnimationTree
 
 #testing variable, could be deleted later
+
+#end test vars
+
 onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
 onready var animation_state = animation_tree.get("parameters/playback")
 
@@ -33,6 +36,13 @@ func _unhandled_input(_event: InputEvent) -> void:
 			animation_state.travel('idle')
 			state_machine.change_state(attack_state)
 		
+		elif Input.is_action_just_pressed('TESTkill'):
+			#if health is 0
+			animation_player.play("PlayerKill")
+			yield(get_tree().create_timer(1.0), "timeout")
+			get_tree().quit()
+			#else return
+		
 		elif Input.is_action_just_pressed('special'):
 			state_machine.change_state(special_state)
 		
@@ -42,10 +52,12 @@ func _unhandled_input(_event: InputEvent) -> void:
 			
 		elif input_vector != Vector2.ZERO: # Checking if move button is pushed
 			animation_state.travel('move')
+			check_health()
 			state_machine.change_state(move_state)
 			
 		else:
 			animation_state.travel('idle')
+			check_health()
 
 
 func add_weapon(weapon: Weapon) -> void:
@@ -66,3 +78,11 @@ func set_blend_position(value: Vector2) -> void:
 
 func playAnimation(animation: String) -> void:
 	animation_state.travel(animation)
+
+
+func check_health() -> void:
+	if (get_health() == 0):
+		animation_player.play("PlayerKill")
+		yield(get_tree().create_timer(1.0), "timeout")
+		get_tree().quit()
+		print('No health!!')
