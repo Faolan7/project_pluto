@@ -6,16 +6,19 @@ const PLAYER_SCENE = preload('res://Scenes/Character/Player.tscn')
 var player: Player
 
 onready var current_room: Room = $Rooms/Room as Room
+onready var current_room2: Room = $Rooms/Room3 as Room
 
 
 func _ready():
 	get_parent().call_deferred('move_child', self, 0)
-	
 	player = PLAYER_SCENE.instance() as Player
 	add_child(player) # Makes player always have a parent
 	
 	current_room.add_connection($Rooms/Room2, Vector2.UP) # Temporary
+	#current_room.add_connection($Rooms/Room2, Vector2.RIGHT) # Temporary
 	load_room(current_room, Vector2.ZERO)
+	#current_room2.add_connection($Rooms/Room3, Vector2.RIGHT) # Temporary
+	#load_room(current_room2, Vector2.ZERO)
 
 
 func load_room(room: Room, enter_dir: Vector2) -> void:

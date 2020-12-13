@@ -43,6 +43,9 @@ func _unhandled_input(_event: InputEvent) -> void:
 			get_tree().quit()
 			#else return
 		
+		elif Input.is_action_just_pressed('TESTheal'):
+			player_heal()
+		
 		elif Input.is_action_just_pressed('special'):
 			state_machine.change_state(special_state)
 		
@@ -86,3 +89,9 @@ func check_health() -> void:
 		yield(get_tree().create_timer(1.0), "timeout")
 		get_tree().quit()
 		print('No health!!')
+
+
+func player_heal() -> void:
+	if (get_health() < 5):
+		animation_player.play("PlayerHeal")
+		set_health(5)
