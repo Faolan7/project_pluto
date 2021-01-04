@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sprites/HangingLight-Sheet.png" type="Texture" id=1]
+
+[sub_resource type="Animation" id=3]
+resource_name = "light"
+length = 0.35
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "light"
+
+[sub_resource type="AnimationNodeStateMachine" id=1]
+states/light/node = SubResource( 4 )
+states/light/position = Vector2( 299, 72 )
+start_node = "light"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+
+[node name="HangingLight" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 4
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "light"
+anims/light = SubResource( 3 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 1 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 2 )

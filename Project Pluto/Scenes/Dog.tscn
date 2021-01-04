@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sprites/Dog1-Sheet.png" type="Texture" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "dog"
+length = 0.55
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 0 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "dog"
+
+[sub_resource type="AnimationNodeStateMachine" id=2]
+states/dog/node = SubResource( 4 )
+states/dog/position = Vector2( 363, 61 )
+start_node = "dog"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=3]
+
+[node name="Dog" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "dog"
+anims/dog = SubResource( 1 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 2 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 3 )
