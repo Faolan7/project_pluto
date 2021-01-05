@@ -3,20 +3,18 @@ extends Character
 
 
 onready var animation_tree: AnimationTree = $AnimationTree as AnimationTree
-
-#testing variable, could be deleted later
-onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
 onready var animation_state = animation_tree.get("parameters/playback")
 
 onready var interact_state: State = $StateMachine/Interact as State
+onready var special_state: State = $StateMachine/SpecialAttack as State
 
 onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 
 
 func _ready() -> void:
 	animation_tree.active = true
-	special_state = $StateMachine/SpecialAttack as State
 	attack_state.weapon = $Sprite/FacingPivot/Weapons/Weapon as Weapon
+	$Sprite/FacingPivot/SpinHitbox.wielder = self
 
 func _unhandled_input(_event: InputEvent) -> void:
 	var input_vector: Vector2 = Vector2(
@@ -30,23 +28,22 @@ func _unhandled_input(_event: InputEvent) -> void:
 		set_face_dir(input_vector)
 		
 		if Input.is_action_just_pressed('attack'):
-			animation_state.travel('idle')
+			play_animation('idle')
 			state_machine.change_state(attack_state)
-		
-		elif Input.is_action_just_pressed('special'):
-			#animation_player.connect('animation_finished', special_state, '_on_special_completed')
+			
+		elif Input.is_action_just_pressed('attack_special'):
 			state_machine.change_state(special_state)
-		
+			
 		elif Input.is_action_just_pressed('interact'):
-			animation_state.travel('idle')
+			play_animation('idle')
 			state_machine.change_state(interact_state)
 			
 		elif input_vector != Vector2.ZERO: # Checking if move button is pushed
-			animation_state.travel('move')
+			play_animation('move')
 			state_machine.change_state(move_state)
 			
 		else:
-			animation_state.travel('idle')
+			play_animation('idle')
 
 
 func add_weapon(weapon: Weapon) -> void:
@@ -55,7 +52,7 @@ func add_weapon(weapon: Weapon) -> void:
 	weapon.get_parent().remove_child(weapon)
 	weapon_slots.add_child(weapon)
 
-func playAnimation(animation: String) -> void:
+func play_animation(animation: String) -> void:
 	animation_state.travel(animation)
 
 
@@ -73,6 +70,6 @@ func _on_state_completed() -> void:
 	
 	set_face_dir(move_state.move_dir)
 	if move_state.move_dir == Vector2.ZERO:
-		animation_state.travel('idle')
+		play_animation('idle')
 	else:
-		animation_state.travel('move')
+		play_animation('move')
