@@ -7,6 +7,7 @@ onready var animation_state = animation_tree.get("parameters/playback")
 
 onready var interact_state: State = $StateMachine/Interact as State
 onready var dodge_state: State = $StateMachine/Dodge as State
+onready var special_state: State = $StateMachine/SpecialAttack as State
 
 onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 
@@ -16,6 +17,7 @@ export var max_weapon_count: int = 1
 func _ready() -> void:
 	animation_tree.active = true
 	attack_state.weapon = $Sprite/FacingPivot/Weapons/Weapon as Weapon
+	$Sprite/FacingPivot/SpinHitbox.wielder = self
 
 func _unhandled_input(_event: InputEvent) -> void:
 	var input_vector: Vector2 = Vector2(
@@ -29,22 +31,25 @@ func _unhandled_input(_event: InputEvent) -> void:
 		set_face_dir(input_vector)
 		
 		if Input.is_action_just_pressed('attack'):
-			animation_state.travel('idle')
+			play_animation('idle')
 			state_machine.change_state(attack_state)
 			
+		elif Input.is_action_just_pressed('attack_special'):
+			state_machine.change_state(special_state)
+			
 		elif Input.is_action_just_pressed('interact'):
-			animation_state.travel('idle')
+			play_animation('idle')
 			state_machine.change_state(interact_state)
 			
 		elif Input.is_action_just_pressed('dodge'):
 			state_machine.change_state(dodge_state)
 			
 		elif input_vector != Vector2.ZERO: # Checking if move button is pushed
-			animation_state.travel('move')
+			play_animation('move')
 			state_machine.change_state(move_state)
 			
 		else:
-			animation_state.travel('idle')
+			play_animation('idle')
 
 
 func add_weapon(weapon: Weapon) -> void:
@@ -56,6 +61,9 @@ func add_weapon(weapon: Weapon) -> void:
 	
 	weapon.get_parent().remove_child(weapon)
 	weapon_slots.add_child(weapon)
+
+func play_animation(animation: String) -> void:
+	animation_state.travel(animation)
 
 
 func set_face_dir(value: Vector2) -> void:
@@ -74,6 +82,6 @@ func _on_state_completed() -> void:
 	
 	set_face_dir(move_state.move_dir)
 	if move_state.move_dir == Vector2.ZERO:
-		animation_state.travel('idle')
+		play_animation('idle')
 	else:
-		animation_state.travel('move')
+		play_animation('move')
