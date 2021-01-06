@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Scenes/Character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Character/Player.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Sprites/Player.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Weapon/Weapon.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/State/Interact.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/State/Dodge.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -17,8 +18,177 @@ height = 8.0
 radius = 6.0
 height = 4.0
 
+[sub_resource type="Animation" id=29]
+resource_name = "dodge_down"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 55, 56, 57, 58, 59, 18 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("StateMachine/Dodge")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "dodge_left"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 50, 51, 52, 53, 54, 12 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("StateMachine/Dodge")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "dodge_right"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 40, 41, 42, 43, 44, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("StateMachine/Dodge")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=32]
+resource_name = "dodge_up"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 45, 46, 47, 48, 49, 6 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("StateMachine/Dodge")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_animation_finished"
+} ]
+}
+
 [sub_resource type="Animation" id=4]
 resource_name = "idle_down"
+length = 0.001
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -35,6 +205,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "idle_left"
+length = 0.001
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -51,6 +222,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=6]
 resource_name = "idle_right"
+length = 0.001
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -67,6 +239,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=7]
 resource_name = "idle_up"
+length = 0.001
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -83,7 +256,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=8]
 resource_name = "move_down"
-length = 0.6
+length = 0.5
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -100,7 +273,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=9]
 resource_name = "move_left"
-length = 0.6
+length = 0.5
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -117,7 +290,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=10]
 resource_name = "move_right"
-length = 0.6
+length = 0.5
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -134,7 +307,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=11]
 resource_name = "move_up"
-length = 0.6
+length = 0.5
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -148,6 +321,28 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 7, 8, 9, 10, 11, 6 ]
 }
+
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "dodge_down"
+
+[sub_resource type="AnimationNodeAnimation" id=34]
+animation = "dodge_up"
+
+[sub_resource type="AnimationNodeAnimation" id=35]
+animation = "dodge_left"
+
+[sub_resource type="AnimationNodeAnimation" id=36]
+animation = "dodge_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=26]
+blend_point_0/node = SubResource( 33 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 34 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 35 )
+blend_point_2/pos = Vector2( -1, 0 )
+blend_point_3/node = SubResource( 36 )
+blend_point_3/pos = Vector2( 1, 0 )
 
 [sub_resource type="AnimationNodeAnimation" id=12]
 animation = "idle_down"
@@ -197,12 +392,18 @@ blend_point_3/pos = Vector2( -1, 0 )
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+
 [sub_resource type="AnimationNodeStateMachine" id=24]
+states/dodge/node = SubResource( 26 )
+states/dodge/position = Vector2( 561, 150 )
 states/idle/node = SubResource( 16 )
 states/idle/position = Vector2( 561, 62 )
 states/move/node = SubResource( 21 )
 states/move/position = Vector2( 780, 62 )
-transitions = [ "idle", "move", SubResource( 22 ), "move", "idle", SubResource( 23 ) ]
+transitions = [ "idle", "move", SubResource( 22 ), "move", "idle", SubResource( 23 ), "idle", "dodge", SubResource( 27 ), "dodge", "idle", SubResource( 28 ) ]
 start_node = "idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=25]
@@ -216,6 +417,7 @@ max_weapon_count = 2
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 4 )
 hframes = 60
+frame = 45
 
 [node name="Bars" parent="Sprite" index="0"]
 visible = true
@@ -259,6 +461,7 @@ shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
+disabled = true
 
 [node name="WorldCollision" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0, 8 )
@@ -272,7 +475,16 @@ MOVE_SPEED = 100
 script = ExtResource( 6 )
 INTERACTION_AREA = NodePath("../../Sprite/FacingPivot/InteractionArea")
 
+[node name="Dodge" type="Node" parent="StateMachine" index="3"]
+script = ExtResource( 7 )
+DODGE_SPEED = 200
+stamina_cost = 5.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+anims/dodge_down = SubResource( 29 )
+anims/dodge_left = SubResource( 30 )
+anims/dodge_right = SubResource( 31 )
+anims/dodge_up = SubResource( 32 )
 anims/idle_down = SubResource( 4 )
 anims/idle_left = SubResource( 5 )
 anims/idle_right = SubResource( 6 )
@@ -286,7 +498,9 @@ anims/move_up = SubResource( 11 )
 tree_root = SubResource( 24 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 25 )
+parameters/dodge/blend_position = Vector2( 1, 0 )
 parameters/idle/blend_position = Vector2( 1, 0 )
 parameters/move/blend_position = Vector2( 1, 0 )
 [connection signal="completed" from="StateMachine/Attack" to="." method="_on_state_completed"]
 [connection signal="completed" from="StateMachine/Interact" to="." method="_on_state_completed"]
+[connection signal="completed" from="StateMachine/Dodge" to="." method="_on_state_completed"]

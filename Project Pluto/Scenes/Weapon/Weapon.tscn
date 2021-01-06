@@ -44,7 +44,7 @@ position = Vector2( 12, 0 )
 rotation = 1.5708
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
-attack_cost = 3.0
+attack_stamina_cost = 3.0
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
 damage = 1

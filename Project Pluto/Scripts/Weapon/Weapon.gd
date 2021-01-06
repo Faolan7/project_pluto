@@ -12,7 +12,7 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPla
 onready var hitbox: Hitbox = $Hitbox as Hitbox
 onready var attack_range: Area2D = $AttackRange as Area2D
 
-export(float) var attack_cost: float
+export var attack_stamina_cost: float
 
 
 func use() -> void:

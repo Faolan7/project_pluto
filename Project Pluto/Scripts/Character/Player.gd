@@ -2,8 +2,6 @@ class_name Player
 extends Character
 
 
-export(int) var max_weapon_count: int = 1
-
 onready var animation_tree: AnimationTree = $AnimationTree as AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
 
@@ -12,10 +10,11 @@ onready var dodge_state: State = $StateMachine/Dodge as State
 
 onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 
+export var max_weapon_count: int = 1
+
 
 func _ready() -> void:
 	animation_tree.active = true
-	
 	attack_state.weapon = $Sprite/FacingPivot/Weapons/Weapon as Weapon
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -38,7 +37,6 @@ func _unhandled_input(_event: InputEvent) -> void:
 			state_machine.change_state(interact_state)
 			
 		elif Input.is_action_just_pressed('dodge'):
-			animation_state.travel('Dodge')
 			state_machine.change_state(dodge_state)
 			
 		elif input_vector != Vector2.ZERO: # Checking if move button is pushed
@@ -67,7 +65,7 @@ func set_face_dir(value: Vector2) -> void:
 
 func set_blend_position(value: Vector2) -> void:
 	animation_tree.set('parameters/idle/blend_position', value)
-	animation_tree.set('parameters/run/blend_position', value)
+	animation_tree.set('parameters/move/blend_position', value)
 	animation_tree.set('parameters/dodge/blend_position', value)
 
 
@@ -79,4 +77,3 @@ func _on_state_completed() -> void:
 		animation_state.travel('idle')
 	else:
 		animation_state.travel('move')
-

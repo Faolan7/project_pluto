@@ -42,13 +42,13 @@ func on_death():
 	queue_free()
 
 func _on_attack_completed() -> void:
-	if weapon.has_targets_in_range() and get_stamina() > weapon.attack_cost:
+	if weapon.has_targets_in_range() and get_stamina() > weapon.attack_stamina_cost:
 		_on_attack_range_entered()
 	else:
 		state_machine.change_state(move_state)
 
 func _on_attack_range_entered() -> void:
-	if get_stamina() > weapon.attack_cost:
+	if get_stamina() > weapon.attack_stamina_cost:
 		state_machine.change_state(attack_state)
 
 func _on_target_detected(body) -> void:

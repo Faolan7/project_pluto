@@ -7,10 +7,10 @@ var weapon: Weapon setget _set_weapon
 func activate() -> void:
 	.activate()
 	
-	if actor.stamina < weapon.attack_cost:
+	if actor.stamina < weapon.attack_stamina_cost:
 		set_completed(true)
 	else:
-		actor.stamina -= weapon.attack_cost
+		actor.stamina -= weapon.attack_stamina_cost
 		weapon.use()
 
 

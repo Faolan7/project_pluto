@@ -1,19 +1,23 @@
 extends State
 
+
 var dodge_dir: Vector2 = Vector2.ZERO
 
-export(int) var DODGE_SPEED: int
+export var DODGE_SPEED: int
+export var stamina_cost: float
 
 
 func activate() -> void:
-	.activate()
-	is_completed = false
+	if actor.stamina >= stamina_cost:
+		actor.stamina -= stamina_cost
+		.activate()
+		actor.animation_state.travel('dodge')
 
-#Not working how I would like it to. But this functions on a basic level.
+
 func _physics_process(_delta: float) -> void:
 	# warning-ignore:return_value_discarded
 	actor.move_and_slide(dodge_dir * DODGE_SPEED)
 
 
-func _on_AnimationPlayer_animation_finished(anim_name):
-	is_completed = true
+func _on_animation_finished():
+	set_completed(true)
