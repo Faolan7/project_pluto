@@ -1,6 +1,6 @@
 extends Control
 
-const DIALOGUE: Resource = preload('res://Scenes/Npc/Dialogue.tscn')
+const DIALOGUE: Resource = preload('res://Scenes/Interface/Dialogue.tscn')
 
 
 func create_dialogue(speaker: Object, callback: String, text: String) -> void:

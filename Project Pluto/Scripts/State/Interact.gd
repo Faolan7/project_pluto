@@ -12,12 +12,11 @@ func _ready() -> void:
 
 func activate() -> void:
 	.activate()
-	is_completed = false
-	
+
 	var closest_object: CollisionObject2D = get_closest_object()
 	
 	if closest_object == null:
-		is_completed = true
+		set_completed(true)
 	else:
 		# warning-ignore:return_value_discarded
 		closest_object.connect('interaction_finished', self, '_on_interaction_finished',
@@ -45,4 +44,4 @@ func get_closest_object() -> CollisionObject2D:
 
 
 func _on_interaction_finished() -> void:
-	is_completed = true
+	set_completed(true)

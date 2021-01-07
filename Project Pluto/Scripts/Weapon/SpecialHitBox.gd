@@ -1,4 +1,4 @@
-class_name Hitbox
+class_name SpecialHitBox
 extends Area2D
 
 

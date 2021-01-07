@@ -1,16 +1,27 @@
 extends Node2D
 
 
+const PLAYER_SCENE = preload('res://Scenes/Character/Player.tscn')
+
+var player: Player
+
 onready var current_room: Room = $Rooms/Room as Room
-onready var player: Player = $Player as Player
 
 
 func _ready():
 	get_parent().call_deferred('move_child', self, 0)
 	
-	current_room.add_connection($Rooms/Room2, Vector2.UP)
+	player = PLAYER_SCENE.instance() as Player
+	add_child(player) # Makes player always have a parent
 	
-	current_room.is_loaded = true
+	current_room.add_connection($Rooms/Room2, Vector2.UP) # Temporary
+	load_room(current_room, Vector2.ZERO)
+
+
+func load_room(room: Room, enter_dir: Vector2) -> void:
+	# warning-ignore:return_value_discarded
+	room.connect('loaded', self, '_on_room_loaded', [enter_dir, room], CONNECT_ONESHOT)
+	room.set_deferred('is_loaded', true)
 
 
 func _on_room_exited(exit_dir: Vector2) -> void:
@@ -18,15 +29,8 @@ func _on_room_exited(exit_dir: Vector2) -> void:
 	var old_room: Room = current_room
 	current_room = current_room.connections[exit_dir] as Room
 	
-	# Unloading old room
 	old_room.set_deferred('is_loaded', false)
-	
-	# Loading new room
-	# warning-ignore:return_value_discarded
-	current_room.connect('loaded', self, '_on_room_loaded',
-		[exit_dir * -1, current_room], CONNECT_ONESHOT)
-	current_room.set_deferred('is_loaded', true)
+	load_room(current_room, exit_dir * -1)
 
 func _on_room_loaded(enter_dir: Vector2, room: Room)->void:
-	room.enter(enter_dir)
-	player.position = current_room.get_enter_position(enter_dir)
+	room.enter(enter_dir, player)
