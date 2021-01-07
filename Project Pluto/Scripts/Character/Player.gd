@@ -3,7 +3,7 @@ extends Character
 
 
 onready var animation_tree: AnimationTree = $AnimationTree as AnimationTree
-onready var animation_state = animation_tree.get("parameters/playback")
+onready var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
 
 onready var interact_state: State = $StateMachine/Interact as State
 onready var dodge_state: State = $StateMachine/Dodge as State

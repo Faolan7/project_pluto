@@ -14,6 +14,6 @@ func activate() -> void:
 		actor.play_animation('special_spin')
 
 
-func _on_special_completed(_anim: String) -> void:
+func _on_special_completed() -> void:
 	set_completed(true)
 	actor.play_animation('idle')
