@@ -9,12 +9,13 @@ var is_dead setget, get_is_dead
 var target: KinematicBody2D
 
 onready var weapon: Weapon = $Sprite/FacingPivot/Weapon as Weapon
+onready var wander_state: State = $StateMachine/Wander as State
 
 
 func _ready() -> void:
 	._ready()
 	attack_state.weapon = weapon
-	state_machine.change_state(move_state)
+	state_machine.change_state(wander_state)
 
 func _physics_process(_delta) -> void:
 	if target != null and state_machine.can_change_state:
@@ -52,8 +53,9 @@ func _on_attack_range_entered() -> void:
 		state_machine.change_state(attack_state)
 
 func _on_target_detected(body) -> void:
+	state_machine.change_state(move_state)
 	target = body
 
 func _on_target_lost(_body) -> void:
 	target = null
-	move_state.move_dir = Vector2.ZERO
+	state_machine.change_state(wander_state)
