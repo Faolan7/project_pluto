@@ -25,10 +25,9 @@ func _unhandled_input(_event: InputEvent) -> void:
 		Input.get_action_strength('move_down') - Input.get_action_strength('move_up')
 	)
 	move_state.move_dir = input_vector
-	
 	# Updating state
 	if state_machine.can_change_state:
-		set_face_dir(input_vector)
+		set_face_dir(get_local_mouse_position().normalized())
 		
 		if Input.is_action_just_pressed('attack'):
 			play_animation('idle')

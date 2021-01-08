@@ -18,12 +18,6 @@ export var attack_stamina_cost: float
 func use() -> void:
 	animation_player.play('stab')
 
-
-func doSpecial() -> void:
-	#animation_player.play('Spin')
-	pass
-
-
 func has_targets_in_range() -> bool:
 	for area in attack_range.get_overlapping_areas():
 		if area.get_parent() != get_wielder():
