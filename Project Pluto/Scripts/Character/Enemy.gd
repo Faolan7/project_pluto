@@ -5,11 +5,15 @@ extends Character
 signal died
 
 
-var is_dead setget, get_is_dead
+var is_dead setget ,get_is_dead
 var target: KinematicBody2D
 
-onready var weapon: Weapon = $Sprite/FacingPivot/Weapon as Weapon
+onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
+
+onready var idle_state: State = $StateMachine/Idle as State
 onready var wander_state: State = $StateMachine/Wander as State
+
+onready var weapon: Weapon = $Sprite/FacingPivot/Weapon as Weapon
 
 
 func _ready() -> void:
@@ -18,10 +22,18 @@ func _ready() -> void:
 	state_machine.change_state(wander_state)
 
 func _physics_process(_delta) -> void:
-	if target != null and state_machine.can_change_state:
+	if target != null and state_machine.current_state == move_state:
 		var to_target: Vector2 = target.position - position
 		move_state.move_dir = to_target
 		set_face_dir(to_target)
+		
+		if weapon.has_targets_in_range() and get_stamina() > weapon.attack_stamina_cost:
+			state_machine.change_state(idle_state)
+			animation_player.play('attack')
+
+
+func do_attack():
+	state_machine.change_state(attack_state)
 
 
 func set_health(value: float) -> void:
@@ -43,18 +55,11 @@ func on_death():
 	queue_free()
 
 func _on_attack_completed() -> void:
-	if weapon.has_targets_in_range() and get_stamina() > weapon.attack_stamina_cost:
-		_on_attack_range_entered()
-	else:
-		state_machine.change_state(move_state)
-
-func _on_attack_range_entered() -> void:
-	if get_stamina() > weapon.attack_stamina_cost:
-		state_machine.change_state(attack_state)
+	state_machine.change_state(move_state)
 
 func _on_target_detected(body) -> void:
-	state_machine.change_state(move_state)
 	target = body
+	state_machine.change_state(move_state)
 
 func _on_target_lost(_body) -> void:
 	target = null

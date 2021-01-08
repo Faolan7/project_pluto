@@ -5,7 +5,7 @@ extends Node
 var can_change_state: bool setget ,_get_can_change_state
 var current_state: State
 
-export(NodePath) var ACTOR_NODE: NodePath # Path to the actor node
+export var ACTOR_NODE: NodePath # Path to the actor node
 
 
 func _ready() -> void:
