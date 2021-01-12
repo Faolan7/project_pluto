@@ -44,11 +44,17 @@ func set_health(value: float) -> void:
 func get_health() -> float:
 	return health_bar.value
 
+func get_max_health() -> float:
+	return health_bar.max_value
+
 func set_stamina(value: float) -> void:
 	stamina_bar.value = value
 
 func get_stamina() -> float:
 	return stamina_bar.value
+
+func get_max_stamina() -> float:
+	return stamina_bar.max_value
 
 
 func _on_damaged(damage: float) -> void:

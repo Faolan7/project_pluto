@@ -4,9 +4,11 @@ extends Character
 
 signal died
 
+var special_stamina_cost: int = 5
 
 var is_dead setget ,get_is_dead
 var target: KinematicBody2D setget set_target
+
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
 
@@ -27,10 +29,19 @@ func _physics_process(_delta) -> void:
 		move_state.move_dir = to_target
 		set_face_dir(to_target)
 		
-		if weapon.has_targets_in_range() and get_stamina() > weapon.attack_stamina_cost:
+		if get_stamina() >= weapon.attack_stamina_cost and should_attack():
 			state_machine.change_state(idle_state)
 			animation_player.play('attack')
+		elif get_stamina() >= special_stamina_cost and weapon.has_targets_in_range():
+			state_machine.change_state(idle_state)
+			animation_player.play('attack')
+			print("I'm using my SPECIAL!")
 
+func should_attack() -> bool:
+	if weapon.has_targets_in_range() and (get_health() <= .5 * get_max_health() or get_stamina() < .75 * special_stamina_cost):
+		return true
+	else:
+		return false
 
 func do_attack():
 	state_machine.change_state(attack_state)
