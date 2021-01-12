@@ -6,7 +6,7 @@ signal died
 
 
 var is_dead setget ,get_is_dead
-var target: KinematicBody2D
+var target: KinematicBody2D setget set_target
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
 
@@ -48,6 +48,10 @@ func set_health(value: float) -> void:
 func get_is_dead() -> bool:
 	return get_health() <= 0
 
+func set_target(body) -> void:
+	target = body
+	state_machine.change_state(move_state)
+
 
 func on_death():
 	weapon.animation_player.stop(true)
@@ -58,9 +62,4 @@ func _on_attack_completed() -> void:
 	state_machine.change_state(move_state)
 
 func _on_target_detected(body) -> void:
-	target = body
-	state_machine.change_state(move_state)
-
-func _on_target_lost(_body) -> void:
-	target = null
-	state_machine.change_state(wander_state)
+	get_tree().call_group('Enemies', 'set_target', body)

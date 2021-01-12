@@ -80,15 +80,20 @@ rotation = -1.5708
 [node name="Entities" parent="." instance=ExtResource( 6 )]
 
 [node name="Enemy" parent="Entities" instance=ExtResource( 5 )]
-position = Vector2( 128, 64 )
+position = Vector2( 175.571, 63.2508 )
 
 [node name="DroppedWeapon" parent="Entities" instance=ExtResource( 8 )]
 position = Vector2( 68.7837, 95.3405 )
 INITIAL_WEAPON_NODE = NodePath("Weapon")
 
 [node name="Weapon" parent="Entities/DroppedWeapon" instance=ExtResource( 7 )]
+
+[node name="Enemy2" parent="Entities" instance=ExtResource( 5 )]
+position = Vector2( 73.4171, 63.678 )
 [connection signal="entered" from="Doors/NorthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, -1 ) ]]
 [connection signal="entered" from="Doors/SouthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, 1 ) ]]
 [connection signal="entered" from="Doors/EastDoor" to="." method="_on_door_entered" binds= [ Vector2( 1, 0 ) ]]
 [connection signal="entered" from="Doors/WestDoor" to="." method="_on_door_entered" binds= [ Vector2( -1, 0 ) ]]
 [connection signal="room_cleared" from="Entities" to="." method="_on_room_cleared"]
+
+[editable path="Entities/Enemy"]
