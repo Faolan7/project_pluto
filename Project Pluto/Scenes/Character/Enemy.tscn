@@ -69,6 +69,8 @@ tracks/0/keys = {
 "Enemies",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+PANIC_THRESHOLD = 0.5
+PATIENCE_THRESHOLD = 0.75
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 6 )
@@ -101,24 +103,22 @@ tint_progress = Color( 0, 1, 1, 1 )
 visible = false
 
 [node name="WorldCollision" type="CollisionShape2D" parent="." index="1"]
-visible = false
 position = Vector2( 0, 8 )
 rotation = 1.5708
 shape = SubResource( 1 )
-
-[node name="HurtBox" parent="." index="2"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
 
 [node name="DetectionArea" type="Area2D" parent="." index="3"]
-visible = false
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" index="0"]
 shape = SubResource( 3 )
+
+[node name="CombatDistance" type="Position2D" parent="." index="4"]
+position = Vector2( 22, 0 )
 
 [node name="Idle" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 7 )
@@ -132,7 +132,7 @@ MOVE_SPEED = 15
 
 [node name="Timer" type="Timer" parent="StateMachine/Wander" index="0"]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 anims/attack = SubResource( 4 )
 anims/idle = SubResource( 5 )
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_target_detected"]
