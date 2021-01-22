@@ -16,7 +16,6 @@ export var max_weapon_count: int = 1
 
 func _ready() -> void:
 	animation_tree.active = true
-	attack_state.weapon = $Sprite/FacingPivot/Weapons/Weapon as Weapon
 	$Sprite/FacingPivot/SpinHitbox.wielder = self
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -25,12 +24,13 @@ func _unhandled_input(_event: InputEvent) -> void:
 		Input.get_action_strength('move_down') - Input.get_action_strength('move_up')
 	)
 	move_state.move_dir = input_vector
+	dodge_state.dodge_dir = input_vector
 	
 	# Updating state
 	if state_machine.can_change_state:
-		set_face_dir(input_vector)
+		set_face_dir(get_local_mouse_position().normalized())
 		
-		if Input.is_action_just_pressed('attack'):
+		if Input.is_action_just_pressed('attack') and attack_state.weapon != null:
 			play_animation('idle')
 			state_machine.change_state(attack_state)
 			
@@ -69,12 +69,11 @@ func play_animation(animation: String) -> void:
 func set_face_dir(value: Vector2) -> void:
 	.set_face_dir(value)
 	set_blend_position(face_dir)
-	dodge_state.dodge_dir = face_dir
 
 func set_blend_position(value: Vector2) -> void:
 	animation_tree.set('parameters/idle/blend_position', value)
 	animation_tree.set('parameters/move/blend_position', value)
-	animation_tree.set('parameters/dodge/blend_position', value)
+	animation_tree.set('parameters/dodge/blend_position', dodge_state.dodge_dir)
 
 
 func _on_state_completed() -> void:

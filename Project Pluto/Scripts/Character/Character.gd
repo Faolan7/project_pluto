@@ -2,7 +2,7 @@ class_name Character
 extends KinematicBody2D
 
 
-const DROPPED_WEAPON: Resource = preload('res://Scenes/DroppedWeapon.tscn')
+const DROPPED_WEAPON: Resource = preload('res://Scenes/Weapon/DroppedWeapon.tscn')
 
 var face_dir: Vector2 = Vector2.RIGHT setget set_face_dir
 var health: float setget set_health, get_health
@@ -35,8 +35,8 @@ func set_face_dir(value: Vector2) -> void:
 			face_dir.x = 0
 			face_dir.y = value.y / abs(value.y)
 			
-		facing_pivot.rotation = face_dir.angle()
-		facing_pivot.show_behind_parent = face_dir == Vector2.UP
+	facing_pivot.rotation = face_dir.angle()
+	facing_pivot.show_behind_parent = face_dir == Vector2.UP
 
 func set_health(value: float) -> void:
 	health_bar.value = value
@@ -44,11 +44,17 @@ func set_health(value: float) -> void:
 func get_health() -> float:
 	return health_bar.value
 
+func get_max_health() -> float:
+	return health_bar.max_value
+
 func set_stamina(value: float) -> void:
 	stamina_bar.value = value
 
 func get_stamina() -> float:
 	return stamina_bar.value
+
+func get_max_stamina() -> float:
+	return stamina_bar.max_value
 
 
 func _on_damaged(damage: float) -> void:

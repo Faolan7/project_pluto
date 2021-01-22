@@ -1,6 +1,8 @@
 class_name Reward
 extends Node
 
+
+
 var xp: int
 var gold: int
 var items: Array = []

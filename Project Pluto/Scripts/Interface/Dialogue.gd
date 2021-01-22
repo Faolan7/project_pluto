@@ -1,6 +1,7 @@
 class_name DialogueBox
 extends PanelContainer
 
+
 signal closed
 
 

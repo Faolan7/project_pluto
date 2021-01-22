@@ -12,17 +12,11 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPla
 onready var hitbox: Hitbox = $Hitbox as Hitbox
 onready var attack_range: Area2D = $AttackRange as Area2D
 
-export var attack_stamina_cost: float
+export(float) var attack_stamina_cost: float
 
 
 func use() -> void:
 	animation_player.play('stab')
-
-
-func doSpecial() -> void:
-	#animation_player.play('Spin')
-	pass
-
 
 func has_targets_in_range() -> bool:
 	for area in attack_range.get_overlapping_areas():

@@ -5,12 +5,11 @@ extends InteractBox
 var weapon: Weapon setget set_weapon
 var weapon_data: Dictionary
 
-export(NodePath) var INITIAL_WEAPON_NODE: NodePath
-
 
 func _ready() -> void:
-	if weapon == null:
-		set_weapon(get_node(INITIAL_WEAPON_NODE))
+	var last_child: Node = get_child(get_child_count() - 1)
+	if last_child is Weapon:
+		set_weapon(last_child)
 
 
 func init(drop_pos: Vector2, drop_weapon: Weapon) -> void:

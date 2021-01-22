@@ -25,4 +25,4 @@ func _set_weapon(value: Weapon) -> void:
 
 
 func _on_attack_completed() -> void:
-	is_completed = true
+	set_completed(true)
