@@ -3,14 +3,12 @@ extends State
 
 var dodge_dir: Vector2 = Vector2.ZERO
 
-export(int) var DODGE_SPEED: int
-export(float) var stamina_cost: float
+export var DODGE_SPEED: int
+export var stamina_cost: float
 
 
 func activate() -> void:
-	if actor.stamina < stamina_cost:
-		set_completed(true)
-	else:
+	if actor.stamina >= stamina_cost:
 		actor.stamina -= stamina_cost
 		.activate()
 		actor.animation_state.travel('dodge')

@@ -2,14 +2,15 @@ class_name DroppedWeapon
 extends InteractBox
 
 
-var weapon: Weapon setget set_weapon
+var weapon: Weapon setget set_weapon, get_weapon
 var weapon_data: Dictionary
+
+export(NodePath) var INITIAL_WEAPON_NODE: NodePath
 
 
 func _ready() -> void:
-	var last_child: Node = get_child(get_child_count() - 1)
-	if last_child is Weapon:
-		set_weapon(last_child)
+	if weapon == null:
+		set_weapon(get_node(INITIAL_WEAPON_NODE))
 
 
 func init(drop_pos: Vector2, drop_weapon: Weapon) -> void:
@@ -28,14 +29,17 @@ func interact(player):
 	finish_interaction()
 	queue_free()
 
-
+#Broken when bow is put into the DroppedWeapon
+#Parameter passed in is NULL
 func set_weapon(value: Weapon) -> void:
+	print(value)
 	weapon = value
 	weapon_data['position'] = weapon.position
 	weapon_data['rotation'] = weapon.rotation
-	
 	weapon.position = Vector2.ZERO
 	weapon.rotation = 0
+	print("did we make it?")
+
 
 func get_weapon() -> Weapon:
 	weapon.position = weapon_data['position']

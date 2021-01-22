@@ -6,39 +6,23 @@ signal room_exited(exit_dir)
 signal loaded()
 
 
-var LAYOUT_SCENE: Resource
-var layout: RoomLayout
-
 var is_loaded: bool setget set_loaded
 var cleared: bool
 
-export(Dictionary) var connections: Dictionary = {
-	Vector2.UP: NodePath(),
-	Vector2.DOWN: NodePath(),
-	Vector2.LEFT: NodePath(),
-	Vector2.RIGHT: NodePath()
+var layout: RoomLayout
+var connections: Dictionary = {
+	Vector2.UP: null,
+	Vector2.DOWN: null,
+	Vector2.LEFT: null,
+	Vector2.RIGHT: null
 }
 
-
-func _ready() -> void:
-	# Getting room layout
-	if get_child_count() > 0 and get_child(0) is RoomLayout:
-		var layout: RoomLayout = get_child(0) as RoomLayout
-		LAYOUT_SCENE = load(layout.filename)
-		layout.queue_free()
-		
-	# Converting connections
-	for dir in connections.keys():
-		var connection: NodePath = connections[dir] as NodePath
-		
-		if connection.is_empty():
-			connections[dir] = null
-		else:
-			connections[dir] = get_node(connection)
+export(Resource) var LAYOUT_SCENE: Resource
 
 
 func enter(enter_dir: Vector2, player: Player) -> void:
 	layout.enter(enter_dir, player, cleared)
+
 
 func add_connection(other: Room, side: Vector2) -> void:
 	connections[side] = other
@@ -57,7 +41,7 @@ func set_loaded(value: bool) -> void:
 		# warning-ignore:return_value_discarded
 		layout.connect('room_exited', self, '_on_room_exited')
 		# warning-ignore:return_value_discarded
-		layout.connect('room_cleared', self, '_on_room_cleared')
+		layout.entities.connect('room_cleared', self, '_on_room_cleared')
 		
 		for dir in connections.keys():
 			if connections[dir] == null:

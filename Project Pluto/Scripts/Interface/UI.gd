@@ -1,6 +1,5 @@
 extends Control
 
-
 const DIALOGUE: Resource = preload('res://Scenes/Interface/Dialogue.tscn')
 
 

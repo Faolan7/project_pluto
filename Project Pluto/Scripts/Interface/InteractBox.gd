@@ -1,7 +1,6 @@
 class_name InteractBox
 extends Area2D
 
-
 signal interaction_started(player)
 signal interaction_finished
 
