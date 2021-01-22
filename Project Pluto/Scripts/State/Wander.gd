@@ -1,3 +1,4 @@
+class_name WanderState
 extends MoveState
 
 

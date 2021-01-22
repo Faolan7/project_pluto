@@ -15,10 +15,10 @@ script = ExtResource( 4 )
 
 [node name="Start" parent="Rooms" instance=ExtResource( 1 )]
 connections = {
-Vector2( -1, 0 ): NodePath(""),
-Vector2( 0, -1 ): NodePath("../Combat"),
-Vector2( 0, 1 ): NodePath(""),
-Vector2( 1, 0 ): NodePath("")
+"down": NodePath(""),
+"left": NodePath("../Puzzle"),
+"right": NodePath(""),
+"up": NodePath("../Combat")
 }
 
 [node name="StartDemo" parent="Rooms/Start" instance=ExtResource( 3 )]
@@ -26,10 +26,10 @@ Vector2( 1, 0 ): NodePath("")
 [node name="Combat" parent="Rooms" instance=ExtResource( 1 )]
 position = Vector2( 0, -192 )
 connections = {
-Vector2( -1, 0 ): NodePath("../Puzzle"),
-Vector2( 0, -1 ): NodePath("../Boss"),
-Vector2( 0, 1 ): NodePath("../Start"),
-Vector2( 1, 0 ): NodePath("")
+"down": NodePath("../Start"),
+"left": NodePath(""),
+"right": NodePath(""),
+"up": NodePath("../Boss")
 }
 
 [node name="CombatDemo" parent="Rooms/Combat" instance=ExtResource( 2 )]
@@ -37,32 +37,32 @@ Vector2( 1, 0 ): NodePath("")
 [node name="Boss" parent="Rooms" instance=ExtResource( 1 )]
 position = Vector2( 0, -384 )
 connections = {
-Vector2( -1, 0 ): NodePath("../Treasure"),
-Vector2( 0, -1 ): NodePath(""),
-Vector2( 0, 1 ): NodePath("../Combat"),
-Vector2( 1, 0 ): NodePath("")
+"down": NodePath("../Combat"),
+"left": NodePath(""),
+"right": NodePath(""),
+"up": NodePath("")
 }
 
 [node name="BossDemo" parent="Rooms/Boss" instance=ExtResource( 6 )]
 
 [node name="Puzzle" parent="Rooms" instance=ExtResource( 1 )]
-position = Vector2( -256, -192 )
+position = Vector2( -256, 0 )
 connections = {
-Vector2( -1, 0 ): NodePath(""),
-Vector2( 0, -1 ): NodePath("../Treasure"),
-Vector2( 0, 1 ): NodePath(""),
-Vector2( 1, 0 ): NodePath("../Combat")
+"down": NodePath(""),
+"left": NodePath(""),
+"right": NodePath("../Start"),
+"up": NodePath("../Treasure")
 }
 
 [node name="PuzzleDemo" parent="Rooms/Puzzle" instance=ExtResource( 7 )]
 
 [node name="Treasure" parent="Rooms" instance=ExtResource( 1 )]
-position = Vector2( -256, -384 )
+position = Vector2( -256, -192 )
 connections = {
-Vector2( -1, 0 ): NodePath(""),
-Vector2( 0, -1 ): NodePath(""),
-Vector2( 0, 1 ): NodePath("../Puzzle"),
-Vector2( 1, 0 ): NodePath("../Boss")
+"down": NodePath("../Puzzle"),
+"left": NodePath(""),
+"right": NodePath(""),
+"up": NodePath("")
 }
 
 [node name="TreasureDemo" parent="Rooms/Treasure" instance=ExtResource( 5 )]

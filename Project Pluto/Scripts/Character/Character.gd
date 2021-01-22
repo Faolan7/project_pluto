@@ -16,7 +16,7 @@ onready var facing_pivot: Node2D = $Sprite/FacingPivot as Node2D
 onready var health_bar: ResourceBar = $Sprite/Bars/HealthBar as ResourceBar
 onready var stamina_bar: ResourceBar = $Sprite/Bars/StaminaBar as ResourceBar
 
-export var stamina_regen_rate: float = 1 # In stamina/second
+export(float) var stamina_regen_rate: float = 1 # In stamina/second
 
 
 func drop_weapon(weapon: Weapon) -> void:
@@ -61,4 +61,6 @@ func _on_damaged(damage: float) -> void:
 	set_health(get_health() - damage)
 
 func _on_stamina_regen() -> void:
-	set_stamina(get_stamina() + stamina_regen_rate / 5) # Occurs 5 times per second
+	var stamina_gain: float = stamina_regen_rate / 5 # Occurs 5 times per second
+	
+	set_stamina(get_stamina() + stamina_gain)

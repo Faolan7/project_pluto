@@ -13,10 +13,10 @@ var is_loaded: bool setget set_loaded
 var cleared: bool
 
 export(Dictionary) var connections: Dictionary = {
-	Vector2.UP: NodePath(),
-	Vector2.DOWN: NodePath(),
-	Vector2.LEFT: NodePath(),
-	Vector2.RIGHT: NodePath()
+	'up': NodePath(),
+	'down': NodePath(),
+	'left': NodePath(),
+	'right': NodePath()
 }
 
 
@@ -29,12 +29,18 @@ func _ready() -> void:
 		
 	# Converting connections
 	for dir in connections.keys():
-		var connection: NodePath = connections[dir] as NodePath
-		
-		if connection.is_empty():
-			connections[dir] = null
+		var path: NodePath = connections[dir] as NodePath
+		var new_key: Vector2
+		match dir:
+			'up': new_key = Vector2.UP
+			'down': new_key = Vector2.DOWN
+			'left': new_key = Vector2.LEFT
+			'right': new_key = Vector2.RIGHT
+			
+		if path.is_empty():
+			connections[new_key] = null
 		else:
-			connections[dir] = get_node(connection)
+			connections[new_key] = get_node(path)
 
 
 func enter(enter_dir: Vector2, player: Player) -> void:
