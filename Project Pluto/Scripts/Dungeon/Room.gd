@@ -23,9 +23,9 @@ export(Dictionary) var connections: Dictionary = {
 func _ready() -> void:
 	# Getting room layout
 	if get_child_count() > 0 and get_child(0) is RoomLayout:
-		var layout: RoomLayout = get_child(0) as RoomLayout
-		LAYOUT_SCENE = load(layout.filename)
-		layout.queue_free()
+		var temp_layout: RoomLayout = get_child(0) as RoomLayout
+		LAYOUT_SCENE = load(temp_layout.filename)
+		temp_layout.queue_free()
 		
 	# Converting connections
 	for dir in connections.keys():

@@ -12,14 +12,15 @@ func _ready() -> void:
 		set_weapon(last_child)
 
 
-func init(drop_pos: Vector2, drop_weapon: Weapon) -> void:
-	position = drop_pos
-	set_weapon(drop_weapon)
-	weapon.visible = true
-	weapon.set_wielder(null)
+static func init(drop_pos: Vector2, drop_weapon: Weapon) -> DroppedWeapon:
+	var instance: DroppedWeapon = load("res://Scenes/Weapon/DroppedWeapon.tscn").instance() as DroppedWeapon
+	instance.position = drop_pos
+	instance.set_weapon(drop_weapon)
 	
-	weapon.get_parent().remove_child(weapon)
-	add_child(weapon)
+	instance.weapon.get_parent().remove_child(instance.weapon)
+	instance.add_child(instance.weapon)
+	
+	return instance
 
 func interact(player):
 	.interact(player)
@@ -36,6 +37,8 @@ func set_weapon(value: Weapon) -> void:
 	
 	weapon.position = Vector2.ZERO
 	weapon.rotation = 0
+	weapon.visible = true
+	weapon.set_wielder(null)
 
 func get_weapon() -> Weapon:
 	weapon.position = weapon_data['position']

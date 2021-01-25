@@ -2,8 +2,6 @@ class_name Character
 extends KinematicBody2D
 
 
-const DROPPED_WEAPON: Resource = preload('res://Scenes/Weapon/DroppedWeapon.tscn')
-
 var face_dir: Vector2 = Vector2.RIGHT setget set_face_dir
 var health: float setget set_health, get_health
 var stamina: float setget set_stamina, get_stamina
@@ -20,9 +18,7 @@ export(float) var stamina_regen_rate: float = 1 # In stamina/second
 
 
 func drop_weapon(weapon: Weapon) -> void:
-	var dropped_weapon = DROPPED_WEAPON.instance()
-	
-	dropped_weapon.init(position - Vector2(0, 1), weapon)
+	var dropped_weapon: DroppedWeapon = DroppedWeapon.init(position - Vector2(0, 1), weapon)
 	get_parent().call_deferred('add_child', dropped_weapon)
 
 
