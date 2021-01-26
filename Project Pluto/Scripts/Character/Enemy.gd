@@ -49,6 +49,12 @@ func _physics_process(_delta) -> void:
 			animation_player.play('attack')
 			print("I'm using my SPECIAL!")
 
+func get_class() -> String:
+	return 'Enemy'
+
+func is_class(cls: String) -> bool:
+	return cls == get_class()
+
 
 func should_attack() -> bool:
 	if weapon.has_targets_in_range() and (

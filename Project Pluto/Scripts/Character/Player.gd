@@ -58,6 +58,7 @@ func add_weapon(weapon: Weapon) -> void:
 		
 	weapon.visible = false
 	attack_state.weapon = weapon
+	special_state.weapon = weapon
 	
 	weapon.get_parent().remove_child(weapon)
 	weapon_slots.add_child(weapon)

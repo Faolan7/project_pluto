@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Sprites/Weapon/bow.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Weapon/BaseWeapon.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Weapon/WeaponRanged.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Weapon/WeaponLibrary/Projectile/Arrow.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 150, 2 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "attack"
+length = 0.16
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.12 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.16 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "special"
+length = 0.16
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.12 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.16 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="Bow" instance=ExtResource( 2 )]
+position = Vector2( 5, 0 )
+rotation = 0.0
+texture = ExtResource( 1 )
+hframes = 2
+script = ExtResource( 3 )
+attack_stamina_cost = 4.0
+PROJECTILE_SCENE = ExtResource( 4 )
+PROJECTILE_SPEED = 200.0
+
+[node name="AttackRange" parent="." index="0"]
+position = Vector2( 150, 0 )
+rotation = 1.5708
+
+[node name="CollisionShape2D" parent="AttackRange" index="0"]
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" parent="." index="1"]
+anims/attack = SubResource( 2 )
+anims/special = SubResource( 3 )
