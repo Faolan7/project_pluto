@@ -9,7 +9,6 @@
 [ext_resource path="res://Scenes/Weapon/Hitbox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/State/Dodge.gd" type="Script" id=9]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 
 [sub_resource type="CircleShape2D" id=2]
@@ -475,9 +474,6 @@ max_weapon_count = 2
 texture = ExtResource( 4 )
 hframes = 98
 frame = 12
-
-[node name="Bars" parent="Sprite" index="0"]
-visible = true
 
 [node name="HealthBar" parent="Sprite/Bars" index="0"]
 margin_left = -12.0

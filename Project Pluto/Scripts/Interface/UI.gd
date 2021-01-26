@@ -1,8 +1,8 @@
-extends Control
+extends Node2D
 
 
 const DIALOGUE: Resource = preload('res://Scenes/Interface/Dialogue.tscn')
-
+var player: Player setget set_player
 
 func create_dialogue(speaker: Object, callback: String, text: String) -> void:
 	var dialogue: DialogueBox = DIALOGUE.instance() as DialogueBox
@@ -13,3 +13,7 @@ func create_dialogue(speaker: Object, callback: String, text: String) -> void:
 	dialogue.connect('closed', speaker, callback)
 	
 	dialogue.display_text(text)
+
+
+func set_player(player: Player) -> void:
+	$Resources.connect_player(player)

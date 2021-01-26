@@ -14,6 +14,9 @@ onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 export var max_weapon_count: int = 1
 
 
+signal update_health(health)
+signal update_stamina(stamina)
+
 func _ready() -> void:
 	animation_tree.active = true
 	$Sprite/FacingPivot/SpinHitbox.wielder = self
@@ -84,3 +87,13 @@ func _on_state_completed() -> void:
 		play_animation('idle')
 	else:
 		play_animation('move')
+
+func set_health(value: float) -> void:
+	.set_health(value)
+	emit_signal("update_health", get_health())
+
+func set_stamina(value: float) -> void:
+	.set_stamina(value)
+	emit_signal("update_stamina", get_stamina())
+
+

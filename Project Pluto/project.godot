@@ -195,7 +195,7 @@ config/icon="res://icon.png"
 [autoload]
 
 QuestJournal="*res://Scripts/Quest/QuestJournal.gd"
-UI="*res://Scripts/Interface/UI.gd"
+UI="*res://Scenes/Interface/Interface.tscn"
 
 [display]
 

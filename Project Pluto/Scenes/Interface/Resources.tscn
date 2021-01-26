@@ -2,10 +2,10 @@
 
 [ext_resource path="res://Sprites/UI/progress_bar.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Interface/ResourceBar.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Interface/ResourceManager.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Interface/ResourceManager.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/UI/Player_Resources_UI.png" type="Texture" id=4]
 
-[node name="Resources" type="Node"]
+[node name="Resources" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="Health" type="TextureProgress" parent="."]
@@ -40,7 +40,6 @@ __meta__ = {
 
 [node name="StaminaRegen" type="Timer" parent="Stamina"]
 
-[node name="HUD" type="Sprite" parent="."]
+[node name="Overlay" type="Sprite" parent="."]
 position = Vector2( 64.1811, 64.2171 )
 texture = ExtResource( 4 )
-[connection signal="timeout" from="Stamina/StaminaRegen" to="." method="_on_StaminaRegen_timeout"]
