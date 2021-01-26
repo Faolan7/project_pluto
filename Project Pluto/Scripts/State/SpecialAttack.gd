@@ -24,9 +24,9 @@ func _on_special_completed() -> void:
 
 func _set_weapon(value: Weapon) -> void:
 	if weapon != null:
-		weapon.disconnect('attack_finished', self, '_on_attack_completed')
+		weapon.disconnect('special_finished', self, '_on_special_completed')
 		
 	weapon = value
 	weapon.wielder = actor  #problem associated with refactor
 	# warning-ignore:return_value_discarded
-	weapon.connect('attack_finished', self, '_on_attack_completed')
+	weapon.connect('special_finished', self, '_on_special_completed')

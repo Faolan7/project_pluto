@@ -17,7 +17,7 @@ export var max_weapon_count: int = 1
 func _ready() -> void:
 	animation_tree.active = true
 	attack_state.weapon = $Sprite/FacingPivot/Weapons/ShortBow as Weapon #Need to figure out how to dynamically make certain weapons as "current weapon" Perhaps some form of queue system?
-	special_state.weapon = $Sprite/FacingPivot/Weapons/ShortBow
+	special_state.weapon = attack_state.weapon
 	$Sprite/FacingPivot/SpinHitbox.wielder = self
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -56,12 +56,12 @@ func _unhandled_input(_event: InputEvent) -> void:
 
 
 func add_weapon(weapon: Weapon) -> void:
-	print(weapon_slots.get_child_count())
 	if weapon_slots.get_child_count() >= max_weapon_count:
 		drop_weapon(attack_state.weapon)
 		
 	weapon.visible = false
 	attack_state.weapon = weapon
+	special_state.weapon = weapon
 	
 	weapon.get_parent().remove_child(weapon)
 	weapon_slots.add_child(weapon)

@@ -32,13 +32,11 @@ func interact(player):
 #Broken when bow is put into the DroppedWeapon
 #Parameter passed in is NULL
 func set_weapon(value: Weapon) -> void:
-	print(value)
 	weapon = value
 	weapon_data['position'] = weapon.position
 	weapon_data['rotation'] = weapon.rotation
 	weapon.position = Vector2.ZERO
 	weapon.rotation = 0
-	print("did we make it?")
 
 
 func get_weapon() -> Weapon:

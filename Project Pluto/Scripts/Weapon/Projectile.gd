@@ -1,9 +1,15 @@
+class_name Projectile
 extends Sprite
 
+
 var wielder: Node2D setget set_wielder, get_wielder
+var velocity: Vector2
+
 onready var hitbox: Hitbox = $Hitbox as Hitbox
-var velocity
-onready var get_attack_range = get_parent() #$AttackRange/CollisionShape2D
+
+
+func _physics_process(delta: float) -> void:
+	position += velocity * delta
 
 
 func set_wielder(value: Node2D) -> void:
@@ -13,10 +19,6 @@ func get_wielder() -> Node2D:
 	return hitbox.wielder as Node2D
 
 
-func _physics_process(delta):
-	position += velocity *  delta
-
-
-func _on_Hitbox_body_entered(body):
-	if body != get_wielder():
+func _on_collision(collision_object: CollisionObject2D) -> void:
+	if collision_object != get_wielder():
 		queue_free()

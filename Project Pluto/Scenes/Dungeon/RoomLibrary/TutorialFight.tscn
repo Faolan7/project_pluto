@@ -6,8 +6,14 @@
 [ext_resource path="res://Sprites/Dungeon/wall.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Character/Enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Dungeon/EntityTracker.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Weapon/Melee Weapon/Dagger.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Weapon/WeaponLibrary/Shortsword.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/DroppedWeapon.tscn" type="PackedScene" id=8]
+
+
+
+
+
+
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
