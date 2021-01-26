@@ -28,7 +28,10 @@ func _unhandled_input(_event: InputEvent) -> void:
 	
 	# Updating state
 	if state_machine.can_change_state:
-		set_face_dir(get_local_mouse_position().normalized())
+		var mouse_position = get_local_mouse_position().normalized()
+		set_face_dir(mouse_position)
+		attack_state.attack_dir = mouse_position
+		special_state.attack_dir = mouse_position
 		
 		if Input.is_action_just_pressed('attack') and attack_state.weapon != null:
 			play_animation('idle')
