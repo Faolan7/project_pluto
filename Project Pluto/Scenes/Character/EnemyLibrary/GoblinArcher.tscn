@@ -9,8 +9,8 @@ radius = 5.0
 height = 4.0
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 8.0
-height = 8.0
+radius = 11.6456
+height = 3.11308
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 64.0
@@ -24,6 +24,10 @@ scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 3 )
 hframes = 77
 frame = 51
+
+[node name="Bars" parent="Sprite" index="0"]
+position = Vector2( 1, 0 )
+scale = Vector2( 1.25, 1 )
 
 [node name="HealthBar" parent="Sprite/Bars" index="0"]
 margin_left = -13.6667
