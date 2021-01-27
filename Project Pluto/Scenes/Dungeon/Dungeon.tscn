@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Dungeon/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_CombatDemo.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Treasure/_TreasureDemo.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Boss/_BossDemo.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Puzzle/_PuzzleDemo.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Sounds/Dungeon.ogg" type="AudioStream" id=8]
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource( 4 )
@@ -66,6 +67,10 @@ connections = {
 }
 
 [node name="TreasureDemo" parent="Rooms/Treasure" instance=ExtResource( 5 )]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
 [connection signal="room_exited" from="Rooms/Start" to="." method="_on_room_exited"]
 [connection signal="room_exited" from="Rooms/Combat" to="." method="_on_room_exited"]
 [connection signal="room_exited" from="Rooms/Boss" to="." method="_on_room_exited"]
