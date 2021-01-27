@@ -13,6 +13,7 @@ margin_left = 7.0
 margin_top = 3.0
 margin_right = 97.0
 margin_bottom = 9.0
+max_value = 10.0
 texture_under = ExtResource( 1 )
 texture_progress = ExtResource( 1 )
 tint_under = Color( 0.227451, 0.227451, 0.227451, 1 )
@@ -28,6 +29,9 @@ margin_left = 6.0
 margin_top = 11.0
 margin_right = 97.0
 margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 20.0
 texture_under = ExtResource( 1 )
 texture_progress = ExtResource( 1 )
 tint_under = Color( 0.521569, 0.521569, 0.521569, 1 )
@@ -41,5 +45,5 @@ __meta__ = {
 [node name="StaminaRegen" type="Timer" parent="Stamina"]
 
 [node name="Overlay" type="Sprite" parent="."]
-position = Vector2( 64.1811, 64.2171 )
+position = Vector2( 64.076, 64.3222 )
 texture = ExtResource( 4 )
