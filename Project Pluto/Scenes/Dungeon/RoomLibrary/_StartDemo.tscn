@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/_Base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Weapon/WeaponLibrary/Bow.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Character/NPC.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Shortsword.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Weapon/DroppedWeapon.tscn" type="PackedScene" id=8]
@@ -11,6 +12,11 @@
 position = Vector2( 64, 92 )
 
 [node name="DroppedWeapon" parent="Entities" index="1" instance=ExtResource( 8 )]
-position = Vector2( 192, 92 )
+position = Vector2( 180, 55 )
 
 [node name="Weapon" parent="Entities/DroppedWeapon" index="1" instance=ExtResource( 7 )]
+
+[node name="DroppedWeapon2" parent="Entities" index="2" instance=ExtResource( 8 )]
+position = Vector2( 180, 135 )
+
+[node name="Bow" parent="Entities/DroppedWeapon2" index="1" instance=ExtResource( 2 )]

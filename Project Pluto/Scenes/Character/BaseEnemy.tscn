@@ -1,30 +1,18 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Character/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/State/Wander.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/Weapon/WeaponLibrary/Shortsword.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sprites/progress_bar.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Enemy/dummy_enemy.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/State/Idle.gd" type="Script" id=7]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 5.0
-height = 4.0
-
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 8.0
-height = 8.0
-
-[sub_resource type="CircleShape2D" id=3]
-radius = 64.0
-
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=1]
 resource_name = "attack"
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/path = NodePath("../GoblinWarrior/Sprite:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -53,11 +41,11 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "idle"
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Enemy/Sprite:frame")
+tracks/0/path = NodePath("../GoblinWarrior/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -103,26 +91,19 @@ texture_progress = ExtResource( 5 )
 tint_under = Color( 0, 0, 0, 1 )
 tint_progress = Color( 0, 1, 1, 1 )
 
-[node name="Weapon" parent="Sprite/FacingPivot" index="0" instance=ExtResource( 4 )]
-visible = false
+[node name="CombatDistance" type="Position2D" parent="Sprite" index="2"]
 
 [node name="WorldCollision" type="CollisionShape2D" parent="." index="1"]
 position = Vector2( 0, 8 )
 rotation = 1.5708
-shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
-shape = SubResource( 2 )
 
 [node name="DetectionArea" type="Area2D" parent="." index="3"]
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" index="0"]
-shape = SubResource( 3 )
-
-[node name="CombatDistance" type="Position2D" parent="." index="4"]
-position = Vector2( 22, 0 )
 
 [node name="Idle" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 7 )
@@ -136,9 +117,9 @@ MOVE_SPEED = 15
 
 [node name="Timer" type="Timer" parent="StateMachine/Wander" index="0"]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
-anims/attack = SubResource( 4 )
-anims/idle = SubResource( 5 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+anims/attack = SubResource( 1 )
+anims/idle = SubResource( 2 )
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_target_detected"]
 [connection signal="completed" from="StateMachine/Attack" to="." method="_on_attack_completed"]
 [connection signal="timeout" from="StateMachine/Wander/Timer" to="StateMachine/Wander" method="_on_update_move_dir"]

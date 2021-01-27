@@ -15,17 +15,17 @@ onready var idle_state: State = $StateMachine/Idle as State
 onready var wander_state: State = $StateMachine/Wander as State
 onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
 
-onready var weapon: Weapon = $Sprite/FacingPivot/Weapon as Weapon
-onready var combat_distance_node: Position2D = $CombatDistance as Position2D
+onready var combat_distance_node: Position2D = $Sprite/CombatDistance as Position2D
 
 export var PANIC_THRESHOLD: float
 export var PATIENCE_THRESHOLD: float
 export var COMBAT_DISTANCE: float
+export var weapon: NodePath
 
 
 func _ready() -> void:
 	._ready()
-	attack_state.weapon = weapon
+	attack_state.weapon = get_node(weapon)
 	combat_distance = COMBAT_DISTANCE if COMBAT_DISTANCE != 0 else combat_distance_node.position.length()
 	
 	set_state('wander')
@@ -43,9 +43,9 @@ func _physics_process(_delta) -> void:
 		else:
 			move_state.move_dir = Vector2.ZERO
 			
-		if get_stamina() >= weapon.attack_stamina_cost and should_attack():
+		if get_stamina() >= attack_state.weapon.attack_stamina_cost and should_attack():
 			animation_player.play('attack')
-		elif get_stamina() >= special_stamina_cost and weapon.has_targets_in_range():
+		elif get_stamina() >= special_stamina_cost and attack_state.weapon.has_targets_in_range():
 			animation_player.play('attack')
 			print("I'm using my SPECIAL!")
 
@@ -57,7 +57,7 @@ func is_class(cls: String) -> bool:
 
 
 func should_attack() -> bool:
-	if weapon.has_targets_in_range() and (
+	if attack_state.weapon.has_targets_in_range() and (
 			get_health() < PANIC_THRESHOLD * get_max_health()
 			or get_stamina() < PATIENCE_THRESHOLD * special_stamina_cost):
 		return true
@@ -94,8 +94,8 @@ func set_target(body) -> void:
 
 
 func on_death():
-	weapon.animation_player.stop(true)
-	drop_weapon(weapon)
+	attack_state.weapon.animation_player.stop(true)
+	drop_weapon(attack_state.weapon)
 	queue_free()
 
 func _on_attack_completed() -> void:
