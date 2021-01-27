@@ -15,13 +15,18 @@ func _ready():
 	add_child(player) # Makes player always have a parent
 	
 	load_room(current_room, Vector2.ZERO)
+	
+	UI.player = player
+	
 
 
 func load_room(room: Room, enter_dir: Vector2) -> void:
 	# warning-ignore:return_value_discarded
 	room.connect('loaded', self, '_on_room_loaded', [enter_dir, room], CONNECT_ONESHOT)
 	room.set_deferred('is_loaded', true)
-
+	
+	
+	UI.position = room.position
 
 func _on_room_exited(exit_dir: Vector2) -> void:
 	# Switching rooms

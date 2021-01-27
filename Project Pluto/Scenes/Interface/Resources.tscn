@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/UI/progress_bar.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Interface/ResourceBar.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Interface/ResourceManager.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/UI/Player_Resources_UI.png" type="Texture" id=4]
+
+[node name="Resources" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Health" type="TextureProgress" parent="."]
+margin_left = 7.0
+margin_top = 3.0
+margin_right = 97.0
+margin_bottom = 9.0
+max_value = 10.0
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 1 )
+tint_under = Color( 0.227451, 0.227451, 0.227451, 1 )
+tint_progress = Color( 0.588235, 0, 0.0941176, 1 )
+nine_patch_stretch = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stamina" type="TextureProgress" parent="."]
+margin_left = 6.0
+margin_top = 11.0
+margin_right = 97.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 20.0
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 1 )
+tint_under = Color( 0.521569, 0.521569, 0.521569, 1 )
+tint_progress = Color( 0.313726, 0.784314, 0.470588, 1 )
+nine_patch_stretch = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaminaRegen" type="Timer" parent="Stamina"]
+
+[node name="Overlay" type="Sprite" parent="."]
+position = Vector2( 64.076, 64.3222 )
+texture = ExtResource( 4 )
