@@ -15,10 +15,9 @@ func _ready() -> void:
 static func init(drop_pos: Vector2, drop_weapon: Weapon) -> DroppedWeapon:
 	var instance: DroppedWeapon = load("res://Scenes/Weapon/DroppedWeapon.tscn").instance() as DroppedWeapon
 	instance.position = drop_pos
-	instance.set_weapon(drop_weapon)
 	
-	instance.weapon.get_parent().remove_child(instance.weapon)
-	instance.add_child(instance.weapon)
+	drop_weapon.get_parent().remove_child(drop_weapon)
+	instance.add_child(drop_weapon)
 	
 	return instance
 
