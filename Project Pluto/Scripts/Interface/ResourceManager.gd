@@ -1,9 +1,6 @@
 extends Node
 
-func connect_player(player: Player):
-	player.connect('update_health', self, '_on_hp_update')
-	player.connect('update_stamina', self, '_on_stamina_update')
-
+func set_bar_values(player: Player):
 	$Health.max_value = player.get_max_health()
 	$Stamina.max_value = player.get_max_stamina()
 	$Stamina.visible = true

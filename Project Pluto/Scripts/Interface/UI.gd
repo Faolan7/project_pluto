@@ -15,11 +15,18 @@ func create_dialogue(speaker: Object, callback: String, text: String) -> void:
 	
 	dialogue.display_text(text)
 
-
+#Set player was doing too many things, so i separated stuff
+#into smaller functions. This helps with readability.
 func set_player(player: Player) -> void:
-	$Resources.connect_player(player)
-	player.connect("update_current_weapon", self, "_on_update_current_weapon")
+	connect_player_signals(player)
+	$Resources.set_bar_values(player)
+
+func connect_player_signals(player: Player) -> void:
+	player.connect('update_health', $Resources, '_on_hp_update')
+	player.connect('update_stamina', $Resources, '_on_stamina_update')
 	
+	player.connect("update_current_weapon", self, "_on_update_current_weapon")
+
+
 func _on_update_current_weapon(weapon) -> void:
-	print("updated weapon")
 	$CurrentWeapon.texture = weapon.texture
