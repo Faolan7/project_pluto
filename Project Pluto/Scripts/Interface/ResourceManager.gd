@@ -9,9 +9,7 @@ func connect_player(player: Player):
 	$Stamina.visible = true
 
 func _on_hp_update(value: float) -> void:
-	print("Resources Current HP Value: ", value)
 	$Health.update_bar(value)
 
 func _on_stamina_update(value: float) -> void:
 	$Stamina.update_bar(value)
-

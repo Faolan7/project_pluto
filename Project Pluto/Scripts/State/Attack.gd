@@ -5,6 +5,7 @@ extends State
 var weapon: Weapon setget _set_weapon
 
 
+
 func activate() -> void:
 	.activate()
 	
@@ -16,6 +17,7 @@ func activate() -> void:
 
 
 func _set_weapon(value: Weapon) -> void:
+	print("picked up weapon")
 	if weapon != null:
 		weapon.disconnect('attack_finished', self, '_on_attack_completed')
 		

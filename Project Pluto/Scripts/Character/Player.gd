@@ -16,6 +16,8 @@ export var max_weapon_count: int = 1
 
 signal update_health(health)
 signal update_stamina(stamina)
+signal update_current_weapon(weapon)
+
 
 func _ready() -> void:
 	animation_tree.active = true
@@ -64,7 +66,8 @@ func add_weapon(weapon: Weapon) -> void:
 	
 	weapon.get_parent().remove_child(weapon)
 	weapon_slots.add_child(weapon)
-
+	emit_signal("update_current_weapon", weapon)
+	
 func play_animation(animation: String) -> void:
 	animation_state.travel(animation)
 
@@ -95,5 +98,3 @@ func set_health(value: float) -> void:
 func set_stamina(value: float) -> void:
 	.set_stamina(value)
 	emit_signal("update_stamina", get_stamina())
-
-
