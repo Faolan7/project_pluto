@@ -55,6 +55,7 @@ damage = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0, -2 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="AttackRange" type="Area2D" parent="."]
 collision_layer = 0

@@ -90,6 +90,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/Character/Player.gd"
 }, {
 "base": "Node2D",
+"class": "PlayerBars",
+"language": "GDScript",
+"path": "res://Scripts/Interface/PlayerBars.gd"
+}, {
+"base": "Node2D",
 "class": "PuzzleTracker",
 "language": "GDScript",
 "path": "res://Scripts/Dungeon/PuzzleTracker.gd"
@@ -153,6 +158,11 @@ _global_script_classes=[ {
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://Scripts/Weapon/Weapon.gd"
+}, {
+"base": "Sprite",
+"class": "WeaponSlot",
+"language": "GDScript",
+"path": "res://Scripts/Interface/WeaponSlot.gd"
 } ]
 _global_script_class_icons={
 "AttackState": "",
@@ -171,6 +181,7 @@ _global_script_class_icons={
 "KillTask": "",
 "MoveState": "",
 "Player": "",
+"PlayerBars": "",
 "PuzzleTracker": "",
 "Quest": "",
 "ResourceBar": "",
@@ -183,7 +194,8 @@ _global_script_class_icons={
 "StateMachine": "",
 "Task": "",
 "WanderState": "",
-"Weapon": ""
+"Weapon": "",
+"WeaponSlot": ""
 }
 
 [application]
@@ -195,7 +207,7 @@ config/icon="res://icon.png"
 [autoload]
 
 QuestJournal="*res://Scripts/Quest/QuestJournal.gd"
-UI="*res://Scenes/Interface/Interface.tscn"
+UI="*res://Scenes/Interface/UI.tscn"
 
 [display]
 

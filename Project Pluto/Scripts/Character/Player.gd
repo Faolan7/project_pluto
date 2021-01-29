@@ -2,6 +2,11 @@ class_name Player
 extends Character
 
 
+signal update_health(health)
+signal update_stamina(stamina)
+signal update_current_weapon(weapon)
+
+
 onready var animation_tree: AnimationTree = $AnimationTree as AnimationTree
 onready var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
 
@@ -12,11 +17,6 @@ onready var special_state: State = $StateMachine/SpecialAttack as State
 onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 
 export var max_weapon_count: int = 1
-
-
-signal update_health(health)
-signal update_stamina(stamina)
-signal update_current_weapon(weapon)
 
 
 func _ready() -> void:
@@ -61,13 +61,13 @@ func add_weapon(weapon: Weapon) -> void:
 	if weapon_slots.get_child_count() >= max_weapon_count:
 		drop_weapon(attack_state.weapon)
 		
-	weapon.visible = false
-	attack_state.weapon = weapon
-	
 	weapon.get_parent().remove_child(weapon)
 	weapon_slots.add_child(weapon)
-	emit_signal("update_current_weapon", weapon)
 	
+	weapon.visible = false
+	attack_state.weapon = weapon
+	emit_signal('update_current_weapon', weapon)
+
 func play_animation(animation: String) -> void:
 	animation_state.travel(animation)
 
@@ -75,6 +75,14 @@ func play_animation(animation: String) -> void:
 func set_face_dir(value: Vector2) -> void:
 	.set_face_dir(value)
 	set_blend_position(face_dir)
+
+func set_health(value: float) -> void:
+	.set_health(value)
+	emit_signal('update_health', get_health())
+
+func set_stamina(value: float) -> void:
+	.set_stamina(value)
+	emit_signal('update_stamina', get_stamina())
 
 func set_blend_position(value: Vector2) -> void:
 	animation_tree.set('parameters/idle/blend_position', value)
@@ -90,11 +98,3 @@ func _on_state_completed() -> void:
 		play_animation('idle')
 	else:
 		play_animation('move')
-
-func set_health(value: float) -> void:
-	.set_health(value)
-	emit_signal("update_health", get_health())
-
-func set_stamina(value: float) -> void:
-	.set_stamina(value)
-	emit_signal("update_stamina", get_stamina())

@@ -2,7 +2,11 @@ extends Node2D
 
 
 const DIALOGUE: Resource = preload('res://Scenes/Interface/Dialogue.tscn')
-onready var player: Player setget set_player
+
+var player: Player setget set_player
+
+onready var player_bars: PlayerBars = $PlayerBars as PlayerBars
+onready var weapon_slot: WeaponSlot = $WeaponSlots/WeaponSlot as WeaponSlot
 
 
 func create_dialogue(speaker: Object, callback: String, text: String) -> void:
@@ -15,18 +19,19 @@ func create_dialogue(speaker: Object, callback: String, text: String) -> void:
 	
 	dialogue.display_text(text)
 
-#Set player was doing too many things, so i separated stuff
-#into smaller functions. This helps with readability.
-func set_player(player: Player) -> void:
-	connect_player_signals(player)
-	$Resources.set_bar_values(player)
 
-func connect_player_signals(player: Player) -> void:
-	player.connect('update_health', $Resources, '_on_hp_update')
-	player.connect('update_stamina', $Resources, '_on_stamina_update')
+func set_player(value: Player) -> void:
+	player = value
 	
+	player_bars.set_bar_values(player)
+	
+	# warning-ignore:return_value_discarded
+	player.connect('update_health', player_bars, '_on_hp_update')
+	# warning-ignore:return_value_discarded
+	player.connect('update_stamina', player_bars, '_on_stamina_update')
+	# warning-ignore:return_value_discarded
 	player.connect("update_current_weapon", self, "_on_update_current_weapon")
 
 
 func _on_update_current_weapon(weapon) -> void:
-	$CurrentWeapon.texture = weapon.texture
+	weapon_slot.weapon = weapon
