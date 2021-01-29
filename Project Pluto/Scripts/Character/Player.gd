@@ -2,9 +2,6 @@ class_name Player
 extends Character
 
 
-onready var animation_tree: AnimationTree = $AnimationTree as AnimationTree
-onready var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
-
 onready var interact_state: State = $StateMachine/Interact as State
 onready var dodge_state: State = $StateMachine/Dodge as State
 onready var special_state: State = $StateMachine/SpecialAttack as State
@@ -15,7 +12,6 @@ export var max_weapon_count: int = 1
 
 
 func _ready() -> void:
-	animation_tree.active = true
 	$Sprite/FacingPivot/SpinHitbox.wielder = self
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -30,7 +26,6 @@ func _unhandled_input(_event: InputEvent) -> void:
 	if state_machine.can_change_state:
 		var mouse_position = get_local_mouse_position().normalized()
 		set_face_dir(mouse_position)
-		attack_state.attack_dir = mouse_position
 		special_state.attack_dir = mouse_position
 		
 		if Input.is_action_just_pressed('attack') and attack_state.weapon != null:
@@ -66,17 +61,9 @@ func add_weapon(weapon: Weapon) -> void:
 	weapon.get_parent().remove_child(weapon)
 	weapon_slots.add_child(weapon)
 
-func play_animation(animation: String) -> void:
-	animation_state.travel(animation)
-
-
-func set_face_dir(value: Vector2) -> void:
-	.set_face_dir(value)
-	set_blend_position(face_dir)
 
 func set_blend_position(value: Vector2) -> void:
-	animation_tree.set('parameters/idle/blend_position', value)
-	animation_tree.set('parameters/move/blend_position', value)
+	.set_blend_position(value)
 	animation_tree.set('parameters/dodge/blend_position', dodge_state.dodge_dir)
 
 

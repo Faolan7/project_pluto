@@ -84,6 +84,7 @@ func set_state(state: String) -> void:
 		'idle':
 			state_machine.change_state(idle_state)
 		'move':
+			play_animation('move')
 			state_machine.change_state(move_state)
 		'wander':
 			state_machine.change_state(wander_state)

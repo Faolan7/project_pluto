@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "State",
+"class": "AttackState",
+"language": "GDScript",
+"path": "res://Scripts/State/Attack.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
@@ -18,6 +23,11 @@ _global_script_classes=[ {
 "class": "DialogueBox",
 "language": "GDScript",
 "path": "res://Scripts/Interface/Dialogue.gd"
+}, {
+"base": "State",
+"class": "DodgeState",
+"language": "GDScript",
+"path": "res://Scripts/State/Dodge.gd"
 }, {
 "base": "StaticBody2D",
 "class": "Door",
@@ -45,9 +55,24 @@ _global_script_classes=[ {
 "path": "res://Scripts/Weapon/Hitbox.gd"
 }, {
 "base": "Area2D",
+"class": "HurtBox",
+"language": "GDScript",
+"path": "res://Scripts/Weapon/Hurtbox.gd"
+}, {
+"base": "State",
+"class": "IdleState",
+"language": "GDScript",
+"path": "res://Scripts/State/Idle.gd"
+}, {
+"base": "Area2D",
 "class": "InteractBox",
 "language": "GDScript",
 "path": "res://Scripts/Interface/InteractBox.gd"
+}, {
+"base": "State",
+"class": "InteractState",
+"language": "GDScript",
+"path": "res://Scripts/State/Interact.gd"
 }, {
 "base": "Task",
 "class": "KillTask",
@@ -109,6 +134,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Dungeon/RoomLayout.gd"
 }, {
+"base": "State",
+"class": "SpecialState",
+"language": "GDScript",
+"path": "res://Scripts/State/SpecialAttack.gd"
+}, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
@@ -124,20 +154,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Quest/Tasks/BaseTask.gd"
 }, {
+"base": "MoveState",
+"class": "WanderState",
+"language": "GDScript",
+"path": "res://Scripts/State/Wander.gd"
+}, {
 "base": "Sprite",
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://Scripts/Weapon/Weapon.gd"
 } ]
 _global_script_class_icons={
+"AttackState": "",
 "Character": "",
 "DialogueBox": "",
+"DodgeState": "",
 "Door": "",
 "DroppedWeapon": "",
 "Enemy": "",
 "EntityTracker": "",
 "Hitbox": "",
+"HurtBox": "",
+"IdleState": "",
 "InteractBox": "",
+"InteractState": "",
 "KillTask": "",
 "MeleeWeapon": "",
 "MoveState": "",
@@ -150,9 +190,11 @@ _global_script_class_icons={
 "Reward": "",
 "Room": "",
 "RoomLayout": "",
+"SpecialState": "",
 "State": "",
 "StateMachine": "",
 "Task": "",
+"WanderState": "",
 "Weapon": ""
 }
 

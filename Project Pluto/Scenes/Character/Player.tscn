@@ -520,6 +520,7 @@ disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 3 )
+disabled = true
 
 [node name="WorldCollision" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0, 8 )

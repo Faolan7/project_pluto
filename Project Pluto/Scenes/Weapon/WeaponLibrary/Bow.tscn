@@ -5,8 +5,8 @@
 [ext_resource path="res://Scripts/Weapon/WeaponRanged.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Projectile/Arrow.tscn" type="PackedScene" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 150, 2 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 300.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "attack"
@@ -77,7 +77,6 @@ PROJECTILE_SCENE = ExtResource( 4 )
 PROJECTILE_SPEED = 200.0
 
 [node name="AttackRange" parent="." index="0"]
-position = Vector2( 150, 0 )
 rotation = 1.5708
 
 [node name="CollisionShape2D" parent="AttackRange" index="0"]
