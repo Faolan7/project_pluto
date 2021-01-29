@@ -8,7 +8,7 @@ signal update_current_weapon(weapon)
 
 
 onready var animation_tree: AnimationTree = $AnimationTree as AnimationTree
-onready var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+onready var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get('parameters/playback') as AnimationNodeStateMachinePlayback
 
 onready var interact_state: State = $StateMachine/Interact as State
 onready var dodge_state: State = $StateMachine/Dodge as State
@@ -21,7 +21,6 @@ export var max_weapon_count: int = 1
 
 func _ready() -> void:
 	animation_tree.active = true
-	$Sprite/FacingPivot/SpinHitbox.wielder = self
 
 func _unhandled_input(_event: InputEvent) -> void:
 	var input_vector: Vector2 = Vector2(
@@ -33,7 +32,10 @@ func _unhandled_input(_event: InputEvent) -> void:
 	
 	# Updating state
 	if state_machine.can_change_state:
-		set_face_dir(get_local_mouse_position().normalized())
+		var mouse_dir: Vector2 = get_local_mouse_position().normalized()
+		set_face_dir(mouse_dir)
+		attack_state.attack_dir = mouse_dir
+		special_state.attack_dir = mouse_dir
 		
 		if Input.is_action_just_pressed('attack') and attack_state.weapon != null:
 			play_animation('idle')

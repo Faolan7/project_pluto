@@ -14,7 +14,6 @@ func activate() -> void:
 		set_completed(true)
 	else:
 		actor.stamina -= special_attack_cost
-		#actor.play_animation('special_spin')
 		weapon.use_special(attack_dir.angle())
 
 
