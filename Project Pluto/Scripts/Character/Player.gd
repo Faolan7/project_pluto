@@ -2,6 +2,11 @@ class_name Player
 extends Character
 
 
+signal update_health(health)
+signal update_stamina(stamina)
+signal update_current_weapon(weapon)
+
+
 onready var animation_tree: AnimationTree = $AnimationTree as AnimationTree
 onready var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
 
@@ -59,6 +64,7 @@ func add_weapon(weapon: Weapon) -> void:
 	weapon.visible = false
 	attack_state.weapon = weapon
 	special_state.weapon = weapon
+	emit_signal('update_current_weapon', weapon)
 	
 	weapon.get_parent().remove_child(weapon)
 	weapon_slots.add_child(weapon)
@@ -70,6 +76,14 @@ func play_animation(animation: String) -> void:
 func set_face_dir(value: Vector2) -> void:
 	.set_face_dir(value)
 	set_blend_position(face_dir)
+
+func set_health(value: float) -> void:
+	.set_health(value)
+	emit_signal('update_health', get_health())
+
+func set_stamina(value: float) -> void:
+	.set_stamina(value)
+	emit_signal('update_stamina', get_stamina())
 
 func set_blend_position(value: Vector2) -> void:
 	animation_tree.set('parameters/idle/blend_position', value)

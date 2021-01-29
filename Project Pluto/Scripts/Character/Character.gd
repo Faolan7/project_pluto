@@ -58,5 +58,4 @@ func _on_damaged(damage: float) -> void:
 
 func _on_stamina_regen() -> void:
 	var stamina_gain: float = stamina_regen_rate / 5 # Occurs 5 times per second
-	
 	set_stamina(get_stamina() + stamina_gain)

@@ -4,9 +4,11 @@
 [ext_resource path="res://Scripts/Character/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/State/Wander.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Shortsword.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Sprites/progress_bar.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Interface/progress_bar.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Enemy/dummy_enemy.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/State/Idle.gd" type="Script" id=7]
+
+
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.0
