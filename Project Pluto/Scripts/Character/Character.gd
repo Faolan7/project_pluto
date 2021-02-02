@@ -15,6 +15,7 @@ onready var stamina_bar: ResourceBar = $Sprite/Bars/StaminaBar as ResourceBar
 onready var animation_tree: AnimationTree = $AnimationTree as AnimationTree
 onready var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get('parameters/playback') as AnimationNodeStateMachinePlayback
 onready var facing_pivot: Node2D = $Sprite/FacingPivot as Node2D
+onready var hurtbox: HurtBox = $HurtBox as HurtBox
 
 export(float) var stamina_regen_rate: float = 1 # In stamina/second
 

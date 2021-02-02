@@ -22,4 +22,4 @@ func create_projectile(attack_dir: float) -> void:
 	projectile.position = get_global_position()
 	projectile.rotation = attack_dir
 	projectile.velocity = Vector2.RIGHT.rotated(attack_dir) * PROJECTILE_SPEED
-	projectile.set_wielder(get_wielder())
+	projectile.set_entity(get_entity())

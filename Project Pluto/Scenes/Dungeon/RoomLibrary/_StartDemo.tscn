@@ -20,3 +20,11 @@ position = Vector2( 180, 55 )
 position = Vector2( 180, 135 )
 
 [node name="Bow" parent="Entities/DroppedWeapon2" index="1" instance=ExtResource( 2 )]
+
+[node name="SecretDroppedWeapon" parent="Entities" index="3" instance=ExtResource( 8 )]
+visible = false
+position = Vector2( 100, 45 )
+
+[node name="Bow" parent="Entities/SecretDroppedWeapon" index="1" instance=ExtResource( 2 )]
+attack_stamina_cost = 0.0
+PROJECTILE_SPEED = 500.0

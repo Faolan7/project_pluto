@@ -38,14 +38,17 @@ func _physics_process(_delta) -> void:
 		
 		if target_distance > combat_distance:
 			move_state.move_dir = to_target
+			play_animation('move')
 		elif target_distance < combat_distance * .9:
 			move_state.move_dir = -to_target
+			play_animation('move')
 		else:
 			move_state.move_dir = Vector2.ZERO
+			play_animation('idle')
 			
 		if get_stamina() >= attack_state.weapon.attack_stamina_cost and should_attack():
 			animation_player.play('attack')
-		elif get_stamina() >= special_stamina_cost and attack_state.weapon.has_targets_in_range():
+		elif get_stamina() >= special_stamina_cost and attack_state.weapon.has_entity_in_range(target):
 			animation_player.play('attack')
 			print("I'm using my SPECIAL!")
 
@@ -57,9 +60,9 @@ func is_class(cls: String) -> bool:
 
 
 func should_attack() -> bool:
-	if attack_state.weapon.has_targets_in_range() and (
-			get_health() < PANIC_THRESHOLD * get_max_health()
-			or get_stamina() < PATIENCE_THRESHOLD * special_stamina_cost):
+	if attack_state.weapon.has_entity_in_range(target) \
+			and (get_health() < PANIC_THRESHOLD * get_max_health()
+				or get_stamina() < PATIENCE_THRESHOLD * special_stamina_cost):
 		return true
 	else:
 		return false
@@ -82,6 +85,7 @@ func set_state(state: String) -> void:
 		'attack':
 			state_machine.change_state(attack_state)
 		'idle':
+			play_animation('idle')
 			state_machine.change_state(idle_state)
 		'move':
 			play_animation('move')
@@ -89,7 +93,7 @@ func set_state(state: String) -> void:
 		'wander':
 			state_machine.change_state(wander_state)
 
-func set_target(body) -> void:
+func set_target(body: Character) -> void:
 	target = body
 	set_state('move')
 

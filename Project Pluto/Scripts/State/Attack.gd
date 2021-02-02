@@ -21,7 +21,7 @@ func _set_weapon(value: Weapon) -> void:
 		weapon.disconnect('attack_finished', self, '_on_attack_completed')
 		
 	weapon = value
-	weapon.wielder = actor
+	weapon.entity = actor
 	# warning-ignore:return_value_discarded
 	weapon.connect('attack_finished', self, '_on_attack_completed')
 

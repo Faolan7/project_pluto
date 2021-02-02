@@ -5,6 +5,6 @@ extends Weapon
 onready var hitbox: Hitbox = $Hitbox as Hitbox
 
 
-func set_wielder(value: Node2D) -> void:
-	.set_wielder(value)
-	hitbox.wielder = value
+func set_entity(value: PhysicsBody2D) -> void:
+	.set_entity(value)
+	hitbox.entity = value

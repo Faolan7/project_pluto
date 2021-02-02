@@ -156,19 +156,21 @@ hframes = 12
 frame = 3
 
 [node name="Bars" parent="Sprite" index="0"]
-position = Vector2( 4.5, 0 )
+position = Vector2( 4.5, 2 )
 
-[node name="HealthBar" parent="Sprite/Bars" index="0"]
-margin_left = -13.6667
-margin_top = -27.6667
-margin_right = 10.3333
-margin_bottom = -25.6667
+[node name="StaminaBar" parent="Sprite/Bars" index="0"]
+margin_left = -17.0
+margin_top = -26.0
+margin_right = 7.0
+margin_bottom = -24.0
+rect_scale = Vector2( 1.25, 1.25 )
 
-[node name="StaminaBar" parent="Sprite/Bars" index="1"]
-margin_left = -13.6667
-margin_top = -25.6667
-margin_right = 10.3333
-margin_bottom = -23.6667
+[node name="HealthBar" parent="Sprite/Bars" index="1"]
+margin_left = -17.0
+margin_top = -28.0
+margin_right = 7.0
+margin_bottom = -26.0
+rect_scale = Vector2( 1.25, 1.25 )
 
 [node name="FacingPivot" parent="Sprite" index="1"]
 position = Vector2( 2.5, 3 )

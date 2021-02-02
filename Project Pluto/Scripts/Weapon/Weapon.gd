@@ -7,7 +7,7 @@ signal special_finished
 signal attack_range_entered
 
 
-var wielder: Node2D setget set_wielder, get_wielder
+var entity: Node2D setget set_entity, get_entity
 
 onready var attack_range: Area2D = $AttackRange as Area2D
 onready var attack_range_shape: CollisionShape2D = $AttackRange/CollisionShape2D as CollisionShape2D
@@ -22,19 +22,16 @@ func use(_attack_dir: float) -> void:
 func use_special(_attack_dir: float) -> void:
 	animation_player.play('special')
 
-func has_targets_in_range() -> bool:
-	for area in attack_range.get_overlapping_areas():
-		if area.get_parent() != wielder:
-			return true
-	return false
 
-
-func set_wielder(value: Node2D):
-	wielder = value
+func set_entity(value: PhysicsBody2D):
+	entity = value
 	attack_range_shape.set_deferred('disabled', value == null or not value.is_class('Enemy'))
 
-func get_wielder():
-	return wielder
+func get_entity():
+	return entity
+
+func has_entity_in_range(target) -> bool: # Target should be Character
+	return attack_range.get_overlapping_areas().has(target.hurtbox)
 
 
 func _on_animation_finished(anim_name: String) -> void:
@@ -43,5 +40,5 @@ func _on_animation_finished(anim_name: String) -> void:
 		'special': emit_signal('special_finished')
 
 func _on_attack_range_entered(area: Area2D) -> void:
-	if area.get_parent() != wielder:
+	if area.get_parent() != entity:
 		emit_signal('attack_range_entered')

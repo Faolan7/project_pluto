@@ -37,7 +37,7 @@ func set_weapon(value: Weapon) -> void:
 	weapon.position = Vector2.ZERO
 	weapon.rotation = 0
 	weapon.visible = true
-	weapon.set_wielder(null)
+	weapon.set_entity(null)
 
 func get_weapon() -> Weapon:
 	weapon.position = weapon_data['position']

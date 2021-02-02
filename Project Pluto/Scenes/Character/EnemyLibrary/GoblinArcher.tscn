@@ -153,19 +153,24 @@ position = Vector2( -1.5, 0 )
 scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 3 )
 hframes = 12
-frame = 7
+frame = 3
 
-[node name="HealthBar" parent="Sprite/Bars" index="0"]
-margin_left = -13.6667
-margin_top = -26.0
-margin_right = 10.3333
-margin_bottom = -24.0
+[node name="Bars" parent="Sprite" index="0"]
+position = Vector2( 4.5, 0 )
 
-[node name="StaminaBar" parent="Sprite/Bars" index="1"]
-margin_left = -13.6667
+[node name="StaminaBar" parent="Sprite/Bars" index="0"]
+margin_left = -17.0
 margin_top = -24.0
-margin_right = 10.3333
+margin_right = 7.0
 margin_bottom = -22.0
+rect_scale = Vector2( 1.25, 1.25 )
+
+[node name="HealthBar" parent="Sprite/Bars" index="1"]
+margin_left = -17.0
+margin_top = -26.0
+margin_right = 7.0
+margin_bottom = -24.0
+rect_scale = Vector2( 1.25, 1.25 )
 
 [node name="Bow" parent="Sprite/FacingPivot" index="0" instance=ExtResource( 2 )]
 visible = false
