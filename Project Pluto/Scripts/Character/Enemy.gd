@@ -102,5 +102,5 @@ func on_death():
 func _on_attack_completed() -> void:
 	set_state('move')
 
-func _on_target_detected(body) -> void:
+func _on_target_detected(body: PhysicsBody2D) -> void:
 	get_tree().call_group('Enemies', 'set_target', body)

@@ -41,63 +41,63 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.27451, 0.27451, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=2]
 animation = "idle_down"
 
-[sub_resource type="AnimationNodeAnimation" id=17]
+[sub_resource type="AnimationNodeAnimation" id=3]
 animation = "idle_up"
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=4]
 animation = "idle_right"
 
-[sub_resource type="AnimationNodeAnimation" id=19]
+[sub_resource type="AnimationNodeAnimation" id=5]
 animation = "idle_left"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=13]
-blend_point_0/node = SubResource( 16 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=6]
+blend_point_0/node = SubResource( 2 )
 blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 17 )
+blend_point_1/node = SubResource( 3 )
 blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 18 )
+blend_point_2/node = SubResource( 4 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 19 )
+blend_point_3/node = SubResource( 5 )
 blend_point_3/pos = Vector2( -1, 0 )
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=7]
 animation = "move_down"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=8]
 animation = "move_up"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "move_right"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "move_left"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=4]
-blend_point_0/node = SubResource( 9 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=11]
+blend_point_0/node = SubResource( 7 )
 blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 10 )
+blend_point_1/node = SubResource( 8 )
 blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 11 )
+blend_point_2/node = SubResource( 9 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 12 )
+blend_point_3/node = SubResource( 10 )
 blend_point_3/pos = Vector2( -1, 0 )
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
 
-[sub_resource type="AnimationNodeStateMachine" id=7]
-states/idle/node = SubResource( 13 )
+[sub_resource type="AnimationNodeStateMachine" id=14]
+states/idle/node = SubResource( 6 )
 states/idle/position = Vector2( 549, 69 )
-states/move/node = SubResource( 4 )
+states/move/node = SubResource( 11 )
 states/move/position = Vector2( 732, 69 )
-transitions = [ "idle", "move", SubResource( 14 ), "move", "idle", SubResource( 15 ) ]
+transitions = [ "idle", "move", SubResource( 12 ), "move", "idle", SubResource( 13 ) ]
 start_node = "idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=8]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=15]
 
 [node name="Enemy" groups=[
 "Enemies",
@@ -163,11 +163,11 @@ MOVE_SPEED = 15
 anims/attack = SubResource( 1 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="6"]
-tree_root = SubResource( 7 )
+tree_root = SubResource( 14 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 8 )
-parameters/idle/blend_position = Vector2( 0, 0 )
-parameters/move/blend_position = Vector2( 0, 0 )
+parameters/playback = SubResource( 15 )
+parameters/idle/blend_position = Vector2( 1, 0 )
+parameters/move/blend_position = Vector2( 1, 0 )
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_target_detected"]
 [connection signal="completed" from="StateMachine/Attack" to="." method="_on_attack_completed"]
 [connection signal="timeout" from="StateMachine/Wander/Timer" to="StateMachine/Wander" method="_on_update_move_dir"]

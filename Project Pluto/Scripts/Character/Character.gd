@@ -31,7 +31,6 @@ func play_animation(animation: String) -> void:
 	animation_state.travel(animation)
 
 
-
 func set_face_dir(value: Vector2) -> void:
 	attack_state.attack_dir = value
 	
