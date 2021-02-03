@@ -27,6 +27,7 @@ func _ready() -> void:
 	._ready()
 	attack_state.weapon = get_node(weapon)
 	combat_distance = COMBAT_DISTANCE if COMBAT_DISTANCE != 0 else combat_distance_node.position.length()
+	combat_distance *= $Sprite.scale.length()
 	
 	set_state('wander')
 

@@ -176,7 +176,7 @@ rect_scale = Vector2( 1.25, 1.25 )
 visible = false
 
 [node name="CombatDistance" parent="Sprite" index="2"]
-position = Vector2( 100, 0 )
+position = Vector2( 150, 0 )
 
 [node name="WorldCollision" parent="." index="1"]
 shape = SubResource( 1 )

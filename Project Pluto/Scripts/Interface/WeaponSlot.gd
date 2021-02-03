@@ -15,4 +15,5 @@ func _set_weapon(value: Weapon) -> void:
 	weapon_sprite.rotation = 0
 	weapon_sprite.visible = true
 	weapon_sprite.scale = weapon_sprite.scale * Vector2(1 / scale.x, 1 / scale.y)
+	
 	add_child(weapon_sprite)
