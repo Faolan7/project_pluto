@@ -51,7 +51,7 @@ func _physics_process(_delta) -> void:
 			animation_player.play('attack')
 		elif get_stamina() >= special_stamina_cost and attack_state.weapon.has_entity_in_range(target):
 			animation_player.play('attack')
-			print("I'm using my SPECIAL!")
+			#print("I'm using my SPECIAL!")
 
 func get_class() -> String:
 	return 'Enemy'

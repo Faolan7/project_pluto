@@ -15,7 +15,7 @@ height = 2.0
 [sub_resource type="CircleShape2D" id=3]
 radius = 64.0
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=13]
 resource_name = "idle_down"
 length = 0.001
 tracks/0/type = "value"
@@ -31,7 +31,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "idle_left"
 length = 0.001
 tracks/0/type = "value"
@@ -47,7 +47,7 @@ tracks/0/keys = {
 "values": [ 9 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 resource_name = "idle_right"
 length = 0.001
 tracks/0/type = "value"
@@ -63,7 +63,7 @@ tracks/0/keys = {
 "values": [ 3 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "idle_up"
 length = 0.001
 tracks/0/type = "value"
@@ -79,7 +79,7 @@ tracks/0/keys = {
 "values": [ 6 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 resource_name = "move_down"
 length = 0.8
 loop = true
@@ -96,7 +96,7 @@ tracks/0/keys = {
 "values": [ 1, 0, 2, 0 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 resource_name = "move_left"
 length = 0.8
 loop = true
@@ -113,7 +113,7 @@ tracks/0/keys = {
 "values": [ 10, 9, 11, 9 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 resource_name = "move_right"
 length = 0.8
 loop = true
@@ -130,7 +130,7 @@ tracks/0/keys = {
 "values": [ 4, 3, 5, 3 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=11]
 resource_name = "move_up"
 length = 0.8
 loop = true
@@ -147,7 +147,7 @@ tracks/0/keys = {
 "values": [ 7, 6, 8, 6 ]
 }
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=4]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
 [node name="GoblinMinion" instance=ExtResource( 1 )]
 weapon = NodePath("Sprite/FacingPivot/Shortsword")
@@ -156,7 +156,7 @@ weapon = NodePath("Sprite/FacingPivot/Shortsword")
 scale = Vector2( 0.33, 0.33 )
 texture = ExtResource( 3 )
 hframes = 12
-frame = 7
+frame = 3
 
 [node name="StaminaBar" parent="Sprite/Bars" index="0"]
 margin_top = -22.0
@@ -194,14 +194,14 @@ visible = false
 shape = SubResource( 3 )
 
 [node name="AnimationPlayer" parent="." index="5"]
-anims/idle_down = SubResource( 5 )
-anims/idle_left = SubResource( 6 )
-anims/idle_right = SubResource( 7 )
-anims/idle_up = SubResource( 8 )
-anims/move_down = SubResource( 9 )
-anims/move_left = SubResource( 10 )
-anims/move_right = SubResource( 11 )
-anims/move_up = SubResource( 12 )
+anims/idle_down = SubResource( 13 )
+anims/idle_left = SubResource( 5 )
+anims/idle_right = SubResource( 6 )
+anims/idle_up = SubResource( 7 )
+anims/move_down = SubResource( 8 )
+anims/move_left = SubResource( 9 )
+anims/move_right = SubResource( 10 )
+anims/move_up = SubResource( 11 )
 
 [node name="AnimationTree" parent="." index="6"]
-parameters/playback = SubResource( 4 )
+parameters/playback = SubResource( 12 )

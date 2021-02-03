@@ -4,7 +4,7 @@ extends State
 
 var interaction_area: Area2D
 
-export(NodePath) var INTERACTION_AREA: NodePath # Path to the actor node
+export(NodePath) var INTERACTION_AREA: NodePath
 
 
 func _ready() -> void:
