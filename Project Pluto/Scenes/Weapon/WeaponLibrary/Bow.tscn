@@ -69,6 +69,7 @@ tracks/1/keys = {
 [node name="Bow" instance=ExtResource( 2 )]
 position = Vector2( 5, 0 )
 rotation = 0.0
+scale = Vector2( 1, 0.75 )
 texture = ExtResource( 1 )
 hframes = 2
 script = ExtResource( 3 )
