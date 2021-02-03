@@ -5,22 +5,21 @@ extends InteractBox
 var weapon: Weapon setget set_weapon
 var weapon_data: Dictionary
 
-export(NodePath) var INITIAL_WEAPON_NODE: NodePath
-
 
 func _ready() -> void:
-	if weapon == null:
-		set_weapon(get_node(INITIAL_WEAPON_NODE))
+	var last_child: Node = get_child(get_child_count() - 1)
+	if last_child is Weapon:
+		set_weapon(last_child)
 
 
-func init(drop_pos: Vector2, drop_weapon: Weapon) -> void:
-	position = drop_pos
-	set_weapon(drop_weapon)
-	weapon.visible = true
-	weapon.set_wielder(null)
+static func init(drop_pos: Vector2, drop_weapon: Weapon) -> DroppedWeapon:
+	var instance: DroppedWeapon = load("res://Scenes/Weapon/DroppedWeapon.tscn").instance() as DroppedWeapon
+	instance.position = drop_pos
 	
-	weapon.get_parent().remove_child(weapon)
-	add_child(weapon)
+	drop_weapon.get_parent().remove_child(drop_weapon)
+	instance.add_child(drop_weapon)
+	
+	return instance
 
 func interact(player):
 	.interact(player)
@@ -37,6 +36,8 @@ func set_weapon(value: Weapon) -> void:
 	
 	weapon.position = Vector2.ZERO
 	weapon.rotation = 0
+	weapon.visible = true
+	weapon.set_entity(null)
 
 func get_weapon() -> Weapon:
 	weapon.position = weapon_data['position']

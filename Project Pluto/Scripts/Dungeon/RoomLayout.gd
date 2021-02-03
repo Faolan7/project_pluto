@@ -2,13 +2,15 @@ class_name RoomLayout
 extends TileMap
 
 
+signal room_cleared
 signal room_exited(exit_dir)
 
 
 onready var WALL_ID: int = tile_set.find_tile_by_name('wall')
 
 onready var camera: Camera2D = $Camera2D as Camera2D
-onready var entities: Node2D = $Entities as Node2D
+onready var entities: EntityTracker = $Entities as EntityTracker
+onready var puzzle_elements: PuzzleTracker = $PuzzleElements as PuzzleTracker
 onready var doors: Dictionary = {
 	Vector2.UP: $Doors/NorthDoor as Door,
 	Vector2.DOWN: $Doors/SouthDoor as Door,
@@ -19,10 +21,10 @@ onready var doors: Dictionary = {
 
 func enter(enter_dir: Vector2, player: Player, cleared: bool) -> void:
 	# Closing doors
-	set_doors_open(false)
+	set_doors_open(cleared)
 	if enter_dir != Vector2.ZERO:
 		doors[enter_dir].is_open = true
-	
+		
 	# Adding player
 	player.get_parent().remove_child(player)
 	entities.add_child(player)
@@ -31,7 +33,8 @@ func enter(enter_dir: Vector2, player: Player, cleared: bool) -> void:
 	# Checking room state
 	if cleared:
 		entities.remove_enemies()
-	elif not entities.has_enemies():
+		puzzle_elements.complete_puzzles()
+	elif not entities.has_enemies() and not puzzle_elements.has_puzzles():
 		entities.emit_signal('room_cleared')
 		
 	camera.current = true
@@ -65,3 +68,4 @@ func _on_door_entered(side: Vector2) -> void:
 
 func _on_room_cleared() -> void:
 	set_doors_open(true)
+	emit_signal('room_cleared')

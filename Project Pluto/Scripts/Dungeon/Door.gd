@@ -5,11 +5,11 @@ extends StaticBody2D
 signal entered
 
 
-export(bool) var is_open: bool = true setget set_open
-
 onready var collision_box: CollisionShape2D = $WorldCollision as CollisionShape2D
 onready var exit_shape: CollisionShape2D = $ExitArea/CollisionShape2D as CollisionShape2D
 onready var sprite: Sprite = $Sprite as Sprite
+
+export(bool) var is_open: bool = true setget set_open
 
 
 func _ready() -> void:

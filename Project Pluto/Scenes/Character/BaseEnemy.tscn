@@ -1,0 +1,169 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Scenes/Character/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Character/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/State/Wander.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/Interface/progress_bar.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/State/Idle.gd" type="Script" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "attack"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.27451, 0.27451, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ "idle" ],
+"method": "set_state"
+}, {
+"args": [ "attack" ],
+"method": "set_state"
+} ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "idle_down"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "idle_up"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "idle_right"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "idle_left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=2]
+blend_point_0/node = SubResource( 12 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 13 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 14 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 15 )
+blend_point_3/pos = Vector2( -1, 0 )
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "move_down"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "move_up"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "move_right"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "move_left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=7]
+blend_point_0/node = SubResource( 3 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 4 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 5 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 6 )
+blend_point_3/pos = Vector2( -1, 0 )
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+
+[sub_resource type="AnimationNodeStateMachine" id=10]
+states/idle/node = SubResource( 2 )
+states/idle/position = Vector2( 549, 69 )
+states/move/node = SubResource( 7 )
+states/move/position = Vector2( 732, 69 )
+transitions = [ "idle", "move", SubResource( 8 ), "move", "idle", SubResource( 9 ) ]
+start_node = "idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=11]
+
+[node name="Enemy" groups=[
+"Enemies",
+] instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+PANIC_THRESHOLD = 0.5
+PATIENCE_THRESHOLD = 0.75
+
+[node name="Bars" parent="Sprite" index="0"]
+visible = true
+
+[node name="StaminaBar" parent="Sprite/Bars" index="0"]
+margin_left = -12.0
+margin_top = -14.0
+margin_right = 12.0
+margin_bottom = -12.0
+max_value = 5.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 5 )
+tint_under = Color( 0, 0, 0, 1 )
+tint_progress = Color( 0, 1, 1, 1 )
+
+[node name="HealthBar" parent="Sprite/Bars" index="1"]
+margin_left = -12.0
+margin_top = -16.0
+margin_right = 12.0
+margin_bottom = -14.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 5 )
+tint_under = Color( 1, 0, 0, 1 )
+tint_progress = Color( 0, 1, 0, 1 )
+
+[node name="CombatDistance" type="Position2D" parent="Sprite" index="2"]
+
+[node name="WorldCollision" type="CollisionShape2D" parent="." index="1"]
+position = Vector2( 0, 8 )
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
+
+[node name="DetectionArea" type="Area2D" parent="." index="3"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" index="0"]
+
+[node name="Idle" type="Node" parent="StateMachine" index="0"]
+script = ExtResource( 7 )
+
+[node name="Move" parent="StateMachine" index="1"]
+MOVE_SPEED = 30
+
+[node name="Wander" type="Node" parent="StateMachine" index="3"]
+script = ExtResource( 3 )
+MOVE_SPEED = 15
+
+[node name="Timer" type="Timer" parent="StateMachine/Wander" index="0"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+anims/attack = SubResource( 1 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="6"]
+tree_root = SubResource( 10 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 11 )
+parameters/idle/blend_position = Vector2( 1, 0 )
+parameters/move/blend_position = Vector2( 1, 0 )
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_target_detected"]
+[connection signal="completed" from="StateMachine/Attack" to="." method="_on_attack_completed"]
+[connection signal="timeout" from="StateMachine/Wander/Timer" to="StateMachine/Wander" method="_on_update_move_dir"]

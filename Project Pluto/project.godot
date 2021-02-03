@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "State",
+"class": "AttackState",
+"language": "GDScript",
+"path": "res://Scripts/State/Attack.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
@@ -18,6 +23,11 @@ _global_script_classes=[ {
 "class": "DialogueBox",
 "language": "GDScript",
 "path": "res://Scripts/Interface/Dialogue.gd"
+}, {
+"base": "State",
+"class": "DodgeState",
+"language": "GDScript",
+"path": "res://Scripts/State/Dodge.gd"
 }, {
 "base": "StaticBody2D",
 "class": "Door",
@@ -34,30 +44,80 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Character/Enemy.gd"
 }, {
+"base": "YSort",
+"class": "EntityTracker",
+"language": "GDScript",
+"path": "res://Scripts/Dungeon/EntityTracker.gd"
+}, {
 "base": "Area2D",
 "class": "Hitbox",
 "language": "GDScript",
 "path": "res://Scripts/Weapon/Hitbox.gd"
 }, {
 "base": "Area2D",
+"class": "HurtBox",
+"language": "GDScript",
+"path": "res://Scripts/Weapon/Hurtbox.gd"
+}, {
+"base": "State",
+"class": "IdleState",
+"language": "GDScript",
+"path": "res://Scripts/State/Idle.gd"
+}, {
+"base": "Area2D",
 "class": "InteractBox",
 "language": "GDScript",
 "path": "res://Scripts/Interface/InteractBox.gd"
+}, {
+"base": "State",
+"class": "InteractState",
+"language": "GDScript",
+"path": "res://Scripts/State/Interact.gd"
 }, {
 "base": "Task",
 "class": "KillTask",
 "language": "GDScript",
 "path": "res://Scripts/Quest/KillTask.gd"
 }, {
+"base": "Weapon",
+"class": "MeleeWeapon",
+"language": "GDScript",
+"path": "res://Scripts/Weapon/WeaponMelee.gd"
+}, {
+"base": "State",
+"class": "MoveState",
+"language": "GDScript",
+"path": "res://Scripts/State/Move.gd"
+}, {
 "base": "Character",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Scripts/Character/Player.gd"
 }, {
+"base": "Node2D",
+"class": "PlayerBars",
+"language": "GDScript",
+"path": "res://Scripts/Interface/PlayerBars.gd"
+}, {
+"base": "Sprite",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://Scripts/Weapon/Projectile.gd"
+}, {
+"base": "Node2D",
+"class": "PuzzleTracker",
+"language": "GDScript",
+"path": "res://Scripts/Dungeon/PuzzleTracker.gd"
+}, {
 "base": "Node",
 "class": "Quest",
 "language": "GDScript",
 "path": "res://Scripts/Quest/Quest.gd"
+}, {
+"base": "Weapon",
+"class": "RangedWeapon",
+"language": "GDScript",
+"path": "res://Scripts/Weapon/WeaponRanged.gd"
 }, {
 "base": "Range",
 "class": "ResourceBar",
@@ -79,10 +139,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Dungeon/RoomLayout.gd"
 }, {
-"base": "Area2D",
-"class": "SpecialHitBox",
+"base": "State",
+"class": "SpecialState",
 "language": "GDScript",
-"path": "res://Scripts/Weapon/SpecialHitBox.gd"
+"path": "res://Scripts/State/SpecialAttack.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -99,31 +159,55 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Quest/Tasks/BaseTask.gd"
 }, {
+"base": "MoveState",
+"class": "WanderState",
+"language": "GDScript",
+"path": "res://Scripts/State/Wander.gd"
+}, {
 "base": "Sprite",
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://Scripts/Weapon/Weapon.gd"
+}, {
+"base": "Sprite",
+"class": "WeaponSlot",
+"language": "GDScript",
+"path": "res://Scripts/Interface/WeaponSlot.gd"
 } ]
 _global_script_class_icons={
+"AttackState": "",
 "Character": "",
 "DialogueBox": "",
+"DodgeState": "",
 "Door": "",
 "DroppedWeapon": "",
 "Enemy": "",
+"EntityTracker": "",
 "Hitbox": "",
+"HurtBox": "",
+"IdleState": "",
 "InteractBox": "",
+"InteractState": "",
 "KillTask": "",
+"MeleeWeapon": "",
+"MoveState": "",
 "Player": "",
+"PlayerBars": "",
+"Projectile": "",
+"PuzzleTracker": "",
 "Quest": "",
+"RangedWeapon": "",
 "ResourceBar": "",
 "Reward": "",
 "Room": "",
 "RoomLayout": "",
-"SpecialHitBox": "",
+"SpecialState": "",
 "State": "",
 "StateMachine": "",
 "Task": "",
-"Weapon": ""
+"WanderState": "",
+"Weapon": "",
+"WeaponSlot": ""
 }
 
 [application]
@@ -135,7 +219,7 @@ config/icon="res://icon.png"
 [autoload]
 
 QuestJournal="*res://Scripts/Quest/QuestJournal.gd"
-UI="*res://Scripts/Interface/UI.gd"
+UI="*res://Scenes/Interface/UI.tscn"
 
 [display]
 
@@ -222,6 +306,10 @@ attack_special={
 2d_physics/layer_3="interaction"
 2d_render/layer_4="enemy_target"
 2d_physics/layer_4="enemy_target"
+
+[physics]
+
+2d/default_gravity=0
 
 [rendering]
 

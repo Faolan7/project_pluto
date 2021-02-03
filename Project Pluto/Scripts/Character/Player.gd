@@ -2,8 +2,10 @@ class_name Player
 extends Character
 
 
-onready var animation_tree: AnimationTree = $AnimationTree as AnimationTree
-onready var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+signal update_health(health)
+signal update_stamina(stamina)
+signal update_current_weapon(weapon)
+
 
 onready var interact_state: State = $StateMachine/Interact as State
 onready var dodge_state: State = $StateMachine/Dodge as State
@@ -16,8 +18,6 @@ export var max_weapon_count: int = 1
 
 func _ready() -> void:
 	animation_tree.active = true
-	attack_state.weapon = $Sprite/FacingPivot/Weapons/Weapon as Weapon
-	$Sprite/FacingPivot/SpinHitbox.wielder = self
 
 func _unhandled_input(_event: InputEvent) -> void:
 	var input_vector: Vector2 = Vector2(
@@ -25,12 +25,15 @@ func _unhandled_input(_event: InputEvent) -> void:
 		Input.get_action_strength('move_down') - Input.get_action_strength('move_up')
 	)
 	move_state.move_dir = input_vector
+	dodge_state.dodge_dir = input_vector
 	
 	# Updating state
 	if state_machine.can_change_state:
-		set_face_dir(input_vector)
+		var mouse_position = get_local_mouse_position().normalized()
+		set_face_dir(mouse_position)
+		special_state.attack_dir = mouse_position
 		
-		if Input.is_action_just_pressed('attack'):
+		if Input.is_action_just_pressed('attack') and attack_state.weapon != null:
 			play_animation('idle')
 			state_machine.change_state(attack_state)
 			
@@ -58,23 +61,24 @@ func add_weapon(weapon: Weapon) -> void:
 		
 	weapon.visible = false
 	attack_state.weapon = weapon
+	special_state.weapon = weapon
+	emit_signal('update_current_weapon', weapon)
 	
 	weapon.get_parent().remove_child(weapon)
 	weapon_slots.add_child(weapon)
 
-func play_animation(animation: String) -> void:
-	animation_state.travel(animation)
 
+func set_health(value: float) -> void:
+	.set_health(value)
+	emit_signal('update_health', get_health())
 
-func set_face_dir(value: Vector2) -> void:
-	.set_face_dir(value)
-	set_blend_position(face_dir)
-	dodge_state.dodge_dir = face_dir
+func set_stamina(value: float) -> void:
+	.set_stamina(value)
+	emit_signal('update_stamina', get_stamina())
 
 func set_blend_position(value: Vector2) -> void:
-	animation_tree.set('parameters/idle/blend_position', value)
-	animation_tree.set('parameters/move/blend_position', value)
-	animation_tree.set('parameters/dodge/blend_position', value)
+	.set_blend_position(value)
+	animation_tree.set('parameters/dodge/blend_position', dodge_state.dodge_dir)
 
 
 func _on_state_completed() -> void:

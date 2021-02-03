@@ -1,29 +1,24 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Scenes/Character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Character/Player.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/progress_bar.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/PlayerMain-SheetBigger.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/Weapon/Weapon.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Sprites/Interface/progress_bar.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/player.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/State/Interact.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/State/SpecialAttack.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/Weapon/Hitbox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/State/Dodge.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 28.5496
-
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 6.0
 height = 8.0
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=3]
 radius = 6.0
 height = 4.0
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "dodge_down"
 length = 0.25
 step = 0.05
@@ -66,7 +61,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "dodge_left"
 length = 0.25
 step = 0.05
@@ -109,7 +104,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 resource_name = "dodge_right"
 length = 0.25
 step = 0.05
@@ -152,7 +147,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "dodge_up"
 length = 0.25
 step = 0.05
@@ -195,7 +190,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=27]
+[sub_resource type="Animation" id=8]
 resource_name = "idle_down"
 length = 0.001
 loop = true
@@ -276,7 +271,7 @@ tracks/0/keys = {
 "values": [ 1, 2, 1, 3, 4, 5, 4, 0 ]
 }
 
-[sub_resource type="Animation" id=28]
+[sub_resource type="Animation" id=13]
 resource_name = "move_left"
 length = 0.7
 loop = true
@@ -293,7 +288,7 @@ tracks/0/keys = {
 "values": [ 19, 20, 19, 21, 22, 23, 22, 18 ]
 }
 
-[sub_resource type="Animation" id=29]
+[sub_resource type="Animation" id=14]
 resource_name = "move_right"
 length = 0.7
 loop = true
@@ -310,7 +305,7 @@ tracks/0/keys = {
 "values": [ 13, 14, 13, 15, 16, 17, 16, 12 ]
 }
 
-[sub_resource type="Animation" id=30]
+[sub_resource type="Animation" id=15]
 resource_name = "move_up"
 length = 0.7
 loop = true
@@ -327,163 +322,118 @@ tracks/0/keys = {
 "values": [ 7, 8, 7, 9, 10, 11, 9, 6 ]
 }
 
-[sub_resource type="Animation" id=16]
-length = 0.24
-step = 0.04
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 93, 94, 95, 96, 93, 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/FacingPivot/SpinHitbox/SpinCollision:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.04, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath("StateMachine/SpecialAttack")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.24 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_on_special_completed"
-} ]
-}
-
-[sub_resource type="AnimationNodeAnimation" id=42]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "dodge_down"
 
-[sub_resource type="AnimationNodeAnimation" id=43]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "dodge_up"
 
-[sub_resource type="AnimationNodeAnimation" id=44]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "dodge_right"
 
-[sub_resource type="AnimationNodeAnimation" id=45]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "dodge_left"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=17]
-blend_point_0/node = SubResource( 42 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=20]
+blend_point_0/node = SubResource( 16 )
 blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 43 )
+blend_point_1/node = SubResource( 17 )
 blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 44 )
+blend_point_2/node = SubResource( 18 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 45 )
+blend_point_3/node = SubResource( 19 )
+blend_point_3/pos = Vector2( -1, 0 )
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "idle_down"
+
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "idle_up"
+
+[sub_resource type="AnimationNodeAnimation" id=23]
+animation = "idle_right"
+
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "idle_left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=25]
+blend_point_0/node = SubResource( 21 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 22 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 23 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 24 )
+blend_point_3/pos = Vector2( -1, 0 )
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "move_down"
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "move_up"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "move_right"
+
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "move_left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=30]
+blend_point_0/node = SubResource( 26 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 27 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 28 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 29 )
 blend_point_3/pos = Vector2( -1, 0 )
 
 [sub_resource type="AnimationNodeAnimation" id=31]
-animation = "idle_down"
-
-[sub_resource type="AnimationNodeAnimation" id=32]
-animation = "idle_up"
-
-[sub_resource type="AnimationNodeAnimation" id=33]
-animation = "idle_right"
-
-[sub_resource type="AnimationNodeAnimation" id=34]
-animation = "idle_left"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id=18]
-blend_point_0/node = SubResource( 31 )
-blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 32 )
-blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 33 )
-blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 34 )
-blend_point_3/pos = Vector2( -1, 0 )
-
-[sub_resource type="AnimationNodeAnimation" id=35]
-animation = "move_down"
-
-[sub_resource type="AnimationNodeAnimation" id=36]
-animation = "move_up"
-
-[sub_resource type="AnimationNodeAnimation" id=37]
-animation = "move_right"
-
-[sub_resource type="AnimationNodeAnimation" id=38]
-animation = "move_left"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id=39]
-blend_point_0/node = SubResource( 35 )
-blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 36 )
-blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 37 )
-blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 38 )
-blend_point_3/pos = Vector2( -1, 0 )
-
-[sub_resource type="AnimationNodeAnimation" id=46]
 animation = "special_spin"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
 
-[sub_resource type="AnimationNodeStateMachine" id=24]
-states/dodge/node = SubResource( 17 )
+[sub_resource type="AnimationNodeStateMachine" id=38]
+states/dodge/node = SubResource( 20 )
 states/dodge/position = Vector2( 513, 130 )
-states/idle/node = SubResource( 18 )
+states/idle/node = SubResource( 25 )
 states/idle/position = Vector2( 513, 45 )
-states/move/node = SubResource( 39 )
+states/move/node = SubResource( 30 )
 states/move/position = Vector2( 676, 45 )
-states/special_spin/node = SubResource( 46 )
+states/special_spin/node = SubResource( 31 )
 states/special_spin/position = Vector2( 329, 45 )
-transitions = [ "idle", "dodge", SubResource( 20 ), "dodge", "idle", SubResource( 21 ), "idle", "move", SubResource( 40 ), "move", "idle", SubResource( 41 ), "idle", "special_spin", SubResource( 47 ), "special_spin", "idle", SubResource( 48 ) ]
+transitions = [ "idle", "dodge", SubResource( 32 ), "dodge", "idle", SubResource( 33 ), "idle", "move", SubResource( 34 ), "move", "idle", SubResource( 35 ), "idle", "special_spin", SubResource( 36 ), "special_spin", "idle", SubResource( 37 ) ]
 start_node = "idle"
 graph_offset = Vector2( -13, -12 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=25]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=39]
 
 [node name="Player" instance=ExtResource( 1 )]
 collision_layer = 9
 script = ExtResource( 2 )
-stamina_regen_rate = 2.0
-max_weapon_count = 2
+stamina_regen_rate = 3.0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 4 )
 hframes = 98
 frame = 12
 
-[node name="Bars" parent="Sprite" index="0"]
-visible = true
-
 [node name="HealthBar" parent="Sprite/Bars" index="0"]
 margin_left = -12.0
 margin_top = -16.0
 margin_right = 12.0
 margin_bottom = -14.0
+max_value = 10.0
 texture_under = ExtResource( 3 )
 texture_progress = ExtResource( 3 )
 tint_under = Color( 1, 0, 0, 1 )
@@ -494,6 +444,7 @@ margin_left = -12.0
 margin_top = -14.0
 margin_right = 12.0
 margin_bottom = -12.0
+max_value = 20.0
 texture_under = ExtResource( 3 )
 texture_progress = ExtResource( 3 )
 tint_under = Color( 0, 0, 0, 1 )
@@ -504,9 +455,6 @@ position = Vector2( 0, 3.5 )
 
 [node name="Weapons" type="Node2D" parent="Sprite/FacingPivot" index="0"]
 
-[node name="Weapon" parent="Sprite/FacingPivot/Weapons" index="0" instance=ExtResource( 5 )]
-visible = false
-
 [node name="InteractionArea" type="Area2D" parent="Sprite/FacingPivot" index="1"]
 position = Vector2( 12, 0 )
 collision_layer = 0
@@ -516,25 +464,13 @@ collision_mask = 4
 position = Vector2( 4, 0 )
 shape = SubResource( 1 )
 
-[node name="SpinHitbox" parent="Sprite/FacingPivot" index="2" instance=ExtResource( 8 )]
-damage = 2
-
-[node name="SpinCollision" type="CollisionShape2D" parent="Sprite/FacingPivot/SpinHitbox" index="0"]
-shape = SubResource( 2 )
-disabled = true
-
-[node name="HurtBox" parent="." index="1"]
-visible = false
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
-shape = SubResource( 3 )
-disabled = true
+shape = SubResource( 2 )
 
 [node name="WorldCollision" type="CollisionShape2D" parent="." index="2"]
-visible = false
 position = Vector2( 0, 8 )
 rotation = 1.5708
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Move" parent="StateMachine" index="0"]
 MOVE_SPEED = 100
@@ -552,24 +488,23 @@ DODGE_SPEED = 200
 stamina_cost = 5.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
-anims/dodge_down = SubResource( 5 )
-anims/dodge_left = SubResource( 6 )
-anims/dodge_right = SubResource( 7 )
-anims/dodge_up = SubResource( 8 )
-anims/idle_down = SubResource( 27 )
+anims/dodge_down = SubResource( 4 )
+anims/dodge_left = SubResource( 5 )
+anims/dodge_right = SubResource( 6 )
+anims/dodge_up = SubResource( 7 )
+anims/idle_down = SubResource( 8 )
 anims/idle_left = SubResource( 9 )
 anims/idle_right = SubResource( 10 )
 anims/idle_up = SubResource( 11 )
 anims/move_down = SubResource( 12 )
-anims/move_left = SubResource( 28 )
-anims/move_right = SubResource( 29 )
-anims/move_up = SubResource( 30 )
-anims/special_spin = SubResource( 16 )
+anims/move_left = SubResource( 13 )
+anims/move_right = SubResource( 14 )
+anims/move_up = SubResource( 15 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="5"]
-tree_root = SubResource( 24 )
+tree_root = SubResource( 38 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 25 )
+parameters/playback = SubResource( 39 )
 parameters/dodge/blend_position = Vector2( 1, 0 )
 parameters/idle/blend_position = Vector2( 1, 0 )
 parameters/move/blend_position = Vector2( 1, 0 )

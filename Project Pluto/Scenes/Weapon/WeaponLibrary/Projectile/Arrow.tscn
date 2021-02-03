@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Weapon/Hitbox.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Weapon/Projectile/arrow.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Weapon/Projectile.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 2, 1.5 )
+
+[node name="Arrow" type="Sprite"]
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2( 10, -0.5 )
+collision_layer = 0
+collision_mask = 3
+script = ExtResource( 1 )
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource( 1 )
+[connection signal="area_entered" from="Hitbox" to="." method="_on_collision"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_collision"]

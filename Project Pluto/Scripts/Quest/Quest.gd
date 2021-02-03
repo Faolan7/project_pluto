@@ -4,16 +4,17 @@ extends Node
 
 enum QuestState {UNSTARTED, STARTED, COMPLETED, TURNED_IN}
 
-var KILL_TASK: Resource = load('res://Scripts/Quest/KillTask.gd')
-
 
 var state: int = QuestState.UNSTARTED
 var tasks: Array = []
 
 
-func init(task_data: Array) -> void:
+static func init(task_data: Array) -> Quest:
+	var quest = load("res://Scripts/Quest/Quest.gd").new()
 	for task in task_data:
-		add_task(task)
+		quest.add_task(task)
+		
+	return quest
 
 func add_task(task_data: Dictionary) -> void:
 	var task: Task = init_task(task_data)
@@ -27,8 +28,7 @@ func init_task(task_data: Dictionary) -> Task:
 	
 	match task_data['type']:
 		'kill':
-			task = KILL_TASK.new()
-			task.init(task_data['enemy'], task_data['quantity'])
+			task = KillTask.init(task_data['enemy'], task_data['quantity'])
 		_: # Quit if unknown task
 			return null
 			

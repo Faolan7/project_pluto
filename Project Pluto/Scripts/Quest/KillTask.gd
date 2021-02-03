@@ -7,9 +7,12 @@ var NUM_TO_KILL: int
 var num_killed: int = 0
 
 
-func init(enemy_id: int, quantity: int) -> void:
-	ENEMY_ID = enemy_id
-	NUM_TO_KILL = quantity
+static func init(enemy_id: int, quantity: int) -> KillTask:
+	var task: KillTask = load("res://Scripts/Quest/KillTask.gd").new() as KillTask
+	task.ENEMY_ID = enemy_id
+	task.NUM_TO_KILL = quantity
+	
+	return task
 
 func add_kill(enemy_id: int) -> void:
 	if ENEMY_ID == enemy_id:
