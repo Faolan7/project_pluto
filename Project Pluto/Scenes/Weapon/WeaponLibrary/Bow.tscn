@@ -76,6 +76,7 @@ texture = ExtResource( 1 )
 hframes = 2
 script = ExtResource( 3 )
 attack_stamina_cost = 4.0
+special_stamina_cost = 10.0
 PROJECTILE_SCENE = ExtResource( 4 )
 PROJECTILE_SPEED = 200.0
 

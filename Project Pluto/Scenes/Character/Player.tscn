@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Scenes/Character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Character/Player.gd" type="Script" id=2]
@@ -388,9 +388,6 @@ blend_point_2/pos = Vector2( 1, 0 )
 blend_point_3/node = SubResource( 29 )
 blend_point_3/pos = Vector2( -1, 0 )
 
-[sub_resource type="AnimationNodeAnimation" id=31]
-animation = "special_spin"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=32]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=33]
@@ -399,10 +396,6 @@ animation = "special_spin"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=35]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=36]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=37]
-
 [sub_resource type="AnimationNodeStateMachine" id=38]
 states/dodge/node = SubResource( 20 )
 states/dodge/position = Vector2( 513, 130 )
@@ -410,9 +403,7 @@ states/idle/node = SubResource( 25 )
 states/idle/position = Vector2( 513, 45 )
 states/move/node = SubResource( 30 )
 states/move/position = Vector2( 676, 45 )
-states/special_spin/node = SubResource( 31 )
-states/special_spin/position = Vector2( 329, 45 )
-transitions = [ "idle", "dodge", SubResource( 32 ), "dodge", "idle", SubResource( 33 ), "idle", "move", SubResource( 34 ), "move", "idle", SubResource( 35 ), "idle", "special_spin", SubResource( 36 ), "special_spin", "idle", SubResource( 37 ) ]
+transitions = [ "idle", "dodge", SubResource( 32 ), "dodge", "idle", SubResource( 33 ), "idle", "move", SubResource( 34 ), "move", "idle", SubResource( 35 ) ]
 start_node = "idle"
 graph_offset = Vector2( -13, -12 )
 
@@ -466,6 +457,7 @@ shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
+disabled = true
 
 [node name="WorldCollision" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0, 8 )
