@@ -76,7 +76,8 @@ tracks/1/keys = {
 position = Vector2( 12, 0 )
 texture = ExtResource( 4 )
 script = ExtResource( 3 )
-attack_stamina_cost = 3.0
+attack_stamina_cost = 2.0
+special_stamina_cost = 5.0
 
 [node name="AttackRange" parent="." index="0"]
 position = Vector2( 0, -2.5 )

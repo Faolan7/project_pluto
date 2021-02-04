@@ -40,7 +40,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 			play_animation('idle')
 			state_machine.change_state(attack_state)
 			
-		elif Input.is_action_just_pressed('attack_special'):
+		elif Input.is_action_just_pressed('attack_special') and special_state.weapon != null:
 			state_machine.change_state(special_state)
 			
 		elif Input.is_action_just_pressed('interact'):

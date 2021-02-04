@@ -14,6 +14,7 @@ onready var attack_range_shape: CollisionShape2D = $AttackRange/CollisionShape2D
 onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
 
 export(float) var attack_stamina_cost: float
+export(float) var special_stamina_cost: float
 
 
 func use(_attack_dir: float) -> void:
