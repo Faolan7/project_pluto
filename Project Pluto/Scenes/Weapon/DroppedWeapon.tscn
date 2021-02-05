@@ -3,6 +3,8 @@
 [ext_resource path="res://Scripts/Weapon/DroppedWeapon.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Interface/InteractBox.tscn" type="PackedScene" id=2]
 
+
+
 [sub_resource type="CircleShape2D" id=1]
 
 [node name="DroppedWeapon" instance=ExtResource( 2 )]

@@ -4,6 +4,8 @@
 [ext_resource path="res://Scenes/Interface/WeaponSlot.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Interface/PlayerBars.tscn" type="PackedScene" id=3]
 
+
+
 [node name="UI" type="Node2D"]
 script = ExtResource( 1 )
 

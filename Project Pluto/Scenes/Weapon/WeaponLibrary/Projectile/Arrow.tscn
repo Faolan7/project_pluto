@@ -4,6 +4,8 @@
 [ext_resource path="res://Sprites/Weapon/Projectile/arrow.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Weapon/Projectile.gd" type="Script" id=3]
 
+
+
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2, 1.5 )
 

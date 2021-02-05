@@ -6,6 +6,8 @@
 [ext_resource path="res://Sprites/Interface/progress_bar.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/State/Idle.gd" type="Script" id=7]
 
+
+
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
 length = 0.25

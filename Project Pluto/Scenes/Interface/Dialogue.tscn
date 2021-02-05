@@ -3,6 +3,8 @@
 [ext_resource path="res://Sprites/Fonts/Arial Rounded Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Interface/Dialogue.gd" type="Script" id=2]
 
+
+
 [sub_resource type="DynamicFont" id=1]
 size = 9
 font_data = ExtResource( 1 )

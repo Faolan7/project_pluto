@@ -2,5 +2,7 @@
 
 [ext_resource path="res://Scripts/Dungeon/EntityTracker.gd" type="Script" id=1]
 
+
+
 [node name="EnemyTracker" type="YSort"]
 script = ExtResource( 1 )

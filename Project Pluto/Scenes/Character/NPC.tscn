@@ -4,6 +4,8 @@
 [ext_resource path="res://Scripts/Character/NPC.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Interface/InteractBox.tscn" type="PackedScene" id=3]
 
+
+
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.71374
 height = 3.42749

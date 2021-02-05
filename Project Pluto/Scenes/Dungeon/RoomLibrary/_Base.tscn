@@ -7,6 +7,8 @@
 [ext_resource path="res://Scripts/Dungeon/PuzzleTracker.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Dungeon/EntityTracker.tscn" type="PackedScene" id=6]
 
+
+
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
