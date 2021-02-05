@@ -388,26 +388,26 @@ blend_point_2/pos = Vector2( 1, 0 )
 blend_point_3/node = SubResource( 29 )
 blend_point_3/pos = Vector2( -1, 0 )
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=32]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=33]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=34]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=35]
-
-[sub_resource type="AnimationNodeStateMachine" id=38]
+[sub_resource type="AnimationNodeStateMachine" id=35]
 states/dodge/node = SubResource( 20 )
 states/dodge/position = Vector2( 513, 130 )
 states/idle/node = SubResource( 25 )
 states/idle/position = Vector2( 513, 45 )
 states/move/node = SubResource( 30 )
 states/move/position = Vector2( 676, 45 )
-transitions = [ "idle", "dodge", SubResource( 32 ), "dodge", "idle", SubResource( 33 ), "idle", "move", SubResource( 34 ), "move", "idle", SubResource( 35 ) ]
+transitions = [ "idle", "dodge", SubResource( 31 ), "dodge", "idle", SubResource( 32 ), "idle", "move", SubResource( 33 ), "move", "idle", SubResource( 34 ) ]
 start_node = "idle"
 graph_offset = Vector2( -13, -12 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=39]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=36]
 
 [node name="Player" instance=ExtResource( 1 )]
 collision_layer = 9
@@ -457,7 +457,6 @@ shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
-disabled = true
 
 [node name="WorldCollision" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0, 8 )
@@ -494,9 +493,9 @@ anims/move_right = SubResource( 14 )
 anims/move_up = SubResource( 15 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="5"]
-tree_root = SubResource( 38 )
+tree_root = SubResource( 35 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 39 )
+parameters/playback = SubResource( 36 )
 parameters/dodge/blend_position = Vector2( 1, 0 )
 parameters/idle/blend_position = Vector2( 1, 0 )
 parameters/move/blend_position = Vector2( 1, 0 )
