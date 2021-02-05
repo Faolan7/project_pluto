@@ -37,6 +37,9 @@ func _unhandled_input(_event: InputEvent) -> void:
 			play_animation('idle')
 			state_machine.change_state(attack_state)
 			
+		elif Input.is_action_just_pressed('menu'):
+			get_tree().change_scene("res://Scenes/Interface/main_menu.tscn")
+			
 		elif Input.is_action_just_pressed('attack_special'):
 			state_machine.change_state(special_state)
 			
