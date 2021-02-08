@@ -16,6 +16,10 @@ onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 export var max_weapon_count: int = 1
 
 
+#refactor later to specifically take strings
+var key_ring: int = 0;
+
+
 func _ready() -> void:
 	animation_tree.active = true
 
@@ -43,6 +47,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 		elif Input.is_action_just_pressed('interact'):
 			play_animation('idle')
 			state_machine.change_state(interact_state)
+			print(key_ring)
 			
 		elif Input.is_action_just_pressed('dodge'):
 			state_machine.change_state(dodge_state)

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/Puzzle/alpha-key.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Interface/InteractBox.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Key.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+height = 32.8921
+
+[node name="Key" type="Sprite"]
+light_mask = 0
+position = Vector2( 4.48847, -1.10243 )
+scale = Vector2( 0.544755, 0.660412 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="InteractBox" type="Area2D" parent="."]
+light_mask = 4
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractBox"]
+light_mask = 4
+position = Vector2( -7.56807, 1.89202 )
+rotation = 1.56613
+shape = SubResource( 1 )
+[connection signal="interaction_started" from="InteractBox" to="." method="_on_interaction"]
