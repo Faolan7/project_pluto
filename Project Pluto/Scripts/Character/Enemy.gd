@@ -16,6 +16,7 @@ onready var wander_state: State = $StateMachine/Wander as State
 onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
 
 onready var combat_distance_node: Position2D = $Sprite/CombatDistance as Position2D
+onready var detection_area_shape: CollisionShape2D = $DetectionArea/CollisionShape2D as CollisionShape2D
 
 export var PANIC_THRESHOLD: float
 export var PATIENCE_THRESHOLD: float
@@ -32,6 +33,7 @@ func _ready() -> void:
 	set_state('wander')
 
 func _physics_process(_delta) -> void:
+		
 	if target != null and state_machine.current_state == move_state:
 		var to_target: Vector2 = target.position - position
 		var target_distance: float = to_target.length()
@@ -96,16 +98,31 @@ func set_state(state: String) -> void:
 
 func set_target(body: Character) -> void:
 	target = body
-	set_state('move')
+	if target == null:
+		set_state('wander')
+		detection_area_shape.set_deferred('disabled', false)
+	else:
+		set_state('move')
+		detection_area_shape.set_deferred('disabled', true)
 
-
+func _on_damaged(damage: float, dealer: Node2D) -> void:
+	._on_damaged(damage, dealer)
+	if dealer != target:
+		set_target(dealer)
+		get_tree().call_group('Enemies', '_on_target_detected', dealer)
+		
 func on_death():
 	attack_state.weapon.animation_player.stop(true)
 	drop_weapon(attack_state.weapon)
 	queue_free()
 
 func _on_attack_completed() -> void:
-	set_state('move')
+	if not is_instance_valid(target):
+		set_target(null)
+	else:
+		set_state('move')
 
 func _on_target_detected(body: PhysicsBody2D) -> void:
-	get_tree().call_group('Enemies', 'set_target', body)
+	if target == null:
+		set_target(body)
+		get_tree().call_group('Enemies', '_on_target_detected', body)

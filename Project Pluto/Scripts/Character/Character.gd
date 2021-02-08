@@ -70,7 +70,7 @@ func set_blend_position(value: Vector2) -> void:
 	animation_tree.set('parameters/move/blend_position', value)
 
 
-func _on_damaged(damage: float) -> void:
+func _on_damaged(damage: float, _dealer: Node2D) -> void:
 	set_health(get_health() - damage)
 
 func _on_stamina_regen() -> void:
