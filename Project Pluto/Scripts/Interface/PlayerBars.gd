@@ -12,7 +12,10 @@ func set_bar_values(player: Player):
 
 
 func _on_hp_update(value: float) -> void:
-	health_bar.update_bar(value)
+	if (value == 0):
+		get_tree().change_scene("res://Scenes/death_screen.tscn")
+	else:
+		health_bar.update_bar(value)
 
 func _on_stamina_update(value: float) -> void:
 	stamina_bar.update_bar(value)
