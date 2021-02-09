@@ -8,7 +8,7 @@ func _ready() -> void:
 	background.playing = true
 
 
-func _on_start_pressed() -> void:
+func _on_continue_pressed() -> void:
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene('res://Scenes/Dungeon/Dungeon.tscn')
 
