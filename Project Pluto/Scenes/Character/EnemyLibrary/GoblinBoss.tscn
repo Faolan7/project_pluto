@@ -4,7 +4,6 @@
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Shortsword.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/Enemy/goblin_boss.png" type="Texture" id=3]
 
-
 [sub_resource type="CapsuleShape2D" id=1]
 height = 8.0
 
@@ -18,21 +17,21 @@ radius = 64.0
 [sub_resource type="AnimationNodeStateMachinePlayback" id=4]
 
 [node name="GoblinBoss" instance=ExtResource( 1 )]
-weapon = NodePath("Sprite/FacingPivot/Shortsword")
+WEAPON_PATH = NodePath("Sprite/FacingPivot/Shortsword")
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
-[node name="HealthBar" parent="Sprite/Bars" index="0"]
-margin_top = -66.0
-margin_bottom = -64.0
-max_value = 5.0
-
-[node name="StaminaBar" parent="Sprite/Bars" index="1"]
+[node name="StaminaBar" parent="Sprite/Bars" index="0"]
 margin_top = -64.0
 margin_bottom = -62.0
 max_value = 10.0
+
+[node name="HealthBar" parent="Sprite/Bars" index="1"]
+margin_top = -66.0
+margin_bottom = -64.0
+max_value = 5.0
 
 [node name="FacingPivot" parent="Sprite" index="1"]
 scale = Vector2( 4, 3 )

@@ -146,7 +146,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
 [node name="GoblinWarrior" instance=ExtResource( 1 )]
-weapon = NodePath("Sprite/FacingPivot/Shortsword")
+WEAPON_PATH = NodePath("Sprite/FacingPivot/Shortsword")
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2( -1.5, 0 )

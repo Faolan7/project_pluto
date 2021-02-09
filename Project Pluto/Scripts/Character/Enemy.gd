@@ -21,20 +21,26 @@ onready var detection_area_shape: CollisionShape2D = $DetectionArea/CollisionSha
 export var PANIC_THRESHOLD: float
 export var PATIENCE_THRESHOLD: float
 export var COMBAT_DISTANCE: float
-export var weapon: NodePath
+export var WEAPON_PATH: NodePath
 
+
+func get_class() -> String:
+	return 'Enemy'
+
+func is_class(cls: String) -> bool:
+	return cls == get_class()
 
 func _ready() -> void:
 	._ready()
-	attack_state.weapon = get_node(weapon)
+	attack_state.weapon = get_node(WEAPON_PATH)
 	combat_distance = COMBAT_DISTANCE if COMBAT_DISTANCE != 0 else combat_distance_node.position.length()
 	combat_distance *= $Sprite.scale.length()
 	
 	set_state('wander')
+	set_physics_process(false)
 
 func _physics_process(_delta) -> void:
-		
-	if target != null and state_machine.current_state == move_state:
+	if state_machine.current_state == move_state:
 		var to_target: Vector2 = target.position - position
 		var target_distance: float = to_target.length()
 		set_face_dir(to_target)
@@ -54,12 +60,6 @@ func _physics_process(_delta) -> void:
 		elif get_stamina() >= special_stamina_cost and attack_state.weapon.has_entity_in_range(target):
 			animation_player.play('attack')
 			#print("I'm using my SPECIAL!")
-
-func get_class() -> String:
-	return 'Enemy'
-
-func is_class(cls: String) -> bool:
-	return cls == get_class()
 
 
 func should_attack() -> bool:
@@ -101,16 +101,19 @@ func set_target(body: Character) -> void:
 	if target == null:
 		set_state('wander')
 		detection_area_shape.set_deferred('disabled', false)
+		set_physics_process(false)
 	else:
 		set_state('move')
 		detection_area_shape.set_deferred('disabled', true)
+		set_physics_process(true)
+
 
 func _on_damaged(damage: float, dealer: Node2D) -> void:
 	._on_damaged(damage, dealer)
 	if dealer != target:
 		set_target(dealer)
 		get_tree().call_group('Enemies', '_on_target_detected', dealer)
-		
+
 func on_death():
 	attack_state.weapon.animation_player.stop(true)
 	drop_weapon(attack_state.weapon)
