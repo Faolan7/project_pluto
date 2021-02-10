@@ -11,6 +11,7 @@ position = Vector2( 128, 92 )
 
 [node name="SuperSword" parent="Entities/DroppedWeapon" index="1" instance=ExtResource( 5 )]
 modulate = Color( 1, 0.27451, 0.27451, 1 )
+position = Vector2( 128, 100 )
 attack_stamina_cost = 0.0
 
 [node name="Hitbox" parent="Entities/DroppedWeapon/SuperSword" index="1"]
