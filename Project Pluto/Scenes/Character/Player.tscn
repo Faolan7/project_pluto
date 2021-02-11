@@ -422,6 +422,7 @@ graph_offset = Vector2( -13, -12 )
 collision_layer = 9
 script = ExtResource( 2 )
 stamina_regen_rate = 3.0
+key_ring = 1
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 4 )
