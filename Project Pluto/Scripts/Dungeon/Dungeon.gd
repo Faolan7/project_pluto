@@ -5,7 +5,7 @@ const PLAYER_SCENE = preload('res://Scenes/Character/Player.tscn')
 
 var player: Player
 
-onready var current_room: Room = $Rooms/Start as Room
+onready var current_room: Room = $Rooms/BeginningRoom as Room
 
 
 func _ready():
@@ -14,6 +14,9 @@ func _ready():
 	player = PLAYER_SCENE.instance() as Player
 	add_child(player) # Makes player always have a parent
 	UI.player = player
+	
+	for child in $Rooms.get_children():
+		child.connect('room_exited', self, '_on_room_exited')
 	
 	load_room(current_room, Vector2.ZERO)
 
@@ -36,3 +39,4 @@ func _on_room_exited(exit_dir: Vector2) -> void:
 
 func _on_room_loaded(enter_dir: Vector2, room: Room)->void:
 	room.enter(enter_dir, player)
+
