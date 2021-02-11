@@ -197,14 +197,14 @@ rotation = 1.5708
 position = Vector2( 48, 192 )
 rotation = -1.5708
 
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 256, 192 )
+texture = ExtResource( 2 )
+
 [node name="PuzzleElements" type="Node2D" parent="."]
 script = ExtResource( 3 )
 
 [node name="Entities" parent="." instance=ExtResource( 7 )]
-
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 256, 192 )
-texture = ExtResource( 2 )
 [connection signal="entered" from="Doors/NorthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, -1 ) ]]
 [connection signal="entered" from="Doors/SouthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, 1 ) ]]
 [connection signal="entered" from="Doors/EastDoor" to="." method="_on_door_entered" binds= [ Vector2( 1, 0 ) ]]
