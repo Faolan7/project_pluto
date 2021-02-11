@@ -12,6 +12,8 @@ onready var sprite: Sprite = $Sprite as Sprite
 export(bool) var is_open: bool = true setget set_open
 
 
+export(bool) var locked_with_key: bool = false
+
 func _ready() -> void:
 	set_open(is_open)
 
@@ -26,3 +28,15 @@ func set_open(value: bool) -> void:
 
 func _on_door_entered(_body: PhysicsBody2D) -> void:
 	emit_signal('entered')
+
+
+func _on_interaction(_player: Player) -> void:
+	if _player.key_ring != 0:
+		_player.key_ring -= 1
+		locked_with_key = true
+	check_locks()
+	$InteractBox.finish_interaction()
+
+func check_locks() -> void:
+	if locked_with_key:
+		set_open(true)
