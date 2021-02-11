@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Dungeon/Room.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_CombatDemo.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/_StartDemo.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_BeginningRoom.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Dungeon/Dungeon.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/_Base.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Boss/_BossDemo.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_UDRoom.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_UDLRoom.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_UDLRRoom.tscn" type="PackedScene" id=9]
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource( 4 )
@@ -21,7 +24,7 @@ connections = {
 "up": NodePath("../Hallway1")
 }
 
-[node name="StartDemo" parent="Rooms/BeginningRoom" instance=ExtResource( 3 )]
+[node name="RoomLayout" parent="Rooms/BeginningRoom" instance=ExtResource( 3 )]
 
 [node name="Hallway1" type="Node2D" parent="Rooms"]
 position = Vector2( 0, -384 )
@@ -33,7 +36,7 @@ connections = {
 "up": NodePath("../Hallway2")
 }
 
-[node name="RoomLayout" parent="Rooms/Hallway1" instance=ExtResource( 5 )]
+[node name="RoomLayout" parent="Rooms/Hallway1" instance=ExtResource( 7 )]
 
 [node name="Hallway2" type="Node2D" parent="Rooms"]
 position = Vector2( 0, -768 )
@@ -45,7 +48,7 @@ connections = {
 "up": NodePath("../Hallway3")
 }
 
-[node name="RoomLayout" parent="Rooms/Hallway2" instance=ExtResource( 5 )]
+[node name="RoomLayout" parent="Rooms/Hallway2" instance=ExtResource( 8 )]
 
 [node name="Hallway3" type="Node2D" parent="Rooms"]
 position = Vector2( 0, -1152 )
@@ -57,7 +60,7 @@ connections = {
 "up": NodePath("../Hallway4")
 }
 
-[node name="RoomLayout" parent="Rooms/Hallway3" instance=ExtResource( 5 )]
+[node name="RoomLayout" parent="Rooms/Hallway3" instance=ExtResource( 7 )]
 
 [node name="Hallway4" type="Node2D" parent="Rooms"]
 position = Vector2( 0, -1536 )
@@ -69,7 +72,7 @@ connections = {
 "up": NodePath("../Crossroads1")
 }
 
-[node name="RoomLayout" parent="Rooms/Hallway4" instance=ExtResource( 5 )]
+[node name="RoomLayout" parent="Rooms/Hallway4" instance=ExtResource( 7 )]
 
 [node name="Graveyard" type="Node2D" parent="Rooms"]
 script = ExtResource( 1 )
@@ -93,7 +96,7 @@ connections = {
 "up": NodePath("../TransitionToFloor2")
 }
 
-[node name="RoomLayout" parent="Rooms/Crossroads1" instance=ExtResource( 5 )]
+[node name="RoomLayout2" parent="Rooms/Crossroads1" instance=ExtResource( 9 )]
 
 [node name="Hallway5" type="Node2D" parent="Rooms"]
 position = Vector2( 520, -1920 )
