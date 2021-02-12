@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Interface/UI.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Interface/WeaponSlot.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Interface/PlayerBars.tscn" type="PackedScene" id=3]
-
-
+[ext_resource path="res://Sprites/Items/key.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Interface/KeyLabel.gd" type="Script" id=5]
 
 [node name="UI" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,3 +15,19 @@ script = ExtResource( 1 )
 
 [node name="WeaponSlot" parent="WeaponSlots" instance=ExtResource( 2 )]
 position = Vector2( 20, 172 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 248, 184 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 222.828
+margin_top = 180.467
+margin_right = 262.828
+margin_bottom = 194.467
+rect_scale = Vector2( 0.397328, 0.581716 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

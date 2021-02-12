@@ -25,13 +25,21 @@ func set_player(value: Player) -> void:
 	
 	player_bars.set_bar_values(player)
 	
+	$Label.set_keys(player.key_ring)
+	
 	# warning-ignore:return_value_discarded
 	player.connect('update_health', player_bars, '_on_hp_update')
 	# warning-ignore:return_value_discarded
 	player.connect('update_stamina', player_bars, '_on_stamina_update')
 	# warning-ignore:return_value_discarded
 	player.connect("update_current_weapon", self, "_on_update_current_weapon")
+	# warning-ignore:return_value_discarded
+	player.connect("update_keys", self, "_on_key_update")
 
+
+
+func _on_key_update(key: int):
+	$Label.set_keys(key)
 
 func _on_update_current_weapon(weapon) -> void:
 	weapon_slot.weapon = weapon
