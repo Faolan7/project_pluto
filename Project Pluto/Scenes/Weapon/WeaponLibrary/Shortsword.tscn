@@ -76,6 +76,7 @@ texture = ExtResource( 4 )
 script = ExtResource( 3 )
 attack_name = "stab"
 attack_stamina_cost = 2.0
+special_name = "spin"
 special_stamina_cost = 5.0
 
 [node name="CollisionShape2D" parent="AttackRange" index="0"]

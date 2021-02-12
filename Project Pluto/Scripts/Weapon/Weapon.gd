@@ -20,11 +20,11 @@ export(String) var special_name: String
 export(float) var special_stamina_cost: float
 
 
-func use(_attack_dir: float) -> void:
-	Attacks.perform(attack_name, self)
+func use(attack_dir: float) -> void:
+	Attacks.perform(attack_name, self, attack_dir)
 
-func use_special(_attack_dir: float) -> void:
-	Attacks.perform(special_name, self)
+func use_special(attack_dir: float) -> void:
+	Attacks.perform(special_name, self, attack_dir)
 
 
 func set_entity(value: PhysicsBody2D):
