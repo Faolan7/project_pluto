@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/State/Attack.gd"
 }, {
+"base": "Node",
+"class": "Attacks",
+"language": "GDScript",
+"path": "res://Scripts/Weapon/Attacks.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
@@ -176,6 +181,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AttackState": "",
+"Attacks": "",
 "Character": "",
 "DialogueBox": "",
 "DodgeState": "",
