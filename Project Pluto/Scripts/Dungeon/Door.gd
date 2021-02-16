@@ -19,11 +19,16 @@ func _ready() -> void:
 
 
 func set_open(value: bool) -> void:
-	is_open = value
-	
-	if collision_box != null: # Export sets value before children are created
-		collision_box.set_deferred('disabled', is_open)
-		sprite.visible = not is_open
+	if locked_with_key == true:
+		sprite.visible = true
+		collision_box.set_deferred('disabled', false)
+	else:
+		is_open = value
+		
+		
+		if collision_box != null: # Export sets value before children are created
+			collision_box.set_deferred('disabled', is_open)
+			sprite.visible = not is_open
 
 
 func _on_door_entered(_body: PhysicsBody2D) -> void:
@@ -31,12 +36,13 @@ func _on_door_entered(_body: PhysicsBody2D) -> void:
 
 
 func _on_interaction(_player: Player) -> void:
-	if _player.key_ring != 0:
+	print("interaction with door")
+	if _player.key_ring != 0 && locked_with_key == true:
 		_player.key_ring -= 1
-		locked_with_key = true
+		locked_with_key = false
 	check_locks()
 	$InteractBox.finish_interaction()
 
 func check_locks() -> void:
-	if locked_with_key:
+	if locked_with_key == false:
 		set_open(true)

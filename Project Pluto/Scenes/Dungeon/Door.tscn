@@ -28,6 +28,8 @@ collision_mask = 0
 shape = SubResource( 2 )
 
 [node name="InteractBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource( 3 )
 
 [node name="WorldCollision2" type="CollisionShape2D" parent="InteractBox"]

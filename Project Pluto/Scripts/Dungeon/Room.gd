@@ -63,7 +63,7 @@ func _ready() -> void:
 			connections[new_key] = get_node(path)
 
 func enter(enter_dir: Vector2, player: Player) -> void:
-	layout.import(room_data)
+	#layout.import(room_data)
 	layout.enter(enter_dir, player, cleared)
 
 func add_connection(other: Room, side: Vector2) -> void:
