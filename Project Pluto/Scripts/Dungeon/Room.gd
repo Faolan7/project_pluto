@@ -12,6 +12,26 @@ var layout: RoomLayout
 var is_loaded: bool setget set_loaded
 var cleared: bool
 
+#doors refers to the doors that are within the room
+#padlock refers to doors that require a key to unlock
+export(Dictionary) var room_data: Dictionary = {
+	"doors": {
+		"up": {
+			"padlock": true
+		},
+		"down": {
+			"padlock": true
+		},
+		"left": {
+			"padlock": true
+		},
+		"right": {
+			"padlock": true
+		}
+	}
+}
+
+
 export(Dictionary) var connections: Dictionary = {
 	'up': NodePath(),
 	'down': NodePath(),
@@ -42,8 +62,8 @@ func _ready() -> void:
 		else:
 			connections[new_key] = get_node(path)
 
-
 func enter(enter_dir: Vector2, player: Player) -> void:
+	layout.import(room_data)
 	layout.enter(enter_dir, player, cleared)
 
 func add_connection(other: Room, side: Vector2) -> void:
@@ -76,4 +96,5 @@ func _on_room_cleared() -> void:
 	cleared = true
 
 func _on_room_exited(exit_dir: Vector2) -> void:
+	#room_data gets imported to Room.gd that will be kept between rooms in memory
 	emit_signal('room_exited', exit_dir)

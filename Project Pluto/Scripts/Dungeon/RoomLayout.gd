@@ -69,3 +69,11 @@ func _on_door_entered(side: Vector2) -> void:
 func _on_room_cleared() -> void:
 	set_doors_open(true)
 	emit_signal('room_cleared')
+
+
+#The below function works as intended for the purposes of having pad locked doors
+#func import(room_data: Dictionary) -> void:
+#	doors.get(Vector2.UP).locked_with_key = room_data.get("doors").get("up").get("padlock")
+#	doors.get(Vector2.DOWN).locked_with_key = room_data.get("doors").get("down").get("padlock")
+#	doors.get(Vector2.LEFT).locked_with_key = room_data.get("doors").get("left").get("padlock")
+#	doors.get(Vector2.RIGHT).locked_with_key = room_data.get("doors").get("right").get("padlock")
