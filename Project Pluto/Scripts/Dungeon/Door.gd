@@ -36,7 +36,6 @@ func _on_door_entered(_body: PhysicsBody2D) -> void:
 
 
 func _on_interaction(_player: Player) -> void:
-	print("interaction with door")
 	if _player.key_ring != 0 && locked_with_key == true:
 		_player.key_ring -= 1
 		locked_with_key = false

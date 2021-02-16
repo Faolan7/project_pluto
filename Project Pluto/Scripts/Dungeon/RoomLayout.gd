@@ -72,8 +72,8 @@ func _on_room_cleared() -> void:
 
 
 #The below function works as intended for the purposes of having pad locked doors
-#func import(room_data: Dictionary) -> void:
-#	doors.get(Vector2.UP).locked_with_key = room_data.get("doors").get("up").get("padlock")
-#	doors.get(Vector2.DOWN).locked_with_key = room_data.get("doors").get("down").get("padlock")
-#	doors.get(Vector2.LEFT).locked_with_key = room_data.get("doors").get("left").get("padlock")
-#	doors.get(Vector2.RIGHT).locked_with_key = room_data.get("doors").get("right").get("padlock")
+func import(room_data: Dictionary) -> void:
+	doors.get(Vector2.UP).locked_with_key = room_data.get("doors").get("up").get("padlock")
+	doors.get(Vector2.DOWN).locked_with_key = room_data.get("doors").get("down").get("padlock")
+	doors.get(Vector2.LEFT).locked_with_key = room_data.get("doors").get("left").get("padlock")
+	doors.get(Vector2.RIGHT).locked_with_key = room_data.get("doors").get("right").get("padlock")
