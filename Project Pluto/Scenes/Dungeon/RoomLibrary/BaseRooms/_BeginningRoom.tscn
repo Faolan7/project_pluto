@@ -208,6 +208,17 @@ texture = ExtResource( 2 )
 script = ExtResource( 3 )
 
 [node name="Entities" parent="." instance=ExtResource( 7 )]
+
+[node name="DroppedWeapon" parent="Entities" instance=ExtResource( 16 )]
+position = Vector2( 347.726, 222.251 )
+
+[node name="Shortsword" parent="Entities/DroppedWeapon" instance=ExtResource( 18 )]
+
+[node name="DroppedWeapon2" parent="Entities" instance=ExtResource( 16 )]
+position = Vector2( 343.054, 151.504 )
+
+[node name="Bow" parent="Entities/DroppedWeapon2" instance=ExtResource( 17 )]
+position = Vector2( 0.328064, -0.667389 )
 [connection signal="entered" from="Doors/NorthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, -1 ) ]]
 [connection signal="entered" from="Doors/SouthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, 1 ) ]]
 [connection signal="entered" from="Doors/EastDoor" to="." method="_on_door_entered" binds= [ Vector2( 1, 0 ) ]]
