@@ -7,6 +7,8 @@ signal update_stamina(stamina)
 signal update_current_weapon(weapon)
 
 
+const DEATH_SCENE = 'res://Scenes/Menu/GameOver.tscn'
+
 onready var interact_state: State = $StateMachine/Interact as State
 onready var dodge_state: State = $StateMachine/Dodge as State
 onready var special_state: State = $StateMachine/SpecialAttack as State
@@ -71,6 +73,10 @@ func add_weapon(weapon: Weapon) -> void:
 func set_health(value: float) -> void:
 	.set_health(value)
 	emit_signal('update_health', get_health())
+	
+	if get_health() <= 0:
+		# warning-ignore:return_value_discarded
+		get_tree().change_scene(DEATH_SCENE)
 
 func set_stamina(value: float) -> void:
 	.set_stamina(value)

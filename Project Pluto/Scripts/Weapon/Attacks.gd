@@ -36,16 +36,17 @@ static func shoot(weapon, attack_dir: float, num_projectiles: int) -> void:
 	_on_attack_finished(weapon, false)
 
 static func stab(weapon) -> void:
-	var STAB_DURATION: float = .1
-	#weapon.tween.connect('tween_completed', Attacks, '_on_attack_finished', [weapon, false])
-	
-	weapon.tween.interpolate_property(weapon, 'position',
-		Vector2(2, 0), weapon.position, STAB_DURATION)
-	weapon.tween.start()
-	
+	weapon.play_tween(weapon, 'position',
+		Vector2(2, 0), weapon.position, .1)
+		
 	yield(weapon.tween, 'tween_completed')
 	_on_attack_finished(weapon, false)
 
 
-static func spin(_weapon) -> void:
-	pass
+static func spin(weapon) -> void:
+	var facing_pivot: Node2D = weapon.entity.facing_pivot
+	weapon.play_tween(facing_pivot, 'rotation',
+		facing_pivot.rotation, facing_pivot.rotation + 2 * PI, .3)
+		
+	yield(weapon.tween, 'tween_completed')
+	_on_attack_finished(weapon, false)
