@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scripts/Dungeon/Room.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_CombatDemo.tscn" type="PackedScene" id=2]
@@ -12,6 +12,15 @@
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_LRRoom.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_ULRRoom.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_URRoom.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_DiningHall1.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_DiningHall2.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Puzzle/_ArtRoomPuzzle.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Treasure/_ArtistBedroomTreasure.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Treasure/_ArmoryTreasure.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_TheLibrary.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_SparingRing.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/IdleRooms/_Floor3Room1.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_ArcherRange.tscn" type="PackedScene" id=21]
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource( 4 )
@@ -135,7 +144,7 @@ connections = {
 "up": NodePath("")
 }
 
-[node name="CombatDemo" parent="Rooms/DiningHall1" instance=ExtResource( 2 )]
+[node name="DiningHall1" parent="Rooms/DiningHall1" instance=ExtResource( 13 )]
 
 [node name="DiningHall2" type="Node2D" parent="Rooms"]
 position = Vector2( -1536, -1920 )
@@ -147,7 +156,7 @@ connections = {
 "up": NodePath("")
 }
 
-[node name="CombatDemo" parent="Rooms/DiningHall2" instance=ExtResource( 2 )]
+[node name="DiningHall2" parent="Rooms/DiningHall2" instance=ExtResource( 14 )]
 
 [node name="Kitchen" type="Node2D" parent="Rooms"]
 position = Vector2( -2048, -1920 )
@@ -219,7 +228,7 @@ connections = {
 "up": NodePath("")
 }
 
-[node name="RoomLayout" parent="Rooms/Armory" instance=ExtResource( 5 )]
+[node name="TreasureDemo" parent="Rooms/Armory" instance=ExtResource( 17 )]
 
 [node name="MensBathroom" type="Node2D" parent="Rooms"]
 position = Vector2( -512, -2304 )
@@ -315,7 +324,7 @@ connections = {
 "up": NodePath("../KillRoom1")
 }
 
-[node name="RoomLayout" parent="Rooms/ArtistBedroom" instance=ExtResource( 5 )]
+[node name="ArtistsBedroomTreasure" parent="Rooms/ArtistBedroom" instance=ExtResource( 16 )]
 
 [node name="ArtStudio" type="Node2D" parent="Rooms"]
 position = Vector2( -512, -3080 )
@@ -327,7 +336,7 @@ connections = {
 "up": NodePath("")
 }
 
-[node name="RoomLayout" parent="Rooms/ArtStudio" instance=ExtResource( 5 )]
+[node name="ArtRoomPuzzle" parent="Rooms/ArtStudio" instance=ExtResource( 15 )]
 
 [node name="BackRoom" type="Node2D" parent="Rooms"]
 position = Vector2( -1024, -3072 )
@@ -339,7 +348,7 @@ connections = {
 "up": NodePath("")
 }
 
-[node name="RoomLayout" parent="Rooms/BackRoom" instance=ExtResource( 5 )]
+[node name="ArtRoomPuzzle" parent="Rooms/BackRoom" instance=ExtResource( 15 )]
 
 [node name="Chapel" type="Node2D" parent="Rooms"]
 position = Vector2( -1536, -3072 )
@@ -351,7 +360,7 @@ connections = {
 "up": NodePath("")
 }
 
-[node name="RoomLayout" parent="Rooms/Chapel" instance=ExtResource( 5 )]
+[node name="ArtRoomPuzzle" parent="Rooms/Chapel" instance=ExtResource( 15 )]
 
 [node name="CornerRoom1" type="Node2D" parent="Rooms"]
 position = Vector2( -1536, -2688 )
@@ -378,7 +387,7 @@ connections = {
 [node name="RoomLayout" parent="Rooms/KeyReward1" instance=ExtResource( 9 )]
 
 [node name="ArcherRange" type="Node2D" parent="Rooms"]
-position = Vector2( 1032, -3080 )
+position = Vector2( 1031.25, -3071.76 )
 script = ExtResource( 1 )
 connections = {
 "down": NodePath("../KeyReward1"),
@@ -387,7 +396,7 @@ connections = {
 "up": NodePath("")
 }
 
-[node name="CombatDemo" parent="Rooms/ArcherRange" instance=ExtResource( 2 )]
+[node name="ArcherRange" parent="Rooms/ArcherRange" instance=ExtResource( 21 )]
 
 [node name="TheLibrary" type="Node2D" parent="Rooms"]
 position = Vector2( 1544, -2688 )
@@ -399,7 +408,7 @@ connections = {
 "up": NodePath("")
 }
 
-[node name="CombatDemo" parent="Rooms/TheLibrary" instance=ExtResource( 2 )]
+[node name="TheLibrary" parent="Rooms/TheLibrary" instance=ExtResource( 18 )]
 
 [node name="SparingRing" type="Node2D" parent="Rooms"]
 position = Vector2( 1032, -2304 )
@@ -411,7 +420,7 @@ connections = {
 "up": NodePath("../KeyReward1")
 }
 
-[node name="CombatDemo" parent="Rooms/SparingRing" instance=ExtResource( 2 )]
+[node name="TheLibrary" parent="Rooms/SparingRing" instance=ExtResource( 19 )]
 
 [node name="KillRoom2" type="Node2D" parent="Rooms"]
 position = Vector2( 0, -3080 )
@@ -447,7 +456,7 @@ connections = {
 "up": NodePath("../ThroneRoom1")
 }
 
-[node name="RoomLayout" parent="Rooms/Crossroads3" instance=ExtResource( 9 )]
+[node name="RoomLayout" parent="Rooms/Crossroads3" instance=ExtResource( 20 )]
 
 [node name="KillRoom3" type="Node2D" parent="Rooms"]
 position = Vector2( 520, -3848 )

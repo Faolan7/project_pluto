@@ -37,7 +37,6 @@
 [ext_resource path="res://Sprites/Dungeon/floors-and-walls/Stone-Floor9.png" type="Texture" id=35]
 [ext_resource path="res://Sprites/Dungeon/floors-and-walls/Stone-Floor4.png" type="Texture" id=36]
 
-
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
