@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/Dungeon/RoomLayout.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Dungeon/floors-and-walls/summoning-circle.png" type="Texture" id=2]
@@ -15,6 +15,9 @@
 [ext_resource path="res://Sprites/Dungeon/floors-and-walls/Stone-Floor12.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/Dungeon/floors-and-walls/Stone-Floor10.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/Dungeon/floors-and-walls/wall.png" type="Texture" id=15]
+[ext_resource path="res://Scenes/Weapon/DroppedWeapon.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Weapon/WeaponLibrary/Bow.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Weapon/WeaponLibrary/Shortsword.tscn" type="PackedScene" id=18]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -205,6 +208,17 @@ texture = ExtResource( 2 )
 script = ExtResource( 3 )
 
 [node name="Entities" parent="." instance=ExtResource( 7 )]
+
+[node name="DroppedWeapon" parent="Entities" instance=ExtResource( 16 )]
+position = Vector2( 347.726, 222.251 )
+
+[node name="Shortsword" parent="Entities/DroppedWeapon" instance=ExtResource( 18 )]
+
+[node name="DroppedWeapon2" parent="Entities" instance=ExtResource( 16 )]
+position = Vector2( 343.054, 151.504 )
+
+[node name="Bow" parent="Entities/DroppedWeapon2" instance=ExtResource( 17 )]
+position = Vector2( 0.328064, -0.667389 )
 [connection signal="entered" from="Doors/NorthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, -1 ) ]]
 [connection signal="entered" from="Doors/SouthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, 1 ) ]]
 [connection signal="entered" from="Doors/EastDoor" to="." method="_on_door_entered" binds= [ Vector2( 1, 0 ) ]]
