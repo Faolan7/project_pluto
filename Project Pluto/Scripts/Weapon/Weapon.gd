@@ -26,6 +26,14 @@ func use(attack_dir: float) -> void:
 func use_special(attack_dir: float) -> void:
 	Attacks.perform(special_name, self, attack_dir)
 
+func play_tween(object: Object, property: String,
+		initial_val, final_val, duration: float,
+		trans_type: int = 0, ease_type: int = 2, delay: float = 0) -> void:
+	# warning-ignore:return_value_discarded
+	tween.interpolate_property(object, property, initial_val, final_val, duration,
+		trans_type, ease_type, delay)
+	# warning-ignore:return_value_discarded
+	tween.start()
 
 func set_entity(value: PhysicsBody2D):
 	entity = value
