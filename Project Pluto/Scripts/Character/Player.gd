@@ -8,6 +8,8 @@ signal update_current_weapon(weapon)
 signal update_keys(keys)
 
 
+var num_keys: int = 0
+
 onready var interact_state: State = $StateMachine/Interact as State
 onready var dodge_state: State = $StateMachine/Dodge as State
 onready var special_state: State = $StateMachine/SpecialAttack as State
@@ -15,9 +17,6 @@ onready var special_state: State = $StateMachine/SpecialAttack as State
 onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 
 export var max_weapon_count: int = 1
-
-
-export var key_ring: int = 0;
 
 
 func _ready() -> void:
@@ -47,7 +46,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 		elif Input.is_action_just_pressed('interact'):
 			play_animation('idle')
 			state_machine.change_state(interact_state)
-			emit_signal("update_keys", key_ring)
+			emit_signal('update_keys', num_keys)
 			
 		elif Input.is_action_just_pressed('dodge'):
 			state_machine.change_state(dodge_state)

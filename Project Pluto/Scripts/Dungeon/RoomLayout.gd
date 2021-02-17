@@ -19,19 +19,20 @@ onready var doors: Dictionary = {
 }
 
 
-func enter(enter_dir: Vector2, player: Player, cleared: bool) -> void:
-	# Closing doors
-	set_doors_open(cleared)
+func enter(enter_dir: Vector2, player: Player, room_data: Dictionary) -> void:
+	import_data(room_data)
+	
+	# Opening entrance door
 	if enter_dir != Vector2.ZERO:
 		doors[enter_dir].is_open = true
-		
+	
 	# Adding player
 	player.get_parent().remove_child(player)
 	entities.add_child(player)
 	player.position = get_enter_position(enter_dir)
 	
 	# Checking room state
-	if cleared:
+	if room_data.get('cleared', false):
 		entities.remove_enemies()
 		puzzle_elements.complete_puzzles()
 	elif not entities.has_enemies() and not puzzle_elements.has_puzzles():
@@ -49,6 +50,35 @@ func remove_door(side: Vector2) -> void:
 	# Replacing floor tiles with wall tiles
 	set_cellv(world_to_map(door.position + offset), WALL_ID)
 	set_cellv(world_to_map(door.position - offset), WALL_ID)
+
+func import_data(data: Dictionary) -> void:
+	if data.size() == 0:
+		return
+		
+	var data_key: String
+	var door_key: Vector2
+	for item in [['north_door', Vector2.UP], ['south_door', Vector2.DOWN],
+			['west_door', Vector2.LEFT], ['east_door', Vector2.RIGHT]]:
+		data_key = item[0]
+		door_key = item[1]
+		doors[door_key].locked = data[data_key]['locked']
+		doors[door_key].is_open = data[data_key]['open']
+
+func export_data() -> Dictionary:
+	var data: Dictionary = {}
+	
+	var data_key: String
+	var door_key: Vector2
+	for item in [['north_door', Vector2.UP], ['south_door', Vector2.DOWN],
+			['west_door', Vector2.LEFT], ['east_door', Vector2.RIGHT]]:
+		data_key = item[0]
+		door_key = item[1]
+		data[data_key] = {
+			'open': doors[door_key].is_open,
+			'locked': doors[door_key].locked
+		}
+		
+	return data
 
 
 func set_doors_open(value: bool) -> void:
@@ -69,11 +99,3 @@ func _on_door_entered(side: Vector2) -> void:
 func _on_room_cleared() -> void:
 	set_doors_open(true)
 	emit_signal('room_cleared')
-
-
-#The below function works as intended for the purposes of having pad locked doors
-func import(room_data: Dictionary) -> void:
-	doors.get(Vector2.UP).locked_with_key = room_data.get("doors").get("up").get("padlock")
-	doors.get(Vector2.DOWN).locked_with_key = room_data.get("doors").get("down").get("padlock")
-	doors.get(Vector2.LEFT).locked_with_key = room_data.get("doors").get("left").get("padlock")
-	doors.get(Vector2.RIGHT).locked_with_key = room_data.get("doors").get("right").get("padlock")

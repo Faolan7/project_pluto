@@ -11,27 +11,7 @@ var layout: RoomLayout
 
 var is_loaded: bool setget set_loaded
 var cleared: bool
-
-#doors refers to the doors that are within the room
-#padlock refers to doors that require a key to unlock
-#what is happening is that this is hard coded, and it is making it where this isn't persistent.
-export(Dictionary) var room_data: Dictionary = {
-	"doors": {
-		"up": {
-			"padlock": true
-		},
-		"down": {
-			"padlock": false
-		},
-		"left": {
-			"padlock": true
-		},
-		"right": {
-			"padlock": false
-		}
-	}
-}
-
+var room_data: Dictionary
 
 export(Dictionary) var connections: Dictionary = {
 	'up': NodePath(),
@@ -64,8 +44,7 @@ func _ready() -> void:
 			connections[new_key] = get_node(path)
 
 func enter(enter_dir: Vector2, player: Player) -> void:
-	layout.import(room_data)
-	layout.enter(enter_dir, player, cleared)
+	layout.enter(enter_dir, player, room_data)
 
 func add_connection(other: Room, side: Vector2) -> void:
 	connections[side] = other
@@ -76,6 +55,8 @@ func set_loaded(value: bool) -> void:
 	is_loaded = value
 	
 	if not value:
+		room_data = layout.export_data()
+		room_data['cleared'] = cleared # Temporary
 		remove_child(layout)
 	else:
 		layout = LAYOUT_SCENE.instance() as RoomLayout
@@ -97,12 +78,4 @@ func _on_room_cleared() -> void:
 	cleared = true
 
 func _on_room_exited(exit_dir: Vector2) -> void:
-	update_locks()
 	emit_signal('room_exited', exit_dir)
-
-
-func update_locks() -> void:
-	room_data.get("doors").get("up")["padlock"] = layout.doors[Vector2.UP].locked_with_key
-	room_data.get("doors").get("down")["padlock"] = layout.doors[Vector2.DOWN].locked_with_key
-	room_data.get("doors").get("left")["padlock"] = layout.doors[Vector2.LEFT].locked_with_key
-	room_data.get("doors").get("right")["padlock"] = layout.doors[Vector2.RIGHT].locked_with_key
