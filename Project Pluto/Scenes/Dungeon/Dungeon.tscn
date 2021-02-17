@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Dungeon/Room.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_CombatDemo.tscn" type="PackedScene" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_UDRoom.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_UDLRoom.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_UDLRRoom.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_LRRoom.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_ULRRoom.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_URRoom.tscn" type="PackedScene" id=12]
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource( 4 )
@@ -109,7 +112,7 @@ connections = {
 "up": NodePath("../MapRoom")
 }
 
-[node name="RoomLayout" parent="Rooms/Hallway5" instance=ExtResource( 5 )]
+[node name="RoomLayout" parent="Rooms/Hallway5" instance=ExtResource( 11 )]
 
 [node name="Hallway6" type="Node2D" parent="Rooms"]
 position = Vector2( -512, -1920 )
@@ -121,7 +124,7 @@ connections = {
 "up": NodePath("../MensBathroom")
 }
 
-[node name="RoomLayout" parent="Rooms/Hallway6" instance=ExtResource( 5 )]
+[node name="RoomLayout" parent="Rooms/Hallway6" instance=ExtResource( 9 )]
 
 [node name="DiningHall1" type="Node2D" parent="Rooms"]
 position = Vector2( -1024, -1920 )
@@ -253,7 +256,7 @@ connections = {
 "up": NodePath("../Crossroads2")
 }
 
-[node name="RoomLayout" parent="Rooms/TransitionToFloor2" instance=ExtResource( 5 )]
+[node name="RoomLayout" parent="Rooms/TransitionToFloor2" instance=ExtResource( 7 )]
 
 [node name="Crossroads2" type="Node2D" parent="Rooms"]
 position = Vector2( 0, -2688 )
@@ -265,7 +268,7 @@ connections = {
 "up": NodePath("../KillRoom2")
 }
 
-[node name="RoomLayout" parent="Rooms/Crossroads2" instance=ExtResource( 5 )]
+[node name="RoomLayout" parent="Rooms/Crossroads2" instance=ExtResource( 9 )]
 
 [node name="Hallway7" type="Node2D" parent="Rooms"]
 position = Vector2( 520, -2688 )
@@ -277,7 +280,7 @@ connections = {
 "up": NodePath("")
 }
 
-[node name="RoomLayout" parent="Rooms/Hallway7" instance=ExtResource( 5 )]
+[node name="RoomLayout" parent="Rooms/Hallway7" instance=ExtResource( 10 )]
 
 [node name="Hallway8" type="Node2D" parent="Rooms"]
 position = Vector2( -512, -2696 )
@@ -289,7 +292,7 @@ connections = {
 "up": NodePath("../ArtStudio")
 }
 
-[node name="RoomLayout" parent="Rooms/Hallway8" instance=ExtResource( 5 )]
+[node name="RoomLayout" parent="Rooms/Hallway8" instance=ExtResource( 11 )]
 
 [node name="KillRoom1" type="Node2D" parent="Rooms"]
 position = Vector2( -1024, -2688 )
@@ -301,7 +304,7 @@ connections = {
 "up": NodePath("../BackRoom")
 }
 
-[node name="CombatDemo" parent="Rooms/KillRoom1" instance=ExtResource( 2 )]
+[node name="RoomLayout" parent="Rooms/KillRoom1" instance=ExtResource( 9 )]
 
 [node name="ArtistBedroom" type="Node2D" parent="Rooms"]
 position = Vector2( -1024, -2296 )
@@ -361,7 +364,7 @@ connections = {
 "up": NodePath("../Chapel")
 }
 
-[node name="RoomLayout" parent="Rooms/CornerRoom1" instance=ExtResource( 5 )]
+[node name="RoomLayout" parent="Rooms/CornerRoom1" instance=ExtResource( 12 )]
 
 [node name="KeyReward1" type="Node2D" parent="Rooms"]
 position = Vector2( 1032, -2688 )
@@ -373,7 +376,7 @@ connections = {
 "up": NodePath("../ArcherRange")
 }
 
-[node name="RoomLayout" parent="Rooms/KeyReward1" instance=ExtResource( 5 )]
+[node name="RoomLayout" parent="Rooms/KeyReward1" instance=ExtResource( 9 )]
 
 [node name="ArcherRange" type="Node2D" parent="Rooms"]
 position = Vector2( 1032, -3080 )
@@ -421,7 +424,7 @@ connections = {
 "up": NodePath("../TransitionToFloor3")
 }
 
-[node name="CombatDemo" parent="Rooms/KillRoom2" instance=ExtResource( 2 )]
+[node name="RoomLayout" parent="Rooms/KillRoom2" instance=ExtResource( 7 )]
 
 [node name="TransitionToFloor3" type="Node2D" parent="Rooms"]
 position = Vector2( 0, -3464 )
@@ -433,7 +436,7 @@ connections = {
 "up": NodePath("../Crossroads3")
 }
 
-[node name="RoomLayout" parent="Rooms/TransitionToFloor3" instance=ExtResource( 5 )]
+[node name="RoomLayout" parent="Rooms/TransitionToFloor3" instance=ExtResource( 7 )]
 
 [node name="Crossroads3" type="Node2D" parent="Rooms"]
 position = Vector2( 0, -3848 )
@@ -445,7 +448,7 @@ connections = {
 "up": NodePath("../ThroneRoom1")
 }
 
-[node name="RoomLayout" parent="Rooms/Crossroads3" instance=ExtResource( 5 )]
+[node name="RoomLayout" parent="Rooms/Crossroads3" instance=ExtResource( 9 )]
 
 [node name="KillRoom3" type="Node2D" parent="Rooms"]
 position = Vector2( 520, -3848 )
