@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 static func init(drop_pos: Vector2, drop_weapon: Weapon) -> DroppedWeapon:
-	var instance: DroppedWeapon = load("res://Scenes/Weapon/DroppedWeapon.tscn").instance() as DroppedWeapon
+	var instance: DroppedWeapon = load("res://Scenes/Item/DroppedWeapon.tscn").instance() as DroppedWeapon
 	instance.position = drop_pos
 	
 	drop_weapon.get_parent().remove_child(drop_weapon)

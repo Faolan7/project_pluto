@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Bow.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Shortsword.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Character/NPC.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Weapon/DroppedWeapon.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Item/DroppedWeapon.tscn" type="PackedScene" id=8]
 
 [node name="StartDemo" instance=ExtResource( 1 )]
 

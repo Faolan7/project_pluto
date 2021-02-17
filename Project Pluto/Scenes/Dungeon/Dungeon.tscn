@@ -8,8 +8,6 @@
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Boss/_BossDemo.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Puzzle/_PuzzleDemo.tscn" type="PackedScene" id=7]
 
-
-
 [node name="Dungeon" type="Node2D"]
 script = ExtResource( 4 )
 

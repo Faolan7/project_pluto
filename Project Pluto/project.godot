@@ -35,9 +35,14 @@ _global_script_classes=[ {
 "path": "res://Scripts/Dungeon/Door.gd"
 }, {
 "base": "InteractBox",
+"class": "DroppedKey",
+"language": "GDScript",
+"path": "res://Scripts/Item/DroppedKey.gd"
+}, {
+"base": "InteractBox",
 "class": "DroppedWeapon",
 "language": "GDScript",
-"path": "res://Scripts/Weapon/DroppedWeapon.gd"
+"path": "res://Scripts/Item/DroppedWeapon.gd"
 }, {
 "base": "Character",
 "class": "Enemy",
@@ -73,6 +78,11 @@ _global_script_classes=[ {
 "class": "InteractState",
 "language": "GDScript",
 "path": "res://Scripts/State/Interact.gd"
+}, {
+"base": "Node2D",
+"class": "KeyCount",
+"language": "GDScript",
+"path": "res://Scripts/Interface/KeyCount.gd"
 }, {
 "base": "Task",
 "class": "KillTask",
@@ -180,6 +190,7 @@ _global_script_class_icons={
 "DialogueBox": "",
 "DodgeState": "",
 "Door": "",
+"DroppedKey": "",
 "DroppedWeapon": "",
 "Enemy": "",
 "EntityTracker": "",
@@ -188,6 +199,7 @@ _global_script_class_icons={
 "IdleState": "",
 "InteractBox": "",
 "InteractState": "",
+"KeyCount": "",
 "KillTask": "",
 "MeleeWeapon": "",
 "MoveState": "",

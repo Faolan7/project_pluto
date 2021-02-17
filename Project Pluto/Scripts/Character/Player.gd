@@ -5,7 +5,10 @@ extends Character
 signal update_health(health)
 signal update_stamina(stamina)
 signal update_current_weapon(weapon)
+signal update_keys(keys)
 
+
+var num_keys: int = 0
 
 onready var interact_state: State = $StateMachine/Interact as State
 onready var dodge_state: State = $StateMachine/Dodge as State
@@ -43,6 +46,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 		elif Input.is_action_just_pressed('interact'):
 			play_animation('idle')
 			state_machine.change_state(interact_state)
+			emit_signal('update_keys', num_keys)
 			
 		elif Input.is_action_just_pressed('dodge'):
 			state_machine.change_state(dodge_state)

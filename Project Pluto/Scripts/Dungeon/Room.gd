@@ -11,6 +11,7 @@ var layout: RoomLayout
 
 var is_loaded: bool setget set_loaded
 var cleared: bool
+var room_data: Dictionary
 
 export(Dictionary) var connections: Dictionary = {
 	'up': NodePath(),
@@ -42,9 +43,8 @@ func _ready() -> void:
 		else:
 			connections[new_key] = get_node(path)
 
-
 func enter(enter_dir: Vector2, player: Player) -> void:
-	layout.enter(enter_dir, player, cleared)
+	layout.enter(enter_dir, player, room_data)
 
 func add_connection(other: Room, side: Vector2) -> void:
 	connections[side] = other
@@ -55,6 +55,8 @@ func set_loaded(value: bool) -> void:
 	is_loaded = value
 	
 	if not value:
+		room_data = layout.export_data()
+		room_data['cleared'] = cleared # Temporary
 		remove_child(layout)
 	else:
 		layout = LAYOUT_SCENE.instance() as RoomLayout
