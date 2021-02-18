@@ -8,15 +8,13 @@ onready var stamina_bar: ResourceBar = $Stamina as ResourceBar
 
 func set_bar_values(player: Player):
 	health_bar.max_value = player.get_max_health()
+	health_bar.value = player.get_health()
 	stamina_bar.max_value = player.get_max_stamina()
+	stamina_bar.value = player.get_stamina()
 
 
 func _on_hp_update(value: float) -> void:
-	if (value == 0):
-		# warning-ignore:return_value_discarded
-		get_tree().change_scene("res://Scenes/death_screen.tscn")
-	else:
-		health_bar.update_bar(value)
+	health_bar.update_bar(value)
 
 func _on_stamina_update(value: float) -> void:
 	stamina_bar.update_bar(value)

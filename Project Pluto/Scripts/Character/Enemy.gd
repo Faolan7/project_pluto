@@ -5,8 +5,6 @@ extends Character
 signal died
 
 
-var special_stamina_cost: int = 5
-
 var is_dead setget ,get_is_dead
 var target: KinematicBody2D setget set_target
 var combat_distance: float
@@ -55,20 +53,26 @@ func _physics_process(_delta) -> void:
 			move_state.move_dir = Vector2.ZERO
 			play_animation('idle')
 			
-		if get_stamina() >= attack_state.weapon.attack_stamina_cost and should_attack():
+		if should_attack():
 			animation_player.play('attack')
-		elif get_stamina() >= special_stamina_cost and attack_state.weapon.has_entity_in_range(target):
+		elif should_special():
 			animation_player.play('attack')
-			#print("I'm using my SPECIAL!")
+			print("I'm using my SPECIAL!")
 
 
 func should_attack() -> bool:
-	if attack_state.weapon.has_entity_in_range(target) \
-			and (get_health() < PANIC_THRESHOLD * get_max_health()
-				or get_stamina() < PATIENCE_THRESHOLD * special_stamina_cost):
-		return true
-	else:
-		return false
+	var cur_weapon: Weapon = attack_state.weapon
+	
+	return get_stamina() >= attack_state.weapon.attack_stamina_cost \
+		and cur_weapon.has_entity_in_range(target) \
+		and (get_health() < PANIC_THRESHOLD * get_max_health()
+			or get_stamina() < PATIENCE_THRESHOLD * cur_weapon.special_stamina_cost)
+
+func should_special() -> bool:
+	var cur_weapon: Weapon = attack_state.weapon
+	
+	return get_stamina() >= cur_weapon.special_stamina_cost \
+		and cur_weapon.has_entity_in_range(target)
 
 
 func set_health(value: float) -> void:

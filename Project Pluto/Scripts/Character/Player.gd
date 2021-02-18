@@ -8,6 +8,8 @@ signal update_current_weapon(weapon)
 signal update_keys(keys)
 
 
+const DEATH_SCENE = 'res://Scenes/Menu/GameOver.tscn'
+
 var num_keys: int = 0
 
 onready var interact_state: State = $StateMachine/Interact as State
@@ -40,7 +42,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 			play_animation('idle')
 			state_machine.change_state(attack_state)
 			
-		elif Input.is_action_just_pressed('attack_special'):
+		elif Input.is_action_just_pressed('attack_special') and special_state.weapon != null:
 			state_machine.change_state(special_state)
 			
 		elif Input.is_action_just_pressed('interact'):
@@ -75,6 +77,10 @@ func add_weapon(weapon: Weapon) -> void:
 func set_health(value: float) -> void:
 	.set_health(value)
 	emit_signal('update_health', get_health())
+	
+	if get_health() <= 0:
+		# warning-ignore:return_value_discarded
+		get_tree().change_scene(DEATH_SCENE)
 
 func set_stamina(value: float) -> void:
 	.set_stamina(value)

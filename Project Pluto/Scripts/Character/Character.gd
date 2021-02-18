@@ -34,6 +34,7 @@ func play_animation(animation: String) -> void:
 
 func set_face_dir(value: Vector2) -> void:
 	attack_state.attack_dir = value
+	facing_pivot.rotation = value.angle()
 	
 	if abs(face_dir.angle_to(value)) > PI / 3:
 		if abs(value.x) > abs(value.y):
@@ -44,7 +45,6 @@ func set_face_dir(value: Vector2) -> void:
 			face_dir.y = value.y / abs(value.y)
 			
 		set_blend_position(face_dir)
-		facing_pivot.rotation = face_dir.angle()
 		facing_pivot.show_behind_parent = face_dir == Vector2.UP
 
 func set_health(value: float) -> void:

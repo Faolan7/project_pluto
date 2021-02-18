@@ -27,4 +27,5 @@ position = Vector2( 100, 45 )
 
 [node name="Bow" parent="Entities/SecretDroppedWeapon" index="1" instance=ExtResource( 2 )]
 attack_stamina_cost = 0.0
+special_stamina_cost = 0.0
 PROJECTILE_SPEED = 500.0

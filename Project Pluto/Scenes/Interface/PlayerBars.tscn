@@ -42,8 +42,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StaminaRegen" type="Timer" parent="Stamina"]
-
 [node name="Overlay" type="Sprite" parent="."]
 texture = ExtResource( 4 )
 centered = false
