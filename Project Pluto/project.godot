@@ -114,7 +114,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Interface/PlayerBars.gd"
 }, {
-"base": "Sprite",
+"base": "Hitbox",
 "class": "Projectile",
 "language": "GDScript",
 "path": "res://Scripts/Weapon/Projectile.gd"
@@ -316,14 +316,11 @@ attack_special={
 
 [layer_names]
 
-2d_render/layer_1="world"
 2d_physics/layer_1="world"
-2d_render/layer_2="hitbox"
 2d_physics/layer_2="hitbox"
-2d_render/layer_3="interaction"
 2d_physics/layer_3="interaction"
-2d_render/layer_4="enemy_target"
 2d_physics/layer_4="enemy_target"
+2d_physics/layer_5="projectile"
 
 [physics]
 

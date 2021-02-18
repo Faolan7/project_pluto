@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Weapon/Hitbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Weapon/Projectile.gd" type="Script" id=2]
+
+[node name="BaseProjectile" instance=ExtResource( 1 )]
+collision_mask = 18
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+[connection signal="area_entered" from="." to="." method="_on_collision"]
+[connection signal="body_entered" from="." to="." method="_on_collision"]
