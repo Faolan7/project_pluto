@@ -10,10 +10,10 @@
 locked = true
 
 [node name="GoblinArcher" parent="Entities" index="0" instance=ExtResource( 2 )]
-position = Vector2( 129.029, 45.7845 )
+position = Vector2( 256, 95.742 )
 
 [node name="GoblinWarrior" parent="Entities" index="1" instance=ExtResource( 3 )]
-position = Vector2( 211.382, 96.6231 )
+position = Vector2( 344.5, 128 )
 
 [node name="GoblinWarrior2" parent="Entities" index="2" instance=ExtResource( 3 )]
-position = Vector2( 44.0007, 94.542 )
+position = Vector2( 160, 128 )

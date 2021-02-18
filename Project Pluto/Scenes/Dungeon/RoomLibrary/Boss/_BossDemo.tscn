@@ -7,10 +7,10 @@
 [node name="BossDemo" instance=ExtResource( 1 )]
 
 [node name="GoblinBoss" parent="Entities" index="0" instance=ExtResource( 2 )]
-position = Vector2( 129.678, 56.6645 )
+position = Vector2( 256, 112 )
 
 [node name="GoblinMinion" parent="Entities" index="1" instance=ExtResource( 3 )]
-position = Vector2( 39.7036, 96.6135 )
+position = Vector2( 96, 144 )
 
 [node name="GoblinMinion2" parent="Entities" index="2" instance=ExtResource( 3 )]
-position = Vector2( 215.706, 97.5054 )
+position = Vector2( 384, 145.32 )
