@@ -33,6 +33,7 @@ func play_animation(animation: String) -> void:
 
 
 func set_face_dir(value: Vector2) -> void:
+	value = value.normalized()
 	attack_state.attack_dir = value
 	facing_pivot.rotation = value.angle()
 	
