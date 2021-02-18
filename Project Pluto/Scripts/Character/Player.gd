@@ -95,8 +95,8 @@ func set_blend_position(value: Vector2) -> void:
 func _on_state_completed() -> void:
 	state_machine.change_state(move_state)
 	
-	set_face_dir(move_state.move_dir)
 	if move_state.move_dir == Vector2.ZERO:
 		play_animation('idle')
 	else:
+		#set_face_dir(move_state.move_dir)
 		play_animation('move')
