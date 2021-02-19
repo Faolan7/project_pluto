@@ -33,7 +33,7 @@ static func shoot(weapon, attack_dir: float, num_projectiles: int) -> void:
 		angle_diff += .1
 		
 	yield(weapon.animation_player, 'animation_finished')
-	_on_attack_finished(weapon, false)
+	_on_attack_finished(weapon, num_projectiles > 1)
 
 static func stab(weapon) -> void:
 	weapon.play_tween(weapon, 'position',
@@ -49,4 +49,4 @@ static func spin(weapon) -> void:
 		facing_pivot.rotation, facing_pivot.rotation + 2 * PI, .3)
 		
 	yield(weapon.tween, 'tween_completed')
-	_on_attack_finished(weapon, false)
+	_on_attack_finished(weapon, true)
