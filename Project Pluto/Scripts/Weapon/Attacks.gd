@@ -12,7 +12,7 @@ static func perform(attack: String, weapon, attack_dir: float) -> void:
 		'shoot': shoot(weapon, attack_dir, 1)
 		'stab': stab(weapon)
 		# Special attacks
-		'spin': spin(weapon)
+		'spin': spin(weapon, 2 * PI)
 		'spreadshot3': shoot(weapon, attack_dir, 3)
 		# Default
 		_: print('ERROR: Unknown attack ' + attack)
@@ -35,18 +35,19 @@ static func shoot(weapon, attack_dir: float, num_projectiles: int) -> void:
 	yield(weapon.animation_player, 'animation_finished')
 	_on_attack_finished(weapon, num_projectiles > 1)
 
+static func spin(weapon, attack_angle: float) -> void:
+	var facing_pivot: Node2D = weapon.entity.facing_pivot
+	weapon.play_tween(facing_pivot, 'rotation',
+		facing_pivot.rotation - attack_angle / 2 - 1,
+		facing_pivot.rotation + attack_angle / 2 + 1,
+		attack_angle / 10)
+		
+	yield(weapon.tween, 'tween_completed')
+	_on_attack_finished(weapon, true)
+
 static func stab(weapon) -> void:
 	weapon.play_tween(weapon, 'position',
 		Vector2(2, 0), weapon.position, .1)
 		
 	yield(weapon.tween, 'tween_completed')
 	_on_attack_finished(weapon, false)
-
-
-static func spin(weapon) -> void:
-	var facing_pivot: Node2D = weapon.entity.facing_pivot
-	weapon.play_tween(facing_pivot, 'rotation',
-		facing_pivot.rotation, facing_pivot.rotation + 2 * PI, .3)
-		
-	yield(weapon.tween, 'tween_completed')
-	_on_attack_finished(weapon, true)
