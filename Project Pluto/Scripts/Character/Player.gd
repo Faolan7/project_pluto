@@ -24,6 +24,7 @@ export var max_weapon_count: int = 1
 func _ready() -> void:
 	animation_tree.active = true
 
+# Handles all user input to control the player
 func _unhandled_input(_event: InputEvent) -> void:
 	var input_vector: Vector2 = Vector2(
 		Input.get_action_strength('move_right') - Input.get_action_strength('move_left'),

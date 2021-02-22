@@ -26,6 +26,7 @@ func use(attack_dir: float) -> void:
 func use_special(attack_dir: float) -> void:
 	Attacks.perform(special_name, self, attack_dir)
 
+# Wrapper for tween node; used for on-the-fly animations
 func play_tween(object: Object, property: String,
 		initial_val, final_val, duration: float,
 		trans_type: int = 0, ease_type: int = 2, delay: float = 0) -> void:

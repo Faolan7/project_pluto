@@ -25,7 +25,7 @@ func activate() -> void:
 			
 		closest_object.interact(actor)
 
-
+# Gets closest object to player that is within the interact box
 func get_closest_object() -> CollisionObject2D:
 	var objects: Array = interaction_area.get_overlapping_areas()
 	

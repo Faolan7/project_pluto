@@ -65,6 +65,7 @@ func get_stamina() -> float:
 func get_max_stamina() -> float:
 	return stamina_bar.max_value
 
+# Sets animation tree's "facing direction"
 func set_blend_position(value: Vector2) -> void:
 	animation_tree.set('parameters/idle/blend_position', value)
 	animation_tree.set('parameters/move/blend_position', value)

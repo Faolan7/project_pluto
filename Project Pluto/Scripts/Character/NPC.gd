@@ -26,7 +26,7 @@ func _on_interaction(_player: Player) -> void:
 			UI.create_dialogue(self, '_on_dialogue_closed',
 				"Wow! I didn't actually think you'd be smart enough to do that, dummy!")
 				
-		_:
+		_: # default
 			UI.create_dialogue(self, '_on_dialogue_closed',
 				"You just gotta go into that other room, dummy!")
 
