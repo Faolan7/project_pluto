@@ -30,7 +30,7 @@ func is_class(cls: String) -> bool:
 
 func _ready() -> void:
 	._ready()
-	attack_state.weapon = get_node(WEAPON_PATH)
+	set_weapon(get_node(WEAPON_PATH))
 	combat_distance = COMBAT_DISTANCE if COMBAT_DISTANCE != 0 else combat_distance_node.position.length()
 	combat_distance *= $Sprite.scale.length()
 	
@@ -61,18 +61,14 @@ func _physics_process(_delta) -> void:
 
 
 func should_attack() -> bool:
-	var cur_weapon: Weapon = attack_state.weapon
-	
-	return get_stamina() >= attack_state.weapon.attack_stamina_cost \
-		and cur_weapon.has_entity_in_range(target) \
+	return get_stamina() >= weapon.attack_stamina_cost \
+		and weapon.has_entity_in_range(target) \
 		and (get_health() < PANIC_THRESHOLD * get_max_health()
-			or get_stamina() < PATIENCE_THRESHOLD * cur_weapon.special_stamina_cost)
+			or get_stamina() < PATIENCE_THRESHOLD * weapon.special_stamina_cost)
 
 func should_special() -> bool:
-	var cur_weapon: Weapon = attack_state.weapon
-	
-	return get_stamina() >= cur_weapon.special_stamina_cost \
-		and cur_weapon.has_entity_in_range(target)
+	return get_stamina() >= weapon.special_stamina_cost \
+		and weapon.has_entity_in_range(target)
 
 
 func set_health(value: float) -> void:
@@ -119,8 +115,8 @@ func _on_damaged(damage: float, dealer: Node2D) -> void:
 		get_tree().call_group('Enemies', '_on_target_detected', dealer)
 
 func on_death():
-	attack_state.weapon.animation_player.stop(true)
-	drop_weapon(attack_state.weapon)
+	weapon.animation_player.stop(true)
+	drop_weapon(weapon)
 	queue_free()
 
 func _on_attack_completed() -> void:

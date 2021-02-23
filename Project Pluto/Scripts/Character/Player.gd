@@ -12,9 +12,9 @@ const DEATH_SCENE = 'res://Scenes/Menu/GameOver.tscn'
 
 var num_keys: int = 0
 
-onready var interact_state: State = $StateMachine/Interact as State
-onready var dodge_state: State = $StateMachine/Dodge as State
-onready var special_state: State = $StateMachine/SpecialAttack as State
+onready var interact_state: InteractState = $StateMachine/Interact as InteractState
+onready var dodge_state: DodgeState = $StateMachine/Dodge as DodgeState
+onready var special_state: SpecialState = $StateMachine/SpecialAttack as SpecialState
 
 onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 
@@ -54,7 +54,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 		elif Input.is_action_just_pressed('dodge'):
 			state_machine.change_state(dodge_state)
 			
-		elif Input.is_action_just_pressed('weapon_switch'):
+		elif Input.is_action_just_pressed('swap_weapon'):
 			get_next_weapon()
 			
 		elif input_vector != Vector2.ZERO: # Checking if move button is pushed
@@ -65,28 +65,27 @@ func _unhandled_input(_event: InputEvent) -> void:
 			play_animation('idle')
 
 
-func add_weapon(weapon: Weapon) -> void:
+func add_weapon(value: Weapon) -> void:
+	# Dropping current weapon if too many are held
 	if weapon_slots.get_child_count() >= max_weapon_count:
-		drop_weapon(attack_state.weapon)
+		drop_weapon(weapon)
 		
+	set_weapon(value)
 	weapon.visible = false
-	set_weapon(weapon)
 	
 	weapon.get_parent().remove_child(weapon)
 	weapon_slots.add_child(weapon)
 
 func get_next_weapon() -> void:
-	var weapon_count = weapon_slots.get_child_count()
-	var next_weapon
-	var cur_index = attack_state.weapon.get_index()
-	
-	if weapon_count > 1:
-		
-		if cur_index == weapon_count - 1:
-			next_weapon = weapon_slots.get_child(0)
+	var num_weapons: int = weapon_slots.get_child_count()
+
+	if num_weapons > 1:
+		var cur_weapon_index: int = weapon.get_index()
+		if cur_weapon_index == num_weapons - 1:
+			set_weapon(weapon_slots.get_child(0) as Weapon)
 		else:
-			next_weapon = weapon_slots.get_child(cur_index + 1)
-		set_weapon(next_weapon)
+			set_weapon(weapon_slots.get_child(cur_weapon_index + 1) as Weapon)
+
 
 func set_health(value: float) -> void:
 	.set_health(value)
@@ -106,8 +105,10 @@ func set_blend_position(value: Vector2) -> void:
 
 func set_weapon(value: Weapon) -> void:
 	.set_weapon(value)
-	special_state.weapon = value
-	emit_signal('update_current_weapon', value)
+	
+	special_state.weapon = weapon
+	emit_signal('update_current_weapon', weapon)
+
 
 func _on_state_completed() -> void:
 	state_machine.change_state(move_state)
