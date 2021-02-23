@@ -18,7 +18,7 @@ onready var special_state: State = $StateMachine/SpecialAttack as State
 
 onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 
-export var max_weapon_count: int = 1
+export var max_weapon_count: int = 2
 
 
 func _ready() -> void:
@@ -54,6 +54,9 @@ func _unhandled_input(_event: InputEvent) -> void:
 		elif Input.is_action_just_pressed('dodge'):
 			state_machine.change_state(dodge_state)
 			
+		elif Input.is_action_just_pressed('weapon_switch'):
+			get_next_weapon()
+			
 		elif input_vector != Vector2.ZERO: # Checking if move button is pushed
 			play_animation('move')
 			state_machine.change_state(move_state)
@@ -67,13 +70,23 @@ func add_weapon(weapon: Weapon) -> void:
 		drop_weapon(attack_state.weapon)
 		
 	weapon.visible = false
-	attack_state.weapon = weapon
-	special_state.weapon = weapon
-	emit_signal('update_current_weapon', weapon)
+	set_weapon(weapon)
 	
 	weapon.get_parent().remove_child(weapon)
 	weapon_slots.add_child(weapon)
 
+func get_next_weapon() -> void:
+	var weapon_count = weapon_slots.get_child_count()
+	var next_weapon
+	var cur_index = attack_state.weapon.get_index()
+	
+	if weapon_count > 1:
+		
+		if cur_index == weapon_count - 1:
+			next_weapon = weapon_slots.get_child(0)
+		else:
+			next_weapon = weapon_slots.get_child(cur_index + 1)
+		set_weapon(next_weapon)
 
 func set_health(value: float) -> void:
 	.set_health(value)
@@ -91,6 +104,10 @@ func set_blend_position(value: Vector2) -> void:
 	.set_blend_position(value)
 	animation_tree.set('parameters/dodge/blend_position', dodge_state.dodge_dir)
 
+func set_weapon(value: Weapon) -> void:
+	.set_weapon(value)
+	special_state.weapon = value
+	emit_signal('update_current_weapon', value)
 
 func _on_state_completed() -> void:
 	state_machine.change_state(move_state)

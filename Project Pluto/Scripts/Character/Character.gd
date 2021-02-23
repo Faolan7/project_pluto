@@ -70,6 +70,8 @@ func set_blend_position(value: Vector2) -> void:
 	animation_tree.set('parameters/idle/blend_position', value)
 	animation_tree.set('parameters/move/blend_position', value)
 
+func set_weapon(value: Weapon) -> void:
+	attack_state.weapon = value
 
 func _on_damaged(damage: float, _dealer: Node2D) -> void:
 	set_health(get_health() - damage)
