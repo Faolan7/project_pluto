@@ -37,12 +37,15 @@ static func shoot(weapon, attack_dir: float, num_projectiles: int) -> void:
 
 static func spin(weapon, attack_angle: float) -> void:
 	var facing_pivot: Node2D = weapon.entity.facing_pivot
+	var original_pivot = facing_pivot.rotation
 	weapon.play_tween(facing_pivot, 'rotation',
 		facing_pivot.rotation - attack_angle / 2 - .1,
 		facing_pivot.rotation + attack_angle / 2 + .1,
 		attack_angle / 10)
+	
 		
 	yield(weapon.tween, 'tween_completed')
+	facing_pivot.rotation = original_pivot
 	_on_attack_finished(weapon, true)
 
 static func stab(weapon) -> void:
