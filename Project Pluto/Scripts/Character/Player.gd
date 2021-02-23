@@ -91,7 +91,7 @@ func set_blend_position(value: Vector2) -> void:
 	.set_blend_position(value)
 	animation_tree.set('parameters/dodge/blend_position', dodge_state.dodge_dir)
 
-func set_face_dir(_value: Vector2) -> void:
+func set_face_dir(value: Vector2) -> void:
 	var gamepad_dir: Vector2 = Vector2(
 		Input.get_action_strength('look_right') - Input.get_action_strength('look_left'),
 		Input.get_action_strength('look_down') - Input.get_action_strength('look_up')
@@ -104,10 +104,11 @@ func set_face_dir(_value: Vector2) -> void:
 		using_gamepad = true
 	elif using_gamepad and gamepad_dir == Vector2.ZERO:
 		return
-		
+	
 	last_mouse_position = mouse_position
-	.set_face_dir(gamepad_dir if using_gamepad else mouse_position - position)
-	special_state.attack_dir = face_dir
+	value = gamepad_dir if using_gamepad else get_local_mouse_position()
+	.set_face_dir(value)
+	special_state.attack_dir = value
 
 func _on_state_completed() -> void:
 	state_machine.change_state(move_state)

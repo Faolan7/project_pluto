@@ -39,11 +39,11 @@ func set_face_dir(value: Vector2) -> void:
 	
 	if abs(face_dir.angle_to(value)) > PI / 3:
 		if abs(value.x) > abs(value.y):
-			face_dir.x = value.x / abs(value.x)
+			face_dir.x = sign(value.x)
 			face_dir.y = 0
 		else:
 			face_dir.x = 0
-			face_dir.y = value.y / abs(value.y)
+			face_dir.y = sign(value.y)
 			
 		set_blend_position(face_dir)
 		facing_pivot.show_behind_parent = face_dir == Vector2.UP
