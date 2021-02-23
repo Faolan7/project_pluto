@@ -5,10 +5,11 @@ extends KinematicBody2D
 var face_dir: Vector2 = Vector2.RIGHT setget set_face_dir
 var health: float setget set_health, get_health
 var stamina: float setget set_stamina, get_stamina
+var weapon: Weapon setget set_weapon
 
 onready var state_machine: StateMachine = $StateMachine as StateMachine
-onready var move_state: State = $StateMachine/Move as State
-onready var attack_state: State = $StateMachine/Attack as State
+onready var move_state: MoveState = $StateMachine/Move as MoveState
+onready var attack_state: AttackState = $StateMachine/Attack as AttackState
 onready var health_bar: ResourceBar = $Sprite/Bars/HealthBar as ResourceBar
 onready var stamina_bar: ResourceBar = $Sprite/Bars/StaminaBar as ResourceBar
 
@@ -24,8 +25,8 @@ func _ready() -> void:
 	animation_tree.active = true
 
 
-func drop_weapon(weapon: Weapon) -> void:
-	var dropped_weapon: DroppedWeapon = DroppedWeapon.init(position - Vector2(0, 1), weapon)
+func drop_weapon(value: Weapon) -> void:
+	var dropped_weapon: DroppedWeapon = DroppedWeapon.init(position - Vector2(0, 1), value)
 	get_parent().call_deferred('add_child', dropped_weapon)
 
 func play_animation(animation: String) -> void:
@@ -69,6 +70,11 @@ func get_max_stamina() -> float:
 func set_blend_position(value: Vector2) -> void:
 	animation_tree.set('parameters/idle/blend_position', value)
 	animation_tree.set('parameters/move/blend_position', value)
+
+func set_weapon(value: Weapon) -> void:
+	weapon = value
+	
+	attack_state.weapon = weapon
 
 
 func _on_damaged(damage: float, _dealer: Node2D) -> void:

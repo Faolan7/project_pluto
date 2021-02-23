@@ -12,13 +12,13 @@ const DEATH_SCENE = 'res://Scenes/Menu/GameOver.tscn'
 
 var num_keys: int = 0
 
-onready var interact_state: State = $StateMachine/Interact as State
-onready var dodge_state: State = $StateMachine/Dodge as State
-onready var special_state: State = $StateMachine/SpecialAttack as State
+onready var interact_state: InteractState = $StateMachine/Interact as InteractState
+onready var dodge_state: DodgeState = $StateMachine/Dodge as DodgeState
+onready var special_state: SpecialState = $StateMachine/SpecialAttack as SpecialState
 
 onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 
-export var max_weapon_count: int = 1
+export var max_weapon_count: int = 2
 
 
 func _ready() -> void:
@@ -56,6 +56,9 @@ func _unhandled_input(_event: InputEvent) -> void:
 		elif Input.is_action_just_pressed('dodge'):
 			state_machine.change_state(dodge_state)
 			
+		elif Input.is_action_just_pressed('swap_weapon'):
+			get_next_weapon()
+			
 		elif input_vector != Vector2.ZERO: # Checking if move button is pushed
 			play_animation('move')
 			state_machine.change_state(move_state)
@@ -64,17 +67,26 @@ func _unhandled_input(_event: InputEvent) -> void:
 			play_animation('idle')
 
 
-func add_weapon(weapon: Weapon) -> void:
+func add_weapon(value: Weapon) -> void:
+	# Dropping current weapon if too many are held
 	if weapon_slots.get_child_count() >= max_weapon_count:
-		drop_weapon(attack_state.weapon)
+		drop_weapon(weapon)
 		
+	set_weapon(value)
 	weapon.visible = false
-	attack_state.weapon = weapon
-	special_state.weapon = weapon
-	emit_signal('update_current_weapon', weapon)
 	
 	weapon.get_parent().remove_child(weapon)
 	weapon_slots.add_child(weapon)
+
+func get_next_weapon() -> void:
+	var num_weapons: int = weapon_slots.get_child_count()
+
+	if num_weapons > 1:
+		var cur_weapon_index: int = weapon.get_index()
+		if cur_weapon_index == num_weapons - 1:
+			set_weapon(weapon_slots.get_child(0) as Weapon)
+		else:
+			set_weapon(weapon_slots.get_child(cur_weapon_index + 1) as Weapon)
 
 
 func set_health(value: float) -> void:
@@ -92,6 +104,12 @@ func set_stamina(value: float) -> void:
 func set_blend_position(value: Vector2) -> void:
 	.set_blend_position(value)
 	animation_tree.set('parameters/dodge/blend_position', dodge_state.dodge_dir)
+
+func set_weapon(value: Weapon) -> void:
+	.set_weapon(value)
+	
+	special_state.weapon = weapon
+	emit_signal('update_current_weapon', weapon)
 
 
 func _on_state_completed() -> void:
