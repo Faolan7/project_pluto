@@ -71,7 +71,8 @@ tracks/1/keys = {
 }
 
 [node name="Shortsword" instance=ExtResource( 1 )]
-position = Vector2( 12, 0 )
+position = Vector2( 20, 0 )
+scale = Vector2( 1.25, 1.5 )
 texture = ExtResource( 4 )
 script = ExtResource( 3 )
 attack_name = "stab"
@@ -79,8 +80,11 @@ attack_stamina_cost = 2.0
 special_name = "spin"
 special_stamina_cost = 5.0
 
+[node name="AttackRange" parent="." index="0"]
+visible = true
+
 [node name="CollisionShape2D" parent="AttackRange" index="0"]
-position = Vector2( 0, 12 )
+position = Vector2( 0, 13.5 )
 shape = SubResource( 1 )
 
 [node name="Hitbox" parent="." index="1" instance=ExtResource( 2 )]

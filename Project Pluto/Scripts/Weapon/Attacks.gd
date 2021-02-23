@@ -12,7 +12,7 @@ static func perform(attack: String, weapon, attack_dir: float) -> void:
 		'shoot': shoot(weapon, attack_dir, 1)
 		'stab': stab(weapon)
 		# Special attacks
-		'spin': spin(weapon, 2 * PI)
+		'spin': spin(weapon, PI)
 		'spreadshot3': shoot(weapon, attack_dir, 3)
 		# Default
 		_: print('ERROR: Unknown attack ' + attack)
@@ -38,8 +38,8 @@ static func shoot(weapon, attack_dir: float, num_projectiles: int) -> void:
 static func spin(weapon, attack_angle: float) -> void:
 	var facing_pivot: Node2D = weapon.entity.facing_pivot
 	weapon.play_tween(facing_pivot, 'rotation',
-		facing_pivot.rotation - attack_angle / 2 - 1,
-		facing_pivot.rotation + attack_angle / 2 + 1,
+		facing_pivot.rotation - attack_angle / 2 - .1,
+		facing_pivot.rotation + attack_angle / 2 + .1,
 		attack_angle / 10)
 		
 	yield(weapon.tween, 'tween_completed')

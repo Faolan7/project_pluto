@@ -47,7 +47,7 @@ script = ExtResource( 3 )
 attack_name = "shoot"
 attack_stamina_cost = 4.0
 special_name = "spreadshot3"
-special_stamina_cost = 10.0
+special_stamina_cost = 12.0
 PROJECTILE_SCENE = ExtResource( 4 )
 PROJECTILE_SPEED = 200.0
 
