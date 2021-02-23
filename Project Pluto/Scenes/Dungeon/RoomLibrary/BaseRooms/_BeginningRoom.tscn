@@ -15,7 +15,7 @@
 [ext_resource path="res://Sprites/Dungeon/floors-and-walls/Stone-Floor12.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/Dungeon/floors-and-walls/Stone-Floor10.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/Dungeon/floors-and-walls/wall.png" type="Texture" id=15]
-[ext_resource path="res://Scenes/Weapon/DroppedWeapon.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Item/DroppedWeapon.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Bow.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Shortsword.tscn" type="PackedScene" id=18]
 
