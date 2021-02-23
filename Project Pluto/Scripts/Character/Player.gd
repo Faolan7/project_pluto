@@ -11,6 +11,8 @@ signal update_keys(keys)
 const DEATH_SCENE = 'res://Scenes/Menu/GameOver.tscn'
 
 var num_keys: int = 0
+var using_gamepad: bool = false
+var last_mouse_position: Vector2 
 
 onready var interact_state: InteractState = $StateMachine/Interact as InteractState
 onready var dodge_state: DodgeState = $StateMachine/Dodge as DodgeState
@@ -31,15 +33,11 @@ func _unhandled_input(_event: InputEvent) -> void:
 		Input.get_action_strength('move_down') - Input.get_action_strength('move_up')
 	)
 	move_state.move_dir = input_vector
-	
+	dodge_state.dodge_dir = input_vector if input_vector != Vector2.ZERO else face_dir
 	
 	# Updating state
 	if state_machine.can_change_state:
-		var mouse_position = get_local_mouse_position().normalized()
-		dodge_state.dodge_dir = move_state.move_dir if move_state.move_dir != Vector2.ZERO else mouse_position
-		set_face_dir(mouse_position)
-		special_state.attack_dir = mouse_position
-		
+		set_face_dir(Vector2.ZERO)
 		
 		if Input.is_action_just_pressed('attack') and attack_state.weapon != null:
 			play_animation('idle')
@@ -100,6 +98,25 @@ func set_health(value: float) -> void:
 func set_stamina(value: float) -> void:
 	.set_stamina(value)
 	emit_signal('update_stamina', get_stamina())
+
+func set_face_dir(value: Vector2) -> void:
+	var gamepad_dir: Vector2 = Vector2(
+		Input.get_action_strength('look_right') - Input.get_action_strength('look_left'),
+		Input.get_action_strength('look_down') - Input.get_action_strength('look_up')
+	)
+	var mouse_position: Vector2 = get_global_mouse_position()
+	
+	if last_mouse_position != mouse_position:
+		using_gamepad = false
+	elif gamepad_dir != Vector2.ZERO:
+		using_gamepad = true
+	elif using_gamepad and gamepad_dir == Vector2.ZERO:
+		return
+	
+	last_mouse_position = mouse_position
+	value = gamepad_dir if using_gamepad else get_local_mouse_position()
+	.set_face_dir(value)
+	special_state.attack_dir = value
 
 func set_blend_position(value: Vector2) -> void:
 	.set_blend_position(value)
