@@ -31,13 +31,15 @@ func _unhandled_input(_event: InputEvent) -> void:
 		Input.get_action_strength('move_down') - Input.get_action_strength('move_up')
 	)
 	move_state.move_dir = input_vector
-	dodge_state.dodge_dir = input_vector
+	
 	
 	# Updating state
 	if state_machine.can_change_state:
 		var mouse_position = get_local_mouse_position().normalized()
+		dodge_state.dodge_dir = move_state.move_dir if move_state.move_dir != Vector2.ZERO else mouse_position
 		set_face_dir(mouse_position)
 		special_state.attack_dir = mouse_position
+		
 		
 		if Input.is_action_just_pressed('attack') and attack_state.weapon != null:
 			play_animation('idle')
