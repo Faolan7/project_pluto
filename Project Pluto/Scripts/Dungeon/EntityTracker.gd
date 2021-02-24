@@ -5,13 +5,9 @@ extends YSort
 signal room_cleared
 
 
-var num_enemies: int = 0
-
-
 func _ready() -> void:
 	for child in get_children():
 		if child is Enemy:
-			num_enemies += 1
 			child.connect('died', self, '_on_death')
 
 
@@ -22,7 +18,7 @@ func remove_enemies() -> void:
 
 func has_enemies() -> bool:
 	for child in get_children():
-		if child is Enemy:
+		if child is Enemy and not child.is_dead:
 			return true
 			
 	return false
@@ -30,7 +26,6 @@ func has_enemies() -> bool:
 
 func _on_death() -> void:
 	QuestJournal.add_kill(1)
-	num_enemies -= 1
 	
-	if num_enemies <= 0:
+	if not has_enemies():
 		emit_signal('room_cleared')
