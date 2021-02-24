@@ -1,21 +1,35 @@
 [gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/Dungeon/Room.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_Crossroads.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_BeginningRoom.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/Crossroads.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/BeginningRoom.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Dungeon/Dungeon.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Puzzle/_PuzzleDemo.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Boss/_BossDemo.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_UDRoom.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_ThroneRoom.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_URRoom.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_DiningHall1.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_DiningHall2.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Treasure/_ArtistBedroomTreasure.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Treasure/_ArmoryTreasure.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_TheLibrary.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_SparingRing.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_ArcherRange.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Boss/Boss.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/UDRoom.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/ThroneRoom.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/URRoom.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/DiningHall1.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/DiningHall2.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Treasure/ArtistBedroomTreasure.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Treasure/ArmoryTreasure.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/TheLibrary.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/SparingRing.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/ArcherRange.tscn" type="PackedScene" id=21]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource( 4 )
