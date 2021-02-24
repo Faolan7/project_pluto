@@ -1,25 +1,20 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://Scripts/Dungeon/Room.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_CombatDemo.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Dungeon/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_Crossroads.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_BeginningRoom.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Dungeon/Dungeon.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/_Base.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Puzzle/_PuzzleDemo.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Boss/_BossDemo.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_UDRoom.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_UDLRoom.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_UDLRRoom.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_LRRoom.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_ULRRoom.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_ThroneRoom.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/BaseRooms/_URRoom.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_DiningHall1.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_DiningHall2.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Puzzle/_ArtRoomPuzzle.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Treasure/_ArtistBedroomTreasure.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Treasure/_ArmoryTreasure.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_TheLibrary.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_SparingRing.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/IdleRooms/_Floor3Room1.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/_ArcherRange.tscn" type="PackedScene" id=21]
 
 [node name="Dungeon" type="Node2D"]
@@ -27,536 +22,172 @@ script = ExtResource( 4 )
 
 [node name="Rooms" type="Node2D" parent="."]
 
-[node name="BeginningRoom" type="Node2D" parent="Rooms"]
-script = ExtResource( 1 )
+[node name="BeginningRoom" parent="Rooms" instance=ExtResource( 1 )]
 connections = {
 "down": NodePath(""),
 "left": NodePath(""),
 "right": NodePath(""),
-"up": NodePath("../Hallway1")
+"up": NodePath("../CombatOne")
 }
 
 [node name="RoomLayout" parent="Rooms/BeginningRoom" instance=ExtResource( 3 )]
 
-[node name="Hallway1" type="Node2D" parent="Rooms"]
+[node name="CombatOne" parent="Rooms" instance=ExtResource( 1 )]
 position = Vector2( 0, -384 )
-script = ExtResource( 1 )
 connections = {
 "down": NodePath("../BeginningRoom"),
 "left": NodePath(""),
 "right": NodePath(""),
-"up": NodePath("../Hallway2")
+"up": NodePath("../CombatTwo")
 }
 
-[node name="RoomLayout" parent="Rooms/Hallway1" instance=ExtResource( 7 )]
+[node name="DiningHall1" parent="Rooms/CombatOne" instance=ExtResource( 13 )]
 
-[node name="Hallway2" type="Node2D" parent="Rooms"]
+[node name="CombatTwo" parent="Rooms" instance=ExtResource( 1 )]
 position = Vector2( 0, -768 )
-script = ExtResource( 1 )
 connections = {
-"down": NodePath("../Hallway1"),
-"left": NodePath("../Graveyard"),
+"down": NodePath("../CombatOne"),
+"left": NodePath(""),
 "right": NodePath(""),
-"up": NodePath("../Hallway3")
+"up": NodePath("../CombatThree")
 }
 
-[node name="RoomLayout" parent="Rooms/Hallway2" instance=ExtResource( 8 )]
+[node name="DiningHall2" parent="Rooms/CombatTwo" instance=ExtResource( 14 )]
 
-[node name="Hallway3" type="Node2D" parent="Rooms"]
+[node name="CombatThree" parent="Rooms" instance=ExtResource( 1 )]
 position = Vector2( 0, -1152 )
-script = ExtResource( 1 )
 connections = {
-"down": NodePath("../Hallway2"),
-"left": NodePath(""),
+"down": NodePath("../CombatTwo"),
+"left": NodePath("../PuzzleOne"),
 "right": NodePath(""),
-"up": NodePath("../Hallway4")
+"up": NodePath("../CombatFour")
 }
 
-[node name="RoomLayout" parent="Rooms/Hallway3" instance=ExtResource( 7 )]
+[node name="RoomLayout" parent="Rooms/CombatThree" instance=ExtResource( 2 )]
 
-[node name="Hallway4" type="Node2D" parent="Rooms"]
-position = Vector2( 0, -1536 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath("../Hallway3"),
-"left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("../Crossroads1")
-}
-
-[node name="RoomLayout" parent="Rooms/Hallway4" instance=ExtResource( 7 )]
-
-[node name="Graveyard" type="Node2D" parent="Rooms"]
-script = ExtResource( 1 )
+[node name="PuzzleOne" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( -512, -1152 )
 connections = {
 "down": NodePath(""),
 "left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("")
+"right": NodePath("../CombatThree"),
+"up": NodePath("../WeaponUpgrade")
 }
 
-[node name="RoomLayout" parent="Rooms/Graveyard" instance=ExtResource( 5 )]
-position = Vector2( -512, -768 )
+[node name="RoomLayout" parent="Rooms/PuzzleOne" instance=ExtResource( 12 )]
 
-[node name="Crossroads1" type="Node2D" parent="Rooms"]
-position = Vector2( 0, -1920 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath("../Hallway4"),
-"left": NodePath("../Hallway6"),
-"right": NodePath("../Hallway5"),
-"up": NodePath("../TransitionToFloor2")
-}
-
-[node name="RoomLayout2" parent="Rooms/Crossroads1" instance=ExtResource( 9 )]
-
-[node name="Hallway5" type="Node2D" parent="Rooms"]
-position = Vector2( 520, -1920 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
-"left": NodePath("../Crossroads1"),
-"right": NodePath("../Barracks"),
-"up": NodePath("../MapRoom")
-}
-
-[node name="RoomLayout" parent="Rooms/Hallway5" instance=ExtResource( 11 )]
-
-[node name="Hallway6" type="Node2D" parent="Rooms"]
-position = Vector2( -512, -1920 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath("../WomensBathroom"),
-"left": NodePath("../DiningHall1"),
-"right": NodePath("../Crossroads1"),
-"up": NodePath("../MensBathroom")
-}
-
-[node name="RoomLayout" parent="Rooms/Hallway6" instance=ExtResource( 9 )]
-
-[node name="DiningHall1" type="Node2D" parent="Rooms"]
-position = Vector2( -1024, -1920 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
-"left": NodePath("../DiningHall2"),
-"right": NodePath("../Hallway6"),
-"up": NodePath("")
-}
-
-[node name="DiningHall1" parent="Rooms/DiningHall1" instance=ExtResource( 13 )]
-
-[node name="DiningHall2" type="Node2D" parent="Rooms"]
-position = Vector2( -1536, -1920 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
-"left": NodePath("../Kitchen"),
-"right": NodePath("../DiningHall1"),
-"up": NodePath("")
-}
-
-[node name="DiningHall2" parent="Rooms/DiningHall2" instance=ExtResource( 14 )]
-
-[node name="Kitchen" type="Node2D" parent="Rooms"]
-position = Vector2( -2048, -1920 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath("../IceBox"),
-"left": NodePath(""),
-"right": NodePath("../DiningHall2"),
-"up": NodePath("../Pantry")
-}
-
-[node name="RoomLayout" parent="Rooms/Kitchen" instance=ExtResource( 5 )]
-
-[node name="IceBox" type="Node2D" parent="Rooms"]
-position = Vector2( -2048, -1536 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
-"left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("")
-}
-
-[node name="RoomLayout" parent="Rooms/IceBox" instance=ExtResource( 5 )]
-
-[node name="Pantry" type="Node2D" parent="Rooms"]
-position = Vector2( -2048, -2304 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
-"left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("")
-}
-
-[node name="RoomLayout" parent="Rooms/Pantry" instance=ExtResource( 5 )]
-
-[node name="MapRoom" type="Node2D" parent="Rooms"]
-position = Vector2( 520, -2304 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath("../Hallway5"),
-"left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("")
-}
-
-[node name="RoomLayout" parent="Rooms/MapRoom" instance=ExtResource( 5 )]
-
-[node name="Barracks" type="Node2D" parent="Rooms"]
-position = Vector2( 1032, -1920 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
-"left": NodePath("../Hallway5"),
-"right": NodePath("../Armory"),
-"up": NodePath("")
-}
-
-[node name="RoomLayout" parent="Rooms/Barracks" instance=ExtResource( 5 )]
-
-[node name="Armory" type="Node2D" parent="Rooms"]
-position = Vector2( 1544, -1920 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
-"left": NodePath("../Barracks"),
-"right": NodePath(""),
-"up": NodePath("")
-}
-
-[node name="TreasureDemo" parent="Rooms/Armory" instance=ExtResource( 17 )]
-
-[node name="MensBathroom" type="Node2D" parent="Rooms"]
-position = Vector2( -512, -2304 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath("../Hallway6"),
-"left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("")
-}
-
-[node name="RoomLayout" parent="Rooms/MensBathroom" instance=ExtResource( 5 )]
-
-[node name="WomensBathroom" type="Node2D" parent="Rooms"]
+[node name="WeaponUpgrade" parent="Rooms" instance=ExtResource( 1 )]
 position = Vector2( -512, -1536 )
-script = ExtResource( 1 )
 connections = {
-"down": NodePath(""),
+"down": NodePath("../PuzzleOne"),
 "left": NodePath(""),
 "right": NodePath(""),
-"up": NodePath("../Hallway6")
+"up": NodePath("")
 }
 
-[node name="RoomLayout" parent="Rooms/WomensBathroom" instance=ExtResource( 5 )]
+[node name="TreasureDemo" parent="Rooms/WeaponUpgrade" instance=ExtResource( 17 )]
 
-[node name="TransitionToFloor2" type="Node2D" parent="Rooms"]
+[node name="CombatFour" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( 0, -1536 )
+connections = {
+"down": NodePath("../CombatThree"),
+"left": NodePath(""),
+"right": NodePath(""),
+"up": NodePath("../CombatFive")
+}
+
+[node name="RoomLayout" parent="Rooms/CombatFour" instance=ExtResource( 7 )]
+
+[node name="CombatFive" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( 0, -1920 )
+connections = {
+"down": NodePath("../CombatFour"),
+"left": NodePath(""),
+"right": NodePath(""),
+"up": NodePath("../CombatSix")
+}
+
+[node name="TheLibrary" parent="Rooms/CombatFive" instance=ExtResource( 19 )]
+
+[node name="CombatSix" parent="Rooms" instance=ExtResource( 1 )]
 position = Vector2( 0, -2304 )
-script = ExtResource( 1 )
 connections = {
-"down": NodePath("../Crossroads1"),
+"down": NodePath("../CombatFive"),
 "left": NodePath(""),
 "right": NodePath(""),
-"up": NodePath("../Crossroads2")
+"up": NodePath("../CombatSeven")
 }
 
-[node name="RoomLayout" parent="Rooms/TransitionToFloor2" instance=ExtResource( 7 )]
+[node name="ArcherRange" parent="Rooms/CombatSix" instance=ExtResource( 21 )]
 
-[node name="Crossroads2" type="Node2D" parent="Rooms"]
+[node name="CombatSeven" parent="Rooms" instance=ExtResource( 1 )]
 position = Vector2( 0, -2688 )
-script = ExtResource( 1 )
 connections = {
-"down": NodePath("../TransitionToFloor2"),
-"left": NodePath("../Hallway8"),
-"right": NodePath("../Hallway7"),
-"up": NodePath("../KillRoom2")
-}
-
-[node name="RoomLayout" parent="Rooms/Crossroads2" instance=ExtResource( 9 )]
-
-[node name="Hallway7" type="Node2D" parent="Rooms"]
-position = Vector2( 520, -2688 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
-"left": NodePath("../Crossroads2"),
-"right": NodePath("../KeyReward1"),
-"up": NodePath("")
-}
-
-[node name="RoomLayout" parent="Rooms/Hallway7" instance=ExtResource( 10 )]
-
-[node name="Hallway8" type="Node2D" parent="Rooms"]
-position = Vector2( -512, -2696 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
-"left": NodePath("../KillRoom1"),
-"right": NodePath("../Crossroads2"),
-"up": NodePath("../ArtStudio")
-}
-
-[node name="RoomLayout" parent="Rooms/Hallway8" instance=ExtResource( 11 )]
-
-[node name="KillRoom1" type="Node2D" parent="Rooms"]
-position = Vector2( -1024, -2688 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath("../ArtistBedroom"),
-"left": NodePath("../CornerRoom1"),
-"right": NodePath("../Hallway8"),
-"up": NodePath("../BackRoom")
-}
-
-[node name="RoomLayout" parent="Rooms/KillRoom1" instance=ExtResource( 9 )]
-
-[node name="ArtistBedroom" type="Node2D" parent="Rooms"]
-position = Vector2( -1024, -2296 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
+"down": NodePath("../CombatSix"),
 "left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("../KillRoom1")
-}
-
-[node name="ArtistsBedroomTreasure" parent="Rooms/ArtistBedroom" instance=ExtResource( 16 )]
-
-[node name="ArtStudio" type="Node2D" parent="Rooms"]
-position = Vector2( -512, -3080 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath("../Hallway8"),
-"left": NodePath("../BackRoom"),
-"right": NodePath(""),
-"up": NodePath("")
-}
-
-[node name="ArtRoomPuzzle" parent="Rooms/ArtStudio" instance=ExtResource( 15 )]
-
-[node name="BackRoom" type="Node2D" parent="Rooms"]
-position = Vector2( -1024, -3072 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath("../KillRoom1"),
-"left": NodePath(""),
-"right": NodePath("../ArtStudio"),
-"up": NodePath("")
-}
-
-[node name="ArtRoomPuzzle" parent="Rooms/BackRoom" instance=ExtResource( 15 )]
-
-[node name="Chapel" type="Node2D" parent="Rooms"]
-position = Vector2( -1536, -3072 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath("../CornerRoom1"),
-"left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("")
-}
-
-[node name="ArtRoomPuzzle" parent="Rooms/Chapel" instance=ExtResource( 15 )]
-
-[node name="CornerRoom1" type="Node2D" parent="Rooms"]
-position = Vector2( -1536, -2688 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
-"left": NodePath(""),
-"right": NodePath("../KillRoom1"),
-"up": NodePath("../Chapel")
-}
-
-[node name="RoomLayout" parent="Rooms/CornerRoom1" instance=ExtResource( 12 )]
-
-[node name="KeyReward1" type="Node2D" parent="Rooms"]
-position = Vector2( 1032, -2688 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath("../SparingRing"),
-"left": NodePath("../Hallway7"),
-"right": NodePath("../TheLibrary"),
-"up": NodePath("../ArcherRange")
-}
-
-[node name="RoomLayout" parent="Rooms/KeyReward1" instance=ExtResource( 9 )]
-
-[node name="ArcherRange" type="Node2D" parent="Rooms"]
-position = Vector2( 1031.25, -3071.76 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath("../KeyReward1"),
-"left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("")
-}
-
-[node name="ArcherRange" parent="Rooms/ArcherRange" instance=ExtResource( 21 )]
-
-[node name="TheLibrary" type="Node2D" parent="Rooms"]
-position = Vector2( 1544, -2688 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
-"left": NodePath("../KeyReward1"),
-"right": NodePath(""),
-"up": NodePath("")
-}
-
-[node name="TheLibrary" parent="Rooms/TheLibrary" instance=ExtResource( 18 )]
-
-[node name="SparingRing" type="Node2D" parent="Rooms"]
-position = Vector2( 1032, -2304 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
-"left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("../KeyReward1")
-}
-
-[node name="TheLibrary" parent="Rooms/SparingRing" instance=ExtResource( 19 )]
-
-[node name="KillRoom2" type="Node2D" parent="Rooms"]
-position = Vector2( 0, -3080 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath("../Crossroads2"),
-"left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("../TransitionToFloor3")
-}
-
-[node name="RoomLayout" parent="Rooms/KillRoom2" instance=ExtResource( 7 )]
-
-[node name="TransitionToFloor3" type="Node2D" parent="Rooms"]
-position = Vector2( 0, -3464 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath("../KillRoom2"),
-"left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("../Crossroads3")
-}
-
-[node name="RoomLayout" parent="Rooms/TransitionToFloor3" instance=ExtResource( 7 )]
-
-[node name="Crossroads3" type="Node2D" parent="Rooms"]
-position = Vector2( 0, -3848 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath("../TransitionToFloor3"),
-"left": NodePath("../KillRoom4"),
-"right": NodePath("../KillRoom3"),
+"right": NodePath("../PuzzleTwo"),
 "up": NodePath("../ThroneRoom1")
 }
 
-[node name="RoomLayout" parent="Rooms/Crossroads3" instance=ExtResource( 20 )]
+[node name="RoomLayout" parent="Rooms/CombatSeven" instance=ExtResource( 2 )]
 
-[node name="KillRoom3" type="Node2D" parent="Rooms"]
-position = Vector2( 520, -3848 )
-script = ExtResource( 1 )
+[node name="PuzzleTwo" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( 512, -2688 )
 connections = {
 "down": NodePath(""),
-"left": NodePath("../Crossroads3"),
-"right": NodePath("../PuzzleRoom1"),
+"left": NodePath("../CombatSeven"),
+"right": NodePath("../LoadsOfMinions"),
 "up": NodePath("")
 }
 
-[node name="CombatDemo" parent="Rooms/KillRoom3" instance=ExtResource( 2 )]
+[node name="PuzzleDemo" parent="Rooms/PuzzleTwo" instance=ExtResource( 5 )]
 
-[node name="KillRoom4" type="Node2D" parent="Rooms"]
-position = Vector2( -512, -3840 )
-script = ExtResource( 1 )
+[node name="LoadsOfMinions" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( 1024, -2688 )
 connections = {
 "down": NodePath(""),
-"left": NodePath("../PuzzleRoom2"),
-"right": NodePath("../Crossroads3"),
+"left": NodePath("../PuzzleTwo"),
+"right": NodePath("../KeyReward"),
 "up": NodePath("")
 }
 
-[node name="CombatDemo" parent="Rooms/KillRoom4" instance=ExtResource( 2 )]
+[node name="TheLibrary" parent="Rooms/LoadsOfMinions" instance=ExtResource( 18 )]
 
-[node name="PuzzleRoom1" type="Node2D" parent="Rooms"]
-position = Vector2( 1032, -3848 )
-script = ExtResource( 1 )
+[node name="KeyReward" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( 1536, -2688 )
 connections = {
 "down": NodePath(""),
-"left": NodePath("../KillRoom3"),
-"right": NodePath("../KeyRoom3"),
-"up": NodePath("")
-}
-
-[node name="RoomLayout" parent="Rooms/PuzzleRoom1" instance=ExtResource( 5 )]
-
-[node name="PuzzleRoom2" type="Node2D" parent="Rooms"]
-position = Vector2( -1024, -3840 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
-"left": NodePath("../KeyRoom2"),
-"right": NodePath("../KillRoom4"),
-"up": NodePath("")
-}
-
-[node name="RoomLayout" parent="Rooms/PuzzleRoom2" instance=ExtResource( 5 )]
-
-[node name="KeyRoom2" type="Node2D" parent="Rooms"]
-position = Vector2( -1536, -3848 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
-"left": NodePath(""),
-"right": NodePath("../PuzzleRoom2"),
-"up": NodePath("")
-}
-
-[node name="RoomLayout" parent="Rooms/KeyRoom2" instance=ExtResource( 5 )]
-
-[node name="KeyRoom3" type="Node2D" parent="Rooms"]
-position = Vector2( 1544, -3848 )
-script = ExtResource( 1 )
-connections = {
-"down": NodePath(""),
-"left": NodePath("../PuzzleRoom1"),
+"left": NodePath("../LoadsOfMinions"),
 "right": NodePath(""),
 "up": NodePath("")
 }
 
-[node name="RoomLayout" parent="Rooms/KeyRoom3" instance=ExtResource( 5 )]
+[node name="ArtistsBedroomTreasure" parent="Rooms/KeyReward" instance=ExtResource( 16 )]
 
-[node name="ThroneRoom1" type="Node2D" parent="Rooms"]
-position = Vector2( 0, -4232 )
-script = ExtResource( 1 )
+[node name="ThroneRoom1" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( 0, -3072 )
 connections = {
-"down": NodePath("../Crossroads3"),
+"down": NodePath("../CombatSeven"),
 "left": NodePath(""),
 "right": NodePath(""),
 "up": NodePath("../ThroneRoom2")
 }
 
-[node name="CombatDemo" parent="Rooms/ThroneRoom1" instance=ExtResource( 2 )]
+[node name="ThroneRoom" parent="Rooms/ThroneRoom1" instance=ExtResource( 8 )]
 
-[node name="ThroneRoom2" type="Node2D" parent="Rooms"]
-position = Vector2( 0, -4608 )
-script = ExtResource( 1 )
+[node name="ThroneRoom2" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( 0, -3456 )
 connections = {
 "down": NodePath("../ThroneRoom1"),
 "left": NodePath(""),
 "right": NodePath(""),
-"up": NodePath("../GrandThroneRoom")
+"up": NodePath("../BossFight")
 }
 
-[node name="CombatDemo" parent="Rooms/ThroneRoom2" instance=ExtResource( 2 )]
+[node name="ThroneRoom" parent="Rooms/ThroneRoom2" instance=ExtResource( 8 )]
 
-[node name="GrandThroneRoom" type="Node2D" parent="Rooms"]
-position = Vector2( 0, -4992 )
-script = ExtResource( 1 )
+[node name="BossFight" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( 0, -3840 )
 connections = {
 "down": NodePath("../ThroneRoom2"),
 "left": NodePath(""),
@@ -564,4 +195,4 @@ connections = {
 "up": NodePath("")
 }
 
-[node name="BossDemo" parent="Rooms/GrandThroneRoom" instance=ExtResource( 6 )]
+[node name="BossDemo" parent="Rooms/BossFight" instance=ExtResource( 6 )]

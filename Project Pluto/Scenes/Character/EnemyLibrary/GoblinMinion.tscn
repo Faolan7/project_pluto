@@ -153,6 +153,7 @@ tracks/0/keys = {
 WEAPON_PATH = NodePath("Sprite/FacingPivot/Shortsword")
 
 [node name="Sprite" parent="." index="0"]
+self_modulate = Color( 0.305882, 0.270588, 0.270588, 1 )
 scale = Vector2( 0.33, 0.33 )
 texture = ExtResource( 3 )
 hframes = 12
