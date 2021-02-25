@@ -100,6 +100,7 @@ func set_state(state: String) -> void:
 
 func set_target(body: Character) -> void:
 	target = body
+	
 	if target == null:
 		set_state('wander')
 		detection_area_shape.set_deferred('disabled', false)
@@ -108,6 +109,10 @@ func set_target(body: Character) -> void:
 		set_state('move')
 		detection_area_shape.set_deferred('disabled', true)
 		set_physics_process(true)
+		
+		if target.is_class('Enemy') and target.is_connected('died', self, 'set_target'):
+			# warning-ignore:return_value_discarded
+			target.connect('died', self, 'set_target', [null])
 
 
 func _on_damaged(damage: float, dealer: Node2D) -> void:
