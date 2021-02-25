@@ -38,7 +38,9 @@ func _ready() -> void:
 	set_physics_process(false)
 
 func _physics_process(_delta) -> void:
-	if state_machine.current_state == move_state:
+	if not is_instance_valid(target):
+		set_target(null)
+	elif state_machine.current_state == move_state:
 		var to_target: Vector2 = target.position - position
 		var target_distance: float = to_target.length()
 		set_face_dir(to_target)
