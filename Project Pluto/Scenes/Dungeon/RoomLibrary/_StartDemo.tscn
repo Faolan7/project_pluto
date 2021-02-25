@@ -16,12 +16,12 @@ position = Vector2( 64, 92 )
 position = Vector2( 180, 55 )
 
 [node name="Sword" parent="Entities/Sword" index="1" instance=ExtResource( 3 )]
+special_name = "sparks"
 
 [node name="Maul" parent="Entities" index="2" instance=ExtResource( 8 )]
 position = Vector2( 180, 95 )
 
 [node name="Maul" parent="Entities/Maul" index="1" instance=ExtResource( 4 )]
-special_name = "explode"
 
 [node name="Bow" parent="Entities" index="3" instance=ExtResource( 8 )]
 position = Vector2( 180, 135 )

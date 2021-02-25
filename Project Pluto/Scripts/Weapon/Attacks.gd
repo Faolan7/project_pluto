@@ -15,6 +15,7 @@ static func perform(attack: String, weapon, special: bool, attack_dir: float) ->
 		'stab': stab(weapon, special)
 		'swing': swing(weapon, special, PI / 2)
 		'explode': explode(weapon, special)
+		'sparks': stab(weapon, special)
 		_: print('ERROR: Unknown attack ' + attack)
 
 static func _on_attack_finished(weapon, special: bool) -> void:
