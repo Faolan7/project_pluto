@@ -27,7 +27,7 @@ func _ready() -> void:
 	animation_tree.active = true
 
 # Handles all user input to control the player
-func _unhandled_input(_event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	var input_vector: Vector2 = Vector2(
 		Input.get_action_strength('move_right') - Input.get_action_strength('move_left'),
 		Input.get_action_strength('move_down') - Input.get_action_strength('move_up')
@@ -39,22 +39,22 @@ func _unhandled_input(_event: InputEvent) -> void:
 	if state_machine.can_change_state:
 		set_face_dir(Vector2.ZERO)
 		
-		if Input.is_action_just_pressed('attack') and attack_state.weapon != null:
+		if event.is_action_pressed('attack') and attack_state.weapon != null:
 			play_animation('idle')
 			state_machine.change_state(attack_state)
 			
-		elif Input.is_action_just_pressed('attack_special') and special_state.weapon != null:
+		elif event.is_action_pressed('attack_special') and special_state.weapon != null:
 			state_machine.change_state(special_state)
 			
-		elif Input.is_action_just_pressed('interact'):
+		elif event.is_action_pressed('interact'):
 			play_animation('idle')
 			state_machine.change_state(interact_state)
 			emit_signal('update_keys', num_keys)
 			
-		elif Input.is_action_just_pressed('dodge'):
+		elif event.is_action_pressed('dodge'):
 			state_machine.change_state(dodge_state)
 			
-		elif Input.is_action_just_pressed('swap_weapon'):
+		elif event.is_action_pressed('swap_weapon'):
 			get_next_weapon()
 			
 		elif input_vector != Vector2.ZERO: # Checking if move button is pushed
