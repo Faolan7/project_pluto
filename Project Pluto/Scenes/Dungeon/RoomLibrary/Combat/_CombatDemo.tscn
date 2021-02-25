@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/_Base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Character/EnemyLibrary/GoblinArcher.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Character/EnemyLibrary/GoblinWarrior.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Item/DroppedKey.tscn" type="PackedScene" id=4]
 
 [node name="CombatDemo" instance=ExtResource( 1 )]
 
@@ -17,3 +18,7 @@ position = Vector2( 211.382, 96.6231 )
 
 [node name="GoblinWarrior2" parent="Entities" index="2" instance=ExtResource( 3 )]
 position = Vector2( 44.0007, 94.542 )
+
+[node name="SecretDroppedKey" parent="Entities" index="3" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 100, 40 )

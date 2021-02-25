@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Weapon/BaseWeapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Weapon/Hitbox.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/Weapon/WeaponMelee.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/Weapon/mace.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -74,11 +73,9 @@ tracks/1/keys = {
 position = Vector2( 20, 0 )
 scale = Vector2( 1.25, 1.25 )
 texture = ExtResource( 4 )
-script = ExtResource( 3 )
 attack_name = "swing"
-attack_stamina_cost = 4.0
-special_name = "spin"
-special_stamina_cost = 5.0
+attack_stamina_cost = 5.0
+attack_hitbox_path = NodePath("Hitbox")
 
 [node name="AttackRange" parent="." index="0"]
 visible = true
