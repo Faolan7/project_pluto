@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Weapon/BaseWeapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Weapon/Hitbox.tscn" type="PackedScene" id=2]
@@ -11,8 +11,10 @@ radius = 23.0
 radius = 4.0
 height = 2.5
 
-[sub_resource type="Animation" id=3]
-resource_name = "attack"
+[sub_resource type="CircleShape2D" id=3]
+radius = 40.0
+
+[sub_resource type="Animation" id=4]
 length = 0.1
 step = 0.02
 tracks/0/type = "value"
@@ -40,8 +42,7 @@ tracks/1/keys = {
 "values": [ true, false, true ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "special"
+[sub_resource type="Animation" id=5]
 length = 0.1
 step = 0.02
 tracks/0/type = "value"
@@ -76,6 +77,9 @@ texture = ExtResource( 4 )
 attack_name = "swing"
 attack_stamina_cost = 5.0
 attack_hitbox_path = NodePath("Hitbox")
+special_name = "slam"
+special_stamina_cost = 10.0
+special_hitbox_path = NodePath("SpecialHitbox")
 
 [node name="AttackRange" parent="." index="0"]
 visible = true
@@ -85,13 +89,22 @@ position = Vector2( 0, 13.5 )
 shape = SubResource( 1 )
 
 [node name="Hitbox" parent="." index="1" instance=ExtResource( 2 )]
-damage = 3
+damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, -6 )
 shape = SubResource( 2 )
 disabled = true
 
-[node name="AnimationPlayer" parent="." index="2"]
-anims/attack = SubResource( 3 )
-anims/special = SubResource( 4 )
+[node name="SpecialHitbox" parent="." index="2" instance=ExtResource( 2 )]
+rotation = -2.27374e-13
+damage = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpecialHitbox" index="0"]
+position = Vector2( 0, 16 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="AnimationPlayer" parent="." index="3"]
+anims/attack = SubResource( 4 )
+anims/special = SubResource( 5 )

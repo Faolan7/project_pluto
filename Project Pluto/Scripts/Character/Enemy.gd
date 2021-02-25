@@ -116,6 +116,10 @@ func set_target(body: Character) -> void:
 
 
 func _on_damaged(damage: float, dealer: Node2D) -> void:
+	# Checking if already dead
+	if get_is_dead():
+		return
+		
 	._on_damaged(damage, dealer)
 	if dealer != target:
 		set_target(dealer)

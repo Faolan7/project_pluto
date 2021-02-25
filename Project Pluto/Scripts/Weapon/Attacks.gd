@@ -8,13 +8,12 @@ static func perform(attack: String, weapon, special: bool, attack_dir: float) ->
 	weapon.visible = true
 	
 	match attack:
-		# Normal attacks
 		'shoot': shoot(weapon, special, attack_dir, 1)
-		'stab': stab(weapon, special)
-		# Special attacks
-		'spin': spin(weapon, special, PI)
+		'slam': slam(weapon, special)
+		'spin': swing(weapon, special, PI)
 		'spreadshot3': shoot(weapon, special, attack_dir, 3)
-		# Default
+		'stab': stab(weapon, special)
+		'swing': swing(weapon, special, PI / 2)
 		_: print('ERROR: Unknown attack ' + attack)
 
 static func _on_attack_finished(weapon, special: bool) -> void:
@@ -22,6 +21,12 @@ static func _on_attack_finished(weapon, special: bool) -> void:
 	weapon.set_hitbox_enabled(false, special)
 	weapon.emit_signal('attack_finished' if not special else 'special_finished')
 
+
+static func slam(weapon, special: bool) -> void:
+	weapon.set_hitbox_enabled(true, special)
+	
+	yield(weapon.get_tree().create_timer(.15), 'timeout')
+	_on_attack_finished(weapon, special)
 
 static func shoot(weapon, special: bool, attack_dir: float, num_projectiles: int) -> void:
 	var cone_size: float = (num_projectiles - 1) / 20.0 # Doing floating point division
@@ -35,7 +40,15 @@ static func shoot(weapon, special: bool, attack_dir: float, num_projectiles: int
 	yield(weapon.animation_player, 'animation_finished')
 	_on_attack_finished(weapon, special)
 
-static func spin(weapon, special: bool, attack_angle: float) -> void:
+static func stab(weapon, special: bool) -> void:
+	weapon.set_hitbox_enabled(true, special)
+	weapon.play_tween(weapon, 'position',
+		Vector2(2, 0), weapon.position, .1)
+		
+	yield(weapon.tween, 'tween_completed')
+	_on_attack_finished(weapon, special)
+
+static func swing(weapon, special: bool, attack_angle: float) -> void:
 	var facing_pivot: Node2D = weapon.entity.facing_pivot
 	var original_pivot = facing_pivot.rotation
 	
@@ -47,12 +60,4 @@ static func spin(weapon, special: bool, attack_angle: float) -> void:
 		
 	yield(weapon.tween, 'tween_completed')
 	facing_pivot.rotation = original_pivot
-	_on_attack_finished(weapon, special)
-
-static func stab(weapon, special: bool) -> void:
-	weapon.set_hitbox_enabled(true, special)
-	weapon.play_tween(weapon, 'position',
-		Vector2(2, 0), weapon.position, .1)
-		
-	yield(weapon.tween, 'tween_completed')
 	_on_attack_finished(weapon, special)
