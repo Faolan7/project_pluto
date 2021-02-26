@@ -33,7 +33,7 @@ static func slam(weapon, special: bool) -> void:
 
 static func explode(weapon, special: bool) -> void:
 	weapon.set_hitbox_enabled(true, special)
-	weapon.set_hitbox_position_to_mouse()
+	weapon.set_hitbox_position_to_mouse(special)
 	
 	yield(weapon.get_tree().create_timer(.15), 'timeout')
 	_on_attack_finished(weapon, special)
@@ -57,6 +57,16 @@ static func stab(weapon, special: bool) -> void:
 		Vector2(2, 0), weapon.position, .1)
 		
 	yield(weapon.tween, 'tween_completed')
+	_on_attack_finished(weapon, special)
+	
+static func sparks(weapon, special: bool) -> void:
+	weapon.animation_player.play('Tome#1')
+	weapon.set_hitbox_enabled(true, special)
+	weapon.play_tween(weapon, 'position',
+		Vector2(2, 0), weapon.position, .1)
+		
+	yield(weapon.tween, 'tween_completed')
+	yield(weapon.animation_player, 'animation_finished')
 	_on_attack_finished(weapon, special)
 
 static func swing(weapon, special: bool, attack_angle: float) -> void:

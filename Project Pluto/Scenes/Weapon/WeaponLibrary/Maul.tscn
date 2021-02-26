@@ -85,6 +85,7 @@ special_hitbox_path = NodePath("SpecialHitbox")
 visible = true
 
 [node name="CollisionShape2D" parent="AttackRange" index="0"]
+visible = false
 position = Vector2( 0, 13.5 )
 shape = SubResource( 1 )
 

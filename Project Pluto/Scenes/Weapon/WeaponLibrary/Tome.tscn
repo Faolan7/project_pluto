@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scripts/Weapon/Weapon.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Weapon/tome1-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Weapon/Hitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sprites/Weapon/Projectile/Lightning-Sheet.png" type="Texture" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="CircleShape2D" id=2]
+
+[sub_resource type="CapsuleShape2D" id=3]
+height = 208.283
+
+[sub_resource type="Animation" id=4]
+resource_name = "Tome#1"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sparks:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sparks:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="Tome" type="Sprite"]
+position = Vector2( 3, 0 )
+rotation = 1.5708
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+attack_name = "explode"
+attack_stamina_cost = 5.0
+attack_hitbox_path = NodePath("Hitbox")
+special_name = "sparks"
+special_stamina_cost = 10.0
+special_hitbox_path = NodePath("SpecialHitbox")
+
+[node name="AttackRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+visible = false
+position = Vector2( 0, 13.5 )
+shape = SubResource( 1 )
+disabled = true
+
+[node name="Hitbox" parent="." instance=ExtResource( 3 )]
+damage = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
+scale = Vector2( 5, 5 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="SpecialHitbox" parent="." instance=ExtResource( 3 )]
+damage = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpecialHitbox"]
+visible = false
+position = Vector2( -3.86358e-06, -88.3883 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Tome#1 = SubResource( 4 )
+
+[node name="Sparks" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 4 )
+hframes = 19
+frame = 3
+[connection signal="area_entered" from="AttackRange" to="." method="_on_attack_range_entered"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_tween_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

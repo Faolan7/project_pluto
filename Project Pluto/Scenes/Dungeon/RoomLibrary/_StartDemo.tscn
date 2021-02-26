@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/_Base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Bow.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Sword.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Maul.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Character/NPC.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Weapon/WeaponLibrary/Tome.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Item/DroppedWeapon.tscn" type="PackedScene" id=8]
 
 [node name="StartDemo" instance=ExtResource( 1 )]
@@ -36,3 +37,8 @@ position = Vector2( 100, 45 )
 attack_stamina_cost = 0.0
 special_stamina_cost = 0.0
 projectile_speed = 1000.0
+
+[node name="Tome" parent="Entities" index="5" instance=ExtResource( 8 )]
+position = Vector2( 65.9061, 134.871 )
+
+[node name="Tome" parent="Entities/Tome" index="1" instance=ExtResource( 6 )]

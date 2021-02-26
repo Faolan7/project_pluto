@@ -85,8 +85,11 @@ func set_hitbox_enabled(value: bool, special: bool = false) -> void:
 #I mean it.
 #Best,
 #Grand Code Monkey
-func set_hitbox_position_to_mouse() ->void:		#use for fireballlllllllll
-	special_hitbox.shape.position = get_local_mouse_position()
+func set_hitbox_position_to_mouse(special: bool) ->void:		#use for fireballlllllllll
+	if special:
+		special_hitbox.shape.position = get_local_mouse_position()
+	else:
+		attack_hitbox.shape.position = get_local_mouse_position()
 
 
 func _on_animation_finished(anim_name: String) -> void:
