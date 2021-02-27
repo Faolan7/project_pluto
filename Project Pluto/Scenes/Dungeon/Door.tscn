@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Sprites/Dungeon/floors-and-walls/door.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Dungeon/Object/door.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Dungeon/Door.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Interface/InteractBox.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 31.9896, 16.0343 )
+extents = Vector2( 32, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 31.9854, 1 )
@@ -17,20 +17,24 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
+offset = Vector2( 1, -1 )
+hframes = 2
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 1, -1 )
 shape = SubResource( 1 )
 
 [node name="ExitArea" type="Area2D" parent="."]
-position = Vector2( 0, -16 )
-collision_mask = 0
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+position = Vector2( 1, -18.25 )
 shape = SubResource( 2 )
 
 [node name="InteractBox" parent="." instance=ExtResource( 3 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractBox"]
+position = Vector2( 1, -1 )
 shape = SubResource( 1 )
 [connection signal="body_entered" from="ExitArea" to="." method="_on_door_entered"]
 [connection signal="interaction_started" from="InteractBox" to="." method="_on_interaction"]

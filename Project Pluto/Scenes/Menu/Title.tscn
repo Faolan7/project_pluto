@@ -99,6 +99,7 @@ size = 12
 font_data = ExtResource( 8 )
 
 [node name="Title" type="AnimatedSprite"]
+scale = Vector2( 2, 2 )
 frames = SubResource( 5 )
 centered = false
 script = ExtResource( 9 )

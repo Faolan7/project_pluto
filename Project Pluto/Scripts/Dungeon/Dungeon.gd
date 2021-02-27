@@ -4,20 +4,26 @@ extends Node2D
 const PLAYER_SCENE = preload('res://Scenes/Character/Player.tscn')
 
 var player: Player
+var current_room: Room
 
-onready var current_room: Room = $Rooms/BeginningRoom as Room
+onready var rooms: Node2D = $Rooms as Node2D
+
 
 
 func _ready():
 	get_parent().call_deferred('move_child', self, 0)
 	
+	# Setting up player
 	player = PLAYER_SCENE.instance() as Player
 	add_child(player) # Makes player always have a parent
 	UI.player = player
 	
-	for child in $Rooms.get_children():
-		child.connect('room_exited', self, '_on_room_exited')
-	
+	# Preparing all the rooms
+	for room in rooms.get_children():
+		room.connect('room_exited', self, '_on_room_exited')
+		
+	# Getting and loading the current room
+	current_room = rooms.get_child(0)
 	load_room(current_room, Vector2.ZERO)
 
 
@@ -39,4 +45,3 @@ func _on_room_exited(exit_dir: Vector2) -> void:
 
 func _on_room_loaded(enter_dir: Vector2, room: Room)->void:
 	room.enter(enter_dir, player)
-

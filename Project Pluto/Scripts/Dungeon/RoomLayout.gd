@@ -20,6 +20,7 @@ onready var doors: Dictionary = {
 
 
 func enter(enter_dir: Vector2, player: Player, room_data: Dictionary) -> void:
+	set_doors_open(false)
 	import_data(room_data)
 	
 	# Opening entrance door
@@ -42,7 +43,7 @@ func enter(enter_dir: Vector2, player: Player, room_data: Dictionary) -> void:
 
 func remove_door(side: Vector2) -> void:
 	var door: Door = doors[side] as Door
-	var offset: Vector2 = Vector2(1, 1)
+	var offset: Vector2 = Vector2(4, 4)
 	
 	# Hiding door
 	door.visible = false
@@ -87,7 +88,7 @@ func set_doors_open(value: bool) -> void:
 
 func get_enter_position(enter_dir: Vector2) -> Vector2:
 	if enter_dir == Vector2.ZERO:
-		return Vector2(128, 96) # Center of room
+		return Vector2(256, 192) # Center of room
 	else:
 		return doors[enter_dir].position
 
