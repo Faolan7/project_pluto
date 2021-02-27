@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Sprites/Weapon/shortsword.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Weapon/sword.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Weapon/Hitbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Weapon/BaseWeapon.tscn" type="PackedScene" id=3]
 
