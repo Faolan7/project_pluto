@@ -2,8 +2,6 @@
 
 [ext_resource path="res://Scripts/Interface/InteractBox.gd" type="Script" id=1]
 
-
-
 [node name="InteractBox" type="Area2D"]
 collision_layer = 4
 collision_mask = 0

@@ -10,7 +10,7 @@ var LAYOUT_SCENE: Resource
 var layout: RoomLayout
 
 var is_loaded: bool setget set_loaded
-var cleared: bool
+var cleared: bool = false
 var room_data: Dictionary
 
 export(Dictionary) var connections: Dictionary = {
