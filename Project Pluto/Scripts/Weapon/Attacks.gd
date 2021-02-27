@@ -8,7 +8,6 @@ static func perform(attack: String, weapon, special: bool, attack_dir: float) ->
 	weapon.visible = true
 	
 	match attack:
-		'fireball': fireball(weapon, special)
 		'lightning': lightning(weapon, special)
 		'shoot': shoot(weapon, special, attack_dir, 1)
 		'slam': slam(weapon, special)
@@ -23,13 +22,6 @@ static func _on_attack_finished(weapon, special: bool) -> void:
 	weapon.set_hitbox_enabled(false, special)
 	weapon.emit_signal('attack_finished' if not special else 'special_finished')
 
-
-static func fireball(weapon, special: bool) -> void:
-	weapon.set_hitbox_enabled(true, special)
-	weapon.set_hitbox_position_to_mouse(special)
-	
-	yield(weapon.get_tree().create_timer(.15), 'timeout')
-	_on_attack_finished(weapon, special)
 
 static func lightning(weapon, special: bool) -> void:
 	weapon.animation_player.play('lightning')

@@ -80,18 +80,6 @@ func set_hitbox_enabled(value: bool, special: bool = false) -> void:
 		if attack_hitbox != null: attack_hitbox.shape.disabled = not value
 
 
-#To Dearest Matthew Montey
-#Do not delete this code.
-#I mean it.
-#Best,
-#Grand Code Monkey
-func set_hitbox_position_to_mouse(special: bool) ->void:		#use for fireballlllllllll
-	if special:
-		special_hitbox.shape.position = get_local_mouse_position()
-	else:
-		attack_hitbox.shape.position = get_local_mouse_position()
-
-
 func _on_animation_finished(anim_name: String) -> void:
 	match anim_name:
 		'attack': emit_signal('attack_finished')

@@ -1,14 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Weapon/Weapon.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Weapon/tome.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Weapon/Hitbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/Weapon/Projectile/lightning.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Weapon/WeaponLibrary/Projectile/Fireball.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 240.0
-
-[sub_resource type="CircleShape2D" id=2]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 26, 128 )
@@ -53,19 +52,36 @@ tracks/2/keys = {
 "values": [ 1, 0 ]
 }
 
+[sub_resource type="Animation" id=6]
+resource_name = "shoot"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 0 ]
+}
+
 [node name="Tome" type="Sprite"]
-position = Vector2( 3, 0 )
+position = Vector2( 6, 0 )
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 hframes = 2
 script = ExtResource( 1 )
-attack_name = "explode"
+attack_name = "shoot"
 attack_stamina_cost = 5.0
-attack_hitbox_path = NodePath("Hitbox")
 special_name = "lightning"
 special_stamina_cost = 10.0
 special_hitbox_path = NodePath("LightningHitbox")
+projectile_scene = ExtResource( 5 )
+projectile_speed = 150.0
 
 [node name="Sparks" type="Sprite" parent="."]
 visible = false
@@ -83,15 +99,6 @@ collision_mask = 2
 shape = SubResource( 1 )
 disabled = true
 
-[node name="Hitbox" parent="." instance=ExtResource( 3 )]
-visible = false
-damage = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-scale = Vector2( 5, 5 )
-shape = SubResource( 2 )
-disabled = true
-
 [node name="LightningHitbox" parent="." instance=ExtResource( 3 )]
 damage = 2
 
@@ -105,6 +112,7 @@ disabled = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
 anims/lightning = SubResource( 4 )
+anims/shoot = SubResource( 6 )
 [connection signal="area_entered" from="AttackRange" to="." method="_on_attack_range_entered"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_tween_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

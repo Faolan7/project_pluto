@@ -9,7 +9,7 @@
 [ext_resource path="res://Scripts/State/Dodge.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 25, 40 )
+extents = Vector2( 40, 40 )
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 26.0
@@ -453,7 +453,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/FacingPivot/InteractionArea" index="0"]
-position = Vector2( 48, 0 )
+position = Vector2( 40, 0 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
