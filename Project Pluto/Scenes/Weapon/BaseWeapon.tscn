@@ -19,3 +19,4 @@ disabled = true
 [node name="Tween" type="Tween" parent="."]
 [connection signal="area_entered" from="AttackRange" to="." method="_on_attack_range_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_tween_finished"]

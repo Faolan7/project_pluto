@@ -20,6 +20,7 @@ onready var special_state: SpecialState = $StateMachine/SpecialAttack as Special
 
 onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 
+export var god_mode: bool = false
 export var max_weapon_count: int = 2
 
 
@@ -128,6 +129,12 @@ func set_weapon(value: Weapon) -> void:
 	special_state.weapon = weapon
 	emit_signal('update_current_weapon', weapon)
 
+
+func _on_damaged(damage: float, dealer: Node2D) -> void:
+	if god_mode:
+		print('Ignored ', damage, ' damage')
+	else:
+		._on_damaged(damage, dealer)
 
 func _on_state_completed() -> void:
 	state_machine.change_state(move_state)

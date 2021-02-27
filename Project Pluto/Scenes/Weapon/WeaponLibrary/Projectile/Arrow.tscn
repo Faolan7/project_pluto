@@ -9,9 +9,9 @@ extents = Vector2( 2, 1.5 )
 [node name="Arrow" instance=ExtResource( 1 )]
 damage = 1
 
-[node name="CollisionShape2D" parent="." index="0"]
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
 position = Vector2( 10, -0.5 )
 shape = SubResource( 1 )
-
-[node name="Sprite" parent="." index="1"]
-texture = ExtResource( 2 )

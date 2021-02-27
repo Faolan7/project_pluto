@@ -4,53 +4,68 @@ extends Node
 # and the workaround would be dirty and annoying
 
 
-static func perform(attack: String, weapon, attack_dir: float) -> void:
+static func perform(attack: String, weapon, special: bool, attack_dir: float) -> void:
 	weapon.visible = true
 	
 	match attack:
-		# Normal attacks
-		'shoot': shoot(weapon, attack_dir, 1)
-		'stab': stab(weapon)
-		# Special attacks
-		'spin': spin(weapon, PI)
-		'spreadshot3': shoot(weapon, attack_dir, 3)
-		# Default
+		'lightning': lightning(weapon, special)
+		'shoot': shoot(weapon, special, attack_dir, 1)
+		'slam': slam(weapon, special)
+		'spin': swing(weapon, special, PI)
+		'spreadshot3': shoot(weapon, special, attack_dir, 3)
+		'stab': stab(weapon, special)
+		'swing': swing(weapon, special, PI / 2)
 		_: print('ERROR: Unknown attack ' + attack)
 
 static func _on_attack_finished(weapon, special: bool) -> void:
 	weapon.visible = false
+	weapon.set_hitbox_enabled(false, special)
 	weapon.emit_signal('attack_finished' if not special else 'special_finished')
 
 
-static func shoot(weapon, attack_dir: float, num_projectiles: int) -> void:
+static func lightning(weapon, special: bool) -> void:
+	weapon.animation_player.play('lightning')
+	weapon.set_hitbox_enabled(true, special)
+	
+	yield(weapon.animation_player, 'animation_finished')
+	_on_attack_finished(weapon, special)
+
+static func slam(weapon, special: bool) -> void:
+	weapon.set_hitbox_enabled(true, special)
+	
+	yield(weapon.get_tree().create_timer(.15), 'timeout')
+	_on_attack_finished(weapon, special)
+
+static func shoot(weapon, special: bool, attack_dir: float, num_projectiles: int) -> void:
 	var cone_size: float = (num_projectiles - 1) / 20.0 # Doing floating point division
 	var angle_diff: float = -cone_size
 	
 	weapon.animation_player.play('shoot')
 	while angle_diff <= cone_size:
 		weapon.create_projectile(attack_dir + angle_diff)
-		
 		angle_diff += .1
 		
 	yield(weapon.animation_player, 'animation_finished')
-	_on_attack_finished(weapon, num_projectiles > 1)
+	_on_attack_finished(weapon, special)
 
-static func spin(weapon, attack_angle: float) -> void:
-	var facing_pivot: Node2D = weapon.entity.facing_pivot
-	var original_pivot = facing_pivot.rotation
-	weapon.play_tween(facing_pivot, 'rotation',
-		facing_pivot.rotation - attack_angle / 2 - .1,
-		facing_pivot.rotation + attack_angle / 2 + .1,
-		attack_angle / 10)
-	
-		
-	yield(weapon.tween, 'tween_completed')
-	facing_pivot.rotation = original_pivot
-	_on_attack_finished(weapon, true)
-
-static func stab(weapon) -> void:
+static func stab(weapon, special: bool) -> void:
+	weapon.set_hitbox_enabled(true, special)
 	weapon.play_tween(weapon, 'position',
 		Vector2(2, 0), weapon.position, .1)
 		
 	yield(weapon.tween, 'tween_completed')
-	_on_attack_finished(weapon, false)
+	_on_attack_finished(weapon, special)
+
+static func swing(weapon, special: bool, attack_angle: float) -> void:
+	var facing_pivot: Node2D = weapon.entity.facing_pivot
+	var original_pivot = facing_pivot.rotation
+	
+	weapon.set_hitbox_enabled(true, special)
+	weapon.play_tween(facing_pivot, 'rotation',
+		facing_pivot.rotation - attack_angle / 2 - .1,
+		facing_pivot.rotation + attack_angle / 2 + .1,
+		attack_angle / 10)
+		
+	yield(weapon.tween, 'tween_completed')
+	facing_pivot.rotation = original_pivot
+	_on_attack_finished(weapon, special)

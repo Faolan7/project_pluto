@@ -38,6 +38,8 @@ func set_weapon(value: Weapon) -> void:
 	weapon.rotation = 0
 	weapon.visible = true
 	weapon.set_entity(null)
+	weapon.set_hitbox_enabled(false, false)
+	weapon.set_hitbox_enabled(false, true)
 
 func get_weapon() -> Weapon:
 	weapon.position = weapon_data['position']

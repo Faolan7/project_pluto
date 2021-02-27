@@ -100,6 +100,7 @@ func set_state(state: String) -> void:
 
 func set_target(body: Character) -> void:
 	target = body
+	
 	if target == null:
 		set_state('wander')
 		detection_area_shape.set_deferred('disabled', false)
@@ -111,6 +112,10 @@ func set_target(body: Character) -> void:
 
 
 func _on_damaged(damage: float, dealer: Node2D) -> void:
+	# Checking if already dead
+	if get_is_dead():
+		return
+		
 	._on_damaged(damage, dealer)
 	if dealer != target:
 		set_target(dealer)
