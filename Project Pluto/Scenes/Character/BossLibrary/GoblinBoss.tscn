@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Character/BaseEnemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Weapon/WeaponLibrary/Maul.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Weapon/WeaponLibrary/Bow.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/Enemy/goblin_boss.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Character/BossLibrary/GoblinBoss.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 8.0
@@ -12,12 +13,13 @@ radius = 16.0
 height = 16.0
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 64.0
+radius = 240.0
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=4]
 
 [node name="GoblinBoss" instance=ExtResource( 1 )]
-WEAPON_PATH = NodePath("Sprite/FacingPivot/Maul")
+script = ExtResource( 4 )
+WEAPON_PATH = NodePath("Sprite/FacingPivot/Bow")
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.5, 0.5 )
@@ -36,11 +38,14 @@ max_value = 5.0
 [node name="FacingPivot" parent="Sprite" index="1"]
 scale = Vector2( 4, 3 )
 
-[node name="Maul" parent="Sprite/FacingPivot" index="0" instance=ExtResource( 2 )]
+[node name="Bow" parent="Sprite/FacingPivot" index="0" instance=ExtResource( 2 )]
 visible = false
+special_name = "spreadshot5"
+special_stamina_cost = 10.0
+projectile_speed = 500.0
 
 [node name="CombatDistance" parent="Sprite" index="2"]
-position = Vector2( 22, 0 )
+position = Vector2( 400, 0 )
 
 [node name="WorldCollision" parent="." index="1"]
 position = Vector2( 0, 13.6123 )

@@ -13,6 +13,7 @@ static func perform(attack: String, weapon, special: bool, attack_dir: float) ->
 		'slam': slam(weapon, special)
 		'spin': swing(weapon, special, PI)
 		'spreadshot3': shoot(weapon, special, attack_dir, 3)
+		'spreadshot5': shoot(weapon, special, attack_dir, 5)
 		'stab': stab(weapon, special)
 		'swing': swing(weapon, special, PI / 2)
 		_: print('ERROR: Unknown attack ' + attack)
