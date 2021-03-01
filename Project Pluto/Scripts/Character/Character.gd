@@ -10,6 +10,7 @@ var weapon: Weapon setget set_weapon
 onready var state_machine: StateMachine = $StateMachine as StateMachine
 onready var move_state: MoveState = $StateMachine/Move as MoveState
 onready var attack_state: AttackState = $StateMachine/Attack as AttackState
+onready var special_state: SpecialState = $StateMachine/SpecialAttack as SpecialState
 onready var health_bar: ResourceBar = $Sprite/Bars/HealthBar as ResourceBar
 onready var stamina_bar: ResourceBar = $Sprite/Bars/StaminaBar as ResourceBar
 
@@ -36,6 +37,7 @@ func play_animation(animation: String) -> void:
 func set_face_dir(value: Vector2) -> void:
 	value = value.normalized()
 	attack_state.attack_dir = value
+	special_state.attack_dir = value
 	facing_pivot.rotation = value.angle()
 	
 	if abs(face_dir.angle_to(value)) > PI / 3:
@@ -76,6 +78,7 @@ func set_weapon(value: Weapon) -> void:
 	weapon = value
 	
 	attack_state.weapon = weapon
+	special_state.weapon = weapon
 
 
 func _on_damaged(damage: float, _dealer: Node2D) -> void:

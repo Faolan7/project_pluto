@@ -16,7 +16,6 @@ var last_mouse_position: Vector2
 
 onready var interact_state: InteractState = $StateMachine/Interact as InteractState
 onready var dodge_state: DodgeState = $StateMachine/Dodge as DodgeState
-onready var special_state: SpecialState = $StateMachine/SpecialAttack as SpecialState
 
 onready var weapon_slots: Node2D = $Sprite/FacingPivot/Weapons as Node2D
 
@@ -117,7 +116,6 @@ func set_face_dir(value: Vector2) -> void:
 	last_mouse_position = mouse_position
 	value = gamepad_dir if using_gamepad else get_local_mouse_position()
 	.set_face_dir(value)
-	special_state.attack_dir = value
 
 func set_blend_position(value: Vector2) -> void:
 	.set_blend_position(value)
@@ -125,8 +123,6 @@ func set_blend_position(value: Vector2) -> void:
 
 func set_weapon(value: Weapon) -> void:
 	.set_weapon(value)
-	
-	special_state.weapon = weapon
 	emit_signal('update_current_weapon', weapon)
 
 

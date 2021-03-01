@@ -16,10 +16,10 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPla
 onready var combat_distance_node: Position2D = $Sprite/CombatDistance as Position2D
 onready var detection_area_shape: CollisionShape2D = $DetectionArea/CollisionShape2D as CollisionShape2D
 
-export var PANIC_THRESHOLD: float
-export var PATIENCE_THRESHOLD: float
-export var COMBAT_DISTANCE: float
-export var WEAPON_PATH: NodePath
+export(float) var PANIC_THRESHOLD: float
+export(float) var PATIENCE_THRESHOLD: float
+export(float) var COMBAT_DISTANCE: float
+export(NodePath) var WEAPON_PATH: NodePath
 
 
 func get_class() -> String:
@@ -58,8 +58,7 @@ func _physics_process(_delta) -> void:
 		if should_attack():
 			animation_player.play('attack')
 		elif should_special():
-			animation_player.play('attack')
-			print("I'm using my SPECIAL!")
+			animation_player.play('special')
 
 
 func should_attack() -> bool:
@@ -95,6 +94,8 @@ func set_state(state: String) -> void:
 		'move':
 			play_animation('move')
 			state_machine.change_state(move_state)
+		'special':
+			state_machine.change_state(special_state)
 		'wander':
 			state_machine.change_state(wander_state)
 
