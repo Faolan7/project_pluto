@@ -9,11 +9,11 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 18.0
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 16.0
 height = 6.5
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "default"
 length = 0.001
 tracks/0/type = "value"
@@ -65,8 +65,7 @@ tracks/3/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "explode"
+[sub_resource type="Animation" id=4]
 length = 6.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Explosion:visible")
@@ -188,10 +187,10 @@ damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionHitbox" index="0"]
 rotation = 1.5708
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
-anims/default = SubResource( 5 )
-anims/explode = SubResource( 3 )
+anims/default = SubResource( 3 )
+anims/explode = SubResource( 4 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
