@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/Dungeon/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Puzzle/Puzzle2.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Boss/Boss.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/VerticalHallway.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/ThroneRoom.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/DiningHall2.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/Crossroads1.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Treasure/Armory.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/DiningHall.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/Crossroads.tscn" type="PackedScene" id=14]
@@ -51,7 +53,7 @@ connections = {
 "up": NodePath("../CombatThree")
 }
 
-[node name="DiningHall" parent="Rooms/CombatTwo" instance=ExtResource( 13 )]
+[node name="DiningHall" parent="Rooms/CombatTwo" instance=ExtResource( 9 )]
 
 [node name="CombatThree" parent="Rooms" instance=ExtResource( 1 )]
 position = Vector2( 0, -1200 )
@@ -62,7 +64,7 @@ connections = {
 "up": NodePath("../CombatFour")
 }
 
-[node name="Crossroads" parent="Rooms/CombatThree" instance=ExtResource( 14 )]
+[node name="Crossroads" parent="Rooms/CombatThree" instance=ExtResource( 10 )]
 
 [node name="PuzzleOne" parent="Rooms" instance=ExtResource( 1 )]
 position = Vector2( -600, -1200 )
