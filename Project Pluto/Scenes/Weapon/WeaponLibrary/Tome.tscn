@@ -9,10 +9,10 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 240.0
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 26, 128 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "lightning"
 step = 0.05
 tracks/0/type = "value"
@@ -52,7 +52,7 @@ tracks/2/keys = {
 "values": [ 1, 0 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 resource_name = "shoot"
 length = 0.3
 tracks/0/type = "value"
@@ -104,15 +104,15 @@ damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LightningHitbox"]
 position = Vector2( 0, -128 )
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 disabled = true
 
 [node name="Tween" type="Tween" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
-anims/lightning = SubResource( 4 )
-anims/shoot = SubResource( 6 )
+anims/lightning = SubResource( 3 )
+anims/shoot = SubResource( 4 )
 [connection signal="area_entered" from="AttackRange" to="." method="_on_attack_range_entered"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_tween_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

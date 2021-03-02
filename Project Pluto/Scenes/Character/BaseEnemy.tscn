@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/Character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Character/Enemy.gd" type="Script" id=2]
@@ -40,63 +40,97 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=2]
-animation = "idle_down"
+[sub_resource type="Animation" id=2]
+resource_name = "special"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.27451, 0.27451, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ "idle" ],
+"method": "set_state"
+}, {
+"args": [ "special" ],
+"method": "set_state"
+} ]
+}
 
 [sub_resource type="AnimationNodeAnimation" id=3]
-animation = "idle_up"
+animation = "idle_down"
 
 [sub_resource type="AnimationNodeAnimation" id=4]
-animation = "idle_right"
+animation = "idle_up"
 
 [sub_resource type="AnimationNodeAnimation" id=5]
+animation = "idle_right"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
 animation = "idle_left"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=6]
-blend_point_0/node = SubResource( 2 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=7]
+blend_point_0/node = SubResource( 3 )
 blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 3 )
+blend_point_1/node = SubResource( 4 )
 blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 4 )
+blend_point_2/node = SubResource( 5 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 5 )
+blend_point_3/node = SubResource( 6 )
 blend_point_3/pos = Vector2( -1, 0 )
-
-[sub_resource type="AnimationNodeAnimation" id=7]
-animation = "move_down"
 
 [sub_resource type="AnimationNodeAnimation" id=8]
-animation = "move_up"
+animation = "move_down"
 
 [sub_resource type="AnimationNodeAnimation" id=9]
-animation = "move_right"
+animation = "move_up"
 
 [sub_resource type="AnimationNodeAnimation" id=10]
+animation = "move_right"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "move_left"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=11]
-blend_point_0/node = SubResource( 7 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=12]
+blend_point_0/node = SubResource( 8 )
 blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 8 )
+blend_point_1/node = SubResource( 9 )
 blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 9 )
+blend_point_2/node = SubResource( 10 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 10 )
+blend_point_3/node = SubResource( 11 )
 blend_point_3/pos = Vector2( -1, 0 )
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=12]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=13]
 
-[sub_resource type="AnimationNodeStateMachine" id=14]
-states/idle/node = SubResource( 6 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachine" id=15]
+states/idle/node = SubResource( 7 )
 states/idle/position = Vector2( 549, 69 )
-states/move/node = SubResource( 11 )
+states/move/node = SubResource( 12 )
 states/move/position = Vector2( 732, 69 )
-transitions = [ "idle", "move", SubResource( 12 ), "move", "idle", SubResource( 13 ) ]
+transitions = [ "idle", "move", SubResource( 13 ), "move", "idle", SubResource( 14 ) ]
 start_node = "idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=15]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=16]
 
 [node name="Enemy" groups=[
 "Enemies",
@@ -157,13 +191,15 @@ MOVE_SPEED = 15
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 anims/attack = SubResource( 1 )
+anims/special = SubResource( 2 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="6"]
-tree_root = SubResource( 14 )
+tree_root = SubResource( 15 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 15 )
+parameters/playback = SubResource( 16 )
 parameters/idle/blend_position = Vector2( 1, 0 )
 parameters/move/blend_position = Vector2( 1, 0 )
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_target_detected"]
 [connection signal="completed" from="StateMachine/Attack" to="." method="_on_attack_completed"]
 [connection signal="timeout" from="StateMachine/Wander/Timer" to="StateMachine/Wander" method="_on_update_move_dir"]
+[connection signal="completed" from="StateMachine/SpecialAttack" to="." method="_on_attack_completed"]

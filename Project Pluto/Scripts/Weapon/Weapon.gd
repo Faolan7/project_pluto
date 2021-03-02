@@ -53,13 +53,13 @@ func play_tween(object: Object, property: String,
 func has_entity_in_range(target) -> bool: # Target should be Character
 	return attack_range.get_overlapping_areas().has(target.hurtbox)
 
-func create_projectile(attack_dir: float) -> void:
+func create_projectile(attack_dir: float, speed_modifier: float = 1) -> void:
 	var projectile = projectile_scene.instance()
 	entity.get_parent().add_child(projectile)
 	
 	projectile.position = entity.position + position
 	projectile.rotation = attack_dir
-	projectile.velocity = Vector2.RIGHT.rotated(attack_dir) * projectile_speed
+	projectile.velocity = Vector2.RIGHT.rotated(attack_dir) * projectile_speed * speed_modifier
 	projectile.entity = get_entity()
 
 

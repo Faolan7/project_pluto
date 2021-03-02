@@ -13,13 +13,14 @@ onready var idle_state: State = $StateMachine/Idle as State
 onready var wander_state: State = $StateMachine/Wander as State
 onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
 
+onready var sprite: Sprite = $Sprite as Sprite
 onready var combat_distance_node: Position2D = $Sprite/CombatDistance as Position2D
 onready var detection_area_shape: CollisionShape2D = $DetectionArea/CollisionShape2D as CollisionShape2D
 
-export var PANIC_THRESHOLD: float
-export var PATIENCE_THRESHOLD: float
-export var COMBAT_DISTANCE: float
-export var WEAPON_PATH: NodePath
+export(float) var PANIC_THRESHOLD: float
+export(float) var PATIENCE_THRESHOLD: float
+export(float) var COMBAT_DISTANCE: float
+export(NodePath) var WEAPON_PATH: NodePath
 
 
 func get_class() -> String:
@@ -32,7 +33,7 @@ func _ready() -> void:
 	._ready()
 	set_weapon(get_node(WEAPON_PATH))
 	combat_distance = COMBAT_DISTANCE if COMBAT_DISTANCE != 0 else combat_distance_node.position.length()
-	combat_distance *= $Sprite.scale.length()
+	combat_distance *= sprite.scale.length()
 	
 	set_state('wander')
 	set_physics_process(false)
@@ -58,17 +59,29 @@ func _physics_process(_delta) -> void:
 		if should_attack():
 			animation_player.play('attack')
 		elif should_special():
-			animation_player.play('attack')
-			print("I'm using my SPECIAL!")
+			animation_player.play('special')
 
 
 func should_attack() -> bool:
+	# No regular attack
+	if weapon.attack_name == '':
+		return false
+	# No special attack
+	elif weapon.special_name == '' \
+			and get_stamina() >= weapon.attack_stamina_cost \
+			and weapon.has_entity_in_range(target):
+		return true
+		
 	return get_stamina() >= weapon.attack_stamina_cost \
 		and weapon.has_entity_in_range(target) \
 		and (get_health() < PANIC_THRESHOLD * get_max_health()
 			or get_stamina() < PATIENCE_THRESHOLD * weapon.special_stamina_cost)
 
 func should_special() -> bool:
+	# No special attack
+	if weapon.special_name == '':
+		return false
+		
 	return get_stamina() >= weapon.special_stamina_cost \
 		and weapon.has_entity_in_range(target)
 
@@ -81,6 +94,9 @@ func set_health(value: float) -> void:
 			emit_signal('died')
 			on_death()
 			return
+
+func get_health_percent() -> float:
+	return get_health() / get_max_health() * 100
 
 func get_is_dead() -> bool:
 	return get_health() <= 0
@@ -95,6 +111,8 @@ func set_state(state: String) -> void:
 		'move':
 			play_animation('move')
 			state_machine.change_state(move_state)
+		'special':
+			state_machine.change_state(special_state)
 		'wander':
 			state_machine.change_state(wander_state)
 
