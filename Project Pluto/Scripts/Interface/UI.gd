@@ -21,11 +21,14 @@ func create_dialogue(speaker: Object, callback: String, text: String) -> void:
 	dialogue.display_text(text)
 
 
-func set_player(value: Player) -> void:
-	player = value
-	
+func reset() -> void:
 	player_bars.set_bar_values(player)
 	key_count._on_key_update(player.num_keys)
+	weapon_slot.weapon = player.weapon
+
+
+func set_player(value: Player) -> void:
+	player = value
 	
 	# warning-ignore:return_value_discarded
 	player.connect('update_health', player_bars, '_on_hp_update')
@@ -35,6 +38,8 @@ func set_player(value: Player) -> void:
 	player.connect('update_current_weapon', self, '_on_update_current_weapon')
 	# warning-ignore:return_value_discarded
 	player.connect('update_keys', key_count, '_on_key_update')
+	
+	reset()
 
 
 func _on_update_current_weapon(weapon) -> void:

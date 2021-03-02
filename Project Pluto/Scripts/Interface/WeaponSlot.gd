@@ -9,6 +9,8 @@ var weapon_sprite: Sprite
 func _set_weapon(value: Weapon) -> void:
 	if weapon_sprite != null:
 		weapon_sprite.queue_free()
+	if value == null:
+		return
 		
 	weapon_sprite = value.duplicate()
 	weapon_sprite.position = Vector2.ZERO
