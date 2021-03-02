@@ -13,6 +13,7 @@ onready var idle_state: State = $StateMachine/Idle as State
 onready var wander_state: State = $StateMachine/Wander as State
 onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
 
+onready var sprite: Sprite = $Sprite as Sprite
 onready var combat_distance_node: Position2D = $Sprite/CombatDistance as Position2D
 onready var detection_area_shape: CollisionShape2D = $DetectionArea/CollisionShape2D as CollisionShape2D
 
@@ -32,7 +33,7 @@ func _ready() -> void:
 	._ready()
 	set_weapon(get_node(WEAPON_PATH))
 	combat_distance = COMBAT_DISTANCE if COMBAT_DISTANCE != 0 else combat_distance_node.position.length()
-	combat_distance *= $Sprite.scale.length()
+	combat_distance *= sprite.scale.length()
 	
 	set_state('wander')
 	set_physics_process(false)
@@ -62,12 +63,25 @@ func _physics_process(_delta) -> void:
 
 
 func should_attack() -> bool:
+	# No regular attack
+	if weapon.attack_name == '':
+		return false
+	# No special attack
+	elif weapon.special_name == '' \
+			and get_stamina() >= weapon.attack_stamina_cost \
+			and weapon.has_entity_in_range(target):
+		return true
+		
 	return get_stamina() >= weapon.attack_stamina_cost \
 		and weapon.has_entity_in_range(target) \
 		and (get_health() < PANIC_THRESHOLD * get_max_health()
 			or get_stamina() < PATIENCE_THRESHOLD * weapon.special_stamina_cost)
 
 func should_special() -> bool:
+	# No special attack
+	if weapon.special_name == '':
+		return false
+		
 	return get_stamina() >= weapon.special_stamina_cost \
 		and weapon.has_entity_in_range(target)
 
@@ -80,6 +94,9 @@ func set_health(value: float) -> void:
 			emit_signal('died')
 			on_death()
 			return
+
+func get_health_percent() -> float:
+	return get_health() / get_max_health() * 100
 
 func get_is_dead() -> bool:
 	return get_health() <= 0

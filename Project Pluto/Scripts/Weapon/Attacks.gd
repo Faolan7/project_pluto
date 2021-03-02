@@ -9,11 +9,12 @@ static func perform(attack: String, weapon, special: bool, attack_dir: float) ->
 	
 	match attack:
 		'lightning': lightning(weapon, special)
-		'shoot': shoot(weapon, special, attack_dir, 1)
+		'shoot': shoot(weapon, special, attack_dir, 1, 1)
 		'slam': slam(weapon, special)
 		'spin': swing(weapon, special, PI)
-		'spreadshot3': shoot(weapon, special, attack_dir, 3)
-		'spreadshot5': shoot(weapon, special, attack_dir, 5)
+		'spreadshot3': shoot(weapon, special, attack_dir, 3, 1)
+		'spreadshot5': shoot(weapon, special, attack_dir, 5, 1)
+		'spreadshotcircle': shoot(weapon, special, attack_dir, 63, .5)
 		'stab': stab(weapon, special)
 		'swing': swing(weapon, special, PI / 2)
 		_: print('ERROR: Unknown attack ' + attack)
@@ -37,13 +38,13 @@ static func slam(weapon, special: bool) -> void:
 	yield(weapon.get_tree().create_timer(.15), 'timeout')
 	_on_attack_finished(weapon, special)
 
-static func shoot(weapon, special: bool, attack_dir: float, num_projectiles: int) -> void:
+static func shoot(weapon, special: bool, attack_dir: float, num_projectiles: int, speed_modifier: float) -> void:
 	var cone_size: float = (num_projectiles - 1) / 20.0 # Doing floating point division
 	var angle_diff: float = -cone_size
 	
 	weapon.animation_player.play('shoot')
 	while angle_diff <= cone_size:
-		weapon.create_projectile(attack_dir + angle_diff)
+		weapon.create_projectile(attack_dir + angle_diff, speed_modifier)
 		angle_diff += .1
 		
 	yield(weapon.animation_player, 'animation_finished')
