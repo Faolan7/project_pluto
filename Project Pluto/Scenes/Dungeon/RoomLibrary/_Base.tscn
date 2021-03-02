@@ -227,6 +227,8 @@ rotation = -1.5708
 [node name="PuzzleElements" type="Node2D" parent="."]
 script = ExtResource( 5 )
 
+[node name="Items" type="Node2D" parent="."]
+
 [node name="Entities" parent="." instance=ExtResource( 6 )]
 [connection signal="entered" from="Doors/NorthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, -1 ) ]]
 [connection signal="entered" from="Doors/SouthDoor" to="." method="_on_door_entered" binds= [ Vector2( 0, 1 ) ]]

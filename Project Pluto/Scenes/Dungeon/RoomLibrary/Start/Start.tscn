@@ -12,25 +12,25 @@ tile_data = PoolIntArray( -65529, 3, 131074, -65528, 3, 131075, 0, 1, 0, 1, 1, 0
 [node name="Decals" parent="." index="1"]
 tile_data = PoolIntArray( 327687, 0, 0 )
 
-[node name="StarterSword" parent="Entities" index="0" instance=ExtResource( 8 )]
+[node name="StarterSword" parent="Items" index="0" instance=ExtResource( 8 )]
 position = Vector2( 384, 128 )
 
-[node name="Shortsword" parent="Entities/StarterSword" index="1" instance=ExtResource( 3 )]
+[node name="Sword" parent="Items/StarterSword" index="1" instance=ExtResource( 3 )]
 
-[node name="StarterBow" parent="Entities" index="1" instance=ExtResource( 8 )]
+[node name="StarterBow" parent="Items" index="1" instance=ExtResource( 8 )]
 position = Vector2( 128, 128 )
 
-[node name="Bow" parent="Entities/StarterBow" index="1" instance=ExtResource( 2 )]
+[node name="Bow" parent="Items/StarterBow" index="1" instance=ExtResource( 2 )]
 
-[node name="StarterTome" parent="Entities" index="2" instance=ExtResource( 8 )]
+[node name="StarterTome" parent="Items" index="2" instance=ExtResource( 8 )]
 position = Vector2( 256, 288 )
 
-[node name="Tome" parent="Entities/StarterTome" index="1" instance=ExtResource( 4 )]
+[node name="Tome" parent="Items/StarterTome" index="1" instance=ExtResource( 4 )]
 
-[node name="SecretBow" parent="Entities" index="3" instance=ExtResource( 8 )]
+[node name="SecretBow" parent="Items" index="3" instance=ExtResource( 8 )]
 visible = false
 position = Vector2( 208, 48 )
 
-[node name="SecretBow" parent="Entities/SecretBow" index="1" instance=ExtResource( 2 )]
+[node name="SecretBow" parent="Items/SecretBow" index="1" instance=ExtResource( 2 )]
 attack_stamina_cost = 0.0
 special_stamina_cost = 0.0

@@ -11,6 +11,7 @@ onready var WALL_ID: int = tile_set.find_tile_by_name('wall')
 onready var camera: Camera2D = $Camera2D as Camera2D
 onready var entities: EntityTracker = $Entities as EntityTracker
 onready var puzzle_elements: PuzzleTracker = $PuzzleElements as PuzzleTracker
+onready var items: Node2D = $Items as Node2D
 onready var doors: Dictionary = {
 	Vector2.UP: $Doors/NorthDoor as Door,
 	Vector2.DOWN: $Doors/SouthDoor as Door,
@@ -56,6 +57,7 @@ func import_data(data: Dictionary) -> void:
 	if data.size() == 0:
 		return
 		
+	# Reading door data
 	var data_key: String
 	var door_key: Vector2
 	for item in [['north_door', Vector2.UP], ['south_door', Vector2.DOWN],
@@ -64,10 +66,17 @@ func import_data(data: Dictionary) -> void:
 		door_key = item[1]
 		doors[door_key].locked = data[data_key]['locked']
 		doors[door_key].is_open = data[data_key]['open']
+		
+	# Reading item data
+	for child in items.get_children():
+		child.queue_free()
+	for item in data['items']:
+		items.add_child(item)
 
 func export_data() -> Dictionary:
 	var data: Dictionary = {}
 	
+	# Storing door data
 	var data_key: String
 	var door_key: Vector2
 	for item in [['north_door', Vector2.UP], ['south_door', Vector2.DOWN],
@@ -78,6 +87,11 @@ func export_data() -> Dictionary:
 			'open': doors[door_key].is_open,
 			'locked': doors[door_key].locked
 		}
+		
+	# Storing treasure data
+	data['items'] = items.get_children()
+	for item in items.get_children():
+		items.remove_child(item)
 		
 	return data
 

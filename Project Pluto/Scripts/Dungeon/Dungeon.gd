@@ -9,7 +9,6 @@ var current_room: Room
 onready var rooms: Node2D = $Rooms as Node2D
 
 
-
 func _ready():
 	get_parent().call_deferred('move_child', self, 0)
 	
