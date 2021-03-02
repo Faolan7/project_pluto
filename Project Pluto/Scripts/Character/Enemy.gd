@@ -117,6 +117,9 @@ func set_state(state: String) -> void:
 			state_machine.change_state(wander_state)
 
 func set_target(body: Character) -> void:
+	if not body is Player:
+		return
+		
 	target = body
 	
 	if target == null:
