@@ -246,6 +246,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [node name="GameOver" type="AnimatedSprite"]
+scale = Vector2( 2, 2 )
 frames = SubResource( 43 )
 speed_scale = 2.0
 centered = false
