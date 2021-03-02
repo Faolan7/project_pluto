@@ -25,9 +25,9 @@ script = ExtResource( 4 )
 
 [node name="Start" parent="Rooms" instance=ExtResource( 1 )]
 connections = {
-"down": NodePath(""),
-"left": NodePath(""),
-"right": NodePath(""),
+"down": NodePath("../LoadsOfMinions"),
+"left": NodePath("../CombatFive"),
+"right": NodePath("../CombatSix"),
 "up": NodePath("../CombatOne")
 }
 
@@ -104,7 +104,7 @@ position = Vector2( 0, -2000 )
 connections = {
 "down": NodePath("../CombatFour"),
 "left": NodePath(""),
-"right": NodePath(""),
+"right": NodePath("../Start"),
 "up": NodePath("../CombatSix")
 }
 
@@ -114,7 +114,7 @@ connections = {
 position = Vector2( 0, -2400 )
 connections = {
 "down": NodePath("../CombatFive"),
-"left": NodePath(""),
+"left": NodePath("../Start"),
 "right": NodePath(""),
 "up": NodePath("../CombatSeven")
 }
@@ -149,7 +149,7 @@ connections = {
 "down": NodePath(""),
 "left": NodePath("../PuzzleTwo"),
 "right": NodePath("../KeyReward"),
-"up": NodePath("")
+"up": NodePath("../Start")
 }
 
 [node name="Library2" parent="Rooms/LoadsOfMinions" instance=ExtResource( 18 )]
