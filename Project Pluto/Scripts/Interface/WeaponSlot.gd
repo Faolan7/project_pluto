@@ -9,6 +9,7 @@ var weapon_sprite: Sprite
 func _set_weapon(value: Weapon) -> void:
 	if weapon_sprite != null:
 		weapon_sprite.queue_free()
+		weapon_sprite = null
 	if value == null:
 		return
 		
