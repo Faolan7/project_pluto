@@ -2,8 +2,6 @@
 
 [ext_resource path="res://Scripts/Weapon/Hurtbox.gd" type="Script" id=1]
 
-
-
 [node name="HurtBox" type="Area2D"]
 collision_layer = 2
 collision_mask = 0
