@@ -20,3 +20,10 @@ func _set_weapon(value: Weapon) -> void:
 	weapon_sprite.scale = weapon_sprite.scale * Vector2(1 / scale.x, 1 / scale.y)
 	
 	add_child(weapon_sprite)
+
+
+func _on_player_entered(_body: PhysicsBody2D):
+	modulate = Color(1, 1, 1, .5)
+
+func _on_player_exited(_body: PhysicsBody2D):
+	modulate = Color(1, 1, 1, 1)

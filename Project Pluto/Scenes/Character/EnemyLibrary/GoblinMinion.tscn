@@ -150,6 +150,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
 [node name="GoblinMinion" instance=ExtResource( 1 )]
+scale = Vector2( 1.5, 1.25 )
 WEAPON_PATH = NodePath("Sprite/FacingPivot/Sword")
 
 [node name="Sprite" parent="." index="0"]
