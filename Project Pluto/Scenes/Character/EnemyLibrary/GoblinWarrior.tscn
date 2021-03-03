@@ -146,6 +146,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
 [node name="GoblinWarrior" instance=ExtResource( 1 )]
+scale = Vector2( 1.6, 1.75 )
 damage_multiplier = 2.0
 WEAPON_PATH = NodePath("Sprite/FacingPivot/Sword")
 
@@ -176,7 +177,6 @@ max_value = 7.0
 
 [node name="FacingPivot" parent="Sprite" index="1"]
 position = Vector2( 2.5, 3 )
-scale = Vector2( 1.5, 1.5 )
 
 [node name="Sword" parent="Sprite/FacingPivot" index="0" instance=ExtResource( 2 )]
 visible = false

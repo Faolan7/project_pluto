@@ -70,8 +70,8 @@ tracks/1/keys = {
 }
 
 [node name="Sword" instance=ExtResource( 3 )]
-position = Vector2( 20, 0 )
-scale = Vector2( 1.25, 1.5 )
+position = Vector2( 30, 0 )
+scale = Vector2( 1.75, 2.2 )
 texture = ExtResource( 1 )
 attack_name = "swing"
 attack_stamina_cost = 2.0

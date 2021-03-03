@@ -37,9 +37,9 @@ tracks/1/keys = {
 }
 
 [node name="Bow" instance=ExtResource( 2 )]
-position = Vector2( 5, 0 )
+position = Vector2( 7, 0 )
 rotation = 0.0
-scale = Vector2( 1, 0.75 )
+scale = Vector2( 2, 1.5 )
 texture = ExtResource( 1 )
 hframes = 2
 attack_name = "shoot"
@@ -47,7 +47,7 @@ attack_stamina_cost = 4.0
 special_name = "spreadshot3"
 special_stamina_cost = 12.0
 projectile_scene = ExtResource( 4 )
-projectile_speed = 200.0
+projectile_speed = 400.0
 
 [node name="AttackRange" parent="." index="0"]
 rotation = 1.5708

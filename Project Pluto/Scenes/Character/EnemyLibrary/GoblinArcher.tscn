@@ -146,6 +146,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
 [node name="GoblinArcher" instance=ExtResource( 1 )]
+scale = Vector2( 1.5, 1.5 )
 damage_multiplier = 0.9
 WEAPON_PATH = NodePath("Sprite/FacingPivot/Bow")
 

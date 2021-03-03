@@ -11,12 +11,12 @@ static func perform(attack: String, weapon, special: bool, attack_dir: float) ->
 		'lightning': lightning(weapon, special)
 		'shoot': shoot(weapon, special, attack_dir, 1, 1)
 		'slam': slam(weapon, special)
-		'spin': swing(weapon, special, PI)
+		'spin': swing(weapon, special, 1.5 * PI)
 		'spreadshot3': shoot(weapon, special, attack_dir, 3, 1)
 		'spreadshot5': shoot(weapon, special, attack_dir, 5, 1)
 		'spreadshotcircle': shoot(weapon, special, attack_dir, 63, .5)
 		'stab': stab(weapon, special)
-		'swing': swing(weapon, special, PI / 2)
+		'swing': swing(weapon, special, .5 * PI)
 		_: print('ERROR: Unknown attack ' + attack)
 
 static func _on_attack_finished(weapon, special: bool) -> void:
