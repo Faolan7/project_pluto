@@ -31,8 +31,9 @@ func set_open(value: bool) -> void:
 		sprite.visible = not is_open
 
 
-func _on_door_entered(_body: PhysicsBody2D) -> void:
-	emit_signal('entered')
+func _on_door_entered(body: PhysicsBody2D) -> void:
+	if body is Player:
+		emit_signal('entered')
 
 func _on_interaction(player: Player) -> void:
 	if locked and player.num_keys > 0:

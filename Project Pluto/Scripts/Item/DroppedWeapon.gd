@@ -4,6 +4,7 @@ extends InteractBox
 
 var weapon: Weapon setget set_weapon
 var weapon_data: Dictionary
+var is_enemy_weapon: bool = false
 
 
 func _ready() -> void:
@@ -34,6 +35,7 @@ func set_weapon(value: Weapon) -> void:
 	weapon_data['position'] = weapon.position
 	weapon_data['rotation'] = weapon.rotation
 	
+	is_enemy_weapon = weapon.entity != null and weapon.entity.is_class('Enemy')
 	weapon.position = Vector2.ZERO
 	weapon.rotation = 0
 	weapon.visible = true

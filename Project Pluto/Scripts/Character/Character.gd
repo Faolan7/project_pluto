@@ -28,7 +28,7 @@ func _ready() -> void:
 
 func drop_weapon(value: Weapon) -> void:
 	var dropped_weapon: DroppedWeapon = DroppedWeapon.init(position - Vector2(0, 1), value)
-	get_parent().call_deferred('add_child', dropped_weapon)
+	get_node('../../Items').call_deferred('add_child', dropped_weapon) # Temporary
 
 func play_animation(animation: String) -> void:
 	animation_state.travel(animation)

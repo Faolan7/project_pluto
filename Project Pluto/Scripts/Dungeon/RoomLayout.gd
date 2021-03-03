@@ -6,6 +6,8 @@ signal room_cleared
 signal room_exited(exit_dir)
 
 
+var cleared: bool
+
 onready var WALL_ID: int = tile_set.find_tile_by_name('wall')
 
 onready var camera: Camera2D = $Camera2D as Camera2D
@@ -34,7 +36,7 @@ func enter(enter_dir: Vector2, player: Player, room_data: Dictionary) -> void:
 	player.position = get_enter_position(enter_dir)
 	
 	# Checking room state
-	if room_data.get('cleared', false):
+	if cleared:
 		entities.remove_enemies()
 		puzzle_elements.complete_puzzles()
 	elif not entities.has_enemies() and not puzzle_elements.has_puzzles():
@@ -57,6 +59,8 @@ func import_data(data: Dictionary) -> void:
 	if data.size() == 0:
 		return
 		
+	cleared = data['cleared']
+	
 	# Reading door data
 	var data_key: String
 	var door_key: Vector2
@@ -74,7 +78,9 @@ func import_data(data: Dictionary) -> void:
 		items.add_child(item)
 
 func export_data() -> Dictionary:
-	var data: Dictionary = {}
+	var data: Dictionary = {
+		'cleared': cleared
+	}
 	
 	# Storing door data
 	var data_key: String
@@ -89,10 +95,13 @@ func export_data() -> Dictionary:
 		}
 		
 	# Storing treasure data
-	data['items'] = items.get_children()
+	data['items'] = []
 	for item in items.get_children():
 		items.remove_child(item)
 		
+		if cleared or (item is DroppedWeapon and not item.is_enemy_weapon):
+			data['items'].append(item)
+			
 	return data
 
 
@@ -112,5 +121,7 @@ func _on_door_entered(side: Vector2) -> void:
 	emit_signal('room_exited', side)
 
 func _on_room_cleared() -> void:
+	cleared = true
+	
 	set_doors_open(true)
 	emit_signal('room_cleared')

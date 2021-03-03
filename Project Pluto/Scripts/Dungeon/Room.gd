@@ -56,7 +56,6 @@ func set_loaded(value: bool) -> void:
 	
 	if not value:
 		room_data = layout.export_data()
-		room_data['cleared'] = cleared # Temporary
 		remove_child(layout)
 	else:
 		layout = LAYOUT_SCENE.instance() as RoomLayout
