@@ -128,7 +128,7 @@ func set_weapon(value: Weapon) -> void:
 
 func _on_damaged(damage: float, dealer: Node2D) -> void:
 	if god_mode:
-		print('Ignored ', damage, ' damage')
+		print(OS.get_ticks_msec(), ': Ignored ', damage, ' damage')
 	else:
 		._on_damaged(damage, dealer)
 

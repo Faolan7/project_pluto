@@ -182,7 +182,7 @@ scale = Vector2( 1.5, 1.5 )
 visible = false
 
 [node name="CombatDistance" parent="Sprite" index="2"]
-position = Vector2( 24, 0 )
+position = Vector2( 20, 0 )
 
 [node name="WorldCollision" parent="." index="1"]
 shape = SubResource( 1 )
@@ -200,7 +200,7 @@ visible = false
 shape = SubResource( 3 )
 
 [node name="Move" parent="StateMachine" index="1"]
-MOVE_SPEED = 105
+MOVE_SPEED = 100
 
 [node name="AnimationPlayer" parent="." index="5"]
 anims/idle_down = SubResource( 4 )

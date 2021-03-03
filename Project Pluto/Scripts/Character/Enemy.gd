@@ -57,11 +57,9 @@ func _physics_process(_delta) -> void:
 			play_animation('idle')
 			
 		if should_attack():
-			#animation_player.play('attack')
-			set_state('attack')
+			animation_player.play('attack')
 		elif should_special():
-			#animation_player.play('special')
-			set_state('attack')
+			animation_player.play('special')
 
 
 func should_attack() -> bool:
