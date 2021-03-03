@@ -200,7 +200,7 @@ visible = false
 shape = SubResource( 3 )
 
 [node name="Move" parent="StateMachine" index="1"]
-MOVE_SPEED = 90
+MOVE_SPEED = 105
 
 [node name="AnimationPlayer" parent="." index="5"]
 anims/idle_down = SubResource( 4 )
