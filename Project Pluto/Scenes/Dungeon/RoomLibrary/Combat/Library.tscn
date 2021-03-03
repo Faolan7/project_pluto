@@ -10,49 +10,13 @@ tile_data = PoolIntArray( 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 
 tile_data = PoolIntArray( 65544, 1, 2, 131074, 2, 0, 131080, 1, 4, 131084, 2, 2, 327683, 1, 0, 393217, 1, 1, 458763, 1, 2, 524298, 2, 0, 589827, 2, 1 )
 
 [node name="GoblinWarrior" parent="Entities" index="0" instance=ExtResource( 2 )]
-position = Vector2( 208.517, 110.243 )
+position = Vector2( 336.584, 142.417 )
 
 [node name="GoblinWarrior2" parent="Entities" index="1" instance=ExtResource( 2 )]
 position = Vector2( 175.759, 142.371 )
 
 [node name="GoblinWarrior3" parent="Entities" index="2" instance=ExtResource( 2 )]
-position = Vector2( 144.261, 175.129 )
+position = Vector2( 337.177, 237.312 )
 
 [node name="GoblinWarrior4" parent="Entities" index="3" instance=ExtResource( 2 )]
-position = Vector2( 143.001, 208.517 )
-
-[node name="GoblinWarrior5" parent="Entities" index="4" instance=ExtResource( 2 )]
-position = Vector2( 176.003, 240.814 )
-
-[node name="GoblinWarrior6" parent="Entities" index="5" instance=ExtResource( 2 )]
-position = Vector2( 206.922, 274.707 )
-
-[node name="GoblinWarrior7" parent="Entities" index="6" instance=ExtResource( 2 )]
-position = Vector2( 240.715, 78.989 )
-
-[node name="GoblinWarrior8" parent="Entities" index="7" instance=ExtResource( 2 )]
-position = Vector2( 273.751, 80.6061 )
-
-[node name="GoblinWarrior9" parent="Entities" index="8" instance=ExtResource( 2 )]
-position = Vector2( 308.005, 273.518 )
-
-[node name="GoblinWarrior10" parent="Entities" index="9" instance=ExtResource( 2 )]
-position = Vector2( 335.951, 241.409 )
-
-[node name="GoblinWarrior11" parent="Entities" index="10" instance=ExtResource( 2 )]
-position = Vector2( 366.276, 206.327 )
-
-[node name="GoblinWarrior12" parent="Entities" index="11" instance=ExtResource( 2 )]
-position = Vector2( 366.87, 173.03 )
-
-[node name="GoblinWarrior13" parent="Entities" index="12" instance=ExtResource( 2 )]
-position = Vector2( 337.735, 140.921 )
-
-[node name="GoblinWarrior14" parent="Entities" index="13" instance=ExtResource( 2 )]
-position = Vector2( 302.059, 109.407 )
-
-[node name="GoblinWarrior15" parent="Entities" index="14" instance=ExtResource( 2 )]
-position = Vector2( 237.841, 190.868 )
-
-[node name="GoblinWarrior16" parent="Entities" index="15" instance=ExtResource( 2 )]
-position = Vector2( 280.058, 192.057 )
+position = Vector2( 175.591, 238.859 )

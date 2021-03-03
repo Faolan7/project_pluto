@@ -2,7 +2,7 @@ extends Projectile
 
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
-onready var explosion_hitbox: Hitbox = $ExplosionHitbox as Hitbox
+onready var explosion_hitbox: Hitbox = $Explosion/ExplosionHitbox as Hitbox
 
 
 func set_entity(value: PhysicsBody2D) -> void:
