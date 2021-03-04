@@ -57,10 +57,10 @@ func create_projectile(attack_dir: float, speed_modifier: float = 1) -> void:
 	var projectile = projectile_scene.instance()
 	entity.get_parent().add_child(projectile)
 	
+	projectile.entity = get_entity()
 	projectile.position = entity.position + position
 	projectile.rotation = attack_dir
 	projectile.velocity = Vector2.RIGHT.rotated(attack_dir) * projectile_speed * speed_modifier
-	projectile.entity = get_entity()
 
 
 func set_entity(value: PhysicsBody2D) -> void:

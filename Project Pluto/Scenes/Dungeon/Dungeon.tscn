@@ -1,22 +1,19 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Dungeon/Room.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Puzzle/Puzzle2.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Boss/FinalBoss.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Start/Start.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Dungeon/Dungeon.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Puzzle/Puzzle1.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Boss/Boss.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/VerticalHallway.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/ThroneRoom.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/DiningHall2.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/Crossroads1.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Boss/PreFinalBoss.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/HallwayRight.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/HallwayLeft.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/Intersection2.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Boss/MinibossOptional.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/Intersection1.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Boss/Miniboss.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Treasure/Armory.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/DiningHall.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/Crossroads.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/LockedDoor.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Treasure/ArtRoom.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/Library.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/Library2.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Scenes/Dungeon/RoomLibrary/Combat/ArcheryRange.tscn" type="PackedScene" id=19]
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource( 4 )
@@ -25,175 +22,131 @@ script = ExtResource( 4 )
 
 [node name="Start" parent="Rooms" instance=ExtResource( 1 )]
 connections = {
-"down": NodePath("../LoadsOfMinions"),
-"left": NodePath("../CombatFive"),
-"right": NodePath("../CombatSix"),
-"up": NodePath("../CombatOne")
+"down": NodePath(""),
+"left": NodePath(""),
+"right": NodePath(""),
+"up": NodePath("../Intersection1")
 }
 
 [node name="Start" parent="Rooms/Start" instance=ExtResource( 3 )]
 
-[node name="CombatOne" parent="Rooms" instance=ExtResource( 1 )]
+[node name="Intersection1" parent="Rooms" instance=ExtResource( 1 )]
 position = Vector2( 0, -400 )
 connections = {
 "down": NodePath("../Start"),
-"left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("../CombatTwo")
+"left": NodePath("../Hallway2"),
+"right": NodePath("../Hallway1"),
+"up": NodePath("")
 }
 
-[node name="DiningHall" parent="Rooms/CombatOne" instance=ExtResource( 13 )]
+[node name="Intersection1" parent="Rooms/Intersection1" instance=ExtResource( 10 )]
 
-[node name="CombatTwo" parent="Rooms" instance=ExtResource( 1 )]
+[node name="Hallway1" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( 550, -400 )
+connections = {
+"down": NodePath(""),
+"left": NodePath("../Intersection1"),
+"right": NodePath(""),
+"up": NodePath("../Intersection2")
+}
+
+[node name="HallwayRight" parent="Rooms/Hallway1" instance=ExtResource( 6 )]
+
+[node name="Intersection2" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( 550, -800 )
+connections = {
+"down": NodePath("../Hallway1"),
+"left": NodePath("../LockedDoor"),
+"right": NodePath(""),
+"up": NodePath("../Miniboss1")
+}
+
+[node name="Intersection2" parent="Rooms/Intersection2" instance=ExtResource( 8 )]
+
+[node name="LockedDoor" parent="Rooms" instance=ExtResource( 1 )]
 position = Vector2( 0, -800 )
-connections = {
-"down": NodePath("../CombatOne"),
-"left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("../CombatThree")
-}
-
-[node name="DiningHall" parent="Rooms/CombatTwo" instance=ExtResource( 9 )]
-
-[node name="CombatThree" parent="Rooms" instance=ExtResource( 1 )]
-position = Vector2( 0, -1200 )
-connections = {
-"down": NodePath("../CombatTwo"),
-"left": NodePath("../PuzzleOne"),
-"right": NodePath(""),
-"up": NodePath("../CombatFour")
-}
-
-[node name="Crossroads" parent="Rooms/CombatThree" instance=ExtResource( 10 )]
-
-[node name="PuzzleOne" parent="Rooms" instance=ExtResource( 1 )]
-position = Vector2( -600, -1200 )
 connections = {
 "down": NodePath(""),
 "left": NodePath(""),
-"right": NodePath("../CombatThree"),
+"right": NodePath("../Intersection2"),
+"up": NodePath("../PreBoss")
+}
+
+[node name="LockedDoor" parent="Rooms/LockedDoor" instance=ExtResource( 13 )]
+
+[node name="Miniboss1" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( 550, -1200 )
+connections = {
+"down": NodePath("../Intersection2"),
+"left": NodePath(""),
+"right": NodePath("../Key"),
+"up": NodePath("")
+}
+
+[node name="Miniboss" parent="Rooms/Miniboss1" instance=ExtResource( 11 )]
+
+[node name="Key" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( 1100, -1200 )
+connections = {
+"down": NodePath(""),
+"left": NodePath("../Miniboss1"),
+"right": NodePath(""),
+"up": NodePath("")
+}
+
+[node name="Armory" parent="Rooms/Key" instance=ExtResource( 12 )]
+
+[node name="Hallway2" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( -550, -400 )
+connections = {
+"down": NodePath(""),
+"left": NodePath(""),
+"right": NodePath("../Intersection1"),
+"up": NodePath("../Miniboss2")
+}
+
+[node name="HallwayLeft" parent="Rooms/Hallway2" instance=ExtResource( 7 )]
+
+[node name="Miniboss2" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( -550, -800 )
+connections = {
+"down": NodePath("../Hallway2"),
+"left": NodePath(""),
+"right": NodePath(""),
 "up": NodePath("../WeaponUpgrade")
 }
 
-[node name="Puzzle1" parent="Rooms/PuzzleOne" instance=ExtResource( 5 )]
+[node name="MinibossOptional" parent="Rooms/Miniboss2" instance=ExtResource( 9 )]
 
 [node name="WeaponUpgrade" parent="Rooms" instance=ExtResource( 1 )]
-position = Vector2( -600, -1600 )
+position = Vector2( -550, -1200 )
 connections = {
-"down": NodePath("../PuzzleOne"),
+"down": NodePath("../Miniboss2"),
 "left": NodePath(""),
 "right": NodePath(""),
 "up": NodePath("")
 }
 
-[node name="Armory" parent="Rooms/WeaponUpgrade" instance=ExtResource( 12 )]
+[node name="ArtRoom" parent="Rooms/WeaponUpgrade" instance=ExtResource( 16 )]
 
-[node name="CombatFour" parent="Rooms" instance=ExtResource( 1 )]
+[node name="PreBoss" parent="Rooms" instance=ExtResource( 1 )]
+position = Vector2( 0, -1200 )
+connections = {
+"down": NodePath("../LockedDoor"),
+"left": NodePath(""),
+"right": NodePath(""),
+"up": NodePath("../Boss")
+}
+
+[node name="PreFinalBoss" parent="Rooms/PreBoss" instance=ExtResource( 5 )]
+
+[node name="Boss" parent="Rooms" instance=ExtResource( 1 )]
 position = Vector2( 0, -1600 )
 connections = {
-"down": NodePath("../CombatThree"),
-"left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("../CombatFive")
-}
-
-[node name="VerticalHallway" parent="Rooms/CombatFour" instance=ExtResource( 7 )]
-
-[node name="CombatFive" parent="Rooms" instance=ExtResource( 1 )]
-position = Vector2( 0, -2000 )
-connections = {
-"down": NodePath("../CombatFour"),
-"left": NodePath(""),
-"right": NodePath("../Start"),
-"up": NodePath("../CombatSix")
-}
-
-[node name="Library" parent="Rooms/CombatFive" instance=ExtResource( 17 )]
-
-[node name="CombatSix" parent="Rooms" instance=ExtResource( 1 )]
-position = Vector2( 0, -2400 )
-connections = {
-"down": NodePath("../CombatFive"),
-"left": NodePath("../Start"),
-"right": NodePath(""),
-"up": NodePath("../CombatSeven")
-}
-
-[node name="ArcheryRange" parent="Rooms/CombatSix" instance=ExtResource( 19 )]
-
-[node name="CombatSeven" parent="Rooms" instance=ExtResource( 1 )]
-position = Vector2( 0, -2800 )
-connections = {
-"down": NodePath("../CombatSix"),
-"left": NodePath(""),
-"right": NodePath("../PuzzleTwo"),
-"up": NodePath("../ThroneRoom1")
-}
-
-[node name="Crossroads" parent="Rooms/CombatSeven" instance=ExtResource( 14 )]
-
-[node name="PuzzleTwo" parent="Rooms" instance=ExtResource( 1 )]
-position = Vector2( 600, -2800 )
-connections = {
-"down": NodePath(""),
-"left": NodePath("../CombatSeven"),
-"right": NodePath("../LoadsOfMinions"),
-"up": NodePath("")
-}
-
-[node name="Puzzle2" parent="Rooms/PuzzleTwo" instance=ExtResource( 2 )]
-
-[node name="LoadsOfMinions" parent="Rooms" instance=ExtResource( 1 )]
-position = Vector2( 1200, -2800 )
-connections = {
-"down": NodePath(""),
-"left": NodePath("../PuzzleTwo"),
-"right": NodePath("../KeyReward"),
-"up": NodePath("../Start")
-}
-
-[node name="Library2" parent="Rooms/LoadsOfMinions" instance=ExtResource( 18 )]
-
-[node name="KeyReward" parent="Rooms" instance=ExtResource( 1 )]
-position = Vector2( 1800, -2800 )
-connections = {
-"down": NodePath(""),
-"left": NodePath("../LoadsOfMinions"),
-"right": NodePath(""),
-"up": NodePath("")
-}
-
-[node name="ArtRoom" parent="Rooms/KeyReward" instance=ExtResource( 16 )]
-
-[node name="ThroneRoom1" parent="Rooms" instance=ExtResource( 1 )]
-position = Vector2( 0, -3200 )
-connections = {
-"down": NodePath("../CombatSeven"),
-"left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("../ThroneRoom2")
-}
-
-[node name="ThroneRoom" parent="Rooms/ThroneRoom1" instance=ExtResource( 8 )]
-
-[node name="ThroneRoom2" parent="Rooms" instance=ExtResource( 1 )]
-position = Vector2( 0, -3600 )
-connections = {
-"down": NodePath("../ThroneRoom1"),
-"left": NodePath(""),
-"right": NodePath(""),
-"up": NodePath("../BossFight")
-}
-
-[node name="ThroneRoom" parent="Rooms/ThroneRoom2" instance=ExtResource( 8 )]
-
-[node name="BossFight" parent="Rooms" instance=ExtResource( 1 )]
-position = Vector2( 0, -4000 )
-connections = {
-"down": NodePath("../ThroneRoom2"),
+"down": NodePath("../PreBoss"),
 "left": NodePath(""),
 "right": NodePath(""),
 "up": NodePath("")
 }
 
-[node name="Boss" parent="Rooms/BossFight" instance=ExtResource( 6 )]
+[node name="FinalBoss" parent="Rooms/Boss" instance=ExtResource( 2 )]
