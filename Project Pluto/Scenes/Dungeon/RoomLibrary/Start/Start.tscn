@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/_Base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Bow.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Sword.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Tome.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Item/WeaponPillar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Item/DroppedWeapon.tscn" type="PackedScene" id=8]
 
 [node name="Start" instance=ExtResource( 1 )]
@@ -12,20 +13,26 @@ tile_data = PoolIntArray( -65529, 3, 131074, -65528, 3, 131075, 0, 1, 0, 1, 1, 0
 [node name="Decals" parent="." index="1"]
 tile_data = PoolIntArray( 327687, 0, 0 )
 
-[node name="StarterSword" parent="Items" index="0" instance=ExtResource( 8 )]
-position = Vector2( 384, 128 )
+[node name="StartingSword" parent="Items" index="0" instance=ExtResource( 5 )]
+position = Vector2( 397.172, 120.232 )
+collision_layer = 4
+collision_mask = 0
 
-[node name="Sword" parent="Items/StarterSword" index="1" instance=ExtResource( 3 )]
+[node name="Sword" parent="Items/StartingSword" index="3" instance=ExtResource( 3 )]
 
-[node name="StarterBow" parent="Items" index="1" instance=ExtResource( 8 )]
-position = Vector2( 128, 128 )
+[node name="StartingBow" parent="Items" index="1" instance=ExtResource( 5 )]
+position = Vector2( 124.588, 118.715 )
+collision_layer = 4
+collision_mask = 0
 
-[node name="Bow" parent="Items/StarterBow" index="1" instance=ExtResource( 2 )]
+[node name="Bow" parent="Items/StartingBow" index="3" instance=ExtResource( 2 )]
 
-[node name="StarterTome" parent="Items" index="2" instance=ExtResource( 8 )]
-position = Vector2( 256, 288 )
+[node name="StartingTome" parent="Items" index="2" instance=ExtResource( 5 )]
+position = Vector2( 259.028, 270.853 )
+collision_layer = 4
+collision_mask = 0
 
-[node name="Tome" parent="Items/StarterTome" index="1" instance=ExtResource( 4 )]
+[node name="Tome" parent="Items/StartingTome" index="3" instance=ExtResource( 4 )]
 
 [node name="SecretBow" parent="Items" index="3" instance=ExtResource( 8 )]
 visible = false

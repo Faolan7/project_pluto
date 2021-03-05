@@ -1,9 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Item/DroppedWeapon.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Interface/InteractBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Item/InteractBox.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 19.1743
 
 [node name="DroppedWeapon" instance=ExtResource( 2 )]
 script = ExtResource( 1 )

@@ -66,6 +66,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func add_weapon(value: Weapon) -> void:
+	if value == null:
+		return
+		
 	# Dropping current weapon if too many are held
 	if weapon_slots.get_child_count() >= max_weapon_count:
 		drop_weapon(weapon)
