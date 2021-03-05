@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/Dungeon/Object/clock.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Dungeon/ObjectAnimation.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "animation"
+length = 0.32
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1, 0, 2 ]
+}
+
+[node name="Clock" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 3
+script = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+anims/animation = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
