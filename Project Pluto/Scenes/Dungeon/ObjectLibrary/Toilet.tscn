@@ -1,22 +1,23 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Sprites/Dungeon/Object/toilet.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Dungeon/ObjectAnimation.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
-resource_name = "toilet-stink"
+resource_name = "animation"
 length = 0.8
 loop = true
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
+tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ 16, 17, 18, 19, 20, 21, 22, 23 ]
 }
 
@@ -28,10 +29,11 @@ extents = Vector2( 24, 10 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 24
-frame = 16
+frame = 20
+script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/toilet-stink = SubResource( 1 )
+anims/animation = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 13.4848 )
