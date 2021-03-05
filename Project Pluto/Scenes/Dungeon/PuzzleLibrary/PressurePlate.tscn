@@ -3,13 +3,11 @@
 [ext_resource path="res://Sprites/Puzzle/pressure_plate.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Dungeon/Puzzles/PressurePlate.gd" type="Script" id=2]
 
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
 [node name="PressurePlate" type="Sprite"]
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 hframes = 2
 script = ExtResource( 2 )

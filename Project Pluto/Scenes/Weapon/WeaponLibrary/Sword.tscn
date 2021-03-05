@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/Weapon/BaseWeapon.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 20.0
+radius = 15.1965
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 2.0
@@ -70,10 +70,10 @@ tracks/1/keys = {
 }
 
 [node name="Sword" instance=ExtResource( 3 )]
-position = Vector2( 20, 0 )
-scale = Vector2( 1.25, 1.5 )
+position = Vector2( 30, 0 )
+scale = Vector2( 1.75, 2.2 )
 texture = ExtResource( 1 )
-attack_name = "stab"
+attack_name = "swing"
 attack_stamina_cost = 2.0
 attack_hitbox_path = NodePath("Hitbox")
 special_name = "spin"

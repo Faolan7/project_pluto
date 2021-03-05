@@ -5,12 +5,11 @@
 [ext_resource path="res://Sprites/Enemy/goblin_minion.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 2.5
-height = 1.0
+radius = 4.0
+height = 4.0
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 5.5
-height = 2.0
+height = 5.0
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 64.0
@@ -150,14 +149,13 @@ tracks/0/keys = {
 [sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
 [node name="GoblinMinion" instance=ExtResource( 1 )]
+scale = Vector2( 1.5, 1.25 )
 WEAPON_PATH = NodePath("Sprite/FacingPivot/Sword")
 
 [node name="Sprite" parent="." index="0"]
-self_modulate = Color( 0.568627, 0.509804, 0.372549, 1 )
-scale = Vector2( 0.33, 0.33 )
+scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 3 )
 hframes = 12
-frame = 3
 
 [node name="StaminaBar" parent="Sprite/Bars" index="0"]
 margin_top = -22.0
@@ -166,11 +164,10 @@ margin_bottom = -20.0
 [node name="HealthBar" parent="Sprite/Bars" index="1"]
 margin_top = -24.0
 margin_bottom = -22.0
-max_value = 1.0
+max_value = 2.0
 
 [node name="FacingPivot" parent="Sprite" index="1"]
 position = Vector2( 0, 4 )
-scale = Vector2( 1.5, 1.5 )
 
 [node name="Sword" parent="Sprite/FacingPivot" index="0" instance=ExtResource( 2 )]
 visible = false
@@ -179,14 +176,14 @@ visible = false
 position = Vector2( 30, 0 )
 
 [node name="WorldCollision" parent="." index="1"]
-position = Vector2( 0, 5 )
+position = Vector2( 0, 8.5 )
 shape = SubResource( 1 )
 
 [node name="HurtBox" parent="." index="2"]
-visible = false
 position = Vector2( 0, 0.5 )
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( 0, 1.5 )
 shape = SubResource( 2 )
 
 [node name="DetectionArea" parent="." index="3"]
@@ -194,6 +191,9 @@ visible = false
 
 [node name="CollisionShape2D" parent="DetectionArea" index="0"]
 shape = SubResource( 3 )
+
+[node name="Move" parent="StateMachine" index="1"]
+MOVE_SPEED = 110
 
 [node name="AnimationPlayer" parent="." index="5"]
 anims/idle_down = SubResource( 4 )

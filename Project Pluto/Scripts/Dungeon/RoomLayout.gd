@@ -113,7 +113,7 @@ func get_enter_position(enter_dir: Vector2) -> Vector2:
 	if enter_dir == Vector2.ZERO:
 		return Vector2(256, 192) # Center of room
 	else:
-		return doors[enter_dir].position
+		return doors[enter_dir].position - enter_dir * 16
 
 
 func _on_door_entered(side: Vector2) -> void:

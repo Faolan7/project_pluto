@@ -53,7 +53,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("ExplosionHitbox/CollisionShape2D:disabled")
+tracks/3/path = NodePath("Explosion/ExplosionHitbox/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -104,7 +104,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("ExplosionHitbox/CollisionShape2D:disabled")
+tracks/3/path = NodePath("Explosion/ExplosionHitbox/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -128,7 +128,7 @@ tracks/4/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("ExplosionHitbox/CollisionShape2D:shape:radius")
+tracks/5/path = NodePath("Explosion/ExplosionHitbox/CollisionShape2D:shape:radius")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -140,7 +140,7 @@ tracks/5/keys = {
 "values": [ 16.0, 22.0, 22.5, 29.0, 32.0, 35.5 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("ExplosionHitbox/CollisionShape2D:shape:height")
+tracks/6/path = NodePath("Explosion/ExplosionHitbox/CollisionShape2D:shape:height")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -165,7 +165,7 @@ tracks/7/keys = {
 }
 
 [node name="Fireball" instance=ExtResource( 1 )]
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.7, 0.6 )
 script = ExtResource( 3 )
 damage = 1
 
@@ -173,24 +173,26 @@ damage = 1
 rotation = -1.5708
 texture = ExtResource( 2 )
 
-[node name="Explosion" type="Sprite" parent="." index="1"]
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
+
+[node name="Explosion" type="Sprite" parent="." index="2"]
 visible = false
 position = Vector2( -1.00005, -14 )
+scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 5 )
 hframes = 11
 
-[node name="CollisionShape2D" parent="." index="2"]
-shape = SubResource( 1 )
-
-[node name="ExplosionHitbox" parent="." index="3" instance=ExtResource( 4 )]
+[node name="ExplosionHitbox" parent="Explosion" index="0" instance=ExtResource( 4 )]
+position = Vector2( 1.00005, 14 )
 damage = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionHitbox" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Explosion/ExplosionHitbox" index="0"]
 rotation = 1.5708
 shape = SubResource( 2 )
 disabled = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 anims/default = SubResource( 3 )
 anims/explode = SubResource( 4 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

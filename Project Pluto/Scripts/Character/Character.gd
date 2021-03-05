@@ -20,6 +20,7 @@ onready var facing_pivot: Node2D = $Sprite/FacingPivot as Node2D
 onready var hurtbox: HurtBox = $HurtBox as HurtBox
 
 export(float) var stamina_regen_rate: float = 1 # In stamina/second
+export(float) var damage_multiplier: float = 1
 
 
 func _ready() -> void:

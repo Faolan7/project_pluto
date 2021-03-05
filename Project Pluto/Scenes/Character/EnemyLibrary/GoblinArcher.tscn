@@ -4,8 +4,6 @@
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Bow.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/Enemy/goblin_archer.png" type="Texture" id=3]
 
-
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.0
 height = 4.0
@@ -148,6 +146,8 @@ tracks/0/keys = {
 [sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
 [node name="GoblinArcher" instance=ExtResource( 1 )]
+scale = Vector2( 1.5, 1.5 )
+damage_multiplier = 0.9
 WEAPON_PATH = NodePath("Sprite/FacingPivot/Bow")
 
 [node name="Sprite" parent="." index="0"]
@@ -173,6 +173,7 @@ margin_top = -26.0
 margin_right = 7.0
 margin_bottom = -24.0
 rect_scale = Vector2( 1.25, 1.25 )
+max_value = 5.0
 
 [node name="Bow" parent="Sprite/FacingPivot" index="0" instance=ExtResource( 2 )]
 visible = false
@@ -196,7 +197,7 @@ visible = false
 shape = SubResource( 3 )
 
 [node name="Move" parent="StateMachine" index="1"]
-MOVE_SPEED = 40
+MOVE_SPEED = 50
 
 [node name="AnimationPlayer" parent="." index="5"]
 anims/idle_down = SubResource( 4 )
