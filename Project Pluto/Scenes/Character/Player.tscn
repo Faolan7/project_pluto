@@ -412,7 +412,6 @@ scale = Vector2( 0.4, 0.4 )
 collision_layer = 9
 script = ExtResource( 2 )
 stamina_regen_rate = 3.0
-god_mode = true
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 4 )

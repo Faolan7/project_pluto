@@ -33,7 +33,6 @@ func set_weapon(value: Weapon) -> void:
 	weapon = value
 	weapon_data['position'] = weapon.position
 	weapon_data['rotation'] = weapon.rotation
-	print('set: ', weapon_data)
 	
 	is_enemy_weapon = weapon.entity != null and weapon.entity.is_class('Enemy')
 	weapon.position = Vector2.ZERO
@@ -44,7 +43,6 @@ func set_weapon(value: Weapon) -> void:
 	weapon.set_hitbox_enabled(false, true)
 
 func get_weapon() -> Weapon:
-	print(weapon_data)
 	weapon.position = weapon_data['position']
 	weapon.rotation = weapon_data['rotation']
 	return weapon
