@@ -2,7 +2,8 @@
 
 [ext_resource path="res://Sprites/Dungeon/Object/door.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Dungeon/Door.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Interface/InteractBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Item/InteractBox.tscn" type="PackedScene" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 16 )
