@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Sprites/Weapon/sword.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Weapon/Hitbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Weapon/BaseWeapon.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sounds/swish_2.wav" type="AudioStream" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.1965
@@ -13,7 +14,7 @@ height = 8.14491
 
 [sub_resource type="Animation" id=3]
 resource_name = "attack"
-length = 0.1
+length = 0.14
 step = 0.02
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
@@ -22,7 +23,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
+"times": PoolRealArray( 0, 0.12 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -34,15 +35,32 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.02, 0.1 ),
+"times": PoolRealArray( 0, 0.02, 0.12 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "special"
+resource_name = "play_swing"
 length = 0.1
+tracks/0/type = "audio"
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.38
 step = 0.02
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
@@ -97,4 +115,7 @@ disabled = true
 
 [node name="AnimationPlayer" parent="." index="2"]
 anims/attack = SubResource( 3 )
-anims/special = SubResource( 4 )
+anims/play_swing = SubResource( 4 )
+anims/special = SubResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Weapon/BaseProjectile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/Weapon/Projectile/fireball.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Weapon/ProjectileLibrary/Fireball.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Weapon/Hitbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sprites/Weapon/Projectile/fireball_explosion.png" type="Texture" id=5]
+[ext_resource path="res://Sounds/fireExplosion.wav" type="AudioStream" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 18.0
@@ -101,7 +102,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Explosion/ExplosionHitbox/CollisionShape2D:disabled")
@@ -163,6 +164,20 @@ tracks/7/keys = {
 "update": 0,
 "values": [ 0.0 ]
 }
+tracks/8/type = "audio"
+tracks/8/path = NodePath("AudioStreamPlayer")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 6 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [node name="Fireball" instance=ExtResource( 1 )]
 scale = Vector2( 0.7, 0.6 )
@@ -170,6 +185,7 @@ script = ExtResource( 3 )
 damage = 1
 
 [node name="Sprite" parent="." index="0"]
+visible = false
 rotation = -1.5708
 texture = ExtResource( 2 )
 
@@ -177,7 +193,6 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Explosion" type="Sprite" parent="." index="2"]
-visible = false
 position = Vector2( -1.00005, -14 )
 scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 5 )
@@ -190,9 +205,10 @@ damage = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Explosion/ExplosionHitbox" index="0"]
 rotation = 1.5708
 shape = SubResource( 2 )
-disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 anims/default = SubResource( 3 )
 anims/explode = SubResource( 4 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
