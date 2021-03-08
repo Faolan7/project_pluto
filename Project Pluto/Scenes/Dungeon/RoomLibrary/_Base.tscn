@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://Scenes/Dungeon/Door.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/Dungeon/Tile/floor.png" type="Texture" id=2]
@@ -41,11 +41,12 @@
 [ext_resource path="res://Sprites/Dungeon/Decal/bags-on-wall.png" type="Texture" id=39]
 [ext_resource path="res://Sprites/Dungeon/Decal/spear-box.png" type="Texture" id=40]
 [ext_resource path="res://Sprites/Dungeon/Decal/mouse.png" type="Texture" id=41]
+[ext_resource path="res://Sprites/Dungeon/Decal/carpet.png" type="Texture" id=42]
 
-[sub_resource type="ConvexPolygonShape2D" id=45]
+[sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 
-[sub_resource type="TileSet" id=46]
+[sub_resource type="TileSet" id=2]
 1/name = "wall"
 1/texture = ExtResource( 4 )
 1/tex_offset = Vector2( 0, 0 )
@@ -63,14 +64,14 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 1/navigation_offset = Vector2( 0, 0 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape = SubResource( 45 )
+1/shape = SubResource( 1 )
 1/shape_one_way = false
 1/shape_one_way_margin = 1.0
 1/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 45 ),
+"shape": SubResource( 1 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
@@ -239,10 +240,10 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [sub_resource type="ConvexPolygonShape2D" id=42]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=44]
+[sub_resource type="ConvexPolygonShape2D" id=43]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="TileSet" id=43]
+[sub_resource type="TileSet" id=44]
 0/name = "summoning circle"
 0/texture = ExtResource( 7 )
 0/tex_offset = Vector2( 0, 0 )
@@ -1286,14 +1287,14 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 62/navigation_offset = Vector2( 0, 0 )
 62/shape_offset = Vector2( 0, 0 )
 62/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-62/shape = SubResource( 44 )
+62/shape = SubResource( 43 )
 62/shape_one_way = false
 62/shape_one_way_margin = 1.0
 62/shapes = [ {
 "autotile_coord": Vector2( 0, 1 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 44 ),
+"shape": SubResource( 43 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 62/z_index = 0
@@ -1376,9 +1377,32 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 67/shape_one_way_margin = 0.0
 67/shapes = [  ]
 67/z_index = 0
+68/name = "carpet"
+68/texture = ExtResource( 42 )
+68/tex_offset = Vector2( 0, 0 )
+68/modulate = Color( 1, 1, 1, 1 )
+68/region = Rect2( 0, 0, 96, 96 )
+68/tile_mode = 1
+68/autotile/bitmask_mode = 1
+68/autotile/bitmask_flags = [ Vector2( 0, 0 ), 432, Vector2( 0, 1 ), 438, Vector2( 0, 2 ), 54, Vector2( 1, 0 ), 216, Vector2( 1, 1 ), 219, Vector2( 1, 2 ), 27, Vector2( 2, 0 ), 504, Vector2( 2, 1 ), 63, Vector2( 2, 2 ), 511 ]
+68/autotile/icon_coordinate = Vector2( 0, 0 )
+68/autotile/tile_size = Vector2( 32, 32 )
+68/autotile/spacing = 0
+68/autotile/occluder_map = [  ]
+68/autotile/navpoly_map = [  ]
+68/autotile/priority_map = [  ]
+68/autotile/z_index_map = [  ]
+68/occluder_offset = Vector2( 0, 0 )
+68/navigation_offset = Vector2( 0, 0 )
+68/shape_offset = Vector2( 0, 0 )
+68/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+68/shape_one_way = false
+68/shape_one_way_margin = 0.0
+68/shapes = [  ]
+68/z_index = 0
 
 [node name="RoomLayout" type="TileMap"]
-tile_set = SubResource( 46 )
+tile_set = SubResource( 2 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 17
 collision_mask = 0
@@ -1390,10 +1414,11 @@ script = ExtResource( 3 )
 anchor_mode = 0
 
 [node name="Decals" type="TileMap" parent="."]
-tile_set = SubResource( 43 )
+tile_set = SubResource( 44 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
 format = 1
+tile_data = PoolIntArray( -131067, 2, 0 )
 
 [node name="Doors" type="Node2D" parent="."]
 

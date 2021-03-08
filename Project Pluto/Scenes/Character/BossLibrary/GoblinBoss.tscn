@@ -7,11 +7,12 @@
 [ext_resource path="res://Scenes/Weapon/WeaponLibrary/Maul.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
-height = 8.0
+radius = 16.0
+height = 15.0
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 16.0
-height = 16.0
+radius = 30.5
+height = 25.0
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 240.0
@@ -25,8 +26,12 @@ PATIENCE_THRESHOLD = 0.5
 WEAPON_PATH = NodePath("Sprite/FacingPivot/Bow")
 
 [node name="Sprite" parent="." index="0"]
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 3 )
+
+[node name="Bars" parent="Sprite" index="0"]
+position = Vector2( 0, 60 )
+scale = Vector2( 4, 2 )
 
 [node name="StaminaBar" parent="Sprite/Bars" index="0"]
 margin_top = -64.0
@@ -53,10 +58,11 @@ projectile_speed = 1000.0
 position = Vector2( 400, 0 )
 
 [node name="WorldCollision" parent="." index="1"]
-position = Vector2( 0, 13.6123 )
+position = Vector2( 0, 25 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( -0.671173, 4.25068 )
 shape = SubResource( 2 )
 
 [node name="DetectionArea" parent="." index="3"]
