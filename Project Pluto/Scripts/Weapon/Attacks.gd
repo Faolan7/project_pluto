@@ -28,7 +28,7 @@ static func _on_attack_finished(weapon, special: bool) -> void:
 static func lightning(weapon, special: bool) -> void:
 	weapon.animation_player.play('lightning')
 	weapon.set_hitbox_enabled(true, special)
-	#weapon.play_sound('lightning')
+	
 	yield(weapon.animation_player, 'animation_finished')
 	_on_attack_finished(weapon, special)
 
@@ -41,8 +41,8 @@ static func slam(weapon, special: bool) -> void:
 static func shoot(weapon, special: bool, attack_dir: float, num_projectiles: int, speed_modifier: float) -> void:
 	var cone_size: float = (num_projectiles - 1) / 20.0 # Doing floating point division
 	var angle_diff: float = -cone_size
-	weapon.play_sound('bow')
 	weapon.animation_player.play('shoot')
+	
 	while angle_diff <= cone_size:
 		weapon.create_projectile(attack_dir + angle_diff, speed_modifier)
 		angle_diff += .1
@@ -62,12 +62,13 @@ static func swing(weapon, special: bool, attack_angle: float) -> void:
 	var facing_pivot: Node2D = weapon.entity.facing_pivot
 	var original_pivot = facing_pivot.rotation
 	weapon.play_sound('swing')
+	
 	weapon.set_hitbox_enabled(true, special)
 	weapon.play_tween(facing_pivot, 'rotation',
 		facing_pivot.rotation - attack_angle / 2 - .1,
 		facing_pivot.rotation + attack_angle / 2 + .1,
 		attack_angle / 10)
-	
+		
 	yield(weapon.tween, 'tween_completed')
 	facing_pivot.rotation = original_pivot
 	_on_attack_finished(weapon, special)

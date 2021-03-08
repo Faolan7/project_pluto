@@ -1,28 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Weapon/BaseProjectile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/Weapon/Projectile/arrow.png" type="Texture" id=2]
-[ext_resource path="res://Sounds/Bow.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2, 1.5 )
-
-[sub_resource type="Animation" id=2]
-resource_name = "play_bow"
-tracks/0/type = "audio"
-tracks/0/path = NodePath("AudioStreamPlayer")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource( 3 )
-} ],
-"times": PoolRealArray( 0 )
-}
 
 [node name="Arrow" instance=ExtResource( 1 )]
 scale = Vector2( 1.5, 1.2 )
@@ -34,9 +16,3 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2( 10, -0.5 )
 shape = SubResource( 1 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
-autoplay = "play_bow"
-anims/play_bow = SubResource( 2 )
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]

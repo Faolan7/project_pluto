@@ -40,8 +40,8 @@ func use_special(attack_dir: float) -> void:
 	if special_name != '':
 		Attacks.perform(special_name, self, true, attack_dir)
 
-func play_sound(sound: String) -> void:
-  animation_player.play('play_' + sound)
+func play_sound(sound_name: String) -> void:
+	animation_player.play('play_' + sound_name)
 
 # Wrapper for tween node; used for on-the-fly animations
 func play_tween(object: Object, property: String,

@@ -43,7 +43,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "play_swing"
-length = 0.1
+length = 0.16
 tracks/0/type = "audio"
 tracks/0/path = NodePath("AudioStreamPlayer")
 tracks/0/interp = 1
@@ -119,3 +119,4 @@ anims/play_swing = SubResource( 4 )
 anims/special = SubResource( 5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource( 5 )
