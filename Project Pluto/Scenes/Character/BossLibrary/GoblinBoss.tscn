@@ -42,14 +42,12 @@ max_value = 5.0
 scale = Vector2( 4, 3 )
 
 [node name="Bow" parent="Sprite/FacingPivot" index="0" instance=ExtResource( 2 )]
-visible = false
 attack_name = "spreadshot5"
 special_name = "spreadshotcircle"
 special_stamina_cost = 9.0
 projectile_speed = 1000.0
 
 [node name="Maul" parent="Sprite/FacingPivot" index="1" instance=ExtResource( 5 )]
-visible = false
 
 [node name="CombatDistance" parent="Sprite" index="2"]
 position = Vector2( 400, 0 )
@@ -60,6 +58,9 @@ shape = SubResource( 1 )
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
+
+[node name="DetectionArea" parent="." index="3"]
+visible = false
 
 [node name="CollisionShape2D" parent="DetectionArea" index="0"]
 shape = SubResource( 3 )
