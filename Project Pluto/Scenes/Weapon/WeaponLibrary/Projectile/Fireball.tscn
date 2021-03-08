@@ -99,10 +99,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ false, true ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Explosion/ExplosionHitbox/CollisionShape2D:disabled")
@@ -185,7 +185,6 @@ script = ExtResource( 3 )
 damage = 1
 
 [node name="Sprite" parent="." index="0"]
-visible = false
 rotation = -1.5708
 texture = ExtResource( 2 )
 
@@ -193,6 +192,7 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Explosion" type="Sprite" parent="." index="2"]
+visible = false
 position = Vector2( -1.00005, -14 )
 scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 5 )
@@ -205,10 +205,12 @@ damage = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Explosion/ExplosionHitbox" index="0"]
 rotation = 1.5708
 shape = SubResource( 2 )
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 anims/default = SubResource( 3 )
 anims/explode = SubResource( 4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource( 6 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
