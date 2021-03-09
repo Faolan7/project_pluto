@@ -18,7 +18,7 @@
 [ext_resource path="res://Scenes/Dungeon/RoomLibrary/Treasure/ArtRoom.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Sounds/Backgroud/Heroic Demise (New).wav" type="AudioStream" id=17]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "boss"
 length = 280.0
 loop = true
@@ -37,8 +37,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "calm"
+[sub_resource type="Animation" id=2]
 length = 100.0
 loop = true
 tracks/0/type = "audio"
@@ -56,8 +55,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "fight"
+[sub_resource type="Animation" id=3]
 length = 85.0
 loop = true
 tracks/0/type = "audio"
@@ -82,7 +80,7 @@ script = ExtResource( 4 )
 
 [node name="Start" parent="Rooms" instance=ExtResource( 1 )]
 connections = {
-"down": NodePath("../Boss"),
+"down": NodePath(""),
 "left": NodePath(""),
 "right": NodePath(""),
 "up": NodePath("../Intersection1")
@@ -216,9 +214,9 @@ music = "boss"
 [node name="FinalBoss" parent="Rooms/Boss" instance=ExtResource( 2 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/boss = SubResource( 3 )
-anims/calm = SubResource( 1 )
-anims/fight = SubResource( 2 )
+anims/boss = SubResource( 1 )
+anims/calm = SubResource( 2 )
+anims/fight = SubResource( 3 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
