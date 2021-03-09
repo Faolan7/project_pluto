@@ -31,7 +31,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "clips": [ {
 "end_offset": 0.0,
-"start_offset": 0.0,
+"start_offset": 3.0,
 "stream": ExtResource( 17 )
 } ],
 "times": PoolRealArray( 0 )
@@ -219,5 +219,5 @@ anims/calm = SubResource( 2 )
 anims/fight = SubResource( 3 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 15 )
+stream = ExtResource( 17 )
 volume_db = -10.0

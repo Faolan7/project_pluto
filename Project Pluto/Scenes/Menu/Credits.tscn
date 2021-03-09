@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Sprites/Fonts/Arial Rounded Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Menu/Credits.gd" type="Script" id=2]
-[ext_resource path="res://Sounds/Title.wav" type="AudioStream" id=3]
+[ext_resource path="res://Sounds/Backgroud/Title.wav" type="AudioStream" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -58,7 +58,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-scroll_speed = 35.0
+scroll_speed = 50.0
 
 [node name="Labels" type="Node2D" parent="."]
 position = Vector2( 0, 375 )
@@ -76,9 +76,9 @@ __meta__ = {
 }
 
 [node name="MainTeam" type="Label" parent="Labels"]
-margin_left = -20.0
+margin_left = -19.0614
 margin_top = 50.0
-margin_right = 547.0
+margin_right = 547.939
 margin_bottom = 484.0
 custom_fonts/font = SubResource( 2 )
 text = "Main Team
@@ -113,6 +113,7 @@ margin_right = 384.0
 margin_bottom = 541.0
 custom_fonts/font = SubResource( 3 )
 text = "Free-Lance
+
 Ryan Bucherl
 	              -Lead Composer"
 align = 1
@@ -127,10 +128,13 @@ margin_right = 385.0
 margin_bottom = 699.0
 custom_fonts/font = SubResource( 4 )
 text = "Contributors via Free Art Assets
+
 Sharm
         -Pixel Artist
+
 Tuomo Untinen
         -Pixel Artist
+
 Diego JP
         -Pixel Artist"
 align = 1
@@ -139,10 +143,10 @@ __meta__ = {
 }
 
 [node name="ThanksForPlaying" type="Label" parent="Labels"]
-margin_left = 138.0
-margin_top = 925.0
-margin_right = 372.0
-margin_bottom = 954.0
+margin_left = 154.263
+margin_top = 1018.96
+margin_right = 388.263
+margin_bottom = 1047.96
 custom_fonts/font = SubResource( 5 )
 text = "Thanks For Playing!"
 align = 1
@@ -151,10 +155,10 @@ __meta__ = {
 }
 
 [node name="ExitButton" type="Button" parent="Labels"]
-margin_left = 200.0
-margin_top = 970.0
-margin_right = 300.0
-margin_bottom = 1005.0
+margin_left = 216.263
+margin_top = 1063.96
+margin_right = 316.263
+margin_bottom = 1098.96
 custom_styles/hover = SubResource( 6 )
 custom_styles/normal = SubResource( 7 )
 custom_fonts/font = SubResource( 8 )
@@ -166,3 +170,4 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 autoplay = true
+[connection signal="pressed" from="Labels/ExitButton" to="." method="_on_exit_pressed"]

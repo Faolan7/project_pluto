@@ -26,6 +26,9 @@ position = Vector2( 180.165, 257.463 )
 [node name="BoilingPot" parent="." index="8" instance=ExtResource( 7 )]
 position = Vector2( 256.211, 188.038 )
 
+[node name="Fire" parent="." index="9" instance=ExtResource( 5 )]
+position = Vector2( 367.54, 143.982 )
+
 [node name="GoblinWarrior" parent="Entities" index="0" instance=ExtResource( 2 )]
 position = Vector2( 173.046, 176.749 )
 WEAPON_PATH = NodePath("../../../Intersection2/Entities/GoblinWarrior/Sprite/FacingPivot/Sword")
@@ -41,6 +44,3 @@ WEAPON_PATH = NodePath("../../../Intersection2/Entities/GoblinMinion/Sprite/Faci
 [node name="GoblinMinion2" parent="Entities" index="3" instance=ExtResource( 4 )]
 position = Vector2( 292.28, 159.809 )
 WEAPON_PATH = NodePath("../../../Intersection2/Entities/GoblinMinion2/Sprite/FacingPivot/Sword")
-
-[node name="Fire" parent="." index="10" instance=ExtResource( 5 )]
-position = Vector2( 367.54, 143.982 )

@@ -10,10 +10,7 @@ onready var ranged_weapon: Weapon = $Sprite/FacingPivot/Bow as Weapon
 func _ready() -> void:
 	set_ranged_phase()
 
-
-func set_health(value: float) -> void:
-	.set_health(value)
-	
+func _physics_process(_delta: float) -> void:
 	if not changed_phase and get_health_percent() < 50:
 		changed_phase = true
 		set_stamina(get_max_stamina())

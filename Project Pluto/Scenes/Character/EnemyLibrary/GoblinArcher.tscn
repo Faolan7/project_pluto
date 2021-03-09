@@ -147,7 +147,6 @@ tracks/0/keys = {
 
 [node name="GoblinArcher" instance=ExtResource( 1 )]
 scale = Vector2( 1.5, 1.5 )
-damage_multiplier = 0.9
 WEAPON_PATH = NodePath("Sprite/FacingPivot/Bow")
 
 [node name="Sprite" parent="." index="0"]
@@ -176,7 +175,6 @@ rect_scale = Vector2( 1.25, 1.25 )
 max_value = 5.0
 
 [node name="Bow" parent="Sprite/FacingPivot" index="0" instance=ExtResource( 2 )]
-visible = false
 
 [node name="CombatDistance" parent="Sprite" index="2"]
 position = Vector2( 150, 0 )
