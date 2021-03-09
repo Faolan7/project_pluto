@@ -3,7 +3,7 @@ extends Node2D
 
 
 signal room_exited(exit_dir)
-signal loaded()
+signal loaded(music)
 
 
 var LAYOUT_SCENE: Resource
@@ -19,6 +19,7 @@ export(Dictionary) var connections: Dictionary = {
 	'left': NodePath(),
 	'right': NodePath()
 }
+export(String, 'fight', 'boss', 'calm') var music: String = 'fight'
 
 
 func _ready() -> void:
@@ -70,11 +71,12 @@ func set_loaded(value: bool) -> void:
 			if connections[dir] == null:
 				layout.remove_door(dir)
 				
-		emit_signal('loaded')
+		emit_signal('loaded', music)
 
 
 func _on_room_cleared() -> void:
 	cleared = true
+	music = 'calm'
 
 func _on_room_exited(exit_dir: Vector2) -> void:
 	emit_signal('room_exited', exit_dir)

@@ -7,6 +7,7 @@ var player: Player
 var current_room: Room
 
 onready var rooms: Node2D = $Rooms as Node2D
+onready var sound_player: AnimationPlayer = $AnimationPlayer as AnimationPlayer
 
 
 func _ready():
@@ -42,5 +43,10 @@ func _on_room_exited(exit_dir: Vector2) -> void:
 	old_room.set_deferred('is_loaded', false)
 	load_room(current_room, exit_dir * -1)
 
-func _on_room_loaded(enter_dir: Vector2, room: Room)->void:
+func _on_room_loaded(music: String, enter_dir: Vector2, room: Room) -> void:
+	# Changing music
+	if music != sound_player.current_animation:
+		sound_player.play(music)
+		
+	# Entering room
 	room.enter(enter_dir, player)
