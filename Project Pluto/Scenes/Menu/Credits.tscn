@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Sprites/Fonts/Arial Rounded Bold.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Scenes/Menu/Credits.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Menu/Credits.gd" type="Script" id=2]
 [ext_resource path="res://Sounds/Title.wav" type="AudioStream" id=3]
-[ext_resource path="res://Scenes/Menu/Button.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -151,7 +150,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="exit" type="Button" parent="Labels"]
+[node name="ExitButton" type="Button" parent="Labels"]
 margin_left = 200.0
 margin_top = 970.0
 margin_right = 300.0
@@ -160,7 +159,6 @@ custom_styles/hover = SubResource( 6 )
 custom_styles/normal = SubResource( 7 )
 custom_fonts/font = SubResource( 8 )
 text = "EXIT"
-script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -168,4 +166,3 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 autoplay = true
-[connection signal="pressed" from="Labels/exit" to="Labels/exit" method="_on_exit_pressed"]
