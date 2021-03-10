@@ -17,3 +17,8 @@ position = Vector2( 256, 192 )
 modulate = Color( 1, 0.27451, 0.27451, 1 )
 attack_stamina_cost = 0.0
 special_stamina_cost = 0.0
+
+[node name="Hitbox" parent="Items/DroppedWeapon/SuperSword" index="1"]
+damage = 4
+
+[editable path="Items/DroppedWeapon/SuperSword"]

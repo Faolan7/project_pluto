@@ -8,7 +8,7 @@ extents = Vector2( 2, 1.5 )
 
 [node name="Arrow" instance=ExtResource( 1 )]
 scale = Vector2( 1.5, 1.2 )
-damage = 1
+damage = 2
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Weapon/Hurtbox.gd"
 }, {
+"base": "State",
+"class": "IdleState",
+"language": "GDScript",
+"path": "res://Scripts/State/Idle.gd"
+}, {
 "base": "Area2D",
 "class": "InteractBox",
 "language": "GDScript",
@@ -159,6 +164,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Quest/Tasks/BaseTask.gd"
 }, {
+"base": "MoveState",
+"class": "WanderState",
+"language": "GDScript",
+"path": "res://Scripts/State/Wander.gd"
+}, {
 "base": "Sprite",
 "class": "Weapon",
 "language": "GDScript",
@@ -187,6 +197,7 @@ _global_script_class_icons={
 "EntityTracker": "",
 "Hitbox": "",
 "HurtBox": "",
+"IdleState": "",
 "InteractBox": "",
 "InteractState": "",
 "KeyCount": "",
@@ -205,6 +216,7 @@ _global_script_class_icons={
 "State": "",
 "StateMachine": "",
 "Task": "",
+"WanderState": "",
 "Weapon": "",
 "WeaponPillar": "",
 "WeaponSlot": ""

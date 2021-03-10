@@ -107,7 +107,7 @@ shape = SubResource( 1 )
 
 [node name="Hitbox" parent="." index="1" instance=ExtResource( 2 )]
 position = Vector2( 0, -2 )
-damage = 1
+damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 2 )

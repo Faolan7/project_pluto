@@ -411,7 +411,7 @@ graph_offset = Vector2( -13, -12 )
 scale = Vector2( 0.4, 0.4 )
 collision_layer = 9
 script = ExtResource( 2 )
-stamina_regen_rate = 3.0
+stamina_regen_rate = 4.0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 4 )
@@ -434,7 +434,7 @@ margin_left = -12.0
 margin_top = -16.0
 margin_right = 12.0
 margin_bottom = -14.0
-max_value = 10.0
+max_value = 15.0
 texture_under = ExtResource( 3 )
 texture_progress = ExtResource( 3 )
 tint_under = Color( 1, 0, 0, 1 )
