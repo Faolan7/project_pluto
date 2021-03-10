@@ -136,7 +136,13 @@ Tuomo Untinen
         -Pixel Artist
 
 Diego JP
-        -Pixel Artist"
+        -Pixel Artist
+		
+Matthew Pablo 
+        -Music Artist
+
+Alexandr Zhelanov 
+       -Music Artist"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -144,9 +150,9 @@ __meta__ = {
 
 [node name="ThanksForPlaying" type="Label" parent="Labels"]
 margin_left = 154.263
-margin_top = 1018.96
+margin_top = 1150.0
 margin_right = 388.263
-margin_bottom = 1047.96
+margin_bottom = 1179.0
 custom_fonts/font = SubResource( 5 )
 text = "Thanks For Playing!"
 align = 1
@@ -156,9 +162,9 @@ __meta__ = {
 
 [node name="ExitButton" type="Button" parent="Labels"]
 margin_left = 216.263
-margin_top = 1063.96
+margin_top = 1200.0
 margin_right = 316.263
-margin_bottom = 1098.96
+margin_bottom = 1235.0
 custom_styles/hover = SubResource( 6 )
 custom_styles/normal = SubResource( 7 )
 custom_fonts/font = SubResource( 8 )

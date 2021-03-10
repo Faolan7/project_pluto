@@ -8,8 +8,8 @@ export var scroll_speed: float
 
 func _physics_process(delta) -> void:
 	labels.position += Vector2.UP * delta * scroll_speed
-	if labels.position.y <= -850:
-		labels.position.y = -850
+	if labels.position.y <= -1000:
+		labels.position.y = -1000
 		set_physics_process(false)
 
 
