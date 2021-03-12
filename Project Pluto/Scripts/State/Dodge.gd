@@ -16,8 +16,9 @@ func activate() -> void:
 		actor.stamina -= stamina_cost
 		.activate()
 		
-		initial_face_dir = actor.face_dir
-		actor.face_dir = dodge_dir
+		#initial_face_dir = actor.face_dir
+		#actor.face_dir = dodge_dir
+		print('dodge: ', dodge_dir)
 		actor.animation_state.travel('dodge')
 
 
@@ -27,5 +28,5 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_animation_finished():
-	actor.face_dir = initial_face_dir
+	#actor.face_dir = initial_face_dir
 	set_completed(true)

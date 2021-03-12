@@ -33,7 +33,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.get_action_strength('move_down') - Input.get_action_strength('move_up')
 	)
 	move_state.move_dir = input_vector
-	dodge_state.dodge_dir = input_vector if input_vector != Vector2.ZERO else face_dir
+	#dodge_state.dodge_dir = input_vector if input_vector != Vector2.ZERO else face_dir
 	
 	# Updating state
 	if state_machine.can_change_state:
@@ -119,10 +119,12 @@ func set_face_dir(value: Vector2) -> void:
 	last_mouse_position = mouse_position
 	value = gamepad_dir if using_gamepad else get_local_mouse_position()
 	.set_face_dir(value)
+	
+	dodge_state.dodge_dir = value.normalized()
 
 func set_blend_position(value: Vector2) -> void:
 	.set_blend_position(value)
-	animation_tree.set('parameters/dodge/blend_position', dodge_state.dodge_dir)
+	animation_tree.set('parameters/dodge/blend_position', face_dir)
 
 func set_weapon(value: Weapon) -> void:
 	.set_weapon(value)
