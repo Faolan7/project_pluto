@@ -57,6 +57,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.is_action_pressed('swap_weapon'):
 			get_next_weapon()
 			
+		elif event.is_action_pressed('cheat_godmode'):
+			god_mode = not god_mode
+			
 		elif input_vector != Vector2.ZERO: # Checking if move button is pushed
 			play_animation('move')
 			state_machine.change_state(move_state)
